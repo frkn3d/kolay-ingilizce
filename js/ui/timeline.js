@@ -21,6 +21,37 @@
     return t;
   }
 
+  /* Mini gösterimde bazı zamanların işaretleri (iki nokta + ok, ya da bant +
+     ucundaki nokta) birbirine çok yakın (ör. Past Perfect: -0.78 / -0.34).
+     Kart daralınca bu birkaç piksele sıkışıp tek bir leke gibi görünüyordu.
+     Bu yüzden mini modda, aynı zamanın bütün işaretlerinin kapladığı x
+     aralığı çok darsa, ortak bir merkez etrafında orantılı olarak genişletilir
+     — okun/notaların birbirine göre sırası ve göreli konumu korunur. */
+  var MINI_MIN_SPREAD = 0.75;
+  function spreadMini(marks) {
+    var xs = [];
+    marks.forEach(function (m) {
+      if (m.x !== undefined) xs.push(m.x);
+      if (m.x2 !== undefined) xs.push(m.x2);
+      if (m.xs) xs = xs.concat(m.xs);
+    });
+    if (xs.length < 2) return marks;
+    var min = Math.min.apply(null, xs), max = Math.max.apply(null, xs);
+    var spread = max - min;
+    if (spread <= 0 || spread >= MINI_MIN_SPREAD) return marks;
+    var mid = (min + max) / 2;
+    var scale = MINI_MIN_SPREAD / spread;
+    function tx(x) { return Math.max(-0.95, Math.min(0.95, mid + (x - mid) * scale)); }
+    return marks.map(function (m) {
+      var m2 = {}, k;
+      for (k in m) m2[k] = m[k];
+      if (m2.x !== undefined) m2.x = tx(m2.x);
+      if (m2.x2 !== undefined) m2.x2 = tx(m2.x2);
+      if (m2.xs) m2.xs = m2.xs.map(tx);
+      return m2;
+    });
+  }
+
   /* Dalgalı çizgi: süren işi anlatır */
   function wavePath(x1, x2, y, amp, steps) {
     var d = '', i, x, dx = (x2 - x1) / steps;
@@ -52,10 +83,16 @@
       for (k in NS) a[k] = NS[k];
       return n(tag, a);
     }
-    /* Yuvarlak uçlu sıfır uzunluklu çizgi = ekranda sabit çaplı nokta */
+    /* Yuvarlak uçlu sıfır uzunluklu çizgi = ekranda sabit çaplı nokta.
+       Altına kart rengiyle biraz daha geniş bir "hâle" konur ki nokta bir
+       bandın ya da okun tam üzerine denk gelince rengin içinde kaybolmasın. */
     function dotAt(x, y, w) {
-      return nn('line', { x1: x, y1: y, x2: x + 0.01, y2: y,
-        stroke: 'var(--tlc)', 'stroke-width': w, 'stroke-linecap': 'round' });
+      var g2 = n('g');
+      g2.appendChild(nn('line', { x1: x, y1: y, x2: x + 0.01, y2: y,
+        stroke: 'var(--surface)', 'stroke-width': w + 3, 'stroke-linecap': 'round' }));
+      g2.appendChild(nn('line', { x1: x, y1: y, x2: x + 0.01, y2: y,
+        stroke: 'var(--tlc)', 'stroke-width': w, 'stroke-linecap': 'round' }));
+      return g2;
     }
     var color = 'var(--' + tense.group + ')';
 
@@ -109,7 +146,10 @@
     var belowRow = 0;
     function belowY() { return AY + (belowRow++ % 2 ? 86 : 60); }
 
-    (tense.timeline.marks || []).forEach(function (m, i) {
+    var marks = tense.timeline.marks || [];
+    if (mini) marks = spreadMini(marks);
+
+    marks.forEach(function (m, i) {
       var g = n('g', { class: 'tl-pop', style: 'animation-delay:' + (0.08 * i + 0.1) + 's' });
 
       if (m.t === 'dot') {
