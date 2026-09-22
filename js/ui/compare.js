@@ -69,7 +69,7 @@
       grid.appendChild(cell);
     });
     box.appendChild(grid);
-    if (p.why) box.appendChild(U.el('p', { class: 'example__note', html: '💡 ' + U.esc(p.why) }));
+    if (p.why) box.appendChild(U.el('p', { class: 'example__note', html: KI.icons.html('bulb') + ' ' + U.esc(p.why) }));
     return box;
   }
 
@@ -96,7 +96,7 @@
     var c = KI.compare.get(id);
     if (!c) {
       frag.appendChild(U.el('div', { class: 'empty' }, [
-        U.el('span', { class: 'empty__ico', text: '🧭' }),
+        U.el('span', { class: 'empty__ico', html: KI.icons.html('compass') }),
         U.el('p', { text: 'Bu karşılaştırma bulunamadı.' }),
         U.el('a', { class: 'btn', href: '#/karsilastir', text: 'Listeye dön' })
       ]));

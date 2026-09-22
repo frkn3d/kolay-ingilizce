@@ -49,11 +49,12 @@ html[data-theme="dark"] .appbar { background: #13231a; border-bottom-color: #081
   border-top: 3px solid transparent;
   transition: color .15s ease, background .15s ease;
 }
-.tab__ico { font-size: 1.22rem; line-height: 1; filter: grayscale(.55); transition: filter .15s ease, transform .15s ease; }
+.tab__ico { display: grid; place-items: center; line-height: 1; opacity: .72; transition: opacity .15s ease, transform .15s ease; }
+.tab__ico .icon { width: 21px; height: 21px; vertical-align: 0; }
 .tab:hover { background: var(--surface-2); }
 .tab.is-active { color: var(--green-700); border-top-color: var(--green-600); background: var(--green-100); }
 html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: var(--present-bg); }
-.tab.is-active .tab__ico { filter: none; transform: translateY(-1px) scale(1.08); }
+.tab.is-active .tab__ico { opacity: 1; transform: translateY(-1px) scale(1.08); }
 
 .view {
   max-width: var(--maxw);
@@ -148,7 +149,8 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
 .sitefoot__mini { font-size: .75rem; opacity: .85; }
 
 .empty { text-align: center; padding: 30px 16px; color: var(--ink-mute); }
-.empty__ico { font-size: 2.4rem; display: block; margin-bottom: .2em; }
+.empty__ico { display: block; margin-bottom: .35em; }
+.empty__ico .icon { width: 2.4rem; height: 2.4rem; vertical-align: 0; }
 
 /* --- Tablet --- */
 @media (min-width: 640px) {
@@ -173,7 +175,7 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
     padding: 7px 16px; border-radius: 999px; border-top: 0;
     font-size: .88rem; color: rgba(251, 246, 233, .72);
   }
-  .tab__ico { font-size: 1rem; }
+  .tab__ico .icon { width: 17px; height: 17px; }
   .tab:hover { background: rgba(251, 246, 233, .12); color: var(--cream); }
   .tab.is-active, html[data-theme="dark"] .tab.is-active {
     background: var(--cream); color: var(--green-800);

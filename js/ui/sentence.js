@@ -48,7 +48,7 @@
         } else {
           KI.store.addWord(w.base || w.en, w.tr);
           KI.audio.play('star');
-          U.toast('Kelime defterine eklendi ⭐');
+          U.toast('Kelime defterine eklendi');
         }
         sheet.refreshSaveBtn();
       });
@@ -63,7 +63,7 @@
       var b = document.getElementById('word-save');
       if (!b || !sheet.current) return;
       var saved = KI.store.hasWord(sheet.current.base || sheet.current.en);
-      b.textContent = saved ? '⭐ Defterimde — çıkar' : '☆ Kelime defterime ekle';
+      b.innerHTML = KI.icons.html(saved ? 'star' : 'star-outline') + ' ' + (saved ? 'Defterimde — çıkar' : 'Kelime defterime ekle');
     },
     show: function (raw, span) {
       if (!sheet.node) return;
@@ -143,14 +143,14 @@
     card.appendChild(sent);
 
     var trEl = U.el('p', { class: 'example__tr', html: '<b>TR:</b> ' + U.esc(ex.tr) });
-    var noteEl = ex.note ? U.el('p', { class: 'example__note', html: '💡 ' + ex.note }) : null;
+    var noteEl = ex.note ? U.el('p', { class: 'example__note', html: KI.icons.html('bulb') + ' ' + ex.note }) : null;
 
     var open = !!KI.store.get('autoTranslate');
     trEl.hidden = !open;
     if (noteEl) noteEl.hidden = !open;
 
     var btnTr = U.el('button', { class: 'btn btn--sm', type: 'button' });
-    function label() { btnTr.textContent = trEl.hidden ? '🇹🇷 Çevir' : '🙈 Gizle'; }
+    function label() { btnTr.innerHTML = KI.icons.html(trEl.hidden ? 'eye' : 'eye-off') + ' ' + (trEl.hidden ? 'Çevir' : 'Gizle'); }
     label();
     btnTr.addEventListener('click', function () {
       trEl.hidden = !trEl.hidden;
@@ -159,13 +159,13 @@
       label();
     });
 
-    var btnSay = U.el('button', { class: 'btn btn--sm btn--primary', type: 'button', html: '🔊 Dinle' });
+    var btnSay = U.el('button', { class: 'btn btn--sm btn--primary', type: 'button', html: KI.icons.html('speaker') + ' Dinle' });
     btnSay.addEventListener('click', function () {
       KI.audio.play('tap');
       KI.speech.speak(ex.en);
     });
 
-    var btnSlow = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🐢 Yavaş' });
+    var btnSlow = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('turtle') + ' Yavaş' });
     btnSlow.addEventListener('click', function () {
       KI.audio.play('tap');
       KI.speech.speak(ex.en, { rate: 0.55 });

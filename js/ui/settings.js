@@ -76,10 +76,10 @@
     /* --- görünüm --- */
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Görünüm' }));
     var themeRow = U.el('div', { class: 'row' });
-    [['light', '☀︎ Açık'], ['dark', '☾ Koyu']].forEach(function (th) {
+    [['light', 'sun', 'Açık'], ['dark', 'moon', 'Koyu']].forEach(function (th) {
       var b = U.el('button', {
         class: 'btn btn--sm' + (KI.store.get('theme') === th[0] ? ' btn--primary' : ''),
-        type: 'button', text: th[1]
+        type: 'button', html: KI.icons.html(th[1]) + ' ' + th[2]
       });
       b.addEventListener('click', function () {
         KI.setTheme(th[0]);
@@ -119,7 +119,7 @@
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
       text: KI.store.learnedCount() + ' zaman öğrenildi olarak işaretli, defterinde ' + KI.store.words().length +
             ' kelime var. Zorlandıklarım listesinde ' + KI.store.troubleCount() + ' kayıt bulunuyor.' }));
-    var reset = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🗑 Tüm ilerlemeyi sıfırla' });
+    var reset = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('trash') + ' Tüm ilerlemeyi sıfırla' });
     reset.addEventListener('click', function () {
       if (!window.confirm('İşaretlenen zamanlar, test sonuçları ve kelime defteri silinecek. Devam edilsin mi?')) return;
       KI.store.reset();

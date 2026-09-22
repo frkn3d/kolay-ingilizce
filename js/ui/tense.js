@@ -24,7 +24,7 @@
     var btn = U.el('button', { class: 'btn btn--sm', type: 'button' });
     function paint() {
       var on = KI.store.isLearned(t.id);
-      btn.textContent = on ? '✅ Öğrendim' : '☐ Öğrendim işaretle';
+      btn.innerHTML = KI.icons.html(on ? 'check-circle' : 'circle') + ' ' + (on ? 'Öğrendim' : 'Öğrendim işaretle');
       btn.classList.toggle('btn--primary', on);
     }
     paint();
@@ -41,7 +41,7 @@
 
   function formula(t) {
     var card = U.el('section', { class: 'card' });
-    card.appendChild(U.el('h2', { class: 'card__title', html: '🧮 Formül' }));
+    card.appendChild(U.el('h2', { class: 'card__title', html: KI.icons.html('formula') + ' Formül' }));
     var f = U.el('div', { class: 'formula' });
     [['+', t.formula.pos, ''], ['−', t.formula.neg, ' formula__row--neg'], ['?', t.formula.que, ' formula__row--que']]
       .forEach(function (r) {
@@ -62,7 +62,7 @@
 
   function logic(t) {
     var card = U.el('section', { class: 'card' });
-    card.appendChild(U.el('h2', { class: 'card__title', html: '🧠 Mantığı' }));
+    card.appendChild(U.el('h2', { class: 'card__title', html: KI.icons.html('logic') + ' Mantığı' }));
     var ul = U.el('ul', { style: 'margin:0 0 4px;padding-left:20px' });
     t.logic.forEach(function (l) { ul.appendChild(U.el('li', { html: l, style: 'margin-bottom:.4em' })); });
     card.appendChild(ul);
@@ -85,7 +85,7 @@
     sec.appendChild(U.el('p', { class: 'soft', style: 'margin-top:-6px;font-size:.9rem',
       html: 'Yeşil kelimeler bu zamanın yapı taşlarıdır. Herhangi bir kelimeye dokunarak anlamını görebilirsin.' }));
 
-    var allBtn = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🔊 Hepsini sırayla dinle' });
+    var allBtn = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Hepsini sırayla dinle' });
     allBtn.addEventListener('click', function () {
       KI.audio.play('tap');
       var i = 0;
@@ -134,7 +134,7 @@
         U.el('span', { class: 'vs__tag', text: '✓ doğru' }), U.el('span', { text: m.good })
       ]));
       vs.appendChild(row);
-      vs.appendChild(U.el('p', { class: 'example__note', html: '💡 ' + U.esc(m.why), style: 'margin:0 0 6px' }));
+      vs.appendChild(U.el('p', { class: 'example__note', html: KI.icons.html('bulb') + ' ' + U.esc(m.why), style: 'margin:0 0 6px' }));
     });
     sec.appendChild(vs);
     return sec;
@@ -158,7 +158,7 @@
     var frag = document.createDocumentFragment();
     if (!t) {
       frag.appendChild(U.el('div', { class: 'empty' }, [
-        U.el('span', { class: 'empty__ico', text: '🧭' }),
+        U.el('span', { class: 'empty__ico', html: KI.icons.html('compass') }),
         U.el('p', { text: 'Bu zaman bulunamadı.' }),
         U.el('a', { class: 'btn', href: '#/harita', text: 'Haritaya dön' })
       ]));

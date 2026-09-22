@@ -155,8 +155,8 @@
     function finish() {
       U.clear(box);
       var pct = Math.round(correct / qs.length * 100);
-      var mood = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪';
-      box.appendChild(U.el('h3', { text: mood + '  ' + correct + ' / ' + qs.length + ' doğru' }));
+      var mood = KI.icons.html(pct >= 80 ? 'trophy' : pct >= 50 ? 'thumbsup' : 'sprout');
+      box.appendChild(U.el('h3', { html: mood + '  ' + correct + ' / ' + qs.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: pct >= 80 ? 'Çok iyi! Bu zamanı kavramışsın.' : pct >= 50 ? 'Fena değil. Örneklere bir daha göz at.' : 'Acele etme; önce mantık bölümünü tekrar oku.' }));
       if (opts.tenseId) KI.store.saveScore(opts.tenseId, correct, qs.length);
 
@@ -170,12 +170,12 @@
         tip.appendChild(U.el('span', { text: 'En çok ' + wt.en + ' (' + wt.tr + ') sorularında zorlandın. Önce oranın mantığını bir daha oku.' }));
         tip.appendChild(U.el('div', { class: 'row', style: 'margin-top:8px' }, [
           U.el('a', { class: 'btn btn--sm', href: '#/zaman/' + wt.id, 'data-sfx': 'nav', text: wt.en + ' konusuna git →' }),
-          U.el('a', { class: 'btn btn--sm', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav', text: '🩹 Zorlandıklarımı çöz' })
+          U.el('a', { class: 'btn btn--sm', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav', html: KI.icons.html('flag') + ' Zorlandıklarımı çöz' })
         ]));
       } else if (KI.store.troubleCount() > 0) {
         tip.appendChild(U.el('span', { text: 'Bu turda hata yapmadın. Geçmişte zorlandığın sorular birikmiş durumda; onları temizlemek iyi olur.' }));
         tip.appendChild(U.el('div', { class: 'row', style: 'margin-top:8px' }, [
-          U.el('a', { class: 'btn btn--sm', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav', text: '🩹 Zorlandıklarımı çöz' })
+          U.el('a', { class: 'btn btn--sm', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav', html: KI.icons.html('flag') + ' Zorlandıklarımı çöz' })
         ]));
       } else {
         tip.appendChild(U.el('span', { text: 'Hata listen temiz. Yeni bir mod deneyebilir ya da henüz öğrenmediğin bir zamana geçebilirsin.' }));
@@ -220,7 +220,7 @@
           qp.appendChild(U.el('span', { text: q.sentence }));
         }
         if (q.speak) {
-          var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🔊 Dinle', style: isPrompt ? 'margin-top:8px' : '' });
+          var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Dinle', style: isPrompt ? 'margin-top:8px' : '' });
           say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(q.speak, isPrompt ? { rate: 0.7 } : null); });
           qp.appendChild(say);
         }
@@ -355,7 +355,7 @@
     function finish() {
       U.clear(box);
       var pct = Math.round(correct / items.length * 100);
-      box.appendChild(U.el('h3', { text: (pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪') + '  ' + correct + ' / ' + items.length + ' doğru' }));
+      box.appendChild(U.el('h3', { html: KI.icons.html(pct >= 80 ? 'trophy' : pct >= 50 ? 'thumbsup' : 'sprout') + '  ' + correct + ' / ' + items.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: 'Cümle kurmak, kelime sırasını öğrenmenin en hızlı yoludur.' }));
       var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
       again.addEventListener('click', function () { i = 0; correct = 0; items = U.shuffle(items); KI.audio.play('tap'); paint(); });
@@ -373,7 +373,7 @@
       U.clear(box);
 
       box.appendChild(U.el('p', { class: 'eyebrow', text: (i + 1) + ' / ' + items.length + ' · Kelimelere dokunup cümleyi kur' }));
-      box.appendChild(U.el('p', { class: 'quiz__q', html: '🇹🇷 ' + U.esc(it.tr) }));
+      box.appendChild(U.el('p', { class: 'quiz__q', html: KI.icons.html('flag') + ' ' + U.esc(it.tr) }));
 
       var line = U.el('div', { class: 'builder__line' });
       var pool = U.el('div', { class: 'builder__pool' });
@@ -437,7 +437,7 @@
           fb.appendChild(mine);
         }
         var actions = U.el('div', { class: 'row', style: 'margin-top:8px' });
-        var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🔊 Dinle' });
+        var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Dinle' });
         say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target); });
         actions.appendChild(say);
         if (it.tense) {
@@ -474,7 +474,7 @@
     function finish() {
       U.clear(box);
       var pct = Math.round(correct / items.length * 100);
-      box.appendChild(U.el('h3', { text: (pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪') + '  ' + correct + ' / ' + items.length + ' doğru' }));
+      box.appendChild(U.el('h3', { html: KI.icons.html(pct >= 80 ? 'trophy' : pct >= 50 ? 'thumbsup' : 'sprout') + '  ' + correct + ' / ' + items.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: 'Dikte, dinlediğini anlamayı ve yazımı aynı anda çalıştırır.' }));
       var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
       again.addEventListener('click', function () { i = 0; correct = 0; items = U.shuffle(items); KI.audio.play('tap'); paint(); });
@@ -492,12 +492,12 @@
 
       box.appendChild(U.el('p', { class: 'eyebrow', text: (i + 1) + ' / ' + items.length + ' · Dinle ve duyduğunu yaz' }));
 
-      var play = U.el('button', { class: 'btn btn--primary', type: 'button', html: '🔊 Dinle' });
+      var play = U.el('button', { class: 'btn btn--primary', type: 'button', html: KI.icons.html('speaker') + ' Dinle' });
       play.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target); });
-      var slow = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🐢 Yavaş' });
+      var slow = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('turtle') + ' Yavaş' });
       slow.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target, { rate: 0.5 }); });
-      var hint = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: '💡 Türkçesi' });
-      var hintP = U.el('p', { class: 'example__note', hidden: true, html: '🇹🇷 ' + U.esc(it.tr) });
+      var hint = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: KI.icons.html('bulb') + ' Türkçesi' });
+      var hintP = U.el('p', { class: 'example__note', hidden: true, html: KI.icons.html('flag') + ' ' + U.esc(it.tr) });
       hint.addEventListener('click', function () {
         hintP.hidden = !hintP.hidden;
         KI.audio.play(hintP.hidden ? 'close' : 'reveal');
@@ -569,28 +569,28 @@
   }
 
   var MODES = [
-    { id: 'karisik', ico: '🎲', t: 'Karışık', d: 'Her türden soru: cümle, çizgi, boşluk, kelime, fiil.',
+    { id: 'karisik', ico: KI.icons.html('dice'), t: 'Karışık', d: 'Her türden soru: cümle, çizgi, boşluk, kelime, fiil.',
       make: function () {
         var n = size();
         return U.shuffle(sentenceQuestions(Math.ceil(n * .3)).concat(
           timelineQuestions(Math.ceil(n * .2)), blankQuestions(Math.ceil(n * .3)),
           wordQuestions(Math.ceil(n * .2)), verbQuestions(Math.ceil(n * .15)))).slice(0, n);
       } },
-    { id: 'zorlandiklarim', ico: '🩹', t: 'Zorlandıklarım', d: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada toplanır.',
+    { id: 'zorlandiklarim', ico: KI.icons.html('flag'), t: 'Zorlandıklarım', d: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada toplanır.',
       make: function () { return troubleQuestions(size()); } },
-    { id: 'cumle', ico: '💬', t: 'Cümleden zamanı bul', d: 'İngilizce cümleyi oku, hangi zaman olduğunu seç.',
+    { id: 'cumle', ico: KI.icons.html('chat'), t: 'Cümleden zamanı bul', d: 'İngilizce cümleyi oku, hangi zaman olduğunu seç.',
       make: function () { return sentenceQuestions(size()); } },
-    { id: 'cizgi', ico: '📈', t: 'Çizgiden zamanı bul', d: 'Zaman çizgisine bak, hangi zaman olduğunu seç.',
+    { id: 'cizgi', ico: KI.icons.html('chart'), t: 'Çizgiden zamanı bul', d: 'Zaman çizgisine bak, hangi zaman olduğunu seç.',
       make: function () { return timelineQuestions(size()); } },
-    { id: 'bosluk', ico: '✏️', t: 'Boşluğu doldur', d: 'Cümledeki boşluğa doğru yapıyı yerleştir.',
+    { id: 'bosluk', ico: KI.icons.html('pencil'), t: 'Boşluğu doldur', d: 'Cümledeki boşluğa doğru yapıyı yerleştir.',
       make: function () { return blankQuestions(size()); } },
-    { id: 'kur', ico: '🧩', t: 'Cümleyi kur', d: 'Türkçesi verilir; kelimelere dokunarak İngilizce cümleyi sen kur.',
+    { id: 'kur', ico: KI.icons.html('puzzle'), t: 'Cümleyi kur', d: 'Türkçesi verilir; kelimelere dokunarak İngilizce cümleyi sen kur.',
       kind: 'builder', make: function () { return buildItems(size()); } },
-    { id: 'dikte', ico: '🎧', t: 'Dinle ve yaz', d: 'Cümle okunur, sen yazarsın; sonra kelime kelime karşılaştırılır.',
+    { id: 'dikte', ico: KI.icons.html('headphones'), t: 'Dinle ve yaz', d: 'Cümle okunur, sen yazarsın; sonra kelime kelime karşılaştırılır.',
       kind: 'dictation', make: function () { return buildItems(Math.min(size(), 10)); } },
-    { id: 'kelime', ico: '📖', t: 'Kelime bilgisi', d: 'Sözlükteki kelimeleri iki yönlü çalış: İngilizce ↔ Türkçe.',
+    { id: 'kelime', ico: KI.icons.html('book'), t: 'Kelime bilgisi', d: 'Sözlükteki kelimeleri iki yönlü çalış: İngilizce ↔ Türkçe.',
       make: function () { return wordQuestions(size()); } },
-    { id: 'fiil', ico: '🔁', t: 'Düzensiz fiiller', d: 'Fiilin 2. ve 3. hâlini bul. Zamanların yapı taşı budur.',
+    { id: 'fiil', ico: KI.icons.html('repeat'), t: 'Düzensiz fiiller', d: 'Fiilin 2. ve 3. hâlini bul. Zamanların yapı taşı budur.',
       make: function () { return verbQuestions(size()); } }
   ];
 
@@ -671,10 +671,10 @@
     if (!qs.length) {
       if (mode.id === 'zorlandiklarim') {
         frag.appendChild(U.el('div', { class: 'empty' }, [
-          U.el('span', { class: 'empty__ico', text: '🎉' }),
+          U.el('span', { class: 'empty__ico', html: KI.icons.html('trophy') }),
           U.el('h3', { text: 'Zorlandığın bir şey yok' }),
           U.el('p', { text: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada birikir. Birkaç tur çözünce burası dolmaya başlar.' }),
-          U.el('a', { class: 'btn btn--primary', href: '#/alistirma/karisik', 'data-sfx': 'nav', text: '🎲 Karışık tura başla' })
+          U.el('a', { class: 'btn btn--primary', href: '#/alistirma/karisik', 'data-sfx': 'nav', html: KI.icons.html('dice') + ' Karışık tura başla' })
         ]));
       } else {
         frag.appendChild(U.el('p', { class: 'empty', text: 'Bu modda soru bulunamadı.' }));
@@ -687,7 +687,7 @@
       }
     };
     if (mode.id === 'zorlandiklarim') {
-      var clr = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: '🧹 Listeyi temizle' });
+      var clr = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: KI.icons.html('trash') + ' Listeyi temizle' });
       clr.addEventListener('click', function () {
         if (!window.confirm('Zorlandıklarım listesi tamamen silinsin mi?')) return;
         KI.store.clearTrouble();

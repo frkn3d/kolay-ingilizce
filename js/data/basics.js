@@ -10,7 +10,7 @@
 
   B.push({
     id: 'sira',
-    icon: '🧩',
+    icon: KI.icons.html('puzzle'),
     title: 'Cümlenin Sırası',
     intro: 'İngilizcede sıra hemen hemen hiç değişmez. Türkçede fiil sona giderken İngilizcede ortadadır.',
     blocks: [
@@ -25,7 +25,7 @@
 
   B.push({
     id: 'zamirler',
-    icon: '👤',
+    icon: KI.icons.html('person'),
     title: 'Kişi Zamirleri',
     intro: 'Her cümlenin bir öznesi olmalıdır. Türkçede "gidiyorum" yeterlidir; İngilizcede "I" yazılmak zorundadır.',
     blocks: [
@@ -44,7 +44,7 @@
 
   B.push({
     id: 'tobe',
-    icon: '🪞',
+    icon: KI.icons.html('mirror'),
     title: 'Olmak Fiili: am / is / are',
     intro: 'Türkçede "-dir, -dır" ekiyle yaptığımız işi İngilizce ayrı bir kelimeyle yapar.',
     blocks: [
@@ -65,7 +65,7 @@
 
   B.push({
     id: 'have',
-    icon: '🤲',
+    icon: KI.icons.html('box'),
     title: 'Sahip Olmak: have / has',
     intro: 'Türkçede "var" ile söylediğimiz şeyleri İngilizce have / has ile söyler.',
     blocks: [
@@ -84,7 +84,7 @@
 
   B.push({
     id: 'artikel',
-    icon: '🔤',
+    icon: KI.icons.html('tag'),
     title: 'a / an / the',
     intro: 'Türkçede olmayan küçük kelimelerdir ama cümlenin doğal durması için gerekirler.',
     blocks: [
@@ -103,7 +103,7 @@
 
   B.push({
     id: 'cogul',
-    icon: '➕',
+    icon: KI.icons.html('plus'),
     title: 'Çoğul Yapmak',
     intro: 'İngilizcede çoğul eki neredeyse her zaman <b>-s</b>’tir.',
     blocks: [
@@ -120,7 +120,7 @@
 
   B.push({
     id: 'ekler',
-    icon: '✍️',
+    icon: KI.icons.html('pencil'),
     title: 'Ekler: -s, -ing, -ed',
     intro: 'Zamanların hepsi bu üç ekle çalışır. Yazımı birkaç küçük kurala bağlıdır.',
     blocks: [
@@ -140,7 +140,7 @@
 
   B.push({
     id: 'fiil-halleri',
-    icon: '🔁',
+    icon: KI.icons.html('repeat'),
     title: 'Fiilin Üç Hâli',
     intro: 'Zamanları kurmak için her fiilin üç hâlini bilmek gerekir: <b>V1</b> (yalın), <b>V2</b> (geçmiş), <b>V3</b> (-miş hâli).',
     blocks: [
@@ -152,7 +152,7 @@
 
   B.push({
     id: 'soru',
-    icon: '❓',
+    icon: KI.icons.html('help-circle'),
     title: 'Soru Kelimeleri',
     intro: 'Soru kelimesi en başa gelir, arkasından yardımcı fiil gelir.',
     blocks: [
@@ -172,7 +172,7 @@
 
   B.push({
     id: 'going-to',
-    icon: '🧭',
+    icon: KI.icons.html('compass'),
     title: 'will mi, be going to mu?',
     intro: 'İkisi de geleceği anlatır ama niyetleri farklıdır.',
     blocks: [

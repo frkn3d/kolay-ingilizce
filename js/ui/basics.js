@@ -41,7 +41,7 @@
       row.appendChild(U.el('td', { text: v.v2 }));
       row.appendChild(U.el('td', { text: v.v3 }));
       row.appendChild(U.el('td', { class: 'soft', text: v.tr }));
-      var btn = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: '🔊', title: 'Üç hâlini dinle' });
+      var btn = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: KI.icons.html('speaker'), title: 'Üç hâlini dinle' });
       btn.addEventListener('click', function () {
         KI.audio.play('tap');
         KI.speech.speak(v.v1 + ', ' + v.v2.replace(',', ' or ') + ', ' + v.v3, { rate: 0.68 });

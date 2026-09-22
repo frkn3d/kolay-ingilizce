@@ -78,10 +78,12 @@
     defs.appendChild(mkA);
     svg.appendChild(defs);
 
-    /* geçmiş / gelecek bölgeleri */
-    var zh = mini ? 130 : 80;
-    svg.appendChild(n('rect', { x: 0, y: AY - zh / 2, width: CX, height: zh, class: 'tl-zone-past', opacity: mini ? '.7' : '.5', rx: 8 }));
-    svg.appendChild(n('rect', { x: CX, y: AY - zh / 2, width: W - CX, height: zh, class: 'tl-zone-future', opacity: mini ? '.7' : '.5', rx: 8 }));
+    /* geçmiş / gelecek bölgeleri: mini gösterimde kartın tamamını değil,
+       eksenin etrafında ince bir "şerit" dolduruyor — böylece iki renk
+       arasındaki fark kartın geri kalanına karışmadan net görünür. */
+    var zh = mini ? 64 : 80;
+    svg.appendChild(n('rect', { x: 0, y: AY - zh / 2, width: CX, height: zh, class: 'tl-zone-past', opacity: mini ? '1' : '.5', rx: mini ? 10 : 8 }));
+    svg.appendChild(n('rect', { x: CX, y: AY - zh / 2, width: W - CX, height: zh, class: 'tl-zone-future', opacity: mini ? '1' : '.5', rx: mini ? 10 : 8 }));
 
     /* ana eksen */
     var axisAttrs = {

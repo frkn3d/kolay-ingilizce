@@ -17,7 +17,7 @@
 | 💬 **101 örnek cümle + 74 soru** | Günlük hayattan kısa cümleler; her zaman için 6-11 örnek ve elle yazılmış 4-7 alıştırma sorusu. |
 | 🇹🇷 **Çevir düğmesi** | Cümlenin Türkçesi istendiğinde açılır; altında o cümlenin inceliğini anlatan bir not çıkar. |
 | 👆 **Tıklanabilir kelimeler** | Cümledeki her kelimeye dokunulur; anlamı, türü ve çekimi (ör. *built → build fiilinin 2. hâli*) alttan açılan kartta görünür. |
-| 📚 **1.790 kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, toplum, sanat; B1-B2 fiil, sıfat ve zarfları; bağlaçlar (*however, although, therefore*); 43 öbek fiil (*give up, look after*); 99 düzensiz fiil. |
+| 📚 **3.000+ kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, hukuk, bilim, sanat, spor, din, askeriye ve daha fazlası; akademik sıfat/zarf/fiiller; bağlaçlar (*however, although, therefore*); 50+ öbek fiil (*give up, look after*); deyimler; 99 düzensiz fiil. |
 | 🔊 **Sesli okuma** | Cihazın kendi konuşma motoruyla (Web Speech API). **Hiçbir internet servisi, hiçbir API anahtarı kullanılmaz.** Normal ve yavaş okuma, ayarlanabilir hız ve ses seçimi. |
 | ⭐ **Kelime defteri** | Beğenilen kelimeler kaydedilir, topluca dinlenir. Sözlük türe göre süzülebilir (isim, fiil, sıfat, zarf, öbek fiil, düzensiz fiil, defterim) ve her kelime kartında o kelimenin geçtiği bir örnek cümle gösterilir. |
 | 🎯 **9 alıştırma modu** | Karışık · Zorlandıklarım · Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · Cümleyi kur · Dinle ve yaz · Kelime bilgisi · Düzensiz fiiller. Tur uzunluğu 5/10/20 soru seçilebilir. |
@@ -30,6 +30,7 @@
 | 🎨 **Retro yeşil tasarım** | Parşömen zemin, kalın çerçeveler, sert gölgeler; açık ve koyu tema. |
 | 🔔 **Kısık ses efektleri** | Tüm tıklama ve doğru/yanlış sesleri tarayıcıda sentezlenir (Web Audio) — tek bir ses dosyası bile indirilmez. |
 | 📱 **Mobil uyumlu** | Telefonda alt sekme çubuğu, masaüstünde üst menü. Ana ekrana eklenebilir (PWA manifest). |
+| ✏️ **Emojisiz, tek stil ikonlar** | Uygulamada hiçbir platform emojisi yok; tüm ikonlar `js/core/icons.js` içinde elle çizilmiş, tema renklerine uyan SVG'lerdir. |
 
 Öğrenilen zamanlar, test sonuçları ve kelime defteri yalnızca **kendi cihazınızda** (localStorage) saklanır; hiçbir veri dışarı gönderilmez.
 
@@ -76,6 +77,7 @@ css/
 js/
   core/
     utils.js               küçük yardımcılar (DOM, karıştırma, toast)
+    icons.js               emojisiz tek stil SVG ikon kütüphanesi
     store.js               localStorage: ayarlar, ilerleme, kelime defteri
     audio.js               Web Audio ile sentezlenen ses efektleri
     speech.js              cihaz üstü sesli okuma (Web Speech API)
@@ -85,6 +87,8 @@ js/
     compare.js             karışan zaman çiftlerinin karşılaştırması
     glossary.js            sözlük çekirdeği + çekim çözücü (-s, -ing, -ed, iyelik)
     vocabulary.js          A1-B2 kelime dağarcığı, temalara ayrılmış
+    vocabulary-b2.js       B2 seviyesine çıkaran ek kelime dalgası
+    vocabulary-b2-plus.js  3000 kelimeyi tamamlayan ikinci dalga
     exercises.js           zamanlara ait ek alıştırma soruları
     basics.js              temel gramer bölümleri
   ui/
@@ -106,8 +110,9 @@ Derleme adımı, paket yöneticisi ve dış bağımlılık **yoktur**. Dosyalar 
 ### Yeni içerik eklemek
 
 - **Örnek cümle:** `js/data/examples-extra.js` içinde ilgili zamanın dizisine `{ en, tr, key, note }` ekleyin. `key`, yeşil vurgulanacak yapı kelimeleridir. Cümledeki her kelimenin sözlükte bulunmasına dikkat edin.
-- **Kelime:** `js/data/vocabulary.js` içindeki uygun temaya `'ingilizce|türkçe|tür|not'` satırı ekleyin. Çekimli hâller (*-s, -ing, -ed*, iyelik, kısaltmalar) kendiliğinden çözülür. Düzensiz fiil için aynı dosyanın sonundaki `addIrregulars` listesine `'V1|V2|V3|Türkçe'` yazın.
+- **Kelime:** `js/data/vocabulary.js` (veya `vocabulary-b2.js` / `vocabulary-b2-plus.js`) içindeki uygun temaya `'ingilizce|türkçe|tür|not'` satırı ekleyin. Çekimli hâller (*-s, -ing, -ed*, iyelik, kısaltmalar) kendiliğinden çözülür. Düzensiz fiil için aynı dosyanın sonundaki `addIrregulars` listesine `'V1|V2|V3|Türkçe'` yazın.
 - **Soru:** `js/data/exercises.js` içinde ilgili zamanın dizisine `{ q, options, answer, why }` ekleyin; hem o zamanın mini testine hem karışık moda kendiliğinden girer.
+- **İkon:** `js/core/icons.js` içindeki `SHAPES` nesnesine yeni bir anahtar ekleyin (24×24 viewBox, `currentColor`); sonra `KI.icons.html('ad')` ile her yerde kullanın. Emoji kullanılmaz.
 
 ## Yayına alma (GitHub Pages)
 
@@ -120,8 +125,8 @@ Depoda bulunan `.nojekyll` dosyası, Pages'in dosyaları olduğu gibi yayımlama
 
 ## Yol haritası
 
-- [ ] Dinleyip yazma (dikte) alıştırması
-- [ ] Zamanları karşılaştıran ikili sayfalar (*Past Simple ↔ Present Perfect*)
+- [x] Dinleyip yazma (dikte) alıştırması
+- [x] Zamanları karşılaştıran ikili sayfalar (*Past Simple ↔ Present Perfect*)
 - [ ] Günlük tekrar (aralıklı tekrar) ile kelime defteri
 - [ ] Android/iOS paketi (Capacitor ile aynı kaynak koddan)
 

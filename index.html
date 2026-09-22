@@ -37,22 +37,22 @@
 
     <div class="appbar__actions">
       <button class="iconbtn" id="btn-sound" type="button" title="Ses efektleri" aria-label="Ses efektlerini aç/kapat">
-        <span class="iconbtn__glyph" data-on="🔔" data-off="🔕">🔔</span>
+        <span class="iconbtn__glyph" data-icon="bell"></span>
       </button>
       <button class="iconbtn" id="btn-theme" type="button" title="Tema" aria-label="Açık/koyu tema">
-        <span class="iconbtn__glyph">🌙</span>
+        <span class="iconbtn__glyph" data-icon="moon"></span>
       </button>
       <button class="iconbtn" id="btn-settings" type="button" title="Ayarlar" aria-label="Ayarlar">
-        <span class="iconbtn__glyph">⚙︎</span>
+        <span class="iconbtn__glyph" data-icon="sliders"></span>
       </button>
     </div>
   </div>
 
   <nav class="tabbar" id="tabbar" aria-label="Ana menü">
-    <a class="tab" href="#/harita" data-route="harita"><span class="tab__ico">🗺️</span><span class="tab__txt">Harita</span></a>
-    <a class="tab" href="#/temeller" data-route="temeller"><span class="tab__ico">🧱</span><span class="tab__txt">Temeller</span></a>
-    <a class="tab" href="#/alistirma" data-route="alistirma"><span class="tab__ico">🎯</span><span class="tab__txt">Alıştırma</span></a>
-    <a class="tab" href="#/sozluk" data-route="sozluk"><span class="tab__ico">📖</span><span class="tab__txt">Sözlük</span></a>
+    <a class="tab" href="#/harita" data-route="harita"><span class="tab__ico" data-icon="map"></span><span class="tab__txt">Harita</span></a>
+    <a class="tab" href="#/temeller" data-route="temeller"><span class="tab__ico" data-icon="wall"></span><span class="tab__txt">Temeller</span></a>
+    <a class="tab" href="#/alistirma" data-route="alistirma"><span class="tab__ico" data-icon="target"></span><span class="tab__txt">Alıştırma</span></a>
+    <a class="tab" href="#/sozluk" data-route="sozluk"><span class="tab__ico" data-icon="book"></span><span class="tab__txt">Sözlük</span></a>
   </nav>
 </header>
 
@@ -66,10 +66,10 @@
 <!-- Kelime baloncuğu -->
 <div class="sheet" id="word-sheet" hidden role="dialog" aria-modal="false" aria-label="Kelime anlamı">
   <div class="sheet__card">
-    <button class="sheet__close" id="word-close" type="button" aria-label="Kapat">✕</button>
+    <button class="sheet__close" id="word-close" type="button" aria-label="Kapat" data-icon="close"></button>
     <div class="sheet__head">
       <h3 class="sheet__word" id="word-title">—</h3>
-      <button class="btn btn--icon" id="word-speak" type="button" title="Oku">🔊</button>
+      <button class="btn btn--icon" id="word-speak" type="button" title="Oku" data-icon="speaker"></button>
     </div>
     <p class="sheet__pos" id="word-pos"></p>
     <p class="sheet__mean" id="word-mean"></p>
@@ -80,7 +80,7 @@
       <p class="sheet__ex-tr" id="word-ex-tr"></p>
     </div>
     <div class="sheet__foot">
-      <button class="btn btn--ghost" id="word-save" type="button">⭐ Kelime defterime ekle</button>
+      <button class="btn btn--ghost" id="word-save" type="button"></button>
     </div>
   </div>
 </div>
@@ -90,7 +90,7 @@
   <div class="modal__card">
     <div class="modal__head">
       <h2>Ayarlar</h2>
-      <button class="iconbtn" id="settings-close" type="button" aria-label="Kapat">✕</button>
+      <button class="iconbtn" id="settings-close" type="button" aria-label="Kapat" data-icon="close"></button>
     </div>
     <div class="modal__body" id="settings-body"></div>
   </div>
@@ -100,12 +100,15 @@
 
 <!-- Çekirdek -->
 <script src="js/core/utils.js"></script>
+<script src="js/core/icons.js"></script>
 <script src="js/core/store.js"></script>
 <script src="js/core/audio.js"></script>
 <script src="js/core/speech.js"></script>
 <!-- Veri -->
 <script src="js/data/glossary.js"></script>
 <script src="js/data/vocabulary.js"></script>
+<script src="js/data/vocabulary-b2.js"></script>
+<script src="js/data/vocabulary-b2-plus.js"></script>
 <script src="js/data/tenses.js"></script>
 <script src="js/data/examples-extra.js"></script>
 <script src="js/data/basics.js"></script>

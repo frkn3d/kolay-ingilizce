@@ -12,7 +12,7 @@
     document.documentElement.setAttribute('data-theme', t);
     KI.store.set('theme', t);
     var g = U.qs('#btn-theme .iconbtn__glyph');
-    if (g) g.textContent = (t === 'dark') ? '☀︎' : '🌙';
+    if (g) g.innerHTML = KI.icons.html(t === 'dark' ? 'sun' : 'moon');
     var meta = U.qs('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', t === 'dark' ? '#0d1711' : '#14361f');
   };
@@ -58,7 +58,7 @@
 
     if (!hit) {
       view.appendChild(U.el('div', { class: 'empty' }, [
-        U.el('span', { class: 'empty__ico', text: '🧭' }),
+        U.el('span', { class: 'empty__ico', html: KI.icons.html('compass') }),
         U.el('h2', { text: 'Sayfa bulunamadı' }),
         U.el('a', { class: 'btn btn--primary', href: '#/harita', text: 'Haritaya dön' })
       ]));
@@ -85,6 +85,10 @@
   function boot() {
     if (booted) return;
     booted = true;
+
+    /* sabit ikonlar: her ikon tek yerden, icons.js'ten gelir */
+    U.qsa('[data-icon]').forEach(function (el) { el.innerHTML = KI.icons.html(el.getAttribute('data-icon')); });
+
     KI.setTheme(KI.store.get('theme'));
     KI.applyPrefs();
     KI.sentence.sheet.init();
@@ -94,7 +98,7 @@
     function paintSound() {
       var on = !!KI.store.get('sound');
       sb.classList.toggle('is-off', !on);
-      sb.querySelector('.iconbtn__glyph').textContent = on ? '🔔' : '🔕';
+      sb.querySelector('.iconbtn__glyph').innerHTML = KI.icons.html(on ? 'bell' : 'bell-off');
       sb.setAttribute('aria-pressed', on ? 'true' : 'false');
     }
     paintSound();

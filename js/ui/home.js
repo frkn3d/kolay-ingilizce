@@ -32,7 +32,7 @@
     var mini = U.el('div', { class: 'tcard__mini' });
     mini.appendChild(KI.timeline.render(t, { mini: true }));
     card.appendChild(mini);
-    if (KI.store.isLearned(t.id)) card.appendChild(U.el('span', { class: 'tcard__done', text: '✅' }));
+    if (KI.store.isLearned(t.id)) card.appendChild(U.el('span', { class: 'tcard__done', html: KI.icons.html('check-circle') }));
     return card;
   }
 
@@ -118,12 +118,13 @@
     hero.appendChild(U.el('p', { text: 'İngilizcede cümle kurmadan önce tek bir soru sorulur. 12 zamanın hepsi aşağıdaki haritada, yerli yerinde.' }));
     hero.appendChild(progressBox());
 
+    var play = KI.icons.html('play');
     var primary = lastT
-      ? U.el('a', { class: 'btn btn--mustard', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: '▶︎ Devam et: ' + U.esc(lastT.tr) })
-      : U.el('a', { class: 'btn btn--mustard', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: '▶︎ Baştan başla' });
+      ? U.el('a', { class: 'btn btn--mustard', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
+      : U.el('a', { class: 'btn btn--mustard', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
     hero.appendChild(U.el('div', { class: 'row', style: 'margin-top:14px' }, [
       primary,
-      U.el('a', { class: 'btn', href: '#/temeller', 'data-sfx': 'nav', html: '🧱 Temeller' })
+      U.el('a', { class: 'btn', href: '#/temeller', 'data-sfx': 'nav', html: KI.icons.html('wall') + ' Temeller' })
     ]));
     frag.appendChild(hero);
 
@@ -139,11 +140,11 @@
     /* --- kısa yollar --- */
     var quick = U.el('div', { class: 'quicklinks' });
     [
-      { href: '#/alistirma', ico: '🎯', t: 'Alıştırma', d: '7 mod' },
-      { href: '#/sozluk', ico: '📖', t: 'Sözlük', d: KI.glossary.size() + ' kelime' }
+      { href: '#/alistirma', ico: 'target', t: 'Alıştırma', d: '9 mod' },
+      { href: '#/sozluk', ico: 'book', t: 'Sözlük', d: KI.glossary.size() + ' kelime' }
     ].forEach(function (c) {
       quick.appendChild(U.el('a', { class: 'quicklink', href: c.href, 'data-sfx': 'nav' }, [
-        U.el('span', { class: 'quicklink__ico', text: c.ico }),
+        U.el('span', { class: 'quicklink__ico', html: KI.icons.html(c.ico) }),
         U.el('span', {}, [
           U.el('b', { text: c.t }),
           U.el('small', { text: c.d })

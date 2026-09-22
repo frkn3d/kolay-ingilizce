@@ -2,6 +2,10 @@
    Kolay İngilizce — components.css (1/3: butonlar, kartlar, rozetler)
    ============================================================ */
 
+/* Emoji yerine tek stil çizgisel ikonlar (bkz. js/core/icons.js).
+   Varsayılan: yazının içinde satır arası bir harf gibi davranır. */
+.icon { width: 1.15em; height: 1.15em; flex: none; vertical-align: -0.2em; }
+
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5em;
   padding: .62em 1.05em;
@@ -36,7 +40,8 @@ html[data-theme="dark"] .btn--primary { background: var(--green-500); color: #0d
   transition: transform .12s ease, background .15s ease;
 }
 .iconbtn:hover { transform: rotate(-6deg) scale(1.05); background: var(--surface-2); }
-.iconbtn__glyph { font-size: 1.05rem; line-height: 1; }
+.iconbtn__glyph { display: grid; place-items: center; line-height: 1; }
+.iconbtn__glyph .icon { width: 19px; height: 19px; vertical-align: 0; }
 .iconbtn.is-off { opacity: .55; }
 
 .card {
@@ -155,8 +160,13 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 .tl .tl-lbl { fill: var(--ink-mute); font-size: 20px; }
 .tl .tl-nowlbl { fill: var(--ink); font-size: 21px; font-weight: 700; }
 .tl .tl-mark-lbl { fill: var(--ink-soft); font-size: 19px; }
+/* Küçük kart çizgisinde --past-bg / --future-bg neredeyse aynı parlaklıkta
+   olduğundan (özellikle koyu temada) mobilde ayırt edilmiyordu. Gerçek
+   --past / --future rengiyle karıştırmak ton farkını belirginleştirir. */
 .tl .tl-zone-past { fill: var(--past-bg); }
 .tl .tl-zone-future { fill: var(--future-bg); }
+.tl--mini .tl-zone-past { fill: color-mix(in srgb, var(--past) 48%, var(--surface)); }
+.tl--mini .tl-zone-future { fill: color-mix(in srgb, var(--future) 48%, var(--surface)); }
 
 .grid-map { display: grid; gap: 12px; }
 .grid-map__head { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -195,7 +205,9 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 .tcard--past   { border-top: 5px solid var(--past); }
 .tcard--present{ border-top: 5px solid var(--present); }
 .tcard--future { border-top: 5px solid var(--future); }
-.tcard__done { position: absolute; top: 5px; right: 7px; font-size: .78rem; }
+.tcard__done { position: absolute; top: 5px; right: 7px; display: grid; place-items: center; }
+.tcard__done .icon { width: 16px; height: 16px; vertical-align: 0; color: var(--green-600); }
+html[data-theme="dark"] .tcard__done .icon { color: var(--green-300); }
 
 /* ---------- 3/3: ilerleme, sözlük, alıştırma, modal, toast ---------- */
 
@@ -378,8 +390,8 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 }
 
 /* ---------- Kart içindeki küçük zaman çizgisi (mobil okunaklılığı) ---------- */
-.tl--mini .tl-axis { stroke-width: 2; }
-.tl--mini .tl-now { stroke-width: 2; stroke-dasharray: 3 3; }
+.tl--mini .tl-axis { stroke-width: 2.4; }
+.tl--mini .tl-now { stroke-width: 3; stroke-dasharray: 4 3; opacity: .9; }
 .tcard__mini { margin-top: 6px; }
 
 /* ---------- Açılır ipucu kutusu ---------- */
@@ -437,7 +449,9 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
   transition: transform .14s ease, border-color .14s ease;
 }
 .quicklink:hover { transform: translate(-2px, -2px); border-color: var(--accent); }
-.quicklink__ico { font-size: 1.4rem; line-height: 1; }
+.quicklink__ico { display: inline-grid; place-items: center; line-height: 1; }
+.quicklink__ico .icon { width: 1.5rem; height: 1.5rem; vertical-align: 0; color: var(--green-700); }
+html[data-theme="dark"] .quicklink__ico .icon { color: var(--green-300); }
 .quicklink b { display: block; font-family: var(--font-display); font-size: 1rem; }
 .quicklink small { color: var(--ink-mute); font-size: .78rem; }
 

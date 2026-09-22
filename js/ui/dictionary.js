@@ -14,7 +14,7 @@
     { id: 'zarf',     t: 'Zarf',      fn: function (d) { return /zarf/.test(d.pos); } },
     { id: 'obek',     t: 'Öbek fiil', fn: function (d) { return /öbek/.test(d.pos); } },
     { id: 'duzensiz', t: 'Düzensiz fiil', special: 'irregular' },
-    { id: 'defter',   t: '⭐ Defterim',  special: 'book' }
+    { id: 'defter',   t: 'Defterim', ico: 'star', special: 'book' }
   ];
 
   var active = 'all';
@@ -24,12 +24,12 @@
     opts = opts || {};
     var acts = U.el('div', { class: 'wrow__acts' });
 
-    var say = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: '🔊', title: 'Dinle' });
+    var say = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: KI.icons.html('speaker'), title: 'Dinle' });
     say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.word(en); });
     acts.appendChild(say);
 
     var star = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button' });
-    function paint() { star.innerHTML = KI.store.hasWord(en) ? '⭐' : '☆'; }
+    function paint() { star.innerHTML = KI.icons.html(KI.store.hasWord(en) ? 'star' : 'star-outline'); }
     paint();
     star.addEventListener('click', function () {
       if (KI.store.hasWord(en)) {
@@ -114,7 +114,8 @@
       U.clear(chips);
       FILTERS.forEach(function (f) {
         var b = U.el('button', {
-          class: 'btn btn--sm' + (active === f.id ? ' btn--primary' : ''), type: 'button', text: f.t
+          class: 'btn btn--sm' + (active === f.id ? ' btn--primary' : ''), type: 'button',
+          html: (f.ico ? KI.icons.html(f.ico) + ' ' : '') + U.esc(f.t)
         });
         b.addEventListener('click', function () {
           active = f.id;
@@ -138,7 +139,7 @@
 
       if (!items.length) {
         list.appendChild(U.el('div', { class: 'empty' }, [
-          U.el('span', { class: 'empty__ico', text: active === 'defter' ? '📒' : '🔍' }),
+          U.el('span', { class: 'empty__ico', html: KI.icons.html(active === 'defter' ? 'notebook' : 'search') }),
           U.el('p', { text: active === 'defter'
             ? 'Defterin boş. Örnek cümlelerde bir kelimeye dokunup "Kelime defterime ekle" dersen burada birikir.'
             : 'Sonuç bulunamadı.' })
@@ -147,7 +148,7 @@
       }
 
       if (active === 'defter' || items.length <= 40) {
-        var all = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🔊 Listeyi sırayla dinle' });
+        var all = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Listeyi sırayla dinle' });
         all.addEventListener('click', function () {
           KI.audio.play('tap');
           var i = 0, arr = items.slice(0, 40);
