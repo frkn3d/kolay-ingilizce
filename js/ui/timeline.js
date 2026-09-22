@@ -59,13 +59,9 @@
     }
     var color = 'var(--' + tense.group + ')';
 
-    /* Mini gösterim, kart 3 sütuna sıkışınca çok dar olabiliyor. Oranı normalde
-       genişliğe göre kendiliğinden küçülen yüksekliğe bağlamak yerine, mini
-       modda "none" ile taban çizip CSS'te sabit bir yükseklik (.tl--mini)
-       veriyoruz — böylece dar kartta bile şerit birkaç piksele düşmüyor. */
     var svg = n('svg', {
       class: 'tl' + (mini ? ' tl--mini' : ''), viewBox: '0 0 ' + W + ' ' + H,
-      preserveAspectRatio: mini ? 'none' : 'xMidYMid meet', role: 'img',
+      preserveAspectRatio: 'xMidYMid meet', role: 'img',
       'aria-label': tense.en + ' zaman çizgisi'
     });
     svg.style.setProperty('--tlc', color);
@@ -82,12 +78,12 @@
     defs.appendChild(mkA);
     svg.appendChild(defs);
 
-    /* geçmiş / gelecek bölgeleri: mini gösterimde kartın tamamını değil,
-       eksenin etrafında ince bir "şerit" dolduruyor — böylece iki renk
-       arasındaki fark kartın geri kalanına karışmadan net görünür. */
-    var zh = mini ? 64 : 80;
-    svg.appendChild(n('rect', { x: 0, y: AY - zh / 2, width: CX, height: zh, class: 'tl-zone-past', opacity: mini ? '1' : '.5', rx: mini ? 10 : 8 }));
-    svg.appendChild(n('rect', { x: CX, y: AY - zh / 2, width: W - CX, height: zh, class: 'tl-zone-future', opacity: mini ? '1' : '.5', rx: mini ? 10 : 8 }));
+    /* geçmiş / gelecek bölgeleri: mini gösterimde ince bir çizgi hâlinde,
+       eksenin hemen üzerinde — kartı kaplayan kalın bir blok değil, sade
+       ve zayıf bir renk ipucu. */
+    var zh = mini ? 30 : 80;
+    svg.appendChild(n('rect', { x: 0, y: AY - zh / 2, width: CX, height: zh, class: 'tl-zone-past', opacity: mini ? '.9' : '.5', rx: mini ? 5 : 8 }));
+    svg.appendChild(n('rect', { x: CX, y: AY - zh / 2, width: W - CX, height: zh, class: 'tl-zone-future', opacity: mini ? '.9' : '.5', rx: mini ? 5 : 8 }));
 
     /* ana eksen */
     var axisAttrs = {
