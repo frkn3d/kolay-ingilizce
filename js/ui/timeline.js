@@ -39,12 +39,28 @@
   function render(tense, opts) {
     opts = opts || {};
     var mini = !!opts.mini;
-    var H = mini ? 62 : 215;
-    var AY = mini ? 34 : 108;            // eksenin y konumu
+    var H = mini ? 150 : 215;
+    var AY = mini ? 74 : 112;            // eksenin y konumu
+
+    /* Küçük gösterimde kart daralınca çizgiler saç teline dönüyordu.
+       vector-effect ile kalınlıklar ekran pikseline sabitlenir; böylece
+       telefonda da masaüstünde de aynı netlikte görünür. */
+    var NS = mini ? { 'vector-effect': 'non-scaling-stroke' } : {};
+    function nn(tag, attrs) {
+      var a = {}, k;
+      for (k in attrs) a[k] = attrs[k];
+      for (k in NS) a[k] = NS[k];
+      return n(tag, a);
+    }
+    /* Yuvarlak uçlu sıfır uzunluklu çizgi = ekranda sabit çaplı nokta */
+    function dotAt(x, y, w) {
+      return nn('line', { x1: x, y1: y, x2: x + 0.01, y2: y,
+        stroke: 'var(--tlc)', 'stroke-width': w, 'stroke-linecap': 'round' });
+    }
     var color = 'var(--' + tense.group + ')';
 
     var svg = n('svg', {
-      class: 'tl', viewBox: '0 0 ' + W + ' ' + H,
+      class: 'tl' + (mini ? ' tl--mini' : ''), viewBox: '0 0 ' + W + ' ' + H,
       preserveAspectRatio: 'xMidYMid meet', role: 'img',
       'aria-label': tense.en + ' zaman çizgisi'
     });
@@ -63,68 +79,81 @@
     svg.appendChild(defs);
 
     /* geçmiş / gelecek bölgeleri */
-    if (!mini) {
-      svg.appendChild(n('rect', { x: 0, y: AY - 46, width: CX, height: 92, class: 'tl-zone-past', opacity: '.5', rx: 8 }));
-      svg.appendChild(n('rect', { x: CX, y: AY - 46, width: W - CX, height: 92, class: 'tl-zone-future', opacity: '.5', rx: 8 }));
-    }
+    var zh = mini ? 130 : 80;
+    svg.appendChild(n('rect', { x: 0, y: AY - zh / 2, width: CX, height: zh, class: 'tl-zone-past', opacity: mini ? '.7' : '.5', rx: 8 }));
+    svg.appendChild(n('rect', { x: CX, y: AY - zh / 2, width: W - CX, height: zh, class: 'tl-zone-future', opacity: mini ? '.7' : '.5', rx: 8 }));
 
     /* ana eksen */
-    var axis = n('line', {
-      x1: 26, y1: AY, x2: W - 26, y2: AY, class: 'tl-axis',
-      'stroke-linecap': 'round',
-      'marker-end': 'url(#ax-' + tense.id + ')',
-      'marker-start': 'url(#ax-' + tense.id + ')'
-    });
-    svg.appendChild(axis);
+    var axisAttrs = {
+      x1: mini ? 14 : 26, y1: AY, x2: W - (mini ? 14 : 26), y2: AY, class: 'tl-axis',
+      'stroke-linecap': 'round'
+    };
+    if (!mini) {
+      axisAttrs['marker-end'] = 'url(#ax-' + tense.id + ')';
+      axisAttrs['marker-start'] = 'url(#ax-' + tense.id + ')';
+    }
+    svg.appendChild(nn('line', axisAttrs));
 
     /* ŞİMDİ çizgisi */
-    svg.appendChild(n('line', { x1: CX, y1: AY - (mini ? 18 : 44), x2: CX, y2: AY + (mini ? 18 : 44), class: 'tl-now' }));
+    svg.appendChild(nn('line', { x1: CX, y1: AY - (mini ? 58 : 40), x2: CX, y2: AY + (mini ? 58 : 40), class: 'tl-now' }));
 
     if (!mini) {
-      svg.appendChild(txt(CX, AY - 54, 'ŞİMDİ', 'tl-nowlbl'));
-      svg.appendChild(txt(70, AY - 54, 'GEÇMİŞ', 'tl-lbl', 'start'));
-      svg.appendChild(txt(W - 70, AY - 54, 'GELECEK', 'tl-lbl', 'end'));
+      svg.appendChild(txt(CX, AY - 80, 'ŞİMDİ', 'tl-nowlbl'));
+      svg.appendChild(txt(40, AY - 80, 'GEÇMİŞ', 'tl-lbl', 'start'));
+      svg.appendChild(txt(W - 40, AY - 80, 'GELECEK', 'tl-lbl', 'end'));
     }
 
     /* işaretler */
+    var belowRow = 0;
+    function belowY() { return AY + (belowRow++ % 2 ? 86 : 60); }
+
     (tense.timeline.marks || []).forEach(function (m, i) {
       var g = n('g', { class: 'tl-pop', style: 'animation-delay:' + (0.08 * i + 0.1) + 's' });
 
       if (m.t === 'dot') {
-        g.appendChild(n('circle', { cx: px(m.x), cy: AY, r: mini ? 7 : 13, fill: 'var(--tlc)', stroke: 'var(--surface)', 'stroke-width': mini ? 2 : 3 }));
-        if (!mini && m.l) g.appendChild(txt(px(m.x), AY + 40, m.l));
+        g.appendChild(mini
+          ? dotAt(px(m.x), AY, 9)
+          : n('circle', { cx: px(m.x), cy: AY, r: 13, fill: 'var(--tlc)', stroke: 'var(--surface)', 'stroke-width': 3 }));
+        if (!mini && m.l) g.appendChild(txt(px(m.x), belowY(), m.l));
 
       } else if (m.t === 'dots') {
         (m.xs || []).forEach(function (x) {
-          g.appendChild(n('circle', { cx: px(x), cy: AY, r: mini ? 5 : 11, fill: 'var(--tlc)', stroke: 'var(--surface)', 'stroke-width': mini ? 2 : 3 }));
+          g.appendChild(mini
+            ? dotAt(px(x), AY, 7)
+            : n('circle', { cx: px(x), cy: AY, r: 11, fill: 'var(--tlc)', stroke: 'var(--surface)', 'stroke-width': 3 }));
         });
-        if (!mini && m.l) g.appendChild(txt(CX, AY + 40, m.l));
+        if (!mini && m.l) g.appendChild(txt(CX, belowY(), m.l));
 
       } else if (m.t === 'span') {
         var x1 = px(m.x), x2 = px(m.x2);
         if (m.style === 'wave' && !mini) {
           g.appendChild(n('path', { d: wavePath(x1, x2, AY, 9, 26), fill: 'none', stroke: 'var(--tlc)', 'stroke-width': 7, 'stroke-linecap': 'round' }));
         } else {
-          g.appendChild(n('line', { x1: x1, y1: AY, x2: x2, y2: AY, stroke: 'var(--tlc)', 'stroke-width': mini ? 8 : 14, 'stroke-linecap': 'round', opacity: '.95' }));
+          g.appendChild(nn('line', { x1: x1, y1: AY, x2: x2, y2: AY, stroke: 'var(--tlc)',
+            'stroke-width': mini ? 8 : 14, 'stroke-linecap': 'round', opacity: '.95' }));
         }
-        g.appendChild(n('line', { x1: x1, y1: AY - (mini ? 9 : 17), x2: x1, y2: AY + (mini ? 9 : 17), stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 5, 'stroke-linecap': 'round' }));
-        g.appendChild(n('line', { x1: x2, y1: AY - (mini ? 9 : 17), x2: x2, y2: AY + (mini ? 9 : 17), stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 5, 'stroke-linecap': 'round' }));
-        if (!mini && m.l) g.appendChild(txt((x1 + x2) / 2, AY + 42, m.l));
+        var capH = mini ? 34 : 17;
+        g.appendChild(nn('line', { x1: x1, y1: AY - capH, x2: x1, y2: AY + capH, stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 5, 'stroke-linecap': 'round' }));
+        g.appendChild(nn('line', { x1: x2, y1: AY - capH, x2: x2, y2: AY + capH, stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 5, 'stroke-linecap': 'round' }));
+        if (!mini && m.l) g.appendChild(txt((x1 + x2) / 2, belowY(), m.l));
 
       } else if (m.t === 'arrow') {
-        var ay = AY - (mini ? 14 : 34);
-        g.appendChild(n('path', {
+        var ay = AY - (mini ? 46 : 34);
+        var arrow = {
           d: 'M' + px(m.x) + ' ' + ay + ' L' + px(m.x2) + ' ' + ay,
-          stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 4, 'stroke-dasharray': '9 7',
-          fill: 'none', 'marker-end': 'url(#ah-' + tense.id + ')'
-        }));
-        if (!mini && m.l) g.appendChild(txt((px(m.x) + px(m.x2)) / 2, ay - 12, m.l));
+          stroke: 'var(--tlc)', 'stroke-width': mini ? 2.5 : 4,
+          'stroke-dasharray': mini ? '4 3' : '9 7', fill: 'none'
+        };
+        if (!mini) arrow['marker-end'] = 'url(#ah-' + tense.id + ')';
+        g.appendChild(nn('path', arrow));
+        if (mini) g.appendChild(n('path', { d: 'M' + (px(m.x2) - 26) + ' ' + (ay - 16) + ' L' + px(m.x2) + ' ' + ay + ' L' + (px(m.x2) - 26) + ' ' + (ay + 16) + ' z', fill: 'var(--tlc)' }));
+        if (!mini && m.l) g.appendChild(txt((px(m.x) + px(m.x2)) / 2, AY - 52, m.l));
 
       } else if (m.t === 'flag') {
-        var fx = px(m.x), fy = AY - (mini ? 20 : 46);
-        g.appendChild(n('line', { x1: fx, y1: fy, x2: fx, y2: AY, stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 4 }));
-        g.appendChild(n('path', { d: 'M' + fx + ' ' + fy + ' l' + (mini ? 22 : 40) + ' ' + (mini ? 6 : 11) + ' l' + (mini ? -22 : -40) + ' ' + (mini ? 6 : 11) + ' z', fill: 'var(--tlc)' }));
-        if (!mini && m.l) g.appendChild(txt(fx, fy - 10, m.l));
+        var fx = px(m.x), fy = AY - (mini ? 56 : 46);
+        g.appendChild(nn('line', { x1: fx, y1: fy, x2: fx, y2: AY, stroke: 'var(--tlc)', 'stroke-width': mini ? 2.5 : 4 }));
+        g.appendChild(n('path', { d: 'M' + fx + ' ' + fy + ' l' + (mini ? 46 : 40) + ' ' + (mini ? 14 : 11) + ' l' + (mini ? -46 : -40) + ' ' + (mini ? 14 : 11) + ' z', fill: 'var(--tlc)' }));
+        if (!mini && m.l) g.appendChild(txt(fx, AY - 52, m.l));
       }
 
       svg.appendChild(g);

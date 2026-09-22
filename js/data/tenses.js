@@ -124,7 +124,7 @@
       caption: 'Geçmişteki iş, oktan da anlaşılacağı gibi bugüne uzanır.',
       marks: [
         { t: 'dot', x: -0.55, l: 'iş oldu' },
-        { t: 'arrow', x: -0.55, x2: -0.02, l: 'etkisi bugüne geliyor' }
+        { t: 'arrow', x: -0.55, x2: -0.02, l: 'bugüne uzanır' }
       ]
     },
     examples: [
@@ -195,7 +195,7 @@
     group: 'past',
     aspect: 'simple',
     en: 'Past Simple',
-    tr: 'Geçmiş Zaman (-di)',
+    tr: 'Geçmiş Zaman (‑di)',
     tagline: 'Geçmişte oldu, bitti — tarihi bellidir',
     formula: {
       pos: 'Özne + <b>V2</b> (fiil + ed ya da düzensiz hâl)',
@@ -239,7 +239,7 @@
     group: 'past',
     aspect: 'continuous',
     en: 'Past Continuous',
-    tr: 'Şimdiki Zamanın Hikâyesi (-yordu)',
+    tr: 'Şimdiki Zamanın Hikâyesi (‑yordu)',
     tagline: 'Geçmişte bir anda sürmekte olan iş',
     formula: {
       pos: 'Özne + <b>was / were</b> + V<b>-ing</b>',
@@ -283,7 +283,7 @@
     group: 'past',
     aspect: 'perfect',
     en: 'Past Perfect',
-    tr: 'Geçmişin Geçmişi (-mişti)',
+    tr: 'Geçmişin Geçmişi (‑mişti)',
     tagline: 'Geçmişteki bir işten de önce olan iş',
     formula: {
       pos: 'Özne + <b>had</b> + <b>V3</b>',
@@ -370,7 +370,7 @@
     group: 'future',
     aspect: 'simple',
     en: 'Future Simple',
-    tr: 'Gelecek Zaman (-ecek)',
+    tr: 'Gelecek Zaman (‑ecek)',
     tagline: 'Gelecekte olacak iş, karar ya da tahmin',
     formula: {
       pos: 'Özne + <b>will</b> + V1',
