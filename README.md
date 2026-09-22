@@ -1,6 +1,8 @@
 # Kolay İngilizce — Zamanlarla Öğren
 
-İngilizcenin temelini **zaman çizgisi** üzerinden anlatan, tamamen tarayıcıda çalışan ücretsiz bir öğrenme uygulaması. Her cümle, zaman çizgisinde tam olarak nereye düştüğü gösterilerek öğretilir. Bütün örnekler **Türk ve Osmanlı kültüründen** seçilmiştir: cami avlusu, iftar topu, Hereke halısı, ebru ustası, Mimar Sinan, Kapalıçarşı…
+İngilizcenin temelini **zaman çizgisi** üzerinden anlatan, tamamen tarayıcıda çalışan ücretsiz bir öğrenme uygulaması. Her cümle, zaman çizgisinde tam olarak nereye düştüğü gösterilerek öğretilir.
+
+Örnekler **Türkiye’deki günlük hayattan** seçilmiştir: zeytin hasadı, çatıda salça, Diyarbakır karpuzu, dolmuş beklemek, Fethiye’nin turkuaz denizi, kıraathanede tavla, bayram şekeri, Kapadokya balonları… Aralarında Dede Korkut, Keloğlan, Nasreddin Hoca ve Karagöz-Hacivat’tan birkaç cümle ile Mimar Sinan, Kapalıçarşı gibi kültür ögeleri de var.
 
 > Tek soru: **Bu iş zamanın neresinde duruyor?** Uygulamanın tamamı bu sorunun üstüne kuruludur.
 
@@ -12,10 +14,10 @@
 | 📈 **Zaman çizgisi çizimi** | Her zaman için ayrı SVG çizgi: iş nokta mı, bant mı, bugüne uzanan ok mu — gözle görülür. |
 | 🧠 **Mantık anlatımı** | Kural ezberi yerine "neden bu zaman" açıklaması, Türkçe karşılığıyla (-di, -yor, -mişti…). |
 | 🧮 **Formül kartı** | Olumlu / olumsuz / soru kalıpları ve "altın kural" uyarısı. |
-| 💬 **56 örnek cümle + 74 soru** | Kültürümüzden, kısa ve gündelik cümleler; her zaman için elle yazılmış 4-7 alıştırma sorusu. |
+| 💬 **101 örnek cümle + 74 soru** | Günlük hayattan kısa cümleler; her zaman için 6-11 örnek ve elle yazılmış 4-7 alıştırma sorusu. |
 | 🇹🇷 **Çevir düğmesi** | Cümlenin Türkçesi istendiğinde açılır; altında o cümlenin inceliğini anlatan bir not çıkar. |
 | 👆 **Tıklanabilir kelimeler** | Cümledeki her kelimeye dokunulur; anlamı, türü ve çekimi (ör. *built → build fiilinin 2. hâli*) alttan açılan kartta görünür. |
-| 📚 **1.700+ kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, toplum, sanat; B1-B2 fiil, sıfat ve zarfları; bağlaçlar (*however, although, therefore*); 43 öbek fiil (*give up, look after*); 99 düzensiz fiil. |
+| 📚 **1.790 kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, toplum, sanat; B1-B2 fiil, sıfat ve zarfları; bağlaçlar (*however, although, therefore*); 43 öbek fiil (*give up, look after*); 99 düzensiz fiil. |
 | 🔊 **Sesli okuma** | Cihazın kendi konuşma motoruyla (Web Speech API). **Hiçbir internet servisi, hiçbir API anahtarı kullanılmaz.** Normal ve yavaş okuma, ayarlanabilir hız ve ses seçimi. |
 | ⭐ **Kelime defteri** | Beğenilen kelimeler kaydedilir, topluca dinlenir. |
 | 🎯 **7 alıştırma modu** | Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · **Cümleyi kur** · **Kelime bilgisi** · **Düzensiz fiiller** · Karışık. Her cevaptan sonra doğrusu ve nedeni gösterilir. |
@@ -76,6 +78,7 @@ js/
     speech.js              cihaz üstü sesli okuma (Web Speech API)
   data/
     tenses.js              12 zaman: mantık, formül, çizgi, örnek, hata, test
+    examples-extra.js      günlük hayattan ek örnek cümleler
     glossary.js            sözlük çekirdeği + çekim çözücü (-s, -ing, -ed, iyelik)
     vocabulary.js          A1-B2 kelime dağarcığı, temalara ayrılmış
     exercises.js           zamanlara ait ek alıştırma soruları
@@ -97,7 +100,7 @@ Derleme adımı, paket yöneticisi ve dış bağımlılık **yoktur**. Dosyalar 
 
 ### Yeni içerik eklemek
 
-- **Örnek cümle:** `js/data/tenses.js` içinde ilgili zamanın `examples` dizisine `{ en, tr, key, note }` ekleyin. `key`, yeşil vurgulanacak yapı kelimeleridir.
+- **Örnek cümle:** `js/data/examples-extra.js` içinde ilgili zamanın dizisine `{ en, tr, key, note }` ekleyin. `key`, yeşil vurgulanacak yapı kelimeleridir. Cümledeki her kelimenin sözlükte bulunmasına dikkat edin.
 - **Kelime:** `js/data/vocabulary.js` içindeki uygun temaya `'ingilizce|türkçe|tür|not'` satırı ekleyin. Çekimli hâller (*-s, -ing, -ed*, iyelik, kısaltmalar) kendiliğinden çözülür. Düzensiz fiil için aynı dosyanın sonundaki `addIrregulars` listesine `'V1|V2|V3|Türkçe'` yazın.
 - **Soru:** `js/data/exercises.js` içinde ilgili zamanın dizisine `{ q, options, answer, why }` ekleyin; hem o zamanın mini testine hem karışık moda kendiliğinden girer.
 
@@ -120,3 +123,7 @@ Depoda bulunan `.nojekyll` dosyası, Pages'in dosyaları olduğu gibi yayımlama
 ## Lisans
 
 MIT — bkz. [LICENSE](LICENSE). Serbestçe kullanılabilir, çoğaltılabilir, sınıfta dağıtılabilir.
+
+---
+
+Bu bir **Logspace** uygulamasıdır.

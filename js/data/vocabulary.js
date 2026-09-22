@@ -430,3 +430,45 @@
   ]);
 
 })(window.KI);
+
+/* ============================================================
+   Günlük hayat örneklerinin kelimeleri
+   (examples-extra.js içindeki cümlelerde geçenler)
+   ============================================================ */
+(function (KI) {
+  'use strict';
+  KI.glossary.addWords([
+  /* yer adları */
+  'diyarbakir|Diyarbakır|özel isim', 'fethiye|Fethiye|özel isim', 'izmir|İzmir|özel isim',
+  'rize|Rize|özel isim', 'erzurum|Erzurum|özel isim', 'cappadocia|Kapadokya|özel isim',
+  'antalya|Antalya|özel isim', 'trabzon|Trabzon|özel isim', 'mardin|Mardin|özel isim',
+  'bombasi|bombası (İzmir bombası tatlısı)|özel isim',
+
+  /* halk hikâyeleri */
+  'dede|dede (Dede Korkut)|özel isim', 'korkut|Korkut (Dede Korkut)|özel isim',
+  'oghuz|Oğuz|özel isim', 'keloglan|Keloğlan|özel isim',
+  'karagoz|Karagöz|özel isim', 'hacivat|Hacivat|özel isim',
+  'shadow|gölge|isim', 'tale|masal|isim', 'folk|halk|sıfat', 'legend|efsane|isim',
+  'hero|kahraman|isim', 'wisdom|bilgelik|isim',
+
+  /* günlük hayat */
+  'tarhana|tarhana|isim', 'paste|salça, macun|isim', 'pickle|turşu|isim',
+  'pickles|turşular|isim', 'jar|kavanoz|isim', 'grove|koru, ağaçlık|isim',
+  'olive grove|zeytinlik|isim', 'harvest|hasat, hasat etmek|isim',
+  'villager|köylü|isim', 'teahouse|kıraathane, çay ocağı|isim',
+  'backgammon|tavla|isim', 'dolmus|dolmuş|isim', 'minibus|minibüs|isim',
+  'truck|kamyon|isim', 'balloon|balon|isim', 'dawn|şafak|isim',
+  'sunrise|gün doğumu|isim', 'sunset|gün batımı|isim', 'turquoise|turkuaz|sıfat',
+  'front|ön|isim', 'in front of|önünde|edat', 'out of|içinden, -den dışarı|edat',
+  'out|dışarı|zarf', 'climb|tırmanmak|fiil', 'reach|ulaşmak, varmak|fiil',
+  'pick|toplamak, seçmek|fiil', 'shake|silkelemek, sallamak|fiil',
+  'grill|ızgarada pişirmek|fiil', 'snow|kar, kar yağmak|isim',
+  'men|adamlar|isim', 'women|kadınlar|isim', 'ring|yüzük, çalmak (zil)|isim',
+  'sweets|şekerler, tatlılar|isim', 'holiday sweets|bayram şekeri|isim',
+  'market day|pazar günü (kurulan pazar)|isim', 'picnic|piknik|isim',
+  'seaside|deniz kenarı|isim', 'countryside|kırsal, taşra|isim',
+  'highland|yayla|isim', 'vineyard|bağ|isim', 'orchard|meyve bahçesi|isim',
+  'greengrocer|manav|isim', 'stall|tezgâh|isim', 'bargain|pazarlık etmek|fiil',
+  'queue|sıra, kuyruk|isim', 'ferryboat|vapur|isim', 'seagull|martı|isim'
+  ]);
+})(window.KI);
