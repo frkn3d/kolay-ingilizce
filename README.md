@@ -14,7 +14,7 @@
 | 📈 **Zaman çizgisi çizimi** | Her zaman için ayrı SVG çizgi: iş nokta mı, bant mı, bugüne uzanan ok mu — gözle görülür. |
 | 🧠 **Mantık anlatımı** | Kural ezberi yerine "neden bu zaman" açıklaması, Türkçe karşılığıyla (-di, -yor, -mişti…). |
 | 🧮 **Formül kartı** | Olumlu / olumsuz / soru kalıpları ve "altın kural" uyarısı. |
-| 💬 **101 örnek cümle + 74 soru** | Günlük hayattan kısa cümleler; her zaman için 6-11 örnek ve elle yazılmış 4-7 alıştırma sorusu. |
+| 💬 **148 örnek cümle + 317 soru** | Günlük hayattan kısa cümleler; her zaman için 8-16 örnek ve elle yazılmış 20-23 alıştırma sorusu (12 zaman + 5 karşılaştırma sayfası). |
 | 🇹🇷 **Çevir düğmesi** | Cümlenin Türkçesi istendiğinde açılır; altında o cümlenin inceliğini anlatan bir not çıkar. |
 | 👆 **Tıklanabilir kelimeler** | Cümledeki her kelimeye dokunulur; anlamı, türü ve çekimi (ör. *built → build fiilinin 2. hâli*) alttan açılan kartta görünür. |
 | 📚 **3.000+ kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, hukuk, bilim, sanat, spor, din, askeriye ve daha fazlası; akademik sıfat/zarf/fiiller; bağlaçlar (*however, although, therefore*); 50+ öbek fiil (*give up, look after*); deyimler; 99 düzensiz fiil. |
@@ -84,12 +84,14 @@ js/
   data/
     tenses.js              12 zaman: mantık, formül, çizgi, örnek, hata, test
     examples-extra.js      günlük hayattan ek örnek cümleler
+    examples-extra-2.js    ikinci örnek dalgası (148 cümleye tamamlar)
     compare.js             karışan zaman çiftlerinin karşılaştırması
     glossary.js            sözlük çekirdeği + çekim çözücü (-s, -ing, -ed, iyelik)
     vocabulary.js          A1-B2 kelime dağarcığı, temalara ayrılmış
     vocabulary-b2.js       B2 seviyesine çıkaran ek kelime dalgası
     vocabulary-b2-plus.js  3000 kelimeyi tamamlayan ikinci dalga
     exercises.js           zamanlara ait ek alıştırma soruları
+    exercises-2.js         ikinci soru dalgası (317 soruya tamamlar)
     basics.js              temel gramer bölümleri
   ui/
     timeline.js            zaman çizgisini SVG olarak çizer
