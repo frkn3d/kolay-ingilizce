@@ -130,19 +130,31 @@
       q.options.forEach(function (o, k) {
         var b = U.el('button', { class: 'opt', type: 'button' }, [
           U.el('span', { class: 'opt__key', text: 'ABCD'.charAt(k) }),
-          U.el('span', { text: o })
+          U.el('span', { class: 'opt__txt', text: o })
         ]);
         b.addEventListener('click', function () {
           if (answered) return;
           answered = true;
           var ok = (k === q.answer);
-          if (ok) { correct++; b.classList.add('is-right'); KI.audio.play('correct'); }
-          else {
+          var rightBtn = list.children[q.answer];
+
+          /* Doğru şık her zaman işaretlenir; seçilen şık ayrıca etiketlenir.
+             Renk tek başına yeterli olmasın diye ✓ / ✕ işareti de konur. */
+          rightBtn.classList.add('is-right');
+          rightBtn.querySelector('.opt__key').textContent = '✓';
+          if (!ok) {
             b.classList.add('is-wrong');
-            list.children[q.answer].classList.add('is-right');
-            KI.audio.play('wrong');
+            b.querySelector('.opt__key').textContent = '✕';
           }
-          U.qsa('.opt', list).forEach(function (x) { x.disabled = true; });
+          b.appendChild(U.el('span', { class: 'opt__tag', text: 'senin cevabın' }));
+
+          U.qsa('.opt', list).forEach(function (x, idx) {
+            x.disabled = true;
+            if (idx !== k && idx !== q.answer) x.classList.add('is-dim');
+          });
+
+          if (ok) { correct++; KI.audio.play('correct'); }
+          else { KI.audio.play('wrong'); }
 
           var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
           fb.appendChild(U.el('b', { class: 'callout__t', text: ok ? '✓ Doğru' : '✕ Doğrusu: ' + q.options[q.answer] }));

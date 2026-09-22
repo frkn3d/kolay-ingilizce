@@ -40,6 +40,13 @@
   --accent:    var(--green-700);
   --accent-ink:var(--cream);
   --link:      var(--green-600);
+  /* alıştırmada cevap durumu */
+  --ok-bg:     #c2dfcc;
+  --ok-edge:   #2a6a46;
+  --ok-key:    var(--cream);
+  --no-bg:     #efc9b6;
+  --no-edge:   #9d4525;
+  --no-key:    var(--cream);
   --hero-bg:   var(--green-800);
   --hero-edge: var(--green-900);
   --hero-ink:  #fbf6e9;
@@ -83,6 +90,12 @@ html[data-theme="dark"] {
   --accent:    var(--green-400);
   --accent-ink:#0f2a1c;
   --link:      #9ccdae;
+  --ok-bg:     #26603f;
+  --ok-edge:   #6fbb8d;
+  --ok-key:    #0d1f14;
+  --no-bg:     #85462b;
+  --no-edge:   #e5a284;
+  --no-key:    #2b1408;
   --hero-bg:   #275438;
   --hero-edge: #3d7d55;
   --hero-ink:  #f6f0e0;
