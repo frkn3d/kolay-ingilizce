@@ -79,6 +79,28 @@
     body.appendChild(U.el('p', { class: 'soft', style: 'margin:10px 0 0;font-size:.88rem',
       html: 'Her kartın altındaki küçük çizgi, o zamanın işi zaman çizgisinde nereye koyduğunu gösterir: nokta tek bir an, bant süren bir iş, ok ise bugüne uzanan etkidir.' }));
 
+    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:14px', text: 'Nereden başlamalı?' }));
+    var route = U.el('ol', { class: 'disclose__list' });
+    [
+      ['Başlangıç', ['temeller', 'present-simple', 'present-continuous', 'past-simple', 'future-simple']],
+      ['Orta', ['past-continuous', 'present-perfect', 'future-continuous', 'past-perfect']],
+      ['İleri', ['present-perfect-continuous', 'past-perfect-continuous', 'future-perfect', 'future-perfect-continuous']]
+    ].forEach(function (step) {
+      var li = U.el('li');
+      li.appendChild(U.el('b', { text: step[0] + ': ' }));
+      step[1].forEach(function (id, i) {
+        if (i) li.appendChild(document.createTextNode(' · '));
+        if (id === 'temeller') {
+          li.appendChild(U.el('a', { href: '#/temeller', 'data-sfx': 'nav', text: 'Temeller' }));
+        } else {
+          var t = KI.tenses.get(id);
+          if (t) li.appendChild(U.el('a', { href: '#/zaman/' + id, 'data-sfx': 'nav', text: t.en }));
+        }
+      });
+      route.appendChild(li);
+    });
+    body.appendChild(route);
+
     d.appendChild(body);
     return d;
   }

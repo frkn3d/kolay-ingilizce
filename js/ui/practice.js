@@ -30,7 +30,8 @@
         options: opts.map(function (o) { return o.en + ' · ' + o.tr; }),
         answer: opts.indexOf(p.t),
         why: p.ex.tr + '  →  ' + p.t.en + ' (' + p.t.tr + ')',
-        link: '#/zaman/' + p.t.id
+        link: '#/zaman/' + p.t.id,
+        tenseId: p.t.id
       };
     });
   }
@@ -46,7 +47,8 @@
         options: opts.map(function (o) { return o.en + ' · ' + o.tr; }),
         answer: opts.indexOf(t),
         why: t.timeline.caption,
-        link: '#/zaman/' + t.id
+        link: '#/zaman/' + t.id,
+        tenseId: t.id
       };
     });
   }
@@ -60,12 +62,81 @@
         qs.push({
           kind: 'blank', head: 'Doğru seçeneği bul',
           sentence: q.q, options: q.options.slice(), answer: q.answer,
-          why: q.why, link: '#/zaman/' + t.id, tenseName: t.en
+          why: q.why, link: '#/zaman/' + t.id, tenseName: t.en,
+          tenseId: t.id, blank: q
         });
       });
     });
     qs = U.shuffle(qs);
     return count ? qs.slice(0, count) : qs;
+  }
+
+  /* Sözlükten tek bir kelime sorusu üretir */
+  function makeWordQ(d, enToTr) {
+    var dict = KI.glossary.dict;
+    var keys = Object.keys(dict).filter(function (k) {
+      var x = dict[k];
+      return x.tr && k.length > 2 && k.indexOf(' ') < 0 && x.pos !== 'özel isim';
+    });
+    var wrongs = U.shuffle(keys.filter(function (x) {
+      return dict[x].tr !== d.tr && (dict[x].pos === d.pos || Math.random() < .3);
+    })).slice(0, 3).map(function (x) { return dict[x]; });
+    var all = U.shuffle([d].concat(wrongs));
+    return {
+      kind: 'word',
+      head: enToTr ? 'Bu kelime ne demek?' : 'Bunun İngilizcesi hangisi?',
+      sentence: enToTr ? d.en : d.tr,
+      speak: enToTr ? d.en : null,
+      options: all.map(function (o) { return enToTr ? o.tr : o.en; }),
+      answer: all.indexOf(d),
+      why: d.en + ' = ' + d.tr + (d.pos ? '  (' + d.pos + ')' : ''),
+      word: { en: d.en, tr: d.tr }
+    };
+  }
+
+  /* 7) Zorlandıklarım: yanlış yapılanlar ve zayıf zamanlar */
+  function troubleQuestions(count) {
+    var out = [];
+
+    KI.store.wrongQuestions().forEach(function (w) {
+      out.push({
+        kind: 'blank', head: 'Bunu daha önce yanlış yapmıştın',
+        sentence: w.q, options: w.options.slice(), answer: w.answer, why: w.why,
+        link: w.tenseId ? '#/zaman/' + w.tenseId : null,
+        tenseId: w.tenseId,
+        blank: { q: w.q, options: w.options, answer: w.answer, why: w.why }
+      });
+    });
+
+    KI.store.wrongWordList().forEach(function (w, i) {
+      var d = KI.glossary.dict[String(w.en).toLowerCase()] || { en: w.en, tr: w.tr, pos: '' };
+      var q = makeWordQ(d, i % 2 === 0);
+      q.head = 'Bu kelimeyi karıştırmıştın';
+      out.push(q);
+    });
+
+    var weak = KI.store.weakTenses(3).map(function (w) { return w.id; });
+    if (weak.length) {
+      var pool = [];
+      KI.tenses.list.forEach(function (t) {
+        if (weak.indexOf(t.id) < 0) return;
+        t.examples.forEach(function (ex) { pool.push({ t: t, ex: ex }); });
+      });
+      U.shuffle(pool).slice(0, 6).forEach(function (p) {
+        var wrong = otherTenses(p.t, 3);
+        var opts = U.shuffle([p.t].concat(wrong));
+        out.push({
+          kind: 'sentence', head: 'Zorlandığın zamanlardan: bu cümle hangi zamanda?',
+          sentence: p.ex.en, speak: p.ex.en,
+          options: opts.map(function (o) { return o.en + ' · ' + o.tr; }),
+          answer: opts.indexOf(p.t),
+          why: p.ex.tr + '  →  ' + p.t.en + ' (' + p.t.tr + ')',
+          link: '#/zaman/' + p.t.id, tenseId: p.t.id
+        });
+      });
+    }
+
+    return U.shuffle(out).slice(0, count || 12);
   }
 
   /* --------- çoktan seçmeli bileşen --------- */
@@ -79,6 +150,7 @@
 
     var box = U.el('div', { class: 'card' });
     var i = 0, correct = 0, answered = false;
+    var missed = {};   /* bu oturumda hangi zamanda kaç yanlış */
 
     function finish() {
       U.clear(box);
@@ -87,6 +159,35 @@
       box.appendChild(U.el('h3', { text: mood + '  ' + correct + ' / ' + qs.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: pct >= 80 ? 'Çok iyi! Bu zamanı kavramışsın.' : pct >= 50 ? 'Fena değil. Örneklere bir daha göz at.' : 'Acele etme; önce mantık bölümünü tekrar oku.' }));
       if (opts.tenseId) KI.store.saveScore(opts.tenseId, correct, qs.length);
+
+      /* Sıradaki adım önerisi */
+      var worst = null, worstN = 0;
+      Object.keys(missed).forEach(function (id) { if (missed[id] > worstN) { worstN = missed[id]; worst = id; } });
+      var tip = U.el('div', { class: 'callout callout--tip', style: 'margin-top:14px' });
+      tip.appendChild(U.el('b', { class: 'callout__t', text: 'Şimdi ne yapmalıyım?' }));
+      if (worst && KI.tenses.get(worst)) {
+        var wt = KI.tenses.get(worst);
+        tip.appendChild(U.el('span', { text: 'En çok ' + wt.en + ' (' + wt.tr + ') sorularında zorlandın. Önce oranın mantığını bir daha oku.' }));
+        tip.appendChild(U.el('div', { class: 'row', style: 'margin-top:8px' }, [
+          U.el('a', { class: 'btn btn--sm', href: '#/zaman/' + wt.id, 'data-sfx': 'nav', text: wt.en + ' konusuna git →' }),
+          U.el('a', { class: 'btn btn--sm', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav', text: '🩹 Zorlandıklarımı çöz' })
+        ]));
+      } else if (KI.store.troubleCount() > 0) {
+        tip.appendChild(U.el('span', { text: 'Bu turda hata yapmadın. Geçmişte zorlandığın sorular birikmiş durumda; onları temizlemek iyi olur.' }));
+        tip.appendChild(U.el('div', { class: 'row', style: 'margin-top:8px' }, [
+          U.el('a', { class: 'btn btn--sm', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav', text: '🩹 Zorlandıklarımı çöz' })
+        ]));
+      } else {
+        tip.appendChild(U.el('span', { text: 'Hata listen temiz. Yeni bir mod deneyebilir ya da henüz öğrenmediğin bir zamana geçebilirsin.' }));
+        var nextT = KI.tenses.list.filter(function (t) { return !KI.store.isLearned(t.id); })[0];
+        if (nextT) {
+          tip.appendChild(U.el('div', { class: 'row', style: 'margin-top:8px' }, [
+            U.el('a', { class: 'btn btn--sm', href: '#/zaman/' + nextT.id, 'data-sfx': 'nav', text: 'Sıradaki: ' + nextT.en + ' →' })
+          ]));
+        }
+      }
+      box.appendChild(tip);
+
       var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
       again.addEventListener('click', function () {
         i = 0; correct = 0; KI.audio.play('tap');
@@ -155,6 +256,8 @@
 
           if (ok) { correct++; KI.audio.play('correct'); }
           else { KI.audio.play('wrong'); }
+          KI.store.recordAnswer(q, ok);
+          if (!ok && q.tenseId) missed[q.tenseId] = (missed[q.tenseId] || 0) + 1;
 
           var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
           fb.appendChild(U.el('b', { class: 'callout__t', text: ok ? '✓ Doğru' : '✕ Doğrusu: ' + q.options[q.answer] }));
@@ -202,7 +305,8 @@
         speak: enToTr ? d.en : null,
         options: all.map(function (o) { return enToTr ? o.tr : o.en; }),
         answer: all.indexOf(d),
-        why: d.en + ' = ' + d.tr + (d.pos ? '  (' + d.pos + ')' : '')
+        why: d.en + ' = ' + d.tr + (d.pos ? '  (' + d.pos + ')' : ''),
+        word: { en: d.en, tr: d.tr }
       };
     });
   }
@@ -224,7 +328,8 @@
         speak: v.v1 + ', ' + v.v2 + ', ' + v.v3,
         options: all,
         answer: all.indexOf(right),
-        why: v.v1 + ' → ' + v.v2 + ' → ' + v.v3 + '  (' + v.tr + ')'
+        why: v.v1 + ' → ' + v.v2 + ' → ' + v.v3 + '  (' + v.tr + ')',
+        word: { en: v.v1, tr: v.tr }
       };
     });
   }
@@ -320,6 +425,17 @@
         var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
         fb.appendChild(U.el('b', { class: 'callout__t', text: ok ? '✓ Doğru kurdun' : '✕ Doğrusu şöyle:' }));
         fb.appendChild(U.el('div', { style: 'font-family:var(--font-display);font-size:1.05rem', text: target }));
+
+        /* Yanlışsa kendi cümleni kelime kelime karşılaştır */
+        if (!ok) {
+          var mine = U.el('div', { class: 'diffline' });
+          mine.appendChild(U.el('span', { class: 'diffline__lbl', text: 'senin kurduğun' }));
+          placed.forEach(function (p, idx) {
+            var good = words[idx] && words[idx].toLowerCase() === p.w.toLowerCase();
+            mine.appendChild(U.el('span', { class: 'diffw' + (good ? ' diffw--ok' : ' diffw--bad'), text: p.w }));
+          });
+          fb.appendChild(mine);
+        }
         var actions = U.el('div', { class: 'row', style: 'margin-top:8px' });
         var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🔊 Dinle' });
         say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target); });
@@ -341,22 +457,141 @@
     return box;
   }
 
+  /* --------- dikte: dinle ve yaz --------- */
+  function normalize(s) {
+    return String(s).toLowerCase()
+      .replace(/[\u2018\u2019]/g, "'")
+      .replace(/[^a-z' ]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function dictation(items, opts) {
+    opts = opts || {};
+    var box = U.el('div', { class: 'card' });
+    var i = 0, correct = 0;
+
+    function finish() {
+      U.clear(box);
+      var pct = Math.round(correct / items.length * 100);
+      box.appendChild(U.el('h3', { text: (pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪') + '  ' + correct + ' / ' + items.length + ' doğru' }));
+      box.appendChild(U.el('p', { class: 'soft', text: 'Dikte, dinlediğini anlamayı ve yazımı aynı anda çalıştırır.' }));
+      var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
+      again.addEventListener('click', function () { i = 0; correct = 0; items = U.shuffle(items); KI.audio.play('tap'); paint(); });
+      var row = U.el('div', { class: 'row', style: 'margin-top:10px' }, [again]);
+      if (opts.onFinish) row.appendChild(opts.onFinish());
+      box.appendChild(row);
+      KI.audio.play('finish');
+    }
+
+    function paint() {
+      if (i >= items.length) return finish();
+      var it = items[i];
+      var target = it.en.replace(/\s+/g, ' ').trim();
+      U.clear(box);
+
+      box.appendChild(U.el('p', { class: 'eyebrow', text: (i + 1) + ' / ' + items.length + ' · Dinle ve duyduğunu yaz' }));
+
+      var play = U.el('button', { class: 'btn btn--primary', type: 'button', html: '🔊 Dinle' });
+      play.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target); });
+      var slow = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🐢 Yavaş' });
+      slow.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target, { rate: 0.5 }); });
+      var hint = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: '💡 Türkçesi' });
+      var hintP = U.el('p', { class: 'example__note', hidden: true, html: '🇹🇷 ' + U.esc(it.tr) });
+      hint.addEventListener('click', function () {
+        hintP.hidden = !hintP.hidden;
+        KI.audio.play(hintP.hidden ? 'close' : 'reveal');
+      });
+      box.appendChild(U.el('div', { class: 'row', style: 'margin-bottom:10px' }, [play, slow, hint]));
+      box.appendChild(hintP);
+
+      var field = U.el('input', {
+        class: 'input', type: 'text', autocomplete: 'off', autocorrect: 'off',
+        autocapitalize: 'off', spellcheck: 'false', placeholder: 'Duyduğun cümleyi buraya yaz…'
+      });
+      box.appendChild(field);
+
+      var check = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', style: 'margin-top:12px', html: '✓ Kontrol et' });
+      box.appendChild(check);
+
+      function submit() {
+        var mine = field.value;
+        if (!normalize(mine)) { field.focus(); return; }
+        var ok = normalize(mine) === normalize(target);
+        if (ok) correct++;
+        KI.audio.play(ok ? 'correct' : 'wrong');
+        check.disabled = true;
+        field.disabled = true;
+        field.classList.add(ok ? 'input--ok' : 'input--no');
+
+        var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
+        fb.appendChild(U.el('b', { class: 'callout__t', text: ok ? '✓ Tam doğru yazdın' : '✕ Doğrusu şöyle:' }));
+        fb.appendChild(U.el('div', { style: 'font-family:var(--font-display);font-size:1.05rem', text: target }));
+        fb.appendChild(U.el('div', { class: 'soft', style: 'font-size:.9rem;margin-top:.2em', text: it.tr }));
+
+        if (!ok) {
+          var tw = normalize(target).split(' ');
+          var mw = normalize(mine).split(' ');
+          var line = U.el('div', { class: 'diffline' });
+          line.appendChild(U.el('span', { class: 'diffline__lbl', text: 'senin yazdığın' }));
+          mw.forEach(function (w, idx) {
+            line.appendChild(U.el('span', { class: 'diffw' + (tw[idx] === w ? ' diffw--ok' : ' diffw--bad'), text: w }));
+          });
+          if (tw.length > mw.length) {
+            line.appendChild(U.el('span', { class: 'diffw diffw--miss', text: '+' + (tw.length - mw.length) + ' kelime eksik' }));
+          }
+          fb.appendChild(line);
+        }
+        box.appendChild(fb);
+
+        var next = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', style: 'margin-top:12px',
+          html: (i + 1 >= items.length ? 'Sonucu gör' : 'Sonraki cümle →') });
+        next.addEventListener('click', function () { i++; KI.audio.play('nav'); paint(); });
+        box.appendChild(next);
+        next.focus();
+      }
+
+      check.addEventListener('click', submit);
+      field.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+
+      /* cümle bir kez kendiliğinden okunur */
+      setTimeout(function () { KI.speech.speak(target); }, 250);
+    }
+
+    paint();
+    return box;
+  }
+
   /* --------- alıştırma sayfası --------- */
+  function size() {
+    var n = Number(KI.store.get('quizSize'));
+    return (n >= 3 && n <= 40) ? n : 10;
+  }
+
   var MODES = [
     { id: 'karisik', ico: '🎲', t: 'Karışık', d: 'Her türden soru: cümle, çizgi, boşluk, kelime, fiil.',
-      make: function () { return U.shuffle(sentenceQuestions(5).concat(timelineQuestions(3), blankQuestions(5), wordQuestions(4), verbQuestions(3))); } },
+      make: function () {
+        var n = size();
+        return U.shuffle(sentenceQuestions(Math.ceil(n * .3)).concat(
+          timelineQuestions(Math.ceil(n * .2)), blankQuestions(Math.ceil(n * .3)),
+          wordQuestions(Math.ceil(n * .2)), verbQuestions(Math.ceil(n * .15)))).slice(0, n);
+      } },
+    { id: 'zorlandiklarim', ico: '🩹', t: 'Zorlandıklarım', d: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada toplanır.',
+      make: function () { return troubleQuestions(size()); } },
     { id: 'cumle', ico: '💬', t: 'Cümleden zamanı bul', d: 'İngilizce cümleyi oku, hangi zaman olduğunu seç.',
-      make: function () { return sentenceQuestions(12); } },
+      make: function () { return sentenceQuestions(size()); } },
     { id: 'cizgi', ico: '📈', t: 'Çizgiden zamanı bul', d: 'Zaman çizgisine bak, hangi zaman olduğunu seç.',
-      make: function () { return timelineQuestions(12); } },
+      make: function () { return timelineQuestions(size()); } },
     { id: 'bosluk', ico: '✏️', t: 'Boşluğu doldur', d: 'Cümledeki boşluğa doğru yapıyı yerleştir.',
-      make: function () { return blankQuestions(15); } },
+      make: function () { return blankQuestions(size()); } },
     { id: 'kur', ico: '🧩', t: 'Cümleyi kur', d: 'Türkçesi verilir; kelimelere dokunarak İngilizce cümleyi sen kur.',
-      kind: 'builder', make: function () { return buildItems(10); } },
+      kind: 'builder', make: function () { return buildItems(size()); } },
+    { id: 'dikte', ico: '🎧', t: 'Dinle ve yaz', d: 'Cümle okunur, sen yazarsın; sonra kelime kelime karşılaştırılır.',
+      kind: 'dictation', make: function () { return buildItems(Math.min(size(), 10)); } },
     { id: 'kelime', ico: '📖', t: 'Kelime bilgisi', d: 'Sözlükteki kelimeleri iki yönlü çalış: İngilizce ↔ Türkçe.',
-      make: function () { return wordQuestions(15); } },
+      make: function () { return wordQuestions(size()); } },
     { id: 'fiil', ico: '🔁', t: 'Düzensiz fiiller', d: 'Fiilin 2. ve 3. hâlini bul. Zamanların yapı taşı budur.',
-      make: function () { return verbQuestions(15); } }
+      make: function () { return verbQuestions(size()); } }
   ];
 
   function view(modeId) {
@@ -369,6 +604,8 @@
       U.el('p', { text: mode ? mode.d : 'Bir mod seç; her yanlıştan sonra doğrusu ve nedeni gösterilir.' })
     ]));
 
+    /* kısayol şeridi yalnız bir mod açıkken gerekli; liste ekranında
+       aynı bilgiyi kartlar zaten veriyor */
     var row = U.el('div', { class: 'pill-row' });
     MODES.forEach(function (m) {
       var a = U.el('a', {
@@ -377,14 +614,34 @@
       });
       row.appendChild(a);
     });
-    frag.appendChild(row);
+    if (mode) frag.appendChild(row);
 
     if (!mode) {
+      /* oturum boyu */
+      var sizeRow = U.el('div', { class: 'setrow' });
+      sizeRow.appendChild(U.el('span', { class: 'setrow__lbl', text: 'Bir turda kaç soru?' }));
+      [5, 10, 20].forEach(function (n) {
+        var b = U.el('button', {
+          class: 'btn btn--sm' + (size() === n ? ' btn--primary' : ''), type: 'button', text: String(n)
+        });
+        b.addEventListener('click', function () {
+          KI.store.set('quizSize', n);
+          KI.audio.play('toggle');
+          KI.router.refresh();
+        });
+        sizeRow.appendChild(b);
+      });
+      frag.appendChild(sizeRow);
+
       var grid = U.el('div', { class: 'stack' });
       MODES.forEach(function (m) {
-        var card = U.el('a', { class: 'card', href: '#/alistirma/' + m.id, 'data-sfx': 'nav',
-          style: 'text-decoration:none;color:inherit;display:block' });
-        card.appendChild(U.el('h3', { html: m.ico + '  ' + m.t }));
+        var card = U.el('a', { class: 'card modecard', href: '#/alistirma/' + m.id, 'data-sfx': 'nav' });
+        var title = U.el('h3', { html: m.ico + '  ' + m.t, style: 'margin-bottom:.2em' });
+        if (m.id === 'zorlandiklarim') {
+          var n = KI.store.troubleCount();
+          title.appendChild(U.el('span', { class: 'countpill' + (n ? '' : ' countpill--zero'), text: String(n) }));
+        }
+        card.appendChild(title);
         card.appendChild(U.el('p', { class: 'soft', text: m.d, style: 'margin:0' }));
         grid.appendChild(card);
       });
@@ -412,7 +669,16 @@
 
     var qs = mode.make();
     if (!qs.length) {
-      frag.appendChild(U.el('p', { class: 'empty', text: 'Bu modda soru bulunamadı.' }));
+      if (mode.id === 'zorlandiklarim') {
+        frag.appendChild(U.el('div', { class: 'empty' }, [
+          U.el('span', { class: 'empty__ico', text: '🎉' }),
+          U.el('h3', { text: 'Zorlandığın bir şey yok' }),
+          U.el('p', { text: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada birikir. Birkaç tur çözünce burası dolmaya başlar.' }),
+          U.el('a', { class: 'btn btn--primary', href: '#/alistirma/karisik', 'data-sfx': 'nav', text: '🎲 Karışık tura başla' })
+        ]));
+      } else {
+        frag.appendChild(U.el('p', { class: 'empty', text: 'Bu modda soru bulunamadı.' }));
+      }
       return frag;
     }
     var opts = {
@@ -420,10 +686,23 @@
         return U.el('a', { class: 'btn', href: '#/alistirma', 'data-sfx': 'back', text: '← Modlara dön' });
       }
     };
-    frag.appendChild(mode.kind === 'builder' ? builder(qs, opts) : widget(qs, opts));
+    if (mode.id === 'zorlandiklarim') {
+      var clr = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: '🧹 Listeyi temizle' });
+      clr.addEventListener('click', function () {
+        if (!window.confirm('Zorlandıklarım listesi tamamen silinsin mi?')) return;
+        KI.store.clearTrouble();
+        KI.audio.play('toggle');
+        U.toast('Liste temizlendi');
+        KI.router.go('#/alistirma');
+      });
+      frag.appendChild(U.el('div', { class: 'row', style: 'margin-bottom:10px' }, [clr]));
+    }
+    frag.appendChild(mode.kind === 'builder' ? builder(qs, opts)
+      : mode.kind === 'dictation' ? dictation(qs, opts)
+      : widget(qs, opts));
     return frag;
   }
 
-  KI.quiz = { widget: widget, builder: builder, modes: MODES };
+  KI.quiz = { widget: widget, builder: builder, dictation: dictation, modes: MODES };
   KI.viewPractice = { render: view };
 })(window.KI);

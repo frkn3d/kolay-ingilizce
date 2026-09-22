@@ -19,10 +19,13 @@
 | 👆 **Tıklanabilir kelimeler** | Cümledeki her kelimeye dokunulur; anlamı, türü ve çekimi (ör. *built → build fiilinin 2. hâli*) alttan açılan kartta görünür. |
 | 📚 **1.790 kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, toplum, sanat; B1-B2 fiil, sıfat ve zarfları; bağlaçlar (*however, although, therefore*); 43 öbek fiil (*give up, look after*); 99 düzensiz fiil. |
 | 🔊 **Sesli okuma** | Cihazın kendi konuşma motoruyla (Web Speech API). **Hiçbir internet servisi, hiçbir API anahtarı kullanılmaz.** Normal ve yavaş okuma, ayarlanabilir hız ve ses seçimi. |
-| ⭐ **Kelime defteri** | Beğenilen kelimeler kaydedilir, topluca dinlenir. |
-| 🎯 **7 alıştırma modu** | Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · **Cümleyi kur** · **Kelime bilgisi** · **Düzensiz fiiller** · Karışık. Her cevaptan sonra doğrusu ve nedeni gösterilir. |
+| ⭐ **Kelime defteri** | Beğenilen kelimeler kaydedilir, topluca dinlenir. Sözlük türe göre süzülebilir (isim, fiil, sıfat, zarf, öbek fiil, düzensiz fiil, defterim) ve her kelime kartında o kelimenin geçtiği bir örnek cümle gösterilir. |
+| 🎯 **9 alıştırma modu** | Karışık · Zorlandıklarım · Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · Cümleyi kur · Dinle ve yaz · Kelime bilgisi · Düzensiz fiiller. Tur uzunluğu 5/10/20 soru seçilebilir. |
+| 🩹 **Zorlandıklarım** | Yanlış yaptığın sorular ve karıştırdığın kelimeler kaydedilir; ayrı bir modda yalnız onlar sorulur. Doğru bildiğinde listeden düşer. |
+| 🎧 **Dinle ve yaz (dikte)** | Cümle cihazın sesiyle okunur, sen yazarsın; sonra kelime kelime karşılaştırılır. |
+| ↔ **Karışan zamanlar** | Türkçe konuşanların en çok karıştırdığı 5 çift yan yana: iki zaman çizgisi, ne zaman hangisi tablosu, aynı durumun iki cümlesi ve ayırt etme testi. |
 | 🧩 **Cümle kurma** | Türkçesi verilir, kelimelere dokunarak İngilizce cümleyi sen dizersin; yanlışsa doğru sıra gösterilir ve okunur. |
-| ♿ **Okunaklılık** | Açık ve koyu temanın tamamı WCAG kontrast ölçümünden geçirildi; her metin en az 4.5:1 oranında. |
+| ♿ **Okunaklılık** | Açık ve koyu temanın tamamı WCAG kontrast ölçümünden geçirildi; her metin en az 4.5:1 oranında. Ayarlardan yazı boyutu ve animasyon azaltma seçilebilir. |
 | 🧱 **Temeller bölümü** | Cümle sırası, zamirler, am/is/are, have/has, a/an/the, çoğul, ekler, 54 düzensiz fiil tablosu, soru kelimeleri, will–going to farkı. |
 | 🎨 **Retro yeşil tasarım** | Parşömen zemin, kalın çerçeveler, sert gölgeler; açık ve koyu tema. |
 | 🔔 **Kısık ses efektleri** | Tüm tıklama ve doğru/yanlış sesleri tarayıcıda sentezlenir (Web Audio) — tek bir ses dosyası bile indirilmez. |
@@ -79,12 +82,14 @@ js/
   data/
     tenses.js              12 zaman: mantık, formül, çizgi, örnek, hata, test
     examples-extra.js      günlük hayattan ek örnek cümleler
+    compare.js             karışan zaman çiftlerinin karşılaştırması
     glossary.js            sözlük çekirdeği + çekim çözücü (-s, -ing, -ed, iyelik)
     vocabulary.js          A1-B2 kelime dağarcığı, temalara ayrılmış
     exercises.js           zamanlara ait ek alıştırma soruları
     basics.js              temel gramer bölümleri
   ui/
     timeline.js            zaman çizgisini SVG olarak çizer
+    compare.js             karşılaştırma sayfası
     sentence.js            tıklanabilir cümle, çevir düğmesi, kelime kartı
     home.js                zaman haritası
     tense.js               tek zamanın sayfası

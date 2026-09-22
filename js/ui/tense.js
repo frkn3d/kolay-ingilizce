@@ -96,7 +96,25 @@
     });
     sec.appendChild(U.el('div', { class: 'row', style: 'margin-bottom:12px' }, [allBtn]));
 
-    t.examples.forEach(function (ex) { sec.appendChild(KI.sentence.example(ex, { accent: true })); });
+    var FIRST = 4;
+    t.examples.slice(0, FIRST).forEach(function (ex) {
+      sec.appendChild(KI.sentence.example(ex, { accent: true }));
+    });
+
+    var rest = t.examples.slice(FIRST);
+    if (rest.length) {
+      var box = U.el('div', { hidden: true });
+      rest.forEach(function (ex) { box.appendChild(KI.sentence.example(ex, { accent: true })); });
+      var more = U.el('button', { class: 'btn btn--block', type: 'button',
+        html: '↓ ' + rest.length + ' örnek daha göster' });
+      more.addEventListener('click', function () {
+        box.hidden = !box.hidden;
+        KI.audio.play(box.hidden ? 'close' : 'reveal');
+        more.innerHTML = box.hidden ? '↓ ' + rest.length + ' örnek daha göster' : '↑ Fazla örnekleri gizle';
+      });
+      sec.appendChild(box);
+      sec.appendChild(more);
+    }
     return sec;
   }
 
@@ -165,6 +183,24 @@
       ]));
       sec.appendChild(KI.quiz.widget(t.quiz, { tenseId: t.id }));
       frag.appendChild(sec);
+    }
+
+    /* bu zamanla karışan başka zaman varsa yolu göster */
+    if (KI.compare) {
+      var cmps = KI.compare.forTense(t.id);
+      if (cmps.length) {
+        var cs = U.el('section', { class: 'section' });
+        cs.appendChild(U.el('h2', { class: 'section__title' }, [
+          U.el('span', { class: 'num', text: '↔' }), document.createTextNode('Bununla karışır')
+        ]));
+        cmps.forEach(function (c) {
+          var card = U.el('a', { class: 'card modecard', href: '#/karsilastir/' + c.id, 'data-sfx': 'nav' });
+          card.appendChild(U.el('h3', { text: c.title, style: 'margin-bottom:.2em' }));
+          card.appendChild(U.el('p', { class: 'soft', style: 'margin:0', text: c.short }));
+          cs.appendChild(card);
+        });
+        frag.appendChild(cs);
+      }
     }
 
     frag.appendChild(pager(t));

@@ -7,6 +7,26 @@
   'use strict';
   var U = KI.util;
 
+  /* Kelimenin geçtiği bir örnek cümleyi uygulamanın içinden bulur.
+     Dizin ilk ihtiyaçta bir kez kurulur. */
+  var exIndex = null;
+  function exampleFor(base) {
+    if (!base) return null;
+    if (!exIndex) {
+      exIndex = {};
+      ((KI.tenses && KI.tenses.list) || []).forEach(function (t) {
+        t.examples.forEach(function (ex) {
+          ex.en.split(/\s+/).forEach(function (tok) {
+            var r = KI.glossary.lookup(tok);
+            var k = r ? String(r.base).toLowerCase() : null;
+            if (k && !exIndex[k]) exIndex[k] = ex;
+          });
+        });
+      });
+    }
+    return exIndex[String(base).toLowerCase()] || null;
+  }
+
   /* ---------- kelime kartı ---------- */
   var sheet = {
     node: null, activeSpan: null, current: null,
@@ -61,6 +81,18 @@
       }
       noteEl.textContent = note;
       noteEl.hidden = !note;
+
+      /* kelimenin geçtiği örnek cümle */
+      var exBox = document.getElementById('word-ex');
+      var ex = exampleFor(found ? found.base : clean);
+      if (ex) {
+        document.getElementById('word-ex-en').textContent = ex.en;
+        document.getElementById('word-ex-tr').textContent = ex.tr;
+        exBox.hidden = false;
+        exBox.onclick = function () { KI.speech.speak(ex.en); };
+      } else {
+        exBox.hidden = true;
+      }
 
       sheet.refreshSaveBtn();
       sheet.node.hidden = false;

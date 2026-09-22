@@ -440,3 +440,91 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 .quicklink__ico { font-size: 1.4rem; line-height: 1; }
 .quicklink b { display: block; font-family: var(--font-display); font-size: 1rem; }
 .quicklink small { color: var(--ink-mute); font-size: .78rem; }
+
+/* ---------- Alıştırma oturum ayarı ---------- */
+.setrow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  background: var(--surface-2); border: 1.5px dashed var(--line-2);
+  border-radius: var(--r); padding: 10px 14px; margin-bottom: 14px;
+}
+.setrow__lbl { font-weight: 600; font-size: .9rem; color: var(--ink-soft); margin-right: auto; }
+.modecard { text-decoration: none; color: inherit; display: block; }
+.countpill {
+  display: inline-block; margin-left: .5em;
+  font-family: var(--font-mono); font-size: .72rem; font-weight: 700;
+  padding: .15em .5em; border-radius: 999px;
+  background: var(--no-edge); color: var(--no-key);
+}
+.countpill--zero { background: var(--surface-2); color: var(--ink-mute); border: 1px solid var(--line); }
+
+/* ---------- Kelime kartındaki örnek cümle ---------- */
+.sheet__ex {
+  margin-top: 12px; padding: 10px 12px;
+  background: var(--surface-2); border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm); cursor: pointer;
+}
+.sheet__ex:hover { background: var(--bg); }
+.sheet__ex-lbl {
+  display: block; font-family: var(--font-mono); font-size: .66rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: .25em;
+}
+.sheet__ex-en { font-family: var(--font-display); font-size: 1rem; margin: 0 0 .15em; }
+.sheet__ex-tr { font-size: .86rem; color: var(--ink-soft); margin: 0; }
+
+/* ---------- Cümle kurmada fark gösterimi ---------- */
+.diffline { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 10px; }
+.diffline__lbl {
+  font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); width: 100%;
+}
+.diffw {
+  font-family: var(--font-display); font-size: .95rem;
+  padding: .15em .45em; border-radius: 6px; border: 1.5px solid transparent;
+}
+.diffw--ok { background: var(--ok-bg); border-color: var(--ok-edge); }
+.diffw--bad { background: var(--no-bg); border-color: var(--no-edge); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+/* ---------- Dikte ---------- */
+.input--ok { border-color: var(--ok-edge); background: var(--ok-bg); }
+.input--no { border-color: var(--no-edge); background: var(--no-bg); }
+.diffw--miss { background: var(--surface-2); border-color: var(--line-2); color: var(--ink-mute); font-size: .8rem; }
+
+/* ---------- Zaman karşılaştırma ---------- */
+.cmp__heads { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.cmp__side {
+  position: relative;
+  border: 2px solid var(--line); border-radius: var(--r);
+  background: var(--surface); padding: 12px 12px 10px;
+  box-shadow: var(--shadow-hard);
+}
+.cmp__side--a { border-top: 5px solid var(--ok-edge); }
+.cmp__side--b { border-top: 5px solid var(--future); }
+.cmp__tag {
+  position: absolute; top: 8px; right: 10px;
+  font-family: var(--font-mono); font-size: .68rem; font-weight: 800; color: var(--ink-mute);
+}
+.cmp__yes { color: var(--present); font-weight: 700; }
+.cmp__no { color: var(--past); font-weight: 700; }
+.cmp__maybe { color: var(--ink-mute); }
+.cmp__pair { margin-bottom: 18px; }
+.cmp__pairgrid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.cmp__cell { min-width: 0; }
+.cmp__cellhead {
+  display: block; font-family: var(--font-mono); font-size: .68rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 4px;
+}
+.cmp__cell .example { margin-bottom: 0; }
+.cmp__cell--a .example { border-left: 5px solid var(--present); }
+.cmp__cell--b .example { border-left: 5px solid var(--future); }
+@media (min-width: 640px) { .cmp__pairgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .cmp__heads { grid-template-columns: 1fr; } }
+
+/* Karşılaştırma tablosu dar ekranda sığsın: yalnız işaret kalır */
+table.tbl--cmp { min-width: 0; }
+table.tbl--cmp th, table.tbl--cmp td { padding: 8px 10px; }
+.cmp__mark { font-weight: 800; }
+@media (max-width: 560px) {
+  .cmp__word { display: none; }
+  table.tbl--cmp th:not(:first-child), table.tbl--cmp td:not(:first-child) { text-align: center; width: 48px; }
+  table.tbl--cmp .cmp__mark { font-size: 1.1rem; }
+}

@@ -17,6 +17,16 @@
     if (meta) meta.setAttribute('content', t === 'dark' ? '#0d1711' : '#14361f');
   };
 
+  /* Yazı boyutu ve hareket tercihlerini belgeye uygula */
+  KI.applyPrefs = function () {
+    var root = document.documentElement;
+    var fs = KI.store.get('fontSize') || 'normal';
+    if (fs === 'normal') root.removeAttribute('data-font');
+    else root.setAttribute('data-font', fs);
+    if (KI.store.get('lessMotion')) root.setAttribute('data-motion', 'less');
+    else root.removeAttribute('data-motion');
+  };
+
   /* ---------------- yönlendirici ---------------- */
   var routes = [
     { re: /^\/?$/,                    tab: 'harita',    run: function () { return KI.viewHome.render(); } },
@@ -26,6 +36,8 @@
     { re: /^\/temeller\/([a-z-]+)\/?$/, tab: 'temeller', run: function (m) { return KI.viewBasics.render(m[1]); } },
     { re: /^\/alistirma\/?$/,         tab: 'alistirma', run: function () { return KI.viewPractice.render(null); } },
     { re: /^\/alistirma\/([a-z-]+)\/?$/, tab: 'alistirma', run: function (m) { return KI.viewPractice.render(m[1]); } },
+    { re: /^\/karsilastir\/?$/, tab: 'temeller',  run: function () { return KI.viewCompare.render(null); } },
+    { re: /^\/karsilastir\/([a-z-]+)\/?$/, tab: 'temeller', run: function (m) { return KI.viewCompare.render(m[1]); } },
     { re: /^\/sozluk\/?$/,            tab: 'sozluk',    run: function () { return KI.viewDictionary.render(); } }
   ];
 
@@ -74,6 +86,7 @@
     if (booted) return;
     booted = true;
     KI.setTheme(KI.store.get('theme'));
+    KI.applyPrefs();
     KI.sentence.sheet.init();
 
     /* ses düğmesi */

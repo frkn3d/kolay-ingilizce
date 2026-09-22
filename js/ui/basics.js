@@ -108,6 +108,22 @@
       frag.appendChild(card);
     });
 
+    if (KI.compare) {
+      var cs = U.el('section', { class: 'section' });
+      cs.appendChild(U.el('h2', { class: 'section__title', text: '↔ Karışan zamanlar' }));
+      cs.appendChild(U.el('p', { class: 'soft', style: 'margin-top:-6px;font-size:.9rem',
+        text: 'Türkçe konuşanların en çok karıştırdığı çiftler yan yana konmuş hâlde.' }));
+      var stack = U.el('div', { class: 'stack' });
+      KI.compare.list.forEach(function (c) {
+        var card = U.el('a', { class: 'card modecard', href: '#/karsilastir/' + c.id, 'data-sfx': 'nav' });
+        card.appendChild(U.el('h3', { text: c.title, style: 'margin-bottom:.2em' }));
+        card.appendChild(U.el('p', { class: 'soft', style: 'margin:0', text: c.short }));
+        stack.appendChild(card);
+      });
+      cs.appendChild(stack);
+      frag.appendChild(cs);
+    }
+
     frag.appendChild(U.el('div', { class: 'pager' }, [
       U.el('a', { class: 'btn', href: '#/harita', 'data-sfx': 'back' }, [U.el('span', { text: '← Harita' })]),
       U.el('a', { class: 'btn btn--primary', href: '#/zaman/present-simple', 'data-sfx': 'nav' }, [U.el('span', { text: 'Zamanlara başla →' })])

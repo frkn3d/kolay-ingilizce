@@ -90,10 +90,35 @@
     });
     body.appendChild(themeRow);
 
+    /* --- okunaklılık --- */
+    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Okunaklılık' }));
+    var fontRow = U.el('div', { class: 'row' });
+    [['small', 'Küçük'], ['normal', 'Normal'], ['large', 'Büyük']].forEach(function (o) {
+      var b = U.el('button', {
+        class: 'btn btn--sm' + ((KI.store.get('fontSize') || 'normal') === o[0] ? ' btn--primary' : ''),
+        type: 'button', text: o[1]
+      });
+      b.addEventListener('click', function () {
+        KI.store.set('fontSize', o[0]);
+        KI.applyPrefs();
+        KI.audio.play('toggle');
+        build();
+      });
+      fontRow.appendChild(b);
+    });
+    body.appendChild(U.el('div', { class: 'field' }, [
+      U.el('div', { class: 'field__lbl' }, [U.el('span', { text: 'Yazı boyutu' })]),
+      fontRow
+    ]));
+    body.appendChild(switchRow('Animasyonları azalt', 'Geçiş ve belirme hareketlerini kapatır.', 'lessMotion', function () {
+      KI.applyPrefs();
+    }));
+
     /* --- ilerleme --- */
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px', text: 'İlerleme' }));
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
-      text: KI.store.learnedCount() + ' zaman öğrenildi olarak işaretli, defterinde ' + KI.store.words().length + ' kelime var.' }));
+      text: KI.store.learnedCount() + ' zaman öğrenildi olarak işaretli, defterinde ' + KI.store.words().length +
+            ' kelime var. Zorlandıklarım listesinde ' + KI.store.troubleCount() + ' kayıt bulunuyor.' }));
     var reset = U.el('button', { class: 'btn btn--sm', type: 'button', html: '🗑 Tüm ilerlemeyi sıfırla' });
     reset.addEventListener('click', function () {
       if (!window.confirm('İşaretlenen zamanlar, test sonuçları ve kelime defteri silinecek. Devam edilsin mi?')) return;

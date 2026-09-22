@@ -18,7 +18,18 @@
     scores: {},      // { tenseId: {best: 0, total: 0} }
     words: [],       // [{en, tr, at}]
     visits: 0,
-    lastTense: ''
+    lastTense: '',
+
+    /* --- yanlışlardan öğrenme --- */
+    weak: {},          // { tenseId: {wrong: n, right: n} }
+    wrongQs: [],       // yanlış yapılan sorular
+    wrongWords: [],    // yanlış bilinen kelimeler
+
+    /* --- oturum ve görünüm tercihleri --- */
+    quizSize: 10,
+    onlyLearned: false,
+    fontSize: 'normal',   // small | normal | large
+    lessMotion: false
   };
 
   var state = load();
@@ -67,6 +78,57 @@
       return cur;
     },
     getScore: function (id) { return state.scores[id] || null; },
+
+    /* --- yanlışlardan öğrenme --- */
+    recordAnswer: function (q, ok) {
+      if (!q) return;
+      if (q.tenseId) {
+        var w = state.weak[q.tenseId] || { wrong: 0, right: 0 };
+        if (ok) w.right++; else w.wrong++;
+        state.weak[q.tenseId] = w;
+      }
+      if (!ok) {
+        if (q.blank) {
+          var key = q.blank.q;
+          state.wrongQs = state.wrongQs.filter(function (x) { return x.q !== key; });
+          state.wrongQs.unshift({ q: q.blank.q, options: q.blank.options, answer: q.blank.answer,
+            why: q.blank.why, tenseId: q.tenseId || '', at: Date.now() });
+          if (state.wrongQs.length > 60) state.wrongQs.pop();
+        }
+        if (q.word && q.word.en) {
+          var we = q.word.en.toLowerCase();
+          state.wrongWords = state.wrongWords.filter(function (x) { return x.en.toLowerCase() !== we; });
+          state.wrongWords.unshift({ en: q.word.en, tr: q.word.tr, at: Date.now() });
+          if (state.wrongWords.length > 100) state.wrongWords.pop();
+        }
+      } else {
+        /* doğru bilinen yanlış listesinden çıkar */
+        if (q.blank) state.wrongQs = state.wrongQs.filter(function (x) { return x.q !== q.blank.q; });
+        if (q.word && q.word.en) {
+          var e2 = q.word.en.toLowerCase();
+          state.wrongWords = state.wrongWords.filter(function (x) { return x.en.toLowerCase() !== e2; });
+        }
+      }
+      save();
+    },
+    weakTenses: function (limit) {
+      var out = [];
+      Object.keys(state.weak).forEach(function (id) {
+        var w = state.weak[id];
+        var total = w.wrong + w.right;
+        if (w.wrong > 0) out.push({ id: id, wrong: w.wrong, right: w.right, rate: w.wrong / total });
+      });
+      out.sort(function (a, b) { return (b.rate - a.rate) || (b.wrong - a.wrong); });
+      return limit ? out.slice(0, limit) : out;
+    },
+    wrongQuestions: function () { return state.wrongQs.slice(); },
+    wrongWordList: function () { return state.wrongWords.slice(); },
+    troubleCount: function () {
+      return state.wrongQs.length + state.wrongWords.length + S.weakTenses().length;
+    },
+    clearTrouble: function () {
+      state.wrongQs = []; state.wrongWords = []; state.weak = {}; save();
+    },
 
     /* --- kelime defteri --- */
     hasWord: function (en) {

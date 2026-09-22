@@ -115,13 +115,21 @@ html[data-theme="dark"] {
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; font-size: 16px; }
+html[data-font="small"] { font-size: 14.5px; }
+html[data-font="large"] { font-size: 18.5px; }
+html[data-motion="less"] *,
+html[data-motion="less"] *::before,
+html[data-motion="less"] *::after {
+  animation-duration: .001ms !important;
+  transition-duration: .001ms !important;
+}
 
 body {
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--ink);
   background-color: var(--bg);
