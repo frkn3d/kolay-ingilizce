@@ -1,0 +1,163 @@
+/* ============================================================
+   Kolay İngilizce — base.css
+   Retro-yeşil palet, tipografi, temel sıfırlama
+   ============================================================ */
+
+:root {
+  /* --- Ana palet (retro yeşil) --- */
+  --green-900: #0f2a1c;
+  --green-800: #14361f;
+  --green-700: #1f5137;
+  --green-600: #2a6a46;
+  --green-500: #36855a;
+  --green-400: #5aa077;
+  --green-300: #8ec2a0;
+  --green-200: #c2dfcc;
+  --green-100: #e2efe5;
+
+  --cream:     #fbf6e9;
+  --paper:     #f4ecd8;
+  --paper-2:   #ece1c6;
+  --sand:      #dfd0ae;
+
+  --mustard:   #d9a03c;
+  --mustard-d: #b8822a;
+  --terra:     #b5542f;
+  --terra-l:   #d8825c;
+  --plum:      #6d4a7a;
+  --sky:       #3f7f8c;
+
+  /* --- Anlamsal --- */
+  --bg:        var(--paper);
+  --bg-grain:  rgba(31, 81, 55, .045);
+  --surface:   var(--cream);
+  --surface-2: #f7f0de;
+  --ink:       #17271d;
+  --ink-soft:  #47584c;
+  --ink-mute:  #6f7f73;
+  --line:      #d4c6a4;
+  --line-2:    #bfae86;
+  --accent:    var(--green-700);
+  --accent-ink:var(--cream);
+
+  /* Zaman grupları */
+  --past:      #b5542f;
+  --past-bg:   #f6e2d8;
+  --present:   #2a6a46;
+  --present-bg:#dcecdf;
+  --future:    #3f7f8c;
+  --future-bg: #d9e9ec;
+
+  /* --- Ölçü --- */
+  --r-sm: 8px;
+  --r:    14px;
+  --r-lg: 22px;
+  --shadow-hard: 3px 3px 0 var(--line-2);
+  --shadow-soft: 0 6px 18px rgba(23, 39, 29, .10);
+  --ring: 0 0 0 3px rgba(54, 133, 90, .35);
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+
+  --maxw: 1080px;
+  --tabbar-h: 62px;
+}
+
+html[data-theme="dark"] {
+  --bg:        #101a13;
+  --bg-grain:  rgba(142, 194, 160, .05);
+  --surface:   #17251b;
+  --surface-2: #1d2e22;
+  --ink:       #ece4cf;
+  --ink-soft:  #bdc9bd;
+  --ink-mute:  #8a9a8d;
+  --line:      #2d4133;
+  --line-2:    #3b5744;
+  --cream:     #ece4cf;
+  --accent:    var(--green-400);
+  --accent-ink:#0f2a1c;
+
+  --past:      #e08a63;
+  --past-bg:   #33231c;
+  --present:   #6fbb8d;
+  --present-bg:#17301f;
+  --future:    #74b6c4;
+  --future-bg: #152b2f;
+
+  --mustard:   #e0b25c;
+  --shadow-hard: 3px 3px 0 #0a1410;
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(0deg, var(--bg-grain) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, var(--bg-grain) 0 1px, transparent 1px 4px);
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 12px);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.22;
+  margin: 0 0 .4em;
+  letter-spacing: -.01em;
+}
+h1 { font-size: clamp(1.55rem, 4.6vw, 2.3rem); }
+h2 { font-size: clamp(1.25rem, 3.6vw, 1.7rem); }
+h3 { font-size: 1.1rem; }
+
+p { margin: 0 0 .9em; }
+a { color: var(--green-600); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+html[data-theme="dark"] a { color: var(--green-300); }
+
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+
+button { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--green-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 99;
+  background: var(--green-700); color: var(--cream);
+  padding: 10px 16px; border-radius: 0 0 var(--r) 0;
+}
+.skip-link:focus { left: 0; }
+
+.muted { color: var(--ink-mute); }
+.soft  { color: var(--ink-soft); }
+.center { text-align: center; }
+.mono { font-family: var(--font-mono); }
+.nowrap { white-space: nowrap; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0 .35em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}

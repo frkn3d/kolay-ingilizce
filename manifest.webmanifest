@@ -1,0 +1,17 @@
+{
+  "name": "Kolay İngilizce — Zamanlarla Öğren",
+  "short_name": "Kolay İngilizce",
+  "description": "Zaman çizgisi üzerinden İngilizce zamanlarını öğreten, Türk kültüründen örneklerle hazırlanmış uygulama.",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4ecd8",
+  "theme_color": "#1f5137",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
