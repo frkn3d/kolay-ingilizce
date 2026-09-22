@@ -146,6 +146,10 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 .tl { width: 100%; display: block; }
+/* Yükseklik viewBox oranına bırakılırsa 3 sütunlu haritada kart daralınca
+   çizgi birkaç piksele iner. Sabit yükseklik + preserveAspectRatio="none"
+   (bkz. timeline.js) her kart genişliğinde okunaklı bir şerit garanti eder. */
+.tl--mini { height: 44px; }
 .tl-wrap {
   background: var(--surface-2);
   border: 2px solid var(--line);
@@ -161,12 +165,14 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 .tl .tl-nowlbl { fill: var(--ink); font-size: 21px; font-weight: 700; }
 .tl .tl-mark-lbl { fill: var(--ink-soft); font-size: 19px; }
 /* Küçük kart çizgisinde --past-bg / --future-bg neredeyse aynı parlaklıkta
-   olduğundan (özellikle koyu temada) mobilde ayırt edilmiyordu. Gerçek
-   --past / --future rengiyle karıştırmak ton farkını belirginleştirir. */
+   olduğundan (özellikle koyu temada) mobilde ayırt edilmiyordu. --tl-mini-*
+   (bkz. base.css) --past/--future rengiyle önceden karıştırılmış, sabit bir
+   değerdir — color-mix() gibi eski tarayıcılarda desteklenmeyebilecek bir
+   fonksiyona bağımlı olmadan her yerde aynı ısı farkını verir. */
 .tl .tl-zone-past { fill: var(--past-bg); }
 .tl .tl-zone-future { fill: var(--future-bg); }
-.tl--mini .tl-zone-past { fill: color-mix(in srgb, var(--past) 48%, var(--surface)); }
-.tl--mini .tl-zone-future { fill: color-mix(in srgb, var(--future) 48%, var(--surface)); }
+.tl--mini .tl-zone-past { fill: var(--tl-mini-past); }
+.tl--mini .tl-zone-future { fill: var(--tl-mini-future); }
 
 .grid-map { display: grid; gap: 12px; }
 .grid-map__head { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }

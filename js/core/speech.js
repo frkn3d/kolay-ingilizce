@@ -9,6 +9,11 @@
   var synth = window.speechSynthesis || null;
   var voices = [];
   var warned = false;
+  /* iOS/Safari'de SpeechSynthesisUtterance nesnesi bir yere referans
+     tutulmazsa konuşma başlamadan çöp toplayıcı tarafından silinip
+     sessiz kalabiliyor (bilinen WebKit hatası). Modül seviyesinde
+     tutmak bunu engeller. */
+  var currentUtterance = null;
 
   function refresh() {
     if (!synth) return;
@@ -58,10 +63,14 @@
         }
         return false;
       }
-      try { synth.cancel(); } catch (e) {}
+      /* Zaten bir şey okunmuyorsa cancel() çağırmaya gerek yok — Safari'de
+         cancel() hemen ardından aynı anda speak() çağrılması bazen konuşmayı
+         sessizce iptal ediyor. */
+      if (synth.speaking || synth.pending) { try { synth.cancel(); } catch (e) {} }
       refresh();
 
       var u = new window.SpeechSynthesisUtterance(String(text));
+      currentUtterance = u;   // bkz. yukarısı: WebKit çöp toplama hatası
       var v = chooseVoice();
       if (v) { u.voice = v; u.lang = v.lang; }
       else { u.lang = 'en-US'; }
@@ -72,9 +81,9 @@
       u.volume = opts.volume === undefined ? 1 : opts.volume;
 
       if (opts.onboundary) u.onboundary = opts.onboundary;
-      if (opts.onend) u.onend = opts.onend;
       if (opts.onstart) u.onstart = opts.onstart;
-      u.onerror = function () { if (opts.onend) opts.onend(); };
+      u.onend = function () { if (currentUtterance === u) currentUtterance = null; if (opts.onend) opts.onend(); };
+      u.onerror = function () { if (currentUtterance === u) currentUtterance = null; if (opts.onend) opts.onend(); };
 
       try {
         synth.speak(u);

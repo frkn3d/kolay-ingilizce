@@ -59,6 +59,11 @@
   --present-bg:#dcecdf;
   --future:    #2d6774;
   --future-bg: #d9e9ec;
+  /* Mini zaman çizgisi şeridi: --past/--future ile --surface'in sabit karışımı.
+     color-mix() yerine önceden hesaplanmış değer kullanılır ki eski Safari/iOS
+     sürümlerinde de (color-mix desteklenmese bile) şerit görünür kalsın. */
+  --tl-mini-past:   #cea18b;
+  --tl-mini-future: #98b1b1;
 
   /* --- Ölçü --- */
   --r-sm: 8px;
@@ -107,6 +112,8 @@ html[data-theme="dark"] {
   --present-bg:#17301f;
   --future:    #74b6c4;
   --future-bg: #152b2f;
+  --tl-mini-past:   #795940;
+  --tl-mini-future: #456e6f;
 
   --mustard:   #e0b25c;
   --shadow-hard: 3px 3px 0 #0a1410;

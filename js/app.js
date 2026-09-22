@@ -138,8 +138,8 @@
       if (el) KI.audio.play(el.getAttribute('data-sfx') || 'tap');
     }, true);
 
-    /* ilk dokunuşta ses motorunu uyandır */
-    ['pointerdown', 'keydown'].forEach(function (evt) {
+    /* ilk dokunuşta ses motorunu uyandır (iOS Safari'de touchend en güvenilir olan) */
+    ['pointerdown', 'touchend', 'keydown'].forEach(function (evt) {
       window.addEventListener(evt, function once() {
         KI.audio.unlock();
         window.removeEventListener(evt, once);

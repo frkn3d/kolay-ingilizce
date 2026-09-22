@@ -59,9 +59,13 @@
     }
     var color = 'var(--' + tense.group + ')';
 
+    /* Mini gösterim, kart 3 sütuna sıkışınca çok dar olabiliyor. Oranı normalde
+       genişliğe göre kendiliğinden küçülen yüksekliğe bağlamak yerine, mini
+       modda "none" ile taban çizip CSS'te sabit bir yükseklik (.tl--mini)
+       veriyoruz — böylece dar kartta bile şerit birkaç piksele düşmüyor. */
     var svg = n('svg', {
       class: 'tl' + (mini ? ' tl--mini' : ''), viewBox: '0 0 ' + W + ' ' + H,
-      preserveAspectRatio: 'xMidYMid meet', role: 'img',
+      preserveAspectRatio: mini ? 'none' : 'xMidYMid meet', role: 'img',
       'aria-label': tense.en + ' zaman çizgisi'
     });
     svg.style.setProperty('--tlc', color);
