@@ -9,7 +9,7 @@
   border-bottom: 3px solid var(--green-900);
   padding-top: env(safe-area-inset-top, 0px);
 }
-html[data-theme="dark"] .appbar { background: #0d1711; border-bottom-color: #060d09; }
+html[data-theme="dark"] .appbar { background: #13231a; border-bottom-color: #081410; }
 
 .appbar__inner {
   max-width: var(--maxw); margin: 0 auto;
@@ -88,17 +88,33 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
 
 .hero {
   background:
-    radial-gradient(1200px 260px at 15% -40%, rgba(217,160,60,.28), transparent 60%),
-    var(--green-800);
-  color: var(--cream);
-  border: 2px solid var(--green-900);
+    radial-gradient(1200px 260px at 15% -40%, var(--hero-glow), transparent 60%),
+    var(--hero-bg);
+  color: var(--hero-ink);
+  border: 2px solid var(--hero-edge);
   border-radius: var(--r-lg);
   padding: 20px 18px;
   box-shadow: var(--shadow-hard);
   margin-bottom: 18px;
 }
-.hero h1 { color: var(--cream); margin-bottom: .3em; }
-.hero p { color: rgba(251, 246, 233, .82); margin-bottom: .8em; font-size: .96rem; }
+.hero h1 { color: var(--hero-ink); margin-bottom: .3em; }
+
+/* Hero üzerindeki düğmeler: koyu temada da zeminden ayrılsın */
+.hero .btn {
+  background: rgba(251, 246, 233, .18);
+  color: var(--hero-ink);
+  border-color: rgba(251, 246, 233, .5);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .3);
+}
+.hero .btn:hover { background: rgba(251, 246, 233, .3); box-shadow: 4px 4px 0 rgba(0, 0, 0, .3); }
+.hero .btn--mustard {
+  background: var(--mustard);
+  color: #3a2a06;
+  border-color: var(--mustard-d);
+  font-weight: 700;
+}
+.hero .btn--mustard:hover { background: #e8b257; }
+.hero p { color: rgba(251, 246, 233, .85); margin-bottom: .8em; font-size: .96rem; }
 .hero .progress__bar { background: rgba(0,0,0,.28); border-color: rgba(251,246,233,.28); }
 .hero .progress__num { color: rgba(251,246,233,.85); }
 
@@ -107,7 +123,7 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
   font-size: .85rem; color: var(--ink-mute); text-decoration: none;
   margin-bottom: 10px;
 }
-.crumb:hover { color: var(--green-600); }
+.crumb:hover { color: var(--link); }
 
 .tense-head {
   border: 2px solid var(--line); border-radius: var(--r-lg);

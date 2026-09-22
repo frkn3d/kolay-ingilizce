@@ -12,12 +12,15 @@
 | 📈 **Zaman çizgisi çizimi** | Her zaman için ayrı SVG çizgi: iş nokta mı, bant mı, bugüne uzanan ok mu — gözle görülür. |
 | 🧠 **Mantık anlatımı** | Kural ezberi yerine "neden bu zaman" açıklaması, Türkçe karşılığıyla (-di, -yor, -mişti…). |
 | 🧮 **Formül kartı** | Olumlu / olumsuz / soru kalıpları ve "altın kural" uyarısı. |
-| 💬 **56 örnek cümle** | Kültürümüzden, kısa ve gündelik cümleler. |
+| 💬 **56 örnek cümle + 74 soru** | Kültürümüzden, kısa ve gündelik cümleler; her zaman için elle yazılmış 4-7 alıştırma sorusu. |
 | 🇹🇷 **Çevir düğmesi** | Cümlenin Türkçesi istendiğinde açılır; altında o cümlenin inceliğini anlatan bir not çıkar. |
 | 👆 **Tıklanabilir kelimeler** | Cümledeki her kelimeye dokunulur; anlamı, türü ve çekimi (ör. *built → build fiilinin 2. hâli*) alttan açılan kartta görünür. |
+| 📚 **1.700+ kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, toplum, sanat; B1-B2 fiil, sıfat ve zarfları; bağlaçlar (*however, although, therefore*); 43 öbek fiil (*give up, look after*); 99 düzensiz fiil. |
 | 🔊 **Sesli okuma** | Cihazın kendi konuşma motoruyla (Web Speech API). **Hiçbir internet servisi, hiçbir API anahtarı kullanılmaz.** Normal ve yavaş okuma, ayarlanabilir hız ve ses seçimi. |
 | ⭐ **Kelime defteri** | Beğenilen kelimeler kaydedilir, topluca dinlenir. |
-| 🎯 **4 alıştırma modu** | Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · Karışık. Her cevaptan sonra doğrusu ve nedeni gösterilir. |
+| 🎯 **7 alıştırma modu** | Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · **Cümleyi kur** · **Kelime bilgisi** · **Düzensiz fiiller** · Karışık. Her cevaptan sonra doğrusu ve nedeni gösterilir. |
+| 🧩 **Cümle kurma** | Türkçesi verilir, kelimelere dokunarak İngilizce cümleyi sen dizersin; yanlışsa doğru sıra gösterilir ve okunur. |
+| ♿ **Okunaklılık** | Açık ve koyu temanın tamamı WCAG kontrast ölçümünden geçirildi; her metin en az 4.5:1 oranında. |
 | 🧱 **Temeller bölümü** | Cümle sırası, zamirler, am/is/are, have/has, a/an/the, çoğul, ekler, 54 düzensiz fiil tablosu, soru kelimeleri, will–going to farkı. |
 | 🎨 **Retro yeşil tasarım** | Parşömen zemin, kalın çerçeveler, sert gölgeler; açık ve koyu tema. |
 | 🔔 **Kısık ses efektleri** | Tüm tıklama ve doğru/yanlış sesleri tarayıcıda sentezlenir (Web Audio) — tek bir ses dosyası bile indirilmez. |
@@ -73,7 +76,9 @@ js/
     speech.js              cihaz üstü sesli okuma (Web Speech API)
   data/
     tenses.js              12 zaman: mantık, formül, çizgi, örnek, hata, test
-    glossary.js            ~570 kelimelik sözlük + 54 düzensiz fiil + çekim çözücü
+    glossary.js            sözlük çekirdeği + çekim çözücü (-s, -ing, -ed, iyelik)
+    vocabulary.js          A1-B2 kelime dağarcığı, temalara ayrılmış
+    exercises.js           zamanlara ait ek alıştırma soruları
     basics.js              temel gramer bölümleri
   ui/
     timeline.js            zaman çizgisini SVG olarak çizer
@@ -93,8 +98,8 @@ Derleme adımı, paket yöneticisi ve dış bağımlılık **yoktur**. Dosyalar 
 ### Yeni içerik eklemek
 
 - **Örnek cümle:** `js/data/tenses.js` içinde ilgili zamanın `examples` dizisine `{ en, tr, key, note }` ekleyin. `key`, yeşil vurgulanacak yapı kelimeleridir.
-- **Kelime:** `js/data/glossary.js` içindeki uygun `add([...])` bloğuna `'ingilizce|türkçe|tür|not'` satırı ekleyin. Çekimli hâller (*-s, -ing, -ed*, iyelik, kısaltmalar) kendiliğinden çözülür.
-- **Soru:** aynı zamanın `quiz` dizisine `{ q, options, answer, why }` ekleyin; karışık moda kendiliğinden karışır.
+- **Kelime:** `js/data/vocabulary.js` içindeki uygun temaya `'ingilizce|türkçe|tür|not'` satırı ekleyin. Çekimli hâller (*-s, -ing, -ed*, iyelik, kısaltmalar) kendiliğinden çözülür. Düzensiz fiil için aynı dosyanın sonundaki `addIrregulars` listesine `'V1|V2|V3|Türkçe'` yazın.
+- **Soru:** `js/data/exercises.js` içinde ilgili zamanın dizisine `{ q, options, answer, why }` ekleyin; hem o zamanın mini testine hem karışık moda kendiliğinden girer.
 
 ## Yayına alma (GitHub Pages)
 

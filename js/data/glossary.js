@@ -313,6 +313,11 @@
   function hit(key, note, shown) {
     var d = DICT[key];
     if (!d) return null;
+    /* -s eki: isimde çoğul, fiilde 3. tekil anlamına gelir */
+    if (note && /çekimli hâl/.test(note)) {
+      if (d.pos === 'isim' || d.pos === 'özel isim') note = 'çoğul hâli (-s)';
+      else if (d.pos === 'fiil' || d.pos === 'yardımcı') note = 'geniş zaman 3. tekil: he, she, it';
+    }
     return {
       en: shown || d.en,
       base: d.en,
@@ -400,9 +405,44 @@
     return out;
   }
 
+  /* Başka veri dosyalarının sözlüğe kelime katması için:
+     KI.glossary.addWords(['word|kelime|tür|not', ...])  */
+  function addWords(list) {
+    var added = 0, updated = 0;
+    (list || []).forEach(function (row) {
+      var p = String(row).split('|');
+      var key = (p[0] || '').toLowerCase().trim();
+      if (!key) return;
+      if (DICT[key]) updated++; else added++;
+      DICT[key] = { en: p[0].trim(), tr: (p[1] || '').trim(), pos: (p[2] || '').trim(), note: (p[3] || '').trim() };
+    });
+    return { added: added, updated: updated };
+  }
+
+  /* Düzensiz fiil listesine ekleme (V1|V2|V3|Türkçe) */
+  function addIrregulars(list) {
+    (list || []).forEach(function (row) {
+      var p = String(row).split('|');
+      var base = p[0].trim(), v2 = p[1].trim(), v3 = p[2].trim(), tr = (p[3] || '').trim();
+      if (!base || VERBLIST.some(function (v) { return v.v1 === base; })) return;
+      VERBLIST.push({ v1: base, v2: v2, v3: v3, tr: tr });
+      if (!DICT[base]) DICT[base] = { en: base, tr: tr, pos: 'fiil', note: '' };
+      v2.split(',').forEach(function (x) {
+        x = x.trim().toLowerCase();
+        if (x && x !== base) FORMS[x] = { base: base, note: base + ' fiilinin 2. hâli (geçmiş)' };
+      });
+      v3.split(',').forEach(function (x) {
+        x = x.trim().toLowerCase();
+        if (x && !FORMS[x] && x !== base) FORMS[x] = { base: base, note: base + ' fiilinin 3. hâli (V3, -miş)' };
+      });
+    });
+  }
+
   KI.glossary = {
     lookup: lookup,
     search: search,
+    addWords: addWords,
+    addIrregulars: addIrregulars,
     dict: DICT,
     size: function () { return Object.keys(DICT).length; },
     irregularVerbs: VERBLIST
