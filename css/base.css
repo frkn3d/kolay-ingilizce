@@ -142,7 +142,20 @@ body {
   padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 12px);
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color .4s ease;
 }
+
+/* Her sekme aynı koyulukta ama hafifçe farklı bir tonda: Harita
+   nötr/varsayılan kalır, diğerleri zaten paletle var olan renklere
+   çok düşük oranda karışır. Koyu temada daha da düşük oranda,
+   o temaya özel tonlarla (kirlenmeyi önlemek için). */
+html[data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--terra) 8%); }
+html[data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--mustard) 8%); }
+html[data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--future) 8%); }
+
+html[data-theme="dark"][data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--past) 4%); }
+html[data-theme="dark"][data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--mustard) 4%); }
+html[data-theme="dark"][data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--future) 4%); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);

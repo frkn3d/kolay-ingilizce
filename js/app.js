@@ -72,6 +72,7 @@
     U.qsa('.tab').forEach(function (a) {
       a.classList.toggle('is-active', hit && a.getAttribute('data-route') === hit.tab);
     });
+    document.documentElement.setAttribute('data-section', hit ? hit.tab : 'harita');
 
     if (lastPath !== null && lastPath !== path) U.scrollTop();
     lastPath = path;
