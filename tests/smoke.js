@@ -27,6 +27,7 @@ var fileUrl = 'file:///' + root.split(path.sep).join('/').replace(/ /g, '%20') +
 var ROUTES = [
   '#/harita', '#/temeller', '#/alistirma', '#/sozluk',
   '#/sozluk/kelimeler', '#/sozluk/hikayeler', '#/sozluk/hikayeler/ay-mi-gunes-mi',
+  '#/sozluk/hikayeler/keloglan-pasa',
   '#/karsilastir', '#/karsilastir/past-simple-present-perfect',
   '#/zaman/present-simple', '#/zaman/future-perfect-continuous'
 ].concat(['karisik', 'zorlandiklarim', 'tekrar', 'cumle', 'cizgi', 'bosluk', 'kur', 'dikte', 'kelime', 'fiil']

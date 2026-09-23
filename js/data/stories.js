@@ -142,6 +142,165 @@
     ]
   });
 
+  S.push({
+    id: 'aydan-yogurt',
+    cat: 'nasreddin',
+    title: 'Yogurt from the Moon',
+    tr: 'Ay’dan Yoğurt',
+    summary: 'Hoca, gölde yüzen ayın yansımasını yoğurt sanıp yakalamaya çalışır.',
+    sentences: [
+      { en: 'One night, Hodja was walking beside a quiet lake.', tr: 'Bir gece Hoca, sessiz bir gölün kenarında yürüyordu.' },
+      { en: 'He looked down and saw a round, white shape floating on the water.', tr: 'Aşağı baktı ve suda yüzen yuvarlak, beyaz bir şekil gördü.' },
+      { en: 'That looks like a big bowl of yogurt! he said to himself.', tr: 'Bu büyük bir kase yoğurda benziyor! dedi kendi kendine.' },
+      { en: 'He ran home and brought back a long rake to pull it out of the water.', tr: 'Eve koşup onu sudan çıkarmak için uzun bir tırmık getirdi.' },
+      { en: 'He reached down carefully and pulled the rake through the water again and again.', tr: 'Dikkatlice eğildi ve tırmığı suda tekrar tekrar çekti.' },
+      { en: 'Suddenly, he lost his balance and fell into the lake with a splash.', tr: 'Birden dengesini kaybetti ve bir çığlıkla göle düştü.' },
+      { en: 'He climbed out, wet and cold, and looked up at the sky.', tr: 'Islak ve üşümüş bir şekilde çıktı ve gökyüzüne baktı.' },
+      { en: 'There, he saw the moon shining brightly above him.', tr: 'Orada, ayın tepesinde parlak bir şekilde parladığını gördü.' },
+      { en: 'Ah, said Hodja, so that is where you belong. I nearly drowned trying to catch you.', tr: 'Ah, dedi Hoca, demek ait olduğun yer orası. Seni yakalamaya çalışırken az kalsın boğuluyordum.' }
+    ]
+  });
+
+  S.push({
+    id: 'kurkum-ye',
+    cat: 'nasreddin',
+    title: 'Eat, My Coat, Eat!',
+    tr: 'Ye Kürküm Ye!',
+    summary: 'Hoca, eski kıyafetiyle görmezden gelindiği bir yemeğe bu kez kürküyle gelir.',
+    sentences: [
+      { en: 'One evening, Hodja was invited to a rich man’s dinner party.', tr: 'Bir akşam Hoca, zengin bir adamın yemek davetine çağrıldı.' },
+      { en: 'He arrived wearing his old, simple coat, and no one greeted him warmly.', tr: 'Eski, sade paltosuyla geldi ve kimse onu sıcak karşılamadı.' },
+      { en: 'The servants gave him a seat far from the table and ignored him all evening.', tr: 'Hizmetkârlar ona masadan uzak bir yer verdi ve bütün akşam onu görmezden geldi.' },
+      { en: 'Hodja quietly went home, put on his best fur coat, and returned to the party.', tr: 'Hoca sessizce eve gitti, en güzel kürkünü giydi ve partiye geri döndü.' },
+      { en: 'This time, everyone stood up and welcomed him with great respect.', tr: 'Bu sefer herkes ayağa kalktı ve onu büyük bir saygıyla karşıladı.' },
+      { en: 'They gave him the best seat and served him the finest food first.', tr: 'Ona en iyi yeri verdiler ve önce en güzel yemekleri sundular.' },
+      { en: 'Hodja took a piece of meat and pushed it into his coat sleeve.', tr: 'Hoca bir parça et alıp kürkünün koluna soktu.' },
+      { en: 'Eat, my coat, eat! he said loudly.', tr: 'Ye kürküm, ye! dedi yüksek sesle.' },
+      { en: 'The other guests were confused and asked him why he was feeding his coat.', tr: 'Diğer misafirler şaşırdı ve neden kürkünü beslediğini sordu.' },
+      { en: 'It seems this dinner was invited for my coat, not for me, said Hodja, so my coat should enjoy it.', tr: 'Görünüşe göre bu yemeğe ben değil kürküm davet edilmiş, dedi Hoca, o zaman yesin.' }
+    ]
+  });
+
+  S.push({
+    id: 'on-uc-esek',
+    cat: 'nasreddin',
+    title: 'The Thirteenth Donkey',
+    tr: 'On Üçüncü Eşek',
+    summary: 'Hoca eşeklerini sayarken, üzerinde oturduğu eşeği saymayı unutur.',
+    sentences: [
+      { en: 'One day, Hodja was riding one donkey and leading twelve others behind him.', tr: 'Bir gün Hoca bir eşeğe biniyor, arkasında on iki tanesini daha götürüyordu.' },
+      { en: 'Before crossing a river, he decided to count his donkeys.', tr: 'Bir nehri geçmeden önce eşeklerini saymaya karar verdi.' },
+      { en: 'He counted the twelve donkeys walking beside him, but forgot to count the one under him.', tr: 'Yanında yürüyen on iki eşeği saydı ama altındakini saymayı unuttu.' },
+      { en: 'Only twelve! he cried. I have lost one of my donkeys!', tr: 'Sadece on iki! diye bağırdı. Eşeklerimden birini kaybettim!' },
+      { en: 'He searched everywhere along the road, but he could not find the missing donkey.', tr: 'Yol boyunca her yeri aradı ama kayıp eşeği bulamadı.' },
+      { en: 'A young boy saw him searching and asked what was wrong.', tr: 'Genç bir çocuk onu ararken gördü ve neyin yanlış olduğunu sordu.' },
+      { en: 'Hodja explained that he had thirteen donkeys but could only count twelve.', tr: 'Hoca, on üç eşeği olduğunu ama sadece on iki tanesini sayabildiğini anlattı.' },
+      { en: 'The boy laughed and said, Hodja, you are sitting on the thirteenth one!', tr: 'Çocuk güldü ve dedi ki, Hoca, on üçüncüsünün üstünde oturuyorsun!' },
+      { en: 'Hodja looked down, laughed at himself, and rode home with all thirteen donkeys.', tr: 'Hoca aşağı baktı, kendine güldü ve on üç eşeğiyle evine döndü.' }
+    ]
+  });
+
+  S.push({
+    id: 'esek-evde-yok',
+    cat: 'nasreddin',
+    title: 'The Donkey Is Not Home',
+    tr: 'Eşek Evde Yok',
+    summary: 'Hoca, eşeğini ödünç vermemek için yalan söyler ama eşek kendini ele verir.',
+    sentences: [
+      { en: 'A neighbour came to Hodja’s house and asked to borrow his donkey for the day.', tr: 'Bir komşu, Hoca’nın evine gelip eşeğini bir günlüğüne ödünç istedi.' },
+      { en: 'Hodja did not want to lend it, so he said, I am sorry, the donkey is not home today.', tr: 'Hoca ödünç vermek istemedi ve dedi ki, üzgünüm, eşek bugün evde değil.' },
+      { en: 'At that exact moment, the donkey began to bray loudly from behind the house.', tr: 'Tam o anda eşek, evin arkasından yüksek sesle anırmaya başladı.' },
+      { en: 'The neighbour looked confused and said, but Hodja, I can hear your donkey right there!', tr: 'Komşu şaşırdı ve dedi ki, ama Hoca, eşeğini tam orada duyabiliyorum!' },
+      { en: 'Hodja became a little angry and said, who do you believe, an old man like me or a donkey?', tr: 'Hoca biraz sinirlendi ve dedi ki, benim gibi yaşlı bir adama mı yoksa bir eşeğe mi inanıyorsun?' },
+      { en: 'The neighbour did not know what to say and walked away, shaking his head.', tr: 'Komşu ne diyeceğini bilemedi ve başını sallayarak uzaklaştı.' },
+      { en: 'Later, Hodja’s friends asked him why he had said such a strange thing.', tr: 'Daha sonra Hoca’nın arkadaşları neden böyle garip bir şey söylediğini sordu.' },
+      { en: 'A man who tells one lie must be ready to defend it with another, said Hodja with a smile.', tr: 'Bir yalan söyleyen adam, onu başka bir yalanla savunmaya hazır olmalı, dedi Hoca gülümseyerek.' }
+    ]
+  });
+
+  S.push({
+    id: 'ne-diyecegimi-biliyor-musunuz',
+    cat: 'nasreddin',
+    title: 'Do You Know What I Am Going to Say?',
+    tr: 'Ne Diyeceğimi Biliyor musunuz?',
+    summary: 'Hoca, camide üç farklı cuma günü aynı soruyu sorar ve her seferinde farklı bir cevap verir.',
+    sentences: [
+      { en: 'One Friday, Hodja was asked to give a sermon at the mosque.', tr: 'Bir cuma günü Hoca’dan camide bir vaaz vermesi istendi.' },
+      { en: 'He stood up and asked the people, do you know what I am going to say?', tr: 'Ayağa kalktı ve halka sordu, ne diyeceğimi biliyor musunuz?' },
+      { en: 'No, we do not know, answered everyone together.', tr: 'Hayır, bilmiyoruz, diye cevap verdi herkes birlikte.' },
+      { en: 'Well then, said Hodja, there is no point talking to people who understand nothing.', tr: 'O zaman, dedi Hoca, hiçbir şey anlamayan insanlarla konuşmanın anlamı yok.' },
+      { en: 'He stepped down and left without saying another word.', tr: 'Aşağı indi ve tek kelime etmeden ayrıldı.' },
+      { en: 'The next Friday, he was asked to try again, and he asked the same question.', tr: 'Ertesi cuma tekrar denemesi istendi ve aynı soruyu sordu.' },
+      { en: 'This time, everyone answered, yes, we know what you are going to say!', tr: 'Bu sefer herkes cevap verdi, evet, ne diyeceğini biliyoruz!' },
+      { en: 'Well then, said Hodja, there is no need for me to say it at all.', tr: 'O zaman, dedi Hoca, onu hiç söylememe gerek yok.' },
+      { en: 'He stepped down again, and the people were left even more confused.', tr: 'Yine aşağı indi ve insanlar daha da şaşkın kaldı.' },
+      { en: 'On the third Friday, half of the people said yes, and half said no.', tr: 'Üçüncü cuma, insanların yarısı evet dedi, yarısı hayır dedi.' },
+      { en: 'Well then, said Hodja calmly, let those who know tell those who do not.', tr: 'O zaman, dedi Hoca sakince, bilenler bilmeyenlere anlatsın.' },
+      { en: 'And with that, he left the mosque for the third time.', tr: 'Ve böylece camiden üçüncü kez ayrıldı.' }
+    ]
+  });
+
+  S.push({
+    id: 'keloglan-dev-tasi',
+    cat: 'halk',
+    title: 'Keloğlan and the Giant’s Stone',
+    tr: 'Keloğlan ve Devin Taşı',
+    summary: 'Keloğlan, köyü rahatsız eden bir devi bir parça peynirle akıllıca korkutur.',
+    sentences: [
+      { en: 'Long ago, a giant lived in the mountains near Keloğlan’s village.', tr: 'Uzun zaman önce, Keloğlan’ın köyünün yakınındaki dağlarda bir dev yaşardı.' },
+      { en: 'The giant often bothered the villagers and demanded food from them.', tr: 'Dev sık sık köylüleri rahatsız eder ve onlardan yiyecek isterdi.' },
+      { en: 'One day, Keloğlan decided to visit the giant and put an end to the trouble.', tr: 'Bir gün Keloğlan, devi ziyaret edip bu soruna son vermeye karar verdi.' },
+      { en: 'He hid a piece of soft white cheese in his pocket before he left.', tr: 'Gitmeden önce cebine bir parça yumuşak beyaz peynir sakladı.' },
+      { en: 'When Keloğlan arrived, the giant picked up a small stone and squeezed it hard.', tr: 'Keloğlan vardığında dev küçük bir taş alıp sertçe sıktı.' },
+      { en: 'Water dripped from the stone, and the giant said, look how strong I am!', tr: 'Taştan su damladı ve dev dedi ki, bak ne kadar güçlüyüm!' },
+      { en: 'Keloğlan calmly took the cheese from his pocket and squeezed it in his hand.', tr: 'Keloğlan sakince cebinden peyniri çıkardı ve elinde sıktı.' },
+      { en: 'Water and milk dripped from the cheese, and the giant’s eyes grew wide with fear.', tr: 'Peynirden su ve süt damladı, devin gözleri korkuyla büyüdü.' },
+      { en: 'If a young man like me is this strong, thought the giant, I should leave this village alone.', tr: 'Benim gibi biri bu kadar güçlüyse, diye düşündü dev, bu köyü rahat bırakmalıyım.' },
+      { en: 'From that day on, the giant never bothered the villagers again.', tr: 'O günden sonra dev, köylüleri bir daha hiç rahatsız etmedi.' }
+    ]
+  });
+
+  S.push({
+    id: 'keloglan-konusan-balik',
+    cat: 'halk',
+    title: 'Keloğlan and the Talking Fish',
+    tr: 'Keloğlan ve Konuşan Balık',
+    summary: 'Keloğlan’ın küçük bir balığa gösterdiği iyilik, köyünü kuraklıktan kurtarır.',
+    sentences: [
+      { en: 'One morning, Keloğlan went to the river to catch fish for his poor mother.', tr: 'Bir sabah Keloğlan, fakir annesi için balık tutmaya nehre gitti.' },
+      { en: 'After a long wait, he caught a small golden fish in his net.', tr: 'Uzun bir bekleyişten sonra ağına küçük altın bir balık takıldı.' },
+      { en: 'To his surprise, the fish spoke to him in a soft, clear voice.', tr: 'Şaşırtıcı bir şekilde balık ona yumuşak, net bir sesle konuştu.' },
+      { en: 'Please let me go, said the fish, and I will help you when you need it most.', tr: 'Lütfen beni bırak, dedi balık, en çok ihtiyacın olduğunda sana yardım edeceğim.' },
+      { en: 'Keloğlan felt sorry for the little fish and gently placed it back in the water.', tr: 'Keloğlan küçük balığa acıdı ve onu nazikçe suya geri bıraktı.' },
+      { en: 'He did not ask for gold or treasure; he simply wanted to help.', tr: 'Altın ya da hazine istemedi; sadece yardım etmek istedi.' },
+      { en: 'Years later, a terrible drought came, and the village river dried up completely.', tr: 'Yıllar sonra korkunç bir kuraklık geldi ve köyün nehri tamamen kurudu.' },
+      { en: 'Keloğlan sat sadly by the dry riverbed, remembering the golden fish.', tr: 'Keloğlan kuru nehir yatağının yanında üzgün bir şekilde oturdu, altın balığı hatırladı.' },
+      { en: 'Suddenly, the same fish appeared in a small pool of water and spoke to him again.', tr: 'Birden aynı balık küçük bir su birikintisinde belirdi ve ona tekrar konuştu.' },
+      { en: 'Because you were kind to me, said the fish, I will show you where fresh water flows underground.', tr: 'Bana iyi davrandığın için, dedi balık, sana yer altında temiz suyun nereden aktığını göstereceğim.' },
+      { en: 'Keloğlan followed the fish’s directions and found a spring that saved the whole village.', tr: 'Keloğlan balığın gösterdiği yönü izledi ve bütün köyü kurtaran bir kaynak buldu.' }
+    ]
+  });
+
+  S.push({
+    id: 'keloglan-pasa',
+    cat: 'halk',
+    title: 'Keloğlan Outwits the Pasha',
+    tr: 'Keloğlan Paşayı Alt Ediyor',
+    summary: 'Kibirli bir paşa Keloğlan’ı küçümser, ama akıllı bir cevapla haksız çıkar.',
+    sentences: [
+      { en: 'A proud pasha once visited Keloğlan’s village and mocked the poor villagers.', tr: 'Kibirli bir paşa bir keresinde Keloğlan’ın köyünü ziyaret etti ve fakir köylülerle alay etti.' },
+      { en: 'He announced a contest: whoever could answer his riddle would receive a bag of silver.', tr: 'Bir yarışma duyurdu: bilmecesini kim cevaplarsa bir torba gümüş kazanacaktı.' },
+      { en: 'Many clever men tried and failed to answer the pasha’s difficult riddle.', tr: 'Birçok zeki adam denedi ve paşanın zor bilmecesini cevaplayamadı.' },
+      { en: 'Keloğlan, wearing his simple, worn clothes, stepped forward to try.', tr: 'Sade, eskimiş kıyafetleriyle Keloğlan, denemek için öne çıktı.' },
+      { en: 'The pasha laughed and said, what could a poor, bald boy like you possibly know?', tr: 'Paşa güldü ve dedi ki, senin gibi fakir, kel bir çocuk ne bilebilir ki?' },
+      { en: 'Keloğlan smiled and said, a full sack stands quietly, but an empty one makes a lot of noise.', tr: 'Keloğlan gülümsedi ve dedi ki, dolu bir çuval sessizce durur, ama boş bir çuval çok gürültü yapar.' },
+      { en: 'The pasha did not understand, so Keloğlan explained, a wise man listens more than he speaks.', tr: 'Paşa anlamadı, bunun üzerine Keloğlan açıkladı, akıllı bir adam konuşmaktan çok dinler.' },
+      { en: 'But a foolish one, like you today, talks and mocks without thinking, he added calmly.', tr: 'Ama bugünkü gibi aptal biri, düşünmeden konuşur ve alay eder, diye ekledi sakince.' },
+      { en: 'The villagers laughed, and even the pasha had to admit that Keloğlan was right.', tr: 'Köylüler güldü ve paşa bile Keloğlan’ın haklı olduğunu kabul etmek zorunda kaldı.' },
+      { en: 'Ashamed but fair, the pasha gave Keloğlan the bag of silver and left the village quietly.', tr: 'Utanmış ama adil bir şekilde paşa, Keloğlan’a gümüş torbasını verdi ve köyden sessizce ayrıldı.' }
+    ]
+  });
+
   /* ---- hikayelerde geçen, sözlükte eksik kalan kelimeler ---- */
   KI.glossary.addWords([
   'cauldron|kazan|isim', 'birth|doğum (give birth: doğurmak)|isim', 'sorry|üzgün|sıfat',
@@ -151,7 +310,23 @@
   'whoever|her kim ki|zamir', 'wisest|en bilge|sıfat', 'gold|altın|isim',
   'messenger|haberci|isim', 'heavier|daha ağır|sıfat', 'feather|tüy|isim',
   'step|adım atmak, adım|fiil', 'forward|ileri, öne|zarf', 'nothing|hiçbir şey|zamir',
-  'else|başka|zarf', 'happily|mutlu bir şekilde|zarf', 'keloğlan|Keloğlan (halk hikayesi kahramanı)|özel isim'
+  'else|başka|zarf', 'happily|mutlu bir şekilde|zarf', 'keloğlan|Keloğlan (halk hikayesi kahramanı)|özel isim',
+
+  'beside|yanında|edat', 'float|yüzmek (su üstünde)|fiil', 'himself|kendisi (erkek)|zamir',
+  'rake|tırmık|isim', 'balance|denge|isim', 'splash|şapırtı (su sesi)|isim',
+  'brightly|parlak bir şekilde|zarf', 'ah|ah|ünlem', 'drown|boğulmak|fiil',
+  'party|parti, davet|isim', 'warmly|sıcak bir şekilde|zarf', 'servant|hizmetkâr|isim',
+  'seat|koltuk, yer|isim', 'far|uzak|sıfat', 'fur|kürk|isim',
+  'welcome|karşılamak, hoş geldin|fiil', 'great|büyük, harika|sıfat', 'finest|en güzel, en iyi|sıfat',
+  'behind|arkasında|edat', 'everywhere|her yerde|zarf', 'thirteen|on üç|sayı',
+  'thirteenth|on üçüncü|sıfat', 'bray|anırmak|fiil', 'third|üçüncü|sayı',
+  'bother|rahatsız etmek|fiil', 'trouble|sorun, dert|isim', 'squeeze|sıkmak|fiil',
+  'drip|damlamak|fiil', 'clear|net, açık|sıfat', 'gently|nazikçe|zarf',
+  'treasure|hazine|isim', 'sadly|üzgün bir şekilde|zarf', 'riverbed|nehir yatağı|isim',
+  'pool|su birikintisi, havuz|isim', 'flow|akmak|fiil', 'underground|yer altında|zarf',
+  'pasha|paşa|isim', 'mock|alay etmek|fiil', 'contest|yarışma|isim',
+  'riddle|bilmece|isim', 'bald|kel|sıfat', 'sack|çuval|isim',
+  'foolish|aptal, akılsız|sıfat'
   ]);
 
   KI.stories = S;
