@@ -22,7 +22,7 @@
 
   function tenseCard(t) {
     var card = U.el('a', {
-      class: 'tcard tcard--' + t.group,
+      class: 'tcard tcard--' + t.group + ' reveal',
       href: '#/zaman/' + t.id,
       'data-sfx': 'nav',
       title: t.en + ' — ' + t.tr
@@ -67,7 +67,7 @@
     wrap.appendChild(timebar);
 
     KI.tenses.aspects.forEach(function (a) {
-      wrap.appendChild(U.el('div', { class: 'grid-map__aspect', text: a.tr, title: a.hint }));
+      wrap.appendChild(U.el('div', { class: 'grid-map__aspect reveal', text: a.tr, title: a.hint }));
       var row = U.el('div', { class: 'grid-map__row' });
       KI.tenses.groups.forEach(function (g) {
         var t = KI.tenses.byCell(g.id, a.id);
@@ -80,7 +80,7 @@
 
   /* "Nasıl okunur?" — kapalı gelen açıklama kutusu */
   function howTo() {
-    var d = U.el('details', { class: 'disclose' });
+    var d = U.el('details', { class: 'disclose reveal' });
     d.appendChild(U.el('summary', { html: '<span>Haritayı nasıl okumalı?</span>' }));
     var body = U.el('div', { class: 'disclose__body' });
 
@@ -135,7 +135,7 @@
     var lastT = last ? KI.tenses.get(last) : null;
     var done = KI.store.learnedCount();
 
-    var hero = U.el('section', { class: 'hero' });
+    var hero = U.el('section', { class: 'hero reveal' });
     hero.appendChild(U.el('h1', { text: 'Her şey zamanın neresinde?' }));
     hero.appendChild(U.el('p', { text: 'İngilizcede cümle kurmadan önce tek bir soru sorulur. 12 zamanın hepsi aşağıdaki haritada, yerli yerinde.' }));
     hero.appendChild(progressBox());
@@ -151,7 +151,7 @@
     frag.appendChild(hero);
 
     /* --- harita --- */
-    var head = U.el('div', { class: 'maphead' }, [
+    var head = U.el('div', { class: 'maphead reveal' }, [
       U.el('h2', { text: 'Zaman Haritası' }),
       U.el('span', { class: 'maphead__num', text: done + ' / ' + KI.tenses.list.length + ' öğrenildi' })
     ]);
@@ -160,7 +160,7 @@
     frag.appendChild(grid());
 
     /* --- kısa yollar --- */
-    var quick = U.el('div', { class: 'quicklinks' });
+    var quick = U.el('div', { class: 'quicklinks reveal' });
     [
       { href: '#/alistirma', ico: 'target', t: 'Alıştırma', d: '10 mod' },
       { href: '#/sozluk', ico: 'book', t: 'Sözlük', d: KI.glossary.size() + ' kelime' }
@@ -175,7 +175,31 @@
     });
     frag.appendChild(quick);
 
+    setTimeout(setupReveal, 0);
     return frag;
+  }
+
+  /* Ekrana girene kadar hiçbir şey oynamasın diye IntersectionObserver
+     kullanılır: her .reveal elemanı yalnız görünüşe girdiğinde belirir,
+     sonra bir daha izlenmez. view() bir DocumentFragment döndürdüğü için
+     bu, fragment DOM'a eklendikten hemen sonra (setTimeout 0) çalıştırılır. */
+  function setupReveal() {
+    var view = document.getElementById('view');
+    if (!view) return;
+    var els = U.qsa('.reveal', view);
+    if (!els.length) return;
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('reveal--in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('reveal--in');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -30px 0px' });
+    els.forEach(function (el) { io.observe(el); });
   }
 
   KI.viewHome = { render: view, title: 'Zaman Haritası' };

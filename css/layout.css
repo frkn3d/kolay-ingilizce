@@ -98,7 +98,7 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
   box-shadow: var(--shadow-hard);
   margin-bottom: 18px;
 }
-.hero h1 { color: var(--hero-ink); margin-bottom: .3em; }
+.hero h1 { color: var(--hero-ink); margin-bottom: .3em; font-size: clamp(1.1rem, 3vw, 1.5rem); }
 
 /* Hero üzerindeki düğmeler: koyu temada da zeminden ayrılsın */
 .hero .btn {
@@ -115,7 +115,7 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
   font-weight: 700;
 }
 .hero .btn--mustard:hover { background: #e8b257; }
-.hero p { color: rgba(251, 246, 233, .85); margin-bottom: .8em; font-size: .96rem; }
+.hero p { color: rgba(251, 246, 233, .85); margin-bottom: .7em; font-size: .82rem; }
 .hero .progress__bar { background: rgba(0,0,0,.28); border-color: rgba(251,246,233,.28); }
 .hero .progress__num { color: rgba(251,246,233,.85); }
 
