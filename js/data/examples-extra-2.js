@@ -96,7 +96,10 @@
   KI.glossary.addWords([
   'leaking|sızdıran, akan|sıfat', 'electricity|elektrik|isim', 'lot|çok, bir sürü|isim',
   'list|liste|isim', 'cartoon|çizgi film|isim', 'outside|dışarı, dışarıda|zarf',
-  'carry|taşımak|fiil', 'bag|çanta, torba|isim'
+  'carry|taşımak|fiil', 'bag|çanta, torba|isim',
+  'there|orada, oraya|zarf|there is/are: var', 'use|kullanmak|fiil',
+  'fifty|elli|sayı', 'sixty|altmış|sayı', 'seventy|yetmiş|sayı',
+  'eighty|seksen|sayı', 'ninety|doksan|sayı'
   ]);
 
   /* ---- her zamanın examples dizisine ekle ---- */

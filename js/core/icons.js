@@ -85,6 +85,9 @@ window.KI = window.KI || {};
 
     'help-circle': '<circle cx="12" cy="12" r="8.6"/><path d="M9.5 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.5-1.1.9-1.1 1.9"/><circle cx="12" cy="16.6" r=".15" fill="currentColor" stroke="none"/>',
 
+    key: '<circle cx="7" cy="12" r="4"/><line x1="11" y1="12" x2="21" y2="12"/><line x1="17" y1="12" x2="17" y2="16"/><line x1="20.5" y1="12" x2="20.5" y2="15"/>',
+    history: '<path d="M3.5 12a8.5 8.5 0 1 0 2.8-6.3"/><polyline points="3.2 4.5 3.5 9 8 8.3"/><polyline points="12 8 12 12.3 15.2 14.2"/>',
+
     calendar: '<rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><line x1="3.2" y1="9.3" x2="20.8" y2="9.3"/><line x1="7.8" y1="3" x2="7.8" y2="7"/><line x1="16.2" y1="3" x2="16.2" y2="7"/><circle cx="8.3" cy="13.6" r="1.05" fill="currentColor" stroke="none"/><circle cx="12" cy="13.6" r="1.05" fill="currentColor" stroke="none"/>',
 
     eye: '<path d="M2 12C4 7 8 4.5 12 4.5S20 7 22 12C20 17 16 19.5 12 19.5S4 17 2 12Z"/><circle cx="12" cy="12" r="3"/>',

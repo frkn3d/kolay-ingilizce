@@ -188,5 +188,60 @@
     ]
   });
 
+  B.push({
+    id: 'modal',
+    icon: KI.icons.html('key'),
+    title: 'Modal Fiiller: can, must, should, may',
+    intro: 'Zamanlar bir işin <b>ne zaman</b> olduğunu anlatır. Modal fiiller ise bir işin ne kadar <b>mümkün, zorunlu ya da doğru</b> olduğunu anlatır. İkisi birlikte çalışır: <b>I can swim.</b> (şimdiki yetenek) — <b>I could swim when I was young.</b> (geçmişteki yetenek).',
+    blocks: [
+      { t: 'callout', kind: 'tip', title: 'Altın kural', text: 'Modal fiilden sonra her zaman <b>yalın fiil</b> gelir, "to" almaz: <b>can go</b>, <b>must go</b> — <i>to go</i> ya da <i>going</i> değil.' },
+      { t: 'table', head: ['Modal', 'Anlamı', 'Örnek'], rows: [
+        ['<b>can</b>', 'yetenek, izin (şimdi)', 'I <b>can</b> speak three languages.'],
+        ['<b>could</b>', 'geçmişte yetenek, kibar rica', '<b>Could</b> you open the window, please?'],
+        ['<b>must</b>', 'güçlü zorunluluk (kendi kararı)', 'I <b>must</b> finish this report today.'],
+        ['<b>have to</b>', 'dışarıdan gelen zorunluluk', 'We <b>have to</b> wear a uniform at school.'],
+        ['<b>should</b>', 'tavsiye, öneri', 'You <b>should</b> see a doctor.'],
+        ['<b>may / might</b>', 'zayıf olasılık', 'It <b>might</b> rain this afternoon.']
+      ] },
+      { t: 'callout', kind: 'warn', title: 'En çok karıştırılan çift', text: '<b>mustn’t</b> (yapma, yasak) ile <b>don’t have to</b> (yapmana gerek yok, seçim senin) birbirinin zıttı gibi görünür ama farklıdır: <b>You mustn’t park here.</b> (Burada park etmek yasak.) <b>You don’t have to come tomorrow.</b> (Yarın gelmene gerek yok, istersen gelme.)' },
+      { t: 'examples', items: [
+        { en: 'My father can still carry heavy bags at seventy.', tr: 'Babam yetmişinde hâlâ ağır çantalar taşıyabiliyor.' },
+        { en: 'You must wash your hands before dinner.', tr: 'Akşam yemeğinden önce ellerini yıkamalısın.' },
+        { en: 'You should drink more water in summer.', tr: 'Yazın daha çok su içmelisin.' },
+        { en: 'It may snow in the mountains tonight.', tr: 'Bu gece dağlarda kar yağabilir.' }
+      ] },
+      { t: 'list', items: [
+        '<b>can’t</b> kesin bir şüpheyi de anlatır: <i>That can’t be true.</i> (Bu doğru olamaz.)',
+        '<b>could</b> zayıf bir olasılık için de kullanılır: <i>She could be at work.</i> (İşte olabilir.)',
+        '<b>had better</b>, should’den daha güçlü bir uyarıdır: <i>You had better hurry.</i> (Acele etsen iyi olur.)'
+      ] }
+    ]
+  });
+
+  B.push({
+    id: 'used-to',
+    icon: KI.icons.html('history'),
+    title: '"used to": Eskiden Öyleydi',
+    intro: 'Geçmişte alışkanlık olan ama artık doğru olmayan bir şeyi anlatır. Present Simple ile karışır çünkü ikisi de "hep böyle" hissi verir — farkı şu: biri geçmişte kaldı, artık geçerli değil.',
+    blocks: [
+      { t: 'table', head: ['Kalıp', 'Örnek'], rows: [
+        ['+ &nbsp; used to + yalın fiil', 'I <b>used to</b> live in a village.'],
+        ['− &nbsp; didn’t use to + yalın fiil', 'I <b>didn’t use to</b> like tea.'],
+        ['? &nbsp; Did + özne + use to?', '<b>Did</b> you <b>use to</b> play an instrument?']
+      ] },
+      { t: 'callout', kind: 'warn', title: 'Dikkat', text: 'Olumsuz ve soruda <b>used</b> değil <b>use</b> yazılır: <i>didn’t use to</i>, <i>Did you use to...?</i> — sondaki -d düşer.' },
+      { t: 'examples', items: [
+        { en: 'We used to live in a small village near the sea.', tr: 'Eskiden deniz kenarındaki küçük bir köyde yaşardık.' },
+        { en: 'I used to hate vegetables, but now I love them.', tr: 'Eskiden sebzelerden nefret ederdim, ama şimdi seviyorum.' },
+        { en: 'There didn’t use to be a mosque on this street.', tr: 'Bu sokakta eskiden bir cami yoktu.' }
+      ] },
+      { t: 'list', items: [
+        '<b>used to</b>: geçmişte süren/tekrar eden ama artık bitmiş bir durum. <i>I used to smoke.</i>',
+        '<b>Present Simple</b>: şu anki alışkanlık. <i>I drink tea every morning.</i>',
+        '<b>Past Simple</b>: geçmişte tek bir olay, tekrar vurgusu yok. <i>I drank tea yesterday.</i>'
+      ] }
+    ]
+  });
+
   KI.basics = B;
 })(window.KI);

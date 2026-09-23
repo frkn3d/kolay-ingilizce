@@ -59,6 +59,20 @@ KI.tenses.list.forEach(function (t) {
 });
 Object.keys(missing).forEach(function (w) { fail('sözlükte yok: "' + w + '" (' + missing[w] + ' örnekte geçiyor)'); });
 
+/* ---- Temeller bölümlerindeki örnek cümleler ---- */
+KI.basics.forEach(function (b) {
+  (b.blocks || []).forEach(function (blk) {
+    if (blk.t !== 'examples') return;
+    (blk.items || []).forEach(function (ex) {
+      ex.en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
+        var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
+        if (!clean) return;
+        if (!KI.glossary.lookup(clean)) fail('basics/' + b.id + ': sözlükte yok "' + clean + '" ("' + ex.en + '")');
+      });
+    });
+  });
+});
+
 /* ---- karşılaştırma sayfalarındaki eşleştirilmiş örnekler ---- */
 KI.compare.list.forEach(function (c) {
   (c.pairs || []).forEach(function (p, i) {

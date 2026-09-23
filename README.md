@@ -20,13 +20,15 @@
 | 📚 **3.000+ kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, hukuk, bilim, sanat, spor, din, askeriye ve daha fazlası; akademik sıfat/zarf/fiiller; bağlaçlar (*however, although, therefore*); 50+ öbek fiil (*give up, look after*); deyimler; 99 düzensiz fiil. |
 | 🔊 **Sesli okuma** | Cihazın kendi konuşma motoruyla (Web Speech API). **Hiçbir internet servisi, hiçbir API anahtarı kullanılmaz.** Normal ve yavaş okuma, ayarlanabilir hız ve ses seçimi. |
 | ⭐ **Kelime defteri** | Beğenilen kelimeler kaydedilir, topluca dinlenir. Sözlük türe göre süzülebilir (isim, fiil, sıfat, zarf, öbek fiil, düzensiz fiil, defterim) ve her kelime kartında o kelimenin geçtiği bir örnek cümle gösterilir. |
-| 🎯 **9 alıştırma modu** | Karışık · Zorlandıklarım · Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · Cümleyi kur · Dinle ve yaz · Kelime bilgisi · Düzensiz fiiller. Tur uzunluğu 5/10/20 soru seçilebilir. |
+| 🎯 **10 alıştırma modu** | Karışık · Zorlandıklarım · Bugünkü Tekrar · Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · Cümleyi kur · Dinle ve yaz · Kelime bilgisi · Düzensiz fiiller. Tur uzunluğu 5/10/20 soru seçilebilir. |
 | 🩹 **Zorlandıklarım** | Yanlış yaptığın sorular ve karıştırdığın kelimeler kaydedilir; ayrı bir modda yalnız onlar sorulur. Doğru bildiğinde listeden düşer. |
 | 🎧 **Dinle ve yaz (dikte)** | Cümle cihazın sesiyle okunur, sen yazarsın; sonra kelime kelime karşılaştırılır. |
 | ↔ **Karışan zamanlar** | Türkçe konuşanların en çok karıştırdığı 6 çift yan yana: iki zaman çizgisi, ne zaman hangisi tablosu, aynı durumun iki cümlesi ve ayırt etme testi. |
 | 🧩 **Cümle kurma** | Türkçesi verilir, kelimelere dokunarak İngilizce cümleyi sen dizersin; yanlışsa doğru sıra gösterilir ve okunur. |
 | ♿ **Okunaklılık** | Açık ve koyu temanın tamamı WCAG kontrast ölçümünden geçirildi; her metin en az 4.5:1 oranında. Ayarlardan yazı boyutu ve animasyon azaltma seçilebilir. |
-| 🧱 **Temeller bölümü** | Cümle sırası, zamirler, am/is/are, have/has, a/an/the, çoğul, ekler, 54 düzensiz fiil tablosu, soru kelimeleri, will–going to farkı. |
+| 🧱 **Temeller bölümü** | Cümle sırası, zamirler, am/is/are, have/has, a/an/the, çoğul, ekler, sıklığa göre ayrılmış düzensiz fiil tablosu, soru kelimeleri, will–going to farkı, modal fiiller (can/must/should/may) ve "used to". |
+| 🔁 **Aralıklı tekrar** | Kelime defterine eklenen her kelime bir Leitner kutusuna girer; "Bugünkü Tekrar" modu yalnız tekrar zamanı gelmiş kelimeleri sorar, doğru bildikçe aralık açılır. |
+| 🎓 **Öğrendiğim zamanlardan sor** | Ayarlardan açılınca tüm soru üreticileri yalnız "Öğrendim" işaretlediğin zamanlardan soru üretir. |
 | 🎨 **Retro yeşil tasarım** | Parşömen zemin, kalın çerçeveler, sert gölgeler; açık ve koyu tema. |
 | 🔔 **Kısık ses efektleri** | Tüm tıklama ve doğru/yanlış sesleri tarayıcıda sentezlenir (Web Audio) — tek bir ses dosyası bile indirilmez. |
 | 📱 **Mobil uyumlu** | Telefonda alt sekme çubuğu, masaüstünde üst menü. Ana ekrana eklenebilir (PWA manifest). |
@@ -132,7 +134,7 @@ Depoda bulunan `.nojekyll` dosyası, Pages'in dosyaları olduğu gibi yayımlama
 
 - [x] Dinleyip yazma (dikte) alıştırması
 - [x] Zamanları karşılaştıran ikili sayfalar (*Past Simple ↔ Present Perfect*)
-- [ ] Günlük tekrar (aralıklı tekrar) ile kelime defteri
+- [x] Günlük tekrar (aralıklı tekrar) ile kelime defteri
 - [ ] Android/iOS paketi (Capacitor ile aynı kaynak koddan)
 
 ## Lisans
