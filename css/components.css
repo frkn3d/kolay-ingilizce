@@ -180,16 +180,28 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
   letter-spacing: .1em; color: var(--ink-mute); margin-bottom: 5px;
 }
 .timebar__label--now { color: var(--ink); }
-.timebar__line { position: relative; height: 2px; background: var(--line-2); margin: 0 7px; }
-.timebar__line::before, .timebar__line::after {
-  content: ''; position: absolute; top: 50%; width: 0; height: 0;
+
+.timebar__trackwrap { position: relative; height: 10px; margin: 0 7px; }
+.timebar__line {
+  position: absolute; left: 0; right: 0; top: 50%; height: 2px;
+  background: var(--line-2); transform-origin: center; transform: translateY(-50%);
+}
+.timebar__cap {
+  position: absolute; top: 50%; width: 0; height: 0;
   border-top: 5px solid transparent; border-bottom: 5px solid transparent;
   transform: translateY(-50%);
 }
-.timebar__line::before { left: -7px; border-right: 7px solid var(--line-2); }
-.timebar__line::after { right: -7px; border-left: 7px solid var(--line-2); }
-@keyframes timebarIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-.timebar--intro { animation: timebarIn 1.2s cubic-bezier(.2, .7, .3, 1) both; }
+.timebar__cap--l { left: -7px; border-right: 7px solid var(--line-2); }
+.timebar__cap--r { right: -7px; border-left: 7px solid var(--line-2); }
+
+/* İlk girişte: etiketler hafifçe yukarıdan belirir, ardından çizgi ortadan
+   iki yana doğru büyür, oklar tam çizgi uçlara ulaştığında belirir. */
+@keyframes timebarLabelsIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@keyframes timebarLineGrow { from { transform: translateY(-50%) scaleX(0); } to { transform: translateY(-50%) scaleX(1); } }
+@keyframes timebarCapIn { from { opacity: 0; } to { opacity: 1; } }
+.timebar--intro .timebar__labels { animation: timebarLabelsIn .7s ease both; }
+.timebar--intro .timebar__line { animation: timebarLineGrow 1.1s cubic-bezier(.2, .7, .3, 1) .25s both; }
+.timebar--intro .timebar__cap { opacity: 0; animation: timebarCapIn .35s ease 1.25s both; }
 
 .grid-map__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .grid-map__aspect {

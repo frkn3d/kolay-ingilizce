@@ -58,7 +58,12 @@
       }));
     });
     timebar.appendChild(labels);
-    timebar.appendChild(U.el('div', { class: 'timebar__line', 'aria-hidden': 'true' }));
+    var trackwrap = U.el('div', { class: 'timebar__trackwrap', 'aria-hidden': 'true' }, [
+      U.el('span', { class: 'timebar__cap timebar__cap--l' }),
+      U.el('span', { class: 'timebar__line' }),
+      U.el('span', { class: 'timebar__cap timebar__cap--r' })
+    ]);
+    timebar.appendChild(trackwrap);
     wrap.appendChild(timebar);
 
     KI.tenses.aspects.forEach(function (a) {
