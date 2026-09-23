@@ -36,13 +36,26 @@
     return card;
   }
 
+  /* "ilk girdiğinde" animasyonu yalnız bu sayfa yüklemesinde bir kez oynar;
+     Harita sekmesine her dönüşte tekrar etmesin diye modül seviyesinde
+     tutulur. */
+  var introPlayed = false;
+
   function grid() {
     var wrap = U.el('div', { class: 'grid-map' });
+    var headRow = U.el('div', { class: 'grid-map__headrow' + (introPlayed ? '' : ' grid-map__headrow--intro') });
+    introPlayed = true;
+    headRow.appendChild(U.el('span', { class: 'grid-map__arrow', 'aria-hidden': 'true', text: '←' }));
     var head = U.el('div', { class: 'grid-map__head' });
     KI.tenses.groups.forEach(function (g) {
-      head.appendChild(U.el('div', { class: 'grid-map__col grid-map__col--' + g.id, text: g.tr }));
+      head.appendChild(U.el('div', { class: 'grid-map__col grid-map__col--' + g.id }, [
+        U.el('span', { class: 'grid-map__col-tr', text: g.tr }),
+        U.el('span', { class: 'grid-map__col-en', text: g.en })
+      ]));
     });
-    wrap.appendChild(head);
+    headRow.appendChild(head);
+    headRow.appendChild(U.el('span', { class: 'grid-map__arrow', 'aria-hidden': 'true', text: '→' }));
+    wrap.appendChild(headRow);
 
     KI.tenses.aspects.forEach(function (a) {
       wrap.appendChild(U.el('div', { class: 'grid-map__aspect', text: a.tr, title: a.hint }));
