@@ -169,14 +169,17 @@
       } else if (m.t === 'span') {
         var x1 = px(m.x), x2 = px(m.x2);
         if (m.style === 'wave' && !mini) {
-          g.appendChild(n('path', { d: wavePath(x1, x2, AY, 9, 26), fill: 'none', stroke: 'var(--tlc)', 'stroke-width': 7, 'stroke-linecap': 'round' }));
+          g.appendChild(n('path', { d: wavePath(x1, x2, AY, 9, 26), fill: 'none', stroke: 'var(--tlc)', 'stroke-width': 6, 'stroke-linecap': 'round' }));
         } else {
+          /* Mini gösterimde bu çizgi (Continuous zamanlar) 8px kalınlığında
+             yuvarlak uçlarla bir hap/kapsül gibi görünüyordu. İnceltilmiş
+             ince bir bant, eksenle aynı ailede okunuyor. */
           g.appendChild(nn('line', { x1: x1, y1: AY, x2: x2, y2: AY, stroke: 'var(--tlc)',
-            'stroke-width': mini ? 8 : 14, 'stroke-linecap': 'round', opacity: '.95' }));
+            'stroke-width': mini ? 4 : 14, 'stroke-linecap': 'round', opacity: '.95' }));
         }
-        var capH = mini ? 34 : 17;
-        g.appendChild(nn('line', { x1: x1, y1: AY - capH, x2: x1, y2: AY + capH, stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 5, 'stroke-linecap': 'round' }));
-        g.appendChild(nn('line', { x1: x2, y1: AY - capH, x2: x2, y2: AY + capH, stroke: 'var(--tlc)', 'stroke-width': mini ? 3 : 5, 'stroke-linecap': 'round' }));
+        var capH = mini ? 18 : 17;
+        g.appendChild(nn('line', { x1: x1, y1: AY - capH, x2: x1, y2: AY + capH, stroke: 'var(--tlc)', 'stroke-width': mini ? 1.6 : 4, 'stroke-linecap': 'round' }));
+        g.appendChild(nn('line', { x1: x2, y1: AY - capH, x2: x2, y2: AY + capH, stroke: 'var(--tlc)', 'stroke-width': mini ? 1.6 : 4, 'stroke-linecap': 'round' }));
         if (!mini && m.l) g.appendChild(txt((x1 + x2) / 2, belowY(), m.l));
 
       } else if (m.t === 'arrow') {
