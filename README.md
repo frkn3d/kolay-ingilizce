@@ -31,6 +31,7 @@
 | 🔔 **Kısık ses efektleri** | Tüm tıklama ve doğru/yanlış sesleri tarayıcıda sentezlenir (Web Audio) — tek bir ses dosyası bile indirilmez. |
 | 📱 **Mobil uyumlu** | Telefonda alt sekme çubuğu, masaüstünde üst menü. Ana ekrana eklenebilir (PWA manifest). |
 | ✏️ **Emojisiz, tek stil ikonlar** | Uygulamada hiçbir platform emojisi yok; tüm ikonlar `js/core/icons.js` içinde elle çizilmiş, tema renklerine uyan SVG'lerdir. |
+| 📡 **Gerçek çevrimdışı çalışma** | `sw.js` service worker'ı bir kez ziyaret edildikten sonra tüm dosyaları önbelleğe alır; internetsizken (uçak, metro) uygulama tam çalışır durumda kalır. |
 
 Öğrenilen zamanlar, test sonuçları ve kelime defteri yalnızca **kendi cihazınızda** (localStorage) saklanır; hiçbir veri dışarı gönderilmez.
 
@@ -70,6 +71,7 @@ Tek dosyalık bir HTML yığını değil; her parça kendi dosyasında:
 ```
 index.html                 uygulama iskeleti
 manifest.webmanifest       ana ekrana ekleme bilgileri
+sw.js                      service worker: dosyaları önbelleğe alır, çevrimdışı çalıştırır
 css/
   base.css                 renk paleti, tipografi, koyu tema
   components.css           düğme, kart, çizgi, test, kelime kartı
@@ -105,6 +107,7 @@ js/
     settings.js            ayarlar penceresi
   app.js                   hash tabanlı yönlendirici ve başlatma
 assets/                    SVG simgeler
+tests/                     içerik doğrulama ve duman testi (bkz. tests/README.md)
 ```
 
 Derleme adımı, paket yöneticisi ve dış bağımlılık **yoktur**. Dosyalar tarayıcıya doğrudan `<script>` ile yüklenir; bu sayede `index.html` çift tıklanarak da (file:// ile) çalışır.

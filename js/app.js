@@ -164,4 +164,12 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
+
+  /* Çevrimdışı çalışma: sw.js dosya kökünde olmalı. file:// üzerinde ve
+     eski tarayıcılarda serviceWorker desteği yoktur; hata sessizce yutulur. */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
 })(window.KI);
