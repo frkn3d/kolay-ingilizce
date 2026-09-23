@@ -85,23 +85,27 @@
     sec.appendChild(U.el('p', { class: 'soft', style: 'margin-top:-6px;font-size:.9rem',
       html: 'Yeşil kelimeler bu zamanın yapı taşlarıdır. Herhangi bir kelimeye dokunarak anlamını görebilirsin.' }));
 
+    /* Her girişte aynı örnekleri görmemek için havuzdan rastgele bir sıra
+       çekilir; "hepsini dinle" de aynı sırayı okur, tutarlı olsun diye. */
+    var pool = U.shuffle(t.examples);
+
     var allBtn = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Hepsini sırayla dinle' });
     allBtn.addEventListener('click', function () {
       KI.audio.play('tap');
       var i = 0;
       (function next() {
-        if (i >= t.examples.length) return;
-        KI.speech.speak(t.examples[i].en, { onend: function () { i++; setTimeout(next, 420); } });
+        if (i >= pool.length) return;
+        KI.speech.speak(pool[i].en, { onend: function () { i++; setTimeout(next, 420); } });
       })();
     });
     sec.appendChild(U.el('div', { class: 'row', style: 'margin-bottom:12px' }, [allBtn]));
 
     var FIRST = 4;
-    t.examples.slice(0, FIRST).forEach(function (ex) {
+    pool.slice(0, FIRST).forEach(function (ex) {
       sec.appendChild(KI.sentence.example(ex, { accent: true }));
     });
 
-    var rest = t.examples.slice(FIRST);
+    var rest = pool.slice(FIRST);
     if (rest.length) {
       var box = U.el('div', { hidden: true });
       rest.forEach(function (ex) { box.appendChild(KI.sentence.example(ex, { accent: true })); });
@@ -181,7 +185,10 @@
       sec.appendChild(U.el('h2', { class: 'section__title' }, [
         U.el('span', { class: 'num', text: '?' }), document.createTextNode('Kendini dene')
       ]));
-      sec.appendChild(KI.quiz.widget(t.quiz, { tenseId: t.id }));
+      /* Havuzda çok daha fazla soru var; her girişte rastgele bir alt küme
+         gösterilir ki hep aynı soru turu tekrarlanmasın. */
+      var QUIZ_N = Math.min(6, t.quiz.length);
+      sec.appendChild(KI.quiz.widget(U.shuffle(t.quiz).slice(0, QUIZ_N), { tenseId: t.id }));
       frag.appendChild(sec);
     }
 

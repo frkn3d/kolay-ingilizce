@@ -24,6 +24,8 @@ global.window = { KI: {} };
   'js/data/tenses.js',
   'js/data/examples-extra.js',
   'js/data/examples-extra-2.js',
+  'js/data/examples-extra-3.js',
+  'js/data/examples-extra-4.js',
   'js/data/basics.js',
   'js/data/exercises.js',
   'js/data/compare.js',

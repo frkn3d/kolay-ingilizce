@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v2';
+var CACHE_VERSION = 'ki-cache-v3';
 
 var CORE_ASSETS = [
   './',
@@ -32,6 +32,8 @@ var CORE_ASSETS = [
   './js/data/tenses.js',
   './js/data/examples-extra.js',
   './js/data/examples-extra-2.js',
+  './js/data/examples-extra-3.js',
+  './js/data/examples-extra-4.js',
   './js/data/basics.js',
   './js/data/exercises.js',
   './js/data/compare.js',

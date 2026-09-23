@@ -121,13 +121,16 @@
 
     var s2 = U.el('section', { class: 'section' });
     s2.appendChild(U.el('h2', { class: 'section__title', text: 'Aynı durum, iki cümle' }));
-    c.pairs.forEach(function (p) { s2.appendChild(pairBlock(p, c)); });
+    /* Her girişte aynı sırayı görmemek için çiftler karıştırılır. */
+    U.shuffle(c.pairs).forEach(function (p) { s2.appendChild(pairBlock(p, c)); });
     frag.appendChild(s2);
 
     if (c.quiz && c.quiz.length && KI.quiz) {
       var s3 = U.el('section', { class: 'section' });
       s3.appendChild(U.el('h2', { class: 'section__title', text: 'Ayırt edebiliyor musun?' }));
-      s3.appendChild(KI.quiz.widget(c.quiz, {}));
+      /* Havuzdan her seferinde rastgele bir alt küme gösterilir. */
+      var CQUIZ_N = Math.min(6, c.quiz.length);
+      s3.appendChild(KI.quiz.widget(U.shuffle(c.quiz).slice(0, CQUIZ_N), {}));
       frag.appendChild(s3);
     }
 
