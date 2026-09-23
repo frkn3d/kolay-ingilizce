@@ -14,7 +14,7 @@
 | 📈 **Zaman çizgisi çizimi** | Her zaman için ayrı SVG çizgi: iş nokta mı, bant mı, bugüne uzanan ok mu — gözle görülür. |
 | 🧠 **Mantık anlatımı** | Kural ezberi yerine "neden bu zaman" açıklaması, Türkçe karşılığıyla (-di, -yor, -mişti…). |
 | 🧮 **Formül kartı** | Olumlu / olumsuz / soru kalıpları ve "altın kural" uyarısı. |
-| 💬 **148 örnek cümle + 317 soru** | Günlük hayattan kısa cümleler; her zaman için 8-16 örnek ve elle yazılmış 20-23 alıştırma sorusu (12 zaman + 5 karşılaştırma sayfası). |
+| 💬 **148 örnek cümle + 327 soru** | Günlük hayattan kısa cümleler; her zaman için 8-16 örnek ve elle yazılmış 20-23 alıştırma sorusu (12 zaman + 6 karşılaştırma sayfası). |
 | 🇹🇷 **Çevir düğmesi** | Cümlenin Türkçesi istendiğinde açılır; altında o cümlenin inceliğini anlatan bir not çıkar. |
 | 👆 **Tıklanabilir kelimeler** | Cümledeki her kelimeye dokunulur; anlamı, türü ve çekimi (ör. *built → build fiilinin 2. hâli*) alttan açılan kartta görünür. |
 | 📚 **3.000+ kelimelik sözlük** | A1’den B2’ye: aile, duygular, ev, yemek, şehir, doğa, sağlık, iş, teknoloji, hukuk, bilim, sanat, spor, din, askeriye ve daha fazlası; akademik sıfat/zarf/fiiller; bağlaçlar (*however, although, therefore*); 50+ öbek fiil (*give up, look after*); deyimler; 99 düzensiz fiil. |
@@ -23,7 +23,7 @@
 | 🎯 **9 alıştırma modu** | Karışık · Zorlandıklarım · Cümleden zamanı bul · Çizgiden zamanı bul · Boşluğu doldur · Cümleyi kur · Dinle ve yaz · Kelime bilgisi · Düzensiz fiiller. Tur uzunluğu 5/10/20 soru seçilebilir. |
 | 🩹 **Zorlandıklarım** | Yanlış yaptığın sorular ve karıştırdığın kelimeler kaydedilir; ayrı bir modda yalnız onlar sorulur. Doğru bildiğinde listeden düşer. |
 | 🎧 **Dinle ve yaz (dikte)** | Cümle cihazın sesiyle okunur, sen yazarsın; sonra kelime kelime karşılaştırılır. |
-| ↔ **Karışan zamanlar** | Türkçe konuşanların en çok karıştırdığı 5 çift yan yana: iki zaman çizgisi, ne zaman hangisi tablosu, aynı durumun iki cümlesi ve ayırt etme testi. |
+| ↔ **Karışan zamanlar** | Türkçe konuşanların en çok karıştırdığı 6 çift yan yana: iki zaman çizgisi, ne zaman hangisi tablosu, aynı durumun iki cümlesi ve ayırt etme testi. |
 | 🧩 **Cümle kurma** | Türkçesi verilir, kelimelere dokunarak İngilizce cümleyi sen dizersin; yanlışsa doğru sıra gösterilir ve okunur. |
 | ♿ **Okunaklılık** | Açık ve koyu temanın tamamı WCAG kontrast ölçümünden geçirildi; her metin en az 4.5:1 oranında. Ayarlardan yazı boyutu ve animasyon azaltma seçilebilir. |
 | 🧱 **Temeller bölümü** | Cümle sırası, zamirler, am/is/are, have/has, a/an/the, çoğul, ekler, 54 düzensiz fiil tablosu, soru kelimeleri, will–going to farkı. |

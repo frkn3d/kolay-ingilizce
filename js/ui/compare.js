@@ -80,7 +80,7 @@
       frag.appendChild(U.el('div', { class: 'page-head' }, [
         U.el('p', { class: 'eyebrow', text: 'Karşılaştırma' }),
         U.el('h1', { text: 'Karışan zamanlar' }),
-        U.el('p', { text: 'Türkçe konuşanların en çok karıştırdığı beş çift. Her sayfada iki zaman yan yana durur, farkı tek bakışta görünür.' })
+        U.el('p', { text: 'Türkçe konuşanların en çok karıştırdığı ' + KI.compare.list.length + ' çift. Her sayfada iki zaman yan yana durur, farkı tek bakışta görünür.' })
       ]));
       var stack = U.el('div', { class: 'stack' });
       KI.compare.list.forEach(function (c) {

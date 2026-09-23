@@ -290,7 +290,11 @@
   IRREGULAR.forEach(function (row) {
     var p = row.split('|');
     var base = p[0], v2 = p[1], v3 = p[2], tr = p[3];
-    VERBLIST.push({ v1: base, v2: v2, v3: v3, tr: tr });
+    /* common:true = en sık kullanılan çekirdek liste (bkz. IRREGULAR dizisi);
+       addIrregulars ile sonradan eklenenler common:false alır. Bu ayrım
+       basics.js'teki fiil tablosunu ve sözlükteki düzensiz fiil süzgecini
+       "en sık kullanılanlar önce" mantığıyla sıralamak için kullanılır. */
+    VERBLIST.push({ v1: base, v2: v2, v3: v3, tr: tr, common: true });
     if (!DICT[base]) DICT[base] = { en: base, tr: tr, pos: 'fiil', note: '' };
     v2.split(',').forEach(function (f) {
       f = f.trim().toLowerCase();
@@ -425,7 +429,7 @@
       var p = String(row).split('|');
       var base = p[0].trim(), v2 = p[1].trim(), v3 = p[2].trim(), tr = (p[3] || '').trim();
       if (!base || VERBLIST.some(function (v) { return v.v1 === base; })) return;
-      VERBLIST.push({ v1: base, v2: v2, v3: v3, tr: tr });
+      VERBLIST.push({ v1: base, v2: v2, v3: v3, tr: tr, common: false });
       if (!DICT[base]) DICT[base] = { en: base, tr: tr, pos: 'fiil', note: '' };
       v2.split(',').forEach(function (x) {
         x = x.trim().toLowerCase();

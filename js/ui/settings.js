@@ -73,6 +73,10 @@
     body.appendChild(U.el('p', { class: 'eyebrow', text: 'Okuma' }));
     body.appendChild(switchRow('Çeviriler açık gelsin', 'Örnek cümlelerin Türkçesi baştan görünür.', 'autoTranslate'));
 
+    /* --- alıştırma --- */
+    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Alıştırma' }));
+    body.appendChild(switchRow('Sadece öğrendiğim zamanlardan sor', 'Açıkken sorular yalnız "Öğrendim" işaretlediğin zamanlardan gelir. Hiçbir zaman işaretli değilse hepsinden sorulur.', 'onlyLearned'));
+
     /* --- görünüm --- */
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Görünüm' }));
     var themeRow = U.el('div', { class: 'row' });

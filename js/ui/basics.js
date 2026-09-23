@@ -25,8 +25,27 @@
     return wrap;
   }
 
+  function verbRow(v) {
+    var row = U.el('tr');
+    row.appendChild(U.el('td', {}, [U.el('b', { text: v.v1 })]));
+    row.appendChild(U.el('td', { text: v.v2 }));
+    row.appendChild(U.el('td', { text: v.v3 }));
+    row.appendChild(U.el('td', { class: 'soft', text: v.tr }));
+    var btn = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: KI.icons.html('speaker'), title: 'Üç hâlini dinle' });
+    btn.addEventListener('click', function () {
+      KI.audio.play('tap');
+      KI.speech.speak(v.v1 + ', ' + v.v2.replace(',', ' or ') + ', ' + v.v3, { rate: 0.68 });
+    });
+    row.appendChild(U.el('td', {}, [btn]));
+    return row;
+  }
+
   function verbTable() {
     var box = U.el('div');
+    var all = KI.glossary.irregularVerbs;
+    var common = all.filter(function (v) { return v.common; });
+    var rest = all.filter(function (v) { return !v.common; });
+
     var wrap = U.el('div', { class: 'tablewrap', style: 'max-height:360px;overflow:auto' });
     var tb = U.el('table', { class: 'tbl' });
     var thead = U.el('thead');
@@ -35,25 +54,33 @@
     thead.appendChild(tr);
     tb.appendChild(thead);
     var body = U.el('tbody');
-    KI.glossary.irregularVerbs.forEach(function (v) {
-      var row = U.el('tr');
-      row.appendChild(U.el('td', {}, [U.el('b', { text: v.v1 })]));
-      row.appendChild(U.el('td', { text: v.v2 }));
-      row.appendChild(U.el('td', { text: v.v3 }));
-      row.appendChild(U.el('td', { class: 'soft', text: v.tr }));
-      var btn = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: KI.icons.html('speaker'), title: 'Üç hâlini dinle' });
-      btn.addEventListener('click', function () {
-        KI.audio.play('tap');
-        KI.speech.speak(v.v1 + ', ' + v.v2.replace(',', ' or ') + ', ' + v.v3, { rate: 0.68 });
-      });
-      row.appendChild(U.el('td', {}, [btn]));
-      body.appendChild(row);
-    });
+    common.forEach(function (v) { body.appendChild(verbRow(v)); });
     tb.appendChild(body);
     wrap.appendChild(tb);
     box.appendChild(wrap);
     box.appendChild(U.el('p', { class: 'soft', style: 'font-size:.82rem;margin:8px 0 0',
-      text: 'Bu listedeki ' + KI.glossary.irregularVerbs.length + ' fiil, günlük İngilizcenin büyük bölümünü karşılar.' }));
+      text: 'Bu ' + common.length + ' fiil, günlük İngilizcenin büyük bölümünü karşılar — önce bunları öğren.' }));
+
+    if (rest.length) {
+      var moreWrap = U.el('div', { class: 'tablewrap', style: 'max-height:360px;overflow:auto', hidden: true });
+      var tb2 = U.el('table', { class: 'tbl' });
+      var body2 = U.el('tbody');
+      rest.forEach(function (v) { body2.appendChild(verbRow(v)); });
+      tb2.appendChild(body2);
+      moreWrap.appendChild(tb2);
+
+      var more = U.el('button', { class: 'btn btn--block', type: 'button', style: 'margin-top:8px',
+        html: '↓ ' + rest.length + ' daha az sık kullanılan fiil daha göster' });
+      more.addEventListener('click', function () {
+        moreWrap.hidden = !moreWrap.hidden;
+        KI.audio.play(moreWrap.hidden ? 'close' : 'reveal');
+        more.innerHTML = moreWrap.hidden
+          ? '↓ ' + rest.length + ' daha az sık kullanılan fiil daha göster'
+          : '↑ Az sık kullanılanları gizle';
+      });
+      box.appendChild(moreWrap);
+      box.appendChild(more);
+    }
     return box;
   }
 

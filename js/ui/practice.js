@@ -8,6 +8,15 @@
 
   /* --------- soru üreticiler --------- */
 
+  /* "Sadece öğrendiğim zamanlar" açıksa ve en az bir zaman işaretliyse,
+     soru üretimi yalnız o zamanlardan yapılır. Hiçbiri işaretli değilse
+     (kör noktaya düşmemek için) tüm zamanlar kullanılır. */
+  function activeTenses() {
+    if (!KI.store.get('onlyLearned')) return KI.tenses.list;
+    var learned = KI.tenses.list.filter(function (t) { return KI.store.isLearned(t.id); });
+    return learned.length ? learned : KI.tenses.list;
+  }
+
   /* Rastgele 3 yanlış zaman adı seç */
   function otherTenses(t, k) {
     return U.shuffle(KI.tenses.list.filter(function (x) { return x.id !== t.id; })).slice(0, k || 3);
@@ -16,7 +25,7 @@
   /* 1) İngilizce cümleyi gör, zamanını bul */
   function sentenceQuestions(count) {
     var pool = [];
-    KI.tenses.list.forEach(function (t) {
+    activeTenses().forEach(function (t) {
       t.examples.forEach(function (ex) { pool.push({ t: t, ex: ex }); });
     });
     return U.shuffle(pool).slice(0, count).map(function (p) {
@@ -38,7 +47,7 @@
 
   /* 2) Zaman çizgisini gör, zamanını bul */
   function timelineQuestions(count) {
-    return U.shuffle(KI.tenses.list.slice()).slice(0, count).map(function (t) {
+    return U.shuffle(activeTenses().slice()).slice(0, count).map(function (t) {
       var opts = U.shuffle([t].concat(otherTenses(t, 3)));
       return {
         kind: 'timeline',
@@ -56,7 +65,7 @@
   /* 3) Boşluk doldurma (elle yazılmış sorular) */
   function blankQuestions(count, tenseId) {
     var qs = [];
-    KI.tenses.list.forEach(function (t) {
+    (tenseId ? KI.tenses.list : activeTenses()).forEach(function (t) {
       if (tenseId && t.id !== tenseId) return;
       (t.quiz || []).forEach(function (q) {
         qs.push({
@@ -337,7 +346,7 @@
   /* 6) Cümle kurma için malzeme */
   function buildItems(count) {
     var pool = [];
-    KI.tenses.list.forEach(function (t) {
+    activeTenses().forEach(function (t) {
       t.examples.forEach(function (ex) {
         var n = ex.en.split(/\s+/).length;
         if (n >= 4 && n <= 10) pool.push({ en: ex.en, tr: ex.tr, tense: t });

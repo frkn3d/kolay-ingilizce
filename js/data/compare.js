@@ -156,6 +156,45 @@
     ]
   });
 
+  C.push({
+    id: 'present-simple-present-continuous',
+    title: 'Present Simple ↔ Present Continuous',
+    short: 'Her zaman mı oluyor, yoksa tam şu anda mı?',
+    a: { label: 'Present Simple', tr: 'Geniş Zaman', tenseId: 'present-simple' },
+    b: { label: 'Present Continuous', tr: 'Şimdiki Zaman', tenseId: 'present-continuous' },
+    intro: 'Başlangıç seviyesinde en çok karışan çift budur. Ayırt etmenin yolu şudur: <b>bu her zaman mı böyle, yoksa sadece şu anda mı böyle?</b>',
+    rules: [
+      { when: 'Alışkanlık, tekrar eden iş (always, usually, every day)', a: 'kullanılır', b: 'kullanılmaz' },
+      { when: 'Tam şu anda oluyor (now, right now, Look!/Listen!)', a: 'kullanılmaz', b: 'kullanılır' },
+      { when: 'Genel, değişmeyen bir gerçek', a: 'kullanılır', b: 'kullanılmaz' },
+      { when: 'Geçici bir dönem (these days, this month, this week)', a: 'kullanılmaz', b: 'kullanılır' },
+      { when: 'know, like, want, believe gibi durum fiilleri', a: 'kullanılır', b: 'kullanılmaz' }
+    ],
+    pairs: [
+      { a: { en: 'I drink tea every morning.', tr: 'Her sabah çay içerim.' },
+        b: { en: 'I am drinking tea right now.', tr: 'Şu anda çay içiyorum.' },
+        why: 'Solda alışkanlık; sağda tam bu anda süren iş.' },
+      { a: { en: 'My father works at the bank.', tr: 'Babam bankada çalışır.' },
+        b: { en: 'My father is working late this week.', tr: 'Babam bu hafta geç saate kadar çalışıyor.' },
+        why: 'Solda kalıcı iş; sağda geçici bir durum (this week).' },
+      { a: { en: 'It rains a lot in Rize.', tr: 'Rize’de çok yağmur yağar.' },
+        b: { en: 'It is raining in Rize right now.', tr: 'Rize’de şu anda yağmur yağıyor.' },
+        why: 'Solda genel bir gerçek; sağda şu anki durum.' }
+    ],
+    quiz: [
+      { q: 'Annem her gün çorba pişirir. → My mother ___ soup every day.', options: ['cook', 'cooks', 'is cooking', 'cooked'], answer: 1, why: 'Alışkanlık: geniş zaman.' },
+      { q: 'Bak! Kedi masadan atlıyor. → Look! The cat ___ off the table.', options: ['jumps', 'jump', 'is jumping', 'jumped'], answer: 2, why: '"Look!" şu anı gösterir.' },
+      { q: 'Hangisi doğru?', options: ['She always drink coffee.', 'She always drinks coffee.', 'She is always drink coffee.', 'She always is drinking coffee.'], answer: 1, why: '"always" ile geniş zaman, he/she/it → -s.' },
+      { q: 'Şu sıralar yeni bir dil öğreniyorum. → I ___ a new language these days.', options: ['learn', 'learns', 'am learning', 'learned'], answer: 2, why: '"these days" geçici bir dönem.' },
+      { q: 'Su deniz seviyesinde 100 derecede kaynar. → Water ___ at 100 degrees at sea level.', options: ['boil', 'boils', 'is boiling', 'boiled'], answer: 1, why: 'Bilimsel gerçek: geniş zaman.' },
+      { q: 'Hangisi yanlış?', options: ['I am knowing the answer.', 'I know the answer.', 'She likes tea.', 'Do you understand?'], answer: 0, why: '"know" bir durum fiilidir, -ing almaz.' },
+      { q: 'Şu anda bahçede çalışıyor. → He ___ in the garden right now.', options: ['works', 'work', 'is working', 'worked'], answer: 2, why: '"right now" şu anı gösterir.' },
+      { q: 'Otobüs her gün sekizde kalkar. → The bus ___ at eight every day.', options: ['leave', 'leaves', 'is leaving', 'left'], answer: 1, why: 'Sabit tarife: geniş zaman.' },
+      { q: 'Hangisi doğru?', options: ['We are usually walking to school.', 'We usually walk to school.', 'We usually are walking to school.', 'We usually walks to school.'], answer: 1, why: '"usually" ile geniş zaman, we → walk.' },
+      { q: 'Bu ay İstanbul’da kalıyoruz (geçici). → We ___ in Istanbul this month.', options: ['stay', 'stays', 'are staying', 'stayed'], answer: 2, why: '"this month" geçici bir durum.' }
+    ]
+  });
+
   KI.compare = {
     list: C,
     get: function (id) { return C.filter(function (c) { return c.id === id; })[0] || null; },
