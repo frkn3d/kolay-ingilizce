@@ -57,13 +57,17 @@
   --past-bg:   #f6e2d8;
   --present:   #2a6a46;
   --present-bg:#dcecdf;
-  --future:    #2d6774;
-  --future-bg: #d9e9ec;
+  /* --future eskiden #2d6774 idi: yeşile çok yakın bir tonda (189-191° hue)
+     kaldığı için açık temada --present ile, özellikle soluk *-bg tonlarında,
+     neredeyse aynı renk gibi görünüyordu. Daha belirgin bir maviye (~208°)
+     kaydırıldı. */
+  --future:    #225677;
+  --future-bg: #dbe6f0;
   /* Mini zaman çizgisi şeridi: --past/--future ile --surface'in sabit karışımı.
      color-mix() yerine önceden hesaplanmış değer kullanılır ki eski Safari/iOS
      sürümlerinde de (color-mix desteklenmese bile) şerit görünür kalsın. */
   --tl-mini-past:   #cea18b;
-  --tl-mini-future: #98b1b1;
+  --tl-mini-future: #93a9b2;
 
   /* --- Ölçü --- */
   --r-sm: 8px;
