@@ -122,7 +122,8 @@
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px', text: 'İlerleme' }));
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
       text: KI.store.learnedCount() + ' zaman öğrenildi olarak işaretli, defterinde ' + KI.store.words().length +
-            ' kelime var. Zorlandıklarım listesinde ' + KI.store.troubleCount() + ' kayıt bulunuyor.' }));
+            ' kelime var (' + KI.store.dueWordCount() + ' tanesinin bugün tekrar zamanı geldi). Zorlandıklarım listesinde ' +
+            KI.store.troubleCount() + ' kayıt bulunuyor.' }));
     var reset = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('trash') + ' Tüm ilerlemeyi sıfırla' });
     reset.addEventListener('click', function () {
       if (!window.confirm('İşaretlenen zamanlar, test sonuçları ve kelime defteri silinecek. Devam edilsin mi?')) return;

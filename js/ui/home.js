@@ -140,7 +140,7 @@
     /* --- kısa yollar --- */
     var quick = U.el('div', { class: 'quicklinks' });
     [
-      { href: '#/alistirma', ico: 'target', t: 'Alıştırma', d: '9 mod' },
+      { href: '#/alistirma', ico: 'target', t: 'Alıştırma', d: '10 mod' },
       { href: '#/sozluk', ico: 'book', t: 'Sözlük', d: KI.glossary.size() + ' kelime' }
     ].forEach(function (c) {
       quick.appendChild(U.el('a', { class: 'quicklink', href: c.href, 'data-sfx': 'nav' }, [

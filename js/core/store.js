@@ -7,6 +7,13 @@
 
   var KEY = 'kolay-ingilizce/v1';
 
+  /* Basit bir Leitner kutusu: doğru bilince bir sonraki kutuya geçer ve
+     tekrar tarihi ertelenir; yanlış bilince ilk kutuya döner (bugün tekrar
+     edilir). Kutu numarası = kaçıncı kez üst üste doğru bilindiği. */
+  var SRS_INTERVAL_DAYS = [null, 0, 1, 3, 7, 16, 30];   // dizin = kutu no (1..6)
+  var SRS_MAX_BOX = SRS_INTERVAL_DAYS.length - 1;
+  var DAY = 24 * 60 * 60 * 1000;
+
   var defaults = {
     sound: true,
     theme: 'light',
@@ -82,6 +89,9 @@
     /* --- yanlışlardan öğrenme --- */
     recordAnswer: function (q, ok) {
       if (!q) return;
+      /* Sorulan kelime defterde kayıtlıysa (hangi moddan geldiğine
+         bakmaksızın) aralıklı tekrar kutusunu da güncelle. */
+      if (q.word && q.word.en && S.hasWord(q.word.en)) S.reviewWord(q.word.en, ok);
       if (q.tenseId) {
         var w = state.weak[q.tenseId] || { wrong: 0, right: 0 };
         if (ok) w.right++; else w.wrong++;
@@ -137,7 +147,7 @@
     },
     addWord: function (en, tr) {
       if (S.hasWord(en)) return false;
-      state.words.unshift({ en: en, tr: tr, at: Date.now() });
+      state.words.unshift({ en: en, tr: tr, at: Date.now(), box: 1, due: Date.now() });
       if (state.words.length > 400) state.words.pop();
       save();
       return true;
@@ -148,6 +158,23 @@
       save();
     },
     words: function () { return state.words.slice(); },
+
+    /* --- aralıklı tekrar (Leitner kutusu) --- */
+    /* Eski kelime defteri kayıtlarında box/due alanı yoktur; olmayanlar
+       "hemen tekrar edilmeli" kabul edilir (due <= şimdi). */
+    dueWords: function () {
+      var now = Date.now();
+      return state.words.filter(function (w) { return !w.due || w.due <= now; });
+    },
+    dueWordCount: function () { return S.dueWords().length; },
+    reviewWord: function (en, ok) {
+      var e = String(en).toLowerCase();
+      var w = state.words.filter(function (x) { return x.en.toLowerCase() === e; })[0];
+      if (!w) return;
+      w.box = ok ? Math.min((w.box || 1) + 1, SRS_MAX_BOX) : 1;
+      w.due = Date.now() + SRS_INTERVAL_DAYS[w.box] * DAY;
+      save();
+    },
 
     reset: function () {
       state = load.call(null);

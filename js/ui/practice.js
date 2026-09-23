@@ -320,6 +320,35 @@
     });
   }
 
+  /* 4b) Aralıklı tekrar: kelime defterinde tekrar zamanı gelmiş kelimeler.
+     Doğru cevap kutu seviyesini yükseltir (tekrar tarihi ertelenir),
+     yanlış cevap kutuyu sıfırlar (bugün tekrar edilir) — bkz. store.js. */
+  function reviewQuestions(count) {
+    var due = KI.store.dueWords();
+    var dict = KI.glossary.dict;
+    var keys = Object.keys(dict);
+    return U.shuffle(due).slice(0, count).map(function (w, i) {
+      var found = KI.glossary.lookup(w.en);
+      var pos = found ? found.pos : '';
+      var wrongs = U.shuffle(keys.filter(function (k) {
+        return dict[k].tr !== w.tr && dict[k].en.toLowerCase() !== w.en.toLowerCase() && (dict[k].pos === pos || Math.random() < .3);
+      })).slice(0, 3).map(function (k) { return dict[k]; });
+      var correct = { en: w.en, tr: w.tr };
+      var all = U.shuffle([correct].concat(wrongs));
+      var enToTr = (i % 2 === 0);
+      return {
+        kind: 'word',
+        head: enToTr ? 'Bu kelime ne demek?' : 'Bunun İngilizcesi hangisi?',
+        sentence: enToTr ? w.en : w.tr,
+        speak: enToTr ? w.en : null,
+        options: all.map(function (o) { return enToTr ? o.tr : o.en; }),
+        answer: all.indexOf(correct),
+        why: w.en + ' = ' + w.tr,
+        word: { en: w.en, tr: w.tr }
+      };
+    });
+  }
+
   /* 5) Düzensiz fiillerin hâlleri */
   function verbQuestions(count) {
     var verbs = KI.glossary.irregularVerbs.filter(function (v) { return v.v2 !== v.v1 || v.v3 !== v.v1; });
@@ -587,6 +616,8 @@
       } },
     { id: 'zorlandiklarim', ico: KI.icons.html('flag'), t: 'Zorlandıklarım', d: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada toplanır.',
       make: function () { return troubleQuestions(size()); } },
+    { id: 'tekrar', ico: KI.icons.html('calendar'), t: 'Bugünkü Tekrar', d: 'Kelime defterinde tekrar zamanı gelmiş kelimeler; aralıklı tekrar ile birikmez.',
+      make: function () { return reviewQuestions(size()); } },
     { id: 'cumle', ico: KI.icons.html('chat'), t: 'Cümleden zamanı bul', d: 'İngilizce cümleyi oku, hangi zaman olduğunu seç.',
       make: function () { return sentenceQuestions(size()); } },
     { id: 'cizgi', ico: KI.icons.html('chart'), t: 'Çizgiden zamanı bul', d: 'Zaman çizgisine bak, hangi zaman olduğunu seç.',
@@ -650,6 +681,10 @@
           var n = KI.store.troubleCount();
           title.appendChild(U.el('span', { class: 'countpill' + (n ? '' : ' countpill--zero'), text: String(n) }));
         }
+        if (m.id === 'tekrar') {
+          var nd = KI.store.dueWordCount();
+          title.appendChild(U.el('span', { class: 'countpill' + (nd ? '' : ' countpill--zero'), text: String(nd) }));
+        }
         card.appendChild(title);
         card.appendChild(U.el('p', { class: 'soft', text: m.d, style: 'margin:0' }));
         grid.appendChild(card);
@@ -684,6 +719,16 @@
           U.el('h3', { text: 'Zorlandığın bir şey yok' }),
           U.el('p', { text: 'Yanlış yaptığın sorular ve karıştırdığın kelimeler burada birikir. Birkaç tur çözünce burası dolmaya başlar.' }),
           U.el('a', { class: 'btn btn--primary', href: '#/alistirma/karisik', 'data-sfx': 'nav', html: KI.icons.html('dice') + ' Karışık tura başla' })
+        ]));
+      } else if (mode.id === 'tekrar') {
+        var hasNotebook = KI.store.words().length > 0;
+        frag.appendChild(U.el('div', { class: 'empty' }, [
+          U.el('span', { class: 'empty__ico', html: KI.icons.html('calendar') }),
+          U.el('h3', { text: hasNotebook ? 'Bugün tekrar edilecek kelime yok' : 'Kelime defterin boş' }),
+          U.el('p', { text: hasNotebook
+            ? 'Defterindeki bütün kelimelerin tekrar tarihi ileride. Yarın tekrar bak.'
+            : 'Sözlükte veya bir örnek cümlede bir kelimeye dokunup "Kelime defterime ekle" dersen, aralıklı tekrar burada başlar.' }),
+          U.el('a', { class: 'btn btn--primary', href: '#/sozluk', 'data-sfx': 'nav', html: KI.icons.html('book') + ' Sözlüğe git' })
         ]));
       } else {
         frag.appendChild(U.el('p', { class: 'empty', text: 'Bu modda soru bulunamadı.' }));

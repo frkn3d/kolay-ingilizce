@@ -28,7 +28,7 @@ var ROUTES = [
   '#/harita', '#/temeller', '#/alistirma', '#/sozluk',
   '#/karsilastir', '#/karsilastir/past-simple-present-perfect',
   '#/zaman/present-simple', '#/zaman/future-perfect-continuous'
-].concat(['karisik', 'zorlandiklarim', 'cumle', 'cizgi', 'bosluk', 'kur', 'dikte', 'kelime', 'fiil']
+].concat(['karisik', 'zorlandiklarim', 'tekrar', 'cumle', 'cizgi', 'bosluk', 'kur', 'dikte', 'kelime', 'fiil']
   .map(function (m) { return '#/alistirma/' + m; }));
 
 JSDOM.fromFile(path.join(root, 'index.html'), {
