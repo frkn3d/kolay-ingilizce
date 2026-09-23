@@ -80,10 +80,17 @@
   }
 
   /* "Nasıl okunur?" — kapalı gelen açıklama kutusu */
-  function howTo() {
+  function howTo(done) {
     var d = U.el('details', { class: 'disclose reveal' });
     d.appendChild(U.el('summary', { html: '<span>Haritayı nasıl okumalı?</span>' }));
     var body = U.el('div', { class: 'disclose__body' });
+
+    body.appendChild(U.el('div', { class: 'maphead', style: 'margin-top:0' }, [
+      U.el('h2', { text: 'Her şey zamanın neresinde?' }),
+      U.el('span', { class: 'maphead__num', text: done + ' / ' + KI.tenses.list.length + ' öğrenildi' })
+    ]));
+    body.appendChild(U.el('p', { class: 'maphead__desc',
+      text: 'İngilizcede cümle kurmadan önce tek bir soru sorulur. 12 zamanın hepsi aşağıdaki haritada, yerli yerinde.' }));
 
     body.appendChild(U.el('p', { html: '<b>Sütunlar</b> işin ne zaman olduğunu söyler. <b>Satırlar</b> işin nasıl olduğunu söyler. İkisi birleşince zamanın adı çıkar.' }));
 
@@ -131,18 +138,11 @@
   function view() {
     var frag = document.createDocumentFragment();
 
-    /* --- karşılama, artık ayrı bir kutu değil; harita başlığının içinde --- */
+    /* --- karşılama metni artık "Haritayı nasıl okumalı?" bölmesinin
+       içinde; burada yalnız ilerleme çubuğu ve eylem düğmeleri kalır --- */
     var last = KI.store.get('lastTense');
     var lastT = last ? KI.tenses.get(last) : null;
     var done = KI.store.learnedCount();
-
-    var head = U.el('div', { class: 'maphead reveal' }, [
-      U.el('h1', { text: 'Her şey zamanın neresinde?' }),
-      U.el('span', { class: 'maphead__num', text: done + ' / ' + KI.tenses.list.length + ' öğrenildi' })
-    ]);
-    frag.appendChild(head);
-    frag.appendChild(U.el('p', { class: 'maphead__desc reveal',
-      text: 'İngilizcede cümle kurmadan önce tek bir soru sorulur. 12 zamanın hepsi aşağıdaki haritada, yerli yerinde.' }));
 
     var actions = U.el('div', { class: 'maphead__actions reveal' });
     actions.appendChild(progressBox());
@@ -156,7 +156,7 @@
     ]));
     frag.appendChild(actions);
 
-    frag.appendChild(howTo());
+    frag.appendChild(howTo(done));
     frag.appendChild(grid());
 
     setTimeout(setupReveal, 0);
