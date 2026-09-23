@@ -6,6 +6,13 @@
   'use strict';
   var U = KI.util;
 
+  var APP_VERSION = '0.3';
+  var CHANGELOG = [
+    { v: '0.3', d: 'Emoji kaldırıldı, tüm ikonlar elle çizilmiş SVG’ye taşındı. Sözlük 3000’ün üzerine çıktı, alıştırma sayısı 327’ye ulaştı. Mobil zaman çizgileri yeniden tasarlandı (renk kontrastı, ince çizgiler, çakışan işaretlerin ayrılması). Aralıklı tekrar (Leitner kutusu) ve "Bugünkü Tekrar" modu, modal fiiller ve "used to" bölümleri, 6. karşılaştırma sayfası, sıklığa göre ayrılmış düzensiz fiiller, gerçek çevrimdışı çalışma. Ana sayfa sadeleştirildi: tek okla zaman şeridi, kaydırdıkça beliren animasyonlar.' },
+    { v: '0.2', d: 'Sözlük B2 seviyesine genişletildi, alıştırma sayısı artırıldı. Karanlık modda okunabilirlik düzeltmeleri (baştan başla butonu, seçili cevap kontrastı). Dede Korkut ve Keloğlan gibi halk hikâyelerinden, günlük hayattan yeni örnek cümleler.' },
+    { v: '0.1', d: 'İlk sürüm: 12 zamanın tam haritası ve zaman çizgisi görselleştirmesi, Türk ve Osmanlı kültüründen örnek cümleler, tıklanabilir sözlük, cihaz üstü sesli okuma, kısık ses efektleri.' }
+  ];
+
   function switchRow(label, hint, key, onChange) {
     var input = U.el('input', { type: 'checkbox' });
     input.checked = !!KI.store.get(key);
@@ -135,8 +142,24 @@
     });
     body.appendChild(reset);
 
-    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.78rem;margin-top:18px;border-top:1px dashed var(--line);padding-top:10px',
-      html: 'Kolay İngilizce · açık kaynak · veriler yalnızca bu cihazda saklanır.' }));
+    /* --- hakkında --- */
+    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px;border-top:1px dashed var(--line);padding-top:14px', text: 'Hakkında' }));
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
+      text: 'Kolay İngilizce · Zaman çizgisiyle gramer · ' + KI.tenses.list.length + ' zaman · ' + KI.glossary.size() + ' kelime.' }));
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.82rem',
+      text: 'Bu bir Logspace uygulamasıdır. Sesler cihazınızın kendi konuşma motoruyla üretilir; hiçbir veri dışarı gönderilmez, her şey yalnızca bu cihazda saklanır.' }));
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.8rem;font-family:var(--font-mono)', text: 'Sürüm ' + APP_VERSION }));
+
+    var changelog = U.el('details', { class: 'disclose', style: 'margin-top:8px' });
+    changelog.appendChild(U.el('summary', { html: '<span>Sürüm notları</span>' }));
+    var clBody = U.el('div', { class: 'disclose__body' });
+    var clList = U.el('ul', { class: 'disclose__list' });
+    CHANGELOG.forEach(function (c) {
+      clList.appendChild(U.el('li', { html: '<b>v' + c.v + '</b> — ' + c.d }));
+    });
+    clBody.appendChild(clList);
+    changelog.appendChild(clBody);
+    body.appendChild(changelog);
   }
 
   KI.settings = { build: build };

@@ -139,15 +139,6 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
 .pager .btn { flex: 1; min-width: 0; }
 .pager .btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.sitefoot {
-  max-width: var(--maxw); margin: 0 auto;
-  padding: 18px 16px 8px; text-align: center;
-  color: var(--ink-mute); font-size: .82rem;
-  border-top: 1px dashed var(--line);
-}
-.sitefoot p { margin: 0 0 .3em; }
-.sitefoot__mini { font-size: .75rem; opacity: .85; }
-
 .empty { text-align: center; padding: 30px 16px; color: var(--ink-mute); }
 .empty__ico { display: block; margin-bottom: .35em; }
 .empty__ico .icon { width: 2.4rem; height: 2.4rem; vertical-align: 0; }

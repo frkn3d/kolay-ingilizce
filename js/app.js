@@ -155,9 +155,6 @@
       paint();
     });
 
-    var foot = document.getElementById('foot-count');
-    if (foot) foot.textContent = KI.tenses.list.length + ' zaman · ' + KI.glossary.size() + ' kelime';
-
     if (!location.hash) location.replace('#/harita');
     paint();
   }
