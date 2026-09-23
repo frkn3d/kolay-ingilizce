@@ -8,19 +8,6 @@
   'use strict';
   var U = KI.util;
 
-  /* Sayı artık hemen üstündeki başlıkta ("X / 12 öğrenildi") olduğu için
-     çubuğun yanında tekrar yazılmıyor — yalnız görsel oran kalıyor. */
-  function progressBox() {
-    var total = KI.tenses.list.length;
-    var done = KI.store.learnedCount();
-    var fill = U.el('div', { class: 'progress__fill' });
-    var box = U.el('div', { class: 'progress' }, [
-      U.el('div', { class: 'progress__bar' }, [fill])
-    ]);
-    setTimeout(function () { fill.style.width = Math.round(done / total * 100) + '%'; }, 60);
-    return box;
-  }
-
   function tenseCard(t) {
     var card = U.el('a', {
       class: 'tcard tcard--' + t.group + ' reveal',
@@ -145,12 +132,11 @@
     var done = KI.store.learnedCount();
 
     var actions = U.el('div', { class: 'maphead__actions reveal' });
-    actions.appendChild(progressBox());
     var play = KI.icons.html('play');
     var primary = lastT
       ? U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
       : U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
-    actions.appendChild(U.el('div', { class: 'row', style: 'margin-top:10px' }, [
+    actions.appendChild(U.el('div', { class: 'row' }, [
       primary,
       U.el('a', { class: 'btn btn--sm', href: '#/temeller', 'data-sfx': 'nav', html: KI.icons.html('wall') + ' Temeller' })
     ]));
