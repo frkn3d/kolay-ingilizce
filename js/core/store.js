@@ -16,6 +16,7 @@
 
   var defaults = {
     sound: true,
+    haptics: true,
     theme: 'light',
     speechRate: 0.85,
     speechVoice: '',

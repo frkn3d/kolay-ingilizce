@@ -39,6 +39,9 @@
     body.appendChild(U.el('p', { class: 'eyebrow', text: 'Ses' }));
     body.appendChild(switchRow('Buton ses efektleri', 'Kısık, kısa tıklama sesleri.', 'sound'));
     body.appendChild(switchRow('Kelimeye dokununca oku', 'Kelime kartı açılınca telaffuzu otomatik duyulur.', 'autoSpeakWord'));
+    if (KI.haptics && KI.haptics.available()) {
+      body.appendChild(switchRow('Titreşim', 'Tıklamalarda minik, yanlış cevapta biraz daha uzun titreşim (yalnızca destekleyen cihazlarda).', 'haptics'));
+    }
 
     /* --- okuma hızı --- */
     var rateVal = U.el('span', { class: 'quiz__score', text: Number(KI.store.get('speechRate')).toFixed(2) + '×' });

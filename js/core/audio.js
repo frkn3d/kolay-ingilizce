@@ -105,6 +105,9 @@
       if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) {} }
     },
     play: function (name) {
+      /* titreşim ses ayarından bağımsız çalışır: kısılmış sesle de,
+         sessiz modda da dokunsal geri bildirim istenebilir. */
+      if (KI.haptics) KI.haptics.trigger(name);
       if (!enabled()) return;
       if (!init()) return;
       if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) {} }
