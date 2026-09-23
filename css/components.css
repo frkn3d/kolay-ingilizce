@@ -474,21 +474,6 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 .maphead h2 { margin: 0; }
 .maphead__num { font-family: var(--font-mono); font-size: .78rem; color: var(--ink-mute); flex: 0 0 auto; }
 
-/* ---------- Kısa yollar ---------- */
-.quicklinks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
-.quicklink {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 14px; text-decoration: none; color: inherit;
-  background: var(--surface); border: 2px solid var(--line);
-  border-radius: var(--r); box-shadow: var(--shadow-hard);
-  transition: transform .14s ease, border-color .14s ease;
-}
-.quicklink:hover { transform: translate(-2px, -2px); border-color: var(--accent); }
-.quicklink__ico { display: inline-grid; place-items: center; line-height: 1; }
-.quicklink__ico .icon { width: 1.5rem; height: 1.5rem; vertical-align: 0; color: var(--green-700); }
-html[data-theme="dark"] .quicklink__ico .icon { color: var(--green-300); }
-.quicklink b { display: block; font-family: var(--font-display); font-size: 1rem; }
-.quicklink small { color: var(--ink-mute); font-size: .78rem; }
 
 /* ---------- Alıştırma oturum ayarı ---------- */
 .setrow {

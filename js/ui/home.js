@@ -159,22 +159,6 @@
     frag.appendChild(howTo());
     frag.appendChild(grid());
 
-    /* --- kısa yollar --- */
-    var quick = U.el('div', { class: 'quicklinks reveal' });
-    [
-      { href: '#/alistirma', ico: 'target', t: 'Alıştırma', d: '10 mod' },
-      { href: '#/sozluk', ico: 'book', t: 'Sözlük', d: KI.glossary.size() + ' kelime' }
-    ].forEach(function (c) {
-      quick.appendChild(U.el('a', { class: 'quicklink', href: c.href, 'data-sfx': 'nav' }, [
-        U.el('span', { class: 'quicklink__ico', html: KI.icons.html(c.ico) }),
-        U.el('span', {}, [
-          U.el('b', { text: c.t }),
-          U.el('small', { text: c.d })
-        ])
-      ]));
-    });
-    frag.appendChild(quick);
-
     setTimeout(setupReveal, 0);
     return frag;
   }

@@ -205,7 +205,4 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
   .tcard__en { font-size: .82rem; }
   .tcard__tr { font-size: .68rem; }
   .hero { padding: 16px 15px; }
-  .quicklinks { gap: 8px; }
-  .quicklink { padding: 10px 11px; gap: 8px; }
-  .quicklink b { font-size: .92rem; }
 }
