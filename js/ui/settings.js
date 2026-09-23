@@ -6,8 +6,9 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.4.3';
+  var APP_VERSION = '0.4.4';
   var CHANGELOG = [
+    { v: '0.4.4', d: 'Üst çubuktaki ses açma/kapama düğmesi kaldırıldı; aynı ayar zaten Ayarlar → Ses altında duruyor, tekrarı gereksizdi.' },
     { v: '0.4.3', d: 'Hikayeler bölümüne 8 yeni anonim hikaye eklendi: 5 yeni Nasreddin Hoca fıkrası (Ay’dan Yoğurt, Ye Kürküm Ye, On Üçüncü Eşek, Eşek Evde Yok, Ne Diyeceğimi Biliyor musunuz) ve 3 yeni Keloğlan hikayesi. Toplam hikaye sayısı 15’e çıktı.' },
     { v: '0.4.2', d: 'Sözlük sekmesi ikiye ayrıldı: Sözlük ve yeni Hikayeler bölümü. Hikayeler’de anonim halk hikayeleri var (Nasreddin Hoca fıkraları ve bir Keloğlan hikayesi); her hikaye cümle cümle sesli okunabiliyor (okunan cümle vurgulanır), herhangi bir kelimeye dokunup Türkçe anlamını görebiliyorsun, isteğe bağlı olarak bütün çevirileri de açabiliyorsun.' },
     { v: '0.4.1', d: 'Zaman sayfalarındaki örnek cümle sayısı 148’den 1000’in üzerine çıktı (yerel kültürden yeni temalarla); artık her girişte örnekler ve "Kendini dene" soruları havuzdan rastgele seçiliyor, aynı sorular tekrar etmiyor. Üst bant sadeleştirildi (alt yazı kaldırıldı). Alıştırma ekranı sıkılaştırıldı: mod kısayol şeridi kaldırıldı, başlık ve şıklar daraltıldı — bir soruyu cevapladıktan sonra aşağı kaydırmaya neredeyse hiç gerek kalmıyor.' },

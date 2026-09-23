@@ -100,22 +100,6 @@
     KI.store.touchVisitStreak();
     if (KI.achievements) KI.achievements.evaluate();
 
-    /* ses düğmesi */
-    var sb = document.getElementById('btn-sound');
-    function paintSound() {
-      var on = !!KI.store.get('sound');
-      sb.classList.toggle('is-off', !on);
-      sb.querySelector('.iconbtn__glyph').innerHTML = KI.icons.html(on ? 'bell' : 'bell-off');
-      sb.setAttribute('aria-pressed', on ? 'true' : 'false');
-    }
-    paintSound();
-    sb.addEventListener('click', function () {
-      KI.store.set('sound', !KI.store.get('sound'));
-      paintSound();
-      KI.audio.play('toggle');
-      U.toast(KI.store.get('sound') ? 'Ses efektleri açık' : 'Ses efektleri kapalı');
-    });
-
     /* tema düğmesi */
     document.getElementById('btn-theme').addEventListener('click', function () {
       KI.setTheme(KI.store.get('theme') === 'dark' ? 'light' : 'dark');

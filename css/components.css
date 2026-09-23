@@ -43,7 +43,6 @@ html[data-theme="dark"] .btn--primary { background: var(--green-500); color: #0d
 .iconbtn:hover { transform: rotate(-6deg) scale(1.05); background: var(--surface-2); }
 .iconbtn__glyph { display: grid; place-items: center; line-height: 1; }
 .iconbtn__glyph .icon { width: 19px; height: 19px; vertical-align: 0; }
-.iconbtn.is-off { opacity: .55; }
 .iconbtn__badge {
   position: absolute; top: -3px; right: -3px;
   min-width: 17px; height: 17px; padding: 0 4px;
