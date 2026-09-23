@@ -9,6 +9,7 @@
 
   var TAP_MS = 8;
   var WRONG_MS = 200;
+  var ACHIEVEMENT_PATTERN = [70, 90, 70, 90, 70];   // art arda üç vuruş
 
   function supported() {
     return typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function';
@@ -20,10 +21,15 @@
   }
 
   var H = {
-    /* name: audio.js'teki tarif adıyla aynıdır ('wrong' hariç hepsi minik) */
+    /* name: audio.js'teki tarif adıyla aynıdır (çoğu minik, 'wrong' uzun,
+       'achievement' art arda üç kısa vuruş) */
     trigger: function (name) {
       if (!enabled()) return;
-      try { navigator.vibrate(name === 'wrong' ? WRONG_MS : TAP_MS); } catch (e) {}
+      try {
+        if (name === 'wrong') navigator.vibrate(WRONG_MS);
+        else if (name === 'achievement') navigator.vibrate(ACHIEVEMENT_PATTERN);
+        else navigator.vibrate(TAP_MS);
+      } catch (e) {}
     },
     available: supported
   };

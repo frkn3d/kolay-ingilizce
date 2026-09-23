@@ -93,6 +93,10 @@
     KI.applyPrefs();
     KI.sentence.sheet.init();
 
+    /* günlük seri ve başarımlar: sayfa her açıldığında bir kez kontrol edilir */
+    KI.store.touchVisitStreak();
+    if (KI.achievements) KI.achievements.evaluate();
+
     /* ses düğmesi */
     var sb = document.getElementById('btn-sound');
     function paintSound() {
@@ -125,9 +129,22 @@
     function closeModal() { modal.hidden = true; KI.audio.play('close'); }
     document.getElementById('settings-close').addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+    /* başarımlar */
+    var achModal = document.getElementById('achievements-modal');
+    document.getElementById('btn-achievements').addEventListener('click', function () {
+      KI.achievements.buildList();
+      achModal.hidden = false;
+      KI.audio.play('open');
+    });
+    function closeAchModal() { achModal.hidden = true; KI.audio.play('close'); }
+    document.getElementById('achievements-close').addEventListener('click', closeAchModal);
+    achModal.addEventListener('click', function (e) { if (e.target === achModal) closeAchModal(); });
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         if (!modal.hidden) closeModal();
+        else if (!achModal.hidden) closeAchModal();
         else KI.sentence.sheet.hide();
       }
     });

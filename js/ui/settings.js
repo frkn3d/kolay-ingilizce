@@ -6,8 +6,9 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.3';
+  var APP_VERSION = '0.4';
   var CHANGELOG = [
+    { v: '0.4', d: 'Başarım sistemi eklendi: el çizimi rozetlerle 15 başarım, kazanınca sesli/titreşimli kutlama kutusu (uygulama çubuğundaki kupa simgesinden erişilir). Dokunsal geri bildirim (titreşim): tıklamalarda minik, yanlış cevapta belirgin titreşim; ayarlardan kapatılabilir. İlerlemeyi bir dosyaya kaydedip başka bir cihazda geri yükleme (dışa/içe aktar).' },
     { v: '0.3', d: 'Emoji kaldırıldı, tüm ikonlar elle çizilmiş SVG’ye taşındı. Sözlük 3000’ün üzerine çıktı, alıştırma sayısı 327’ye ulaştı. Mobil zaman çizgileri yeniden tasarlandı (renk kontrastı, ince çizgiler, çakışan işaretlerin ayrılması). Aralıklı tekrar (Leitner kutusu) ve "Bugünkü Tekrar" modu, modal fiiller ve "used to" bölümleri, 6. karşılaştırma sayfası, sıklığa göre ayrılmış düzensiz fiiller, gerçek çevrimdışı çalışma. Ana sayfa sadeleştirildi: tek okla zaman şeridi, kaydırdıkça beliren animasyonlar.' },
     { v: '0.2', d: 'Sözlük B2 seviyesine genişletildi, alıştırma sayısı artırıldı. Karanlık modda okunabilirlik düzeltmeleri (baştan başla butonu, seçili cevap kontrastı). Dede Korkut ve Keloğlan gibi halk hikâyelerinden, günlük hayattan yeni örnek cümleler.' },
     { v: '0.1', d: 'İlk sürüm: 12 zamanın tam haritası ve zaman çizgisi görselleştirmesi, günlük hayattan ve yerel kültürden örnek cümleler, tıklanabilir sözlük, cihaz üstü sesli okuma, kısık ses efektleri.' }
@@ -144,6 +145,51 @@
       KI.router.refresh();
     });
     body.appendChild(reset);
+
+    /* --- veri: cihaz değişince ilerlemeyi taşımak için --- */
+    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px', text: 'Veri' }));
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
+      text: 'İlerlemeni bir dosyaya kaydedip başka bir cihazda geri yükleyebilirsin. Hiçbir veri dışarıya gönderilmez.' }));
+    var dataRow = U.el('div', { class: 'row' });
+    var exportBtn = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('download') + ' Dışa aktar' });
+    exportBtn.addEventListener('click', function () {
+      KI.audio.play('tap');
+      var blob = new Blob([KI.store.exportData()], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = U.el('a', { href: url, download: 'kolay-ingilizce-yedek-' + new Date().toISOString().slice(0, 10) + '.json' });
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+      U.toast('Yedek dosyası indirildi');
+    });
+    var importInput = U.el('input', { type: 'file', accept: 'application/json,.json', style: 'display:none' });
+    var importBtn = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('upload') + ' İçe aktar' });
+    importBtn.addEventListener('click', function () { KI.audio.play('tap'); importInput.click(); });
+    importInput.addEventListener('change', function () {
+      var file = importInput.files && importInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        if (!window.confirm('Mevcut ilerleme bu dosyadaki verilerle değiştirilecek. Devam edilsin mi?')) { importInput.value = ''; return; }
+        var ok = KI.store.importData(String(reader.result));
+        if (ok) {
+          KI.audio.play('correct');
+          U.toast('Veriler geri yüklendi');
+          build();
+          KI.router.refresh();
+        } else {
+          KI.audio.play('wrong');
+          U.toast('Dosya okunamadı: geçerli bir yedek değil');
+        }
+        importInput.value = '';
+      };
+      reader.readAsText(file);
+    });
+    dataRow.appendChild(exportBtn);
+    dataRow.appendChild(importBtn);
+    dataRow.appendChild(importInput);
+    body.appendChild(dataRow);
 
     /* --- hakkında --- */
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px;border-top:1px dashed var(--line);padding-top:14px', text: 'Hakkında' }));

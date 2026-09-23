@@ -95,7 +95,27 @@ window.KI = window.KI || {};
 
     formula: '<rect x="5" y="3" width="14" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="12" y1="16" x2="12.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/>',
 
-    logic: '<circle cx="9" cy="12" r="5.4"/><circle cx="15" cy="12" r="5.4"/><line x1="12" y1="6.8" x2="12" y2="17.2"/>'
+    logic: '<circle cx="9" cy="12" r="5.4"/><circle cx="15" cy="12" r="5.4"/><line x1="12" y1="6.8" x2="12" y2="17.2"/>',
+
+    upload: '<path d="M12 15V4"/><polyline points="7,8.5 12,3.5 17,8.5"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>',
+    download: '<path d="M12 4v11"/><polyline points="7,10.5 12,15.5 17,10.5"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>',
+
+    /* --- başarım ikonları: her biri tek bir başarımı temsil eder --- */
+    'ach-step': '<circle cx="5.5" cy="18.5" r="1.6" fill="currentColor" stroke="none"/><line x1="7" y1="17" x2="16.5" y2="7.5"/><polyline points="12,7.5 16.5,7.5 16.5,13"/>',
+    'ach-half': '<circle cx="12" cy="12" r="8.4"/><path d="M12 3.6a8.4 8.4 0 0 1 0 16.8Z" fill="currentColor" stroke="none"/>',
+    'ach-crown': '<polyline points="4,17.5 4,9.5 8.5,13 12,6.5 15.5,13 20,9.5 20,17.5"/><line x1="4" y1="17.5" x2="20" y2="17.5"/>',
+    'ach-clipboard': '<rect x="5" y="4.2" width="14" height="16.8" rx="1.6"/><rect x="9" y="2.6" width="6" height="3" rx="1"/><path d="M8.3 12.4l2.3 2.3 5-5.4"/>',
+    'ach-stopwatch': '<circle cx="12" cy="13.5" r="7.8"/><line x1="12" y1="13.5" x2="12" y2="9"/><line x1="12" y1="13.5" x2="14.8" y2="15"/><line x1="9.5" y1="2.6" x2="14.5" y2="2.6"/><line x1="12" y1="2.6" x2="12" y2="5.2"/>',
+    'ach-medal': '<line x1="7.5" y1="2.6" x2="10.8" y2="9.8"/><line x1="16.5" y1="2.6" x2="13.2" y2="9.8"/><circle cx="12" cy="15.2" r="6"/><polygon points="12,11.8 12.9,14.1 15.3,14.4 13.5,16 14,18.4 12,17.1 10,18.4 10.5,16 8.7,14.4 11.1,14.1" fill="currentColor" stroke="none"/>',
+    'ach-gem': '<polygon points="7,4 17,4 21,9.5 12,20.5 3,9.5"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="9.5" y1="4" x2="12" y2="9.5"/><line x1="14.5" y1="4" x2="12" y2="9.5"/>',
+    'ach-gems': '<polygon points="12,3.2 15.2,7.4 12,12.4 8.8,7.4"/><polygon points="4.3,10.4 6.8,13.6 4.3,17.6 1.8,13.6"/><polygon points="19.7,10.4 22.2,13.6 19.7,17.6 17.2,13.6"/>',
+    'ach-bookmark': '<path d="M6 3.4h12v17.2l-6-4-6 4V3.4Z"/><line x1="9.3" y1="9.6" x2="14.7" y2="9.6"/><line x1="12" y1="6.9" x2="12" y2="12.3"/>',
+    'ach-stack': '<rect x="4" y="15.6" width="16" height="3.4" rx="0.7"/><rect x="5" y="11.4" width="14" height="3.4" rx="0.7"/><rect x="6" y="7.2" width="12" height="3.4" rx="0.7"/>',
+    'ach-shelf': '<line x1="3" y1="20.4" x2="21" y2="20.4"/><rect x="4.5" y="6.4" width="3" height="14"/><rect x="8.6" y="9.2" width="3" height="11.2"/><rect x="12.7" y="4.6" width="3" height="15.8"/><rect x="16.8" y="7.8" width="3" height="12.6"/>',
+    'ach-brain': '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/><path d="M9.7 8.7l1.7 1.7 2.9-3.1"/>',
+    'ach-heart': '<path d="M12 19.5s-7-4.3-9.1-8.8C1.1 7.2 3.2 4.2 6.4 4.2c2 0 3.4 1.1 5.6 3.3 2.2-2.2 3.6-3.3 5.6-3.3 3.2 0 5.3 3 3.5 6.5-2.1 4.5-9.1 8.8-9.1 8.8Z"/>',
+    'ach-flame': '<path d="M12 21c-4 0-6.4-2.5-6.4-5.8 0-2.9 1.9-4.6 2.5-7.2.3 1.3 1.1 2.3 2 2.5-.4-2.9.8-5.9 3.2-7.5-.6 2.5.4 3.9 1.7 5.3 1.7 1.7 3.1 3.5 3.1 6.9 0 3.3-2.4 5.8-6.1 5.8Z"/>',
+    'ach-flame-star': '<path d="M10.3 21c-3.3 0-5.4-2.2-5.4-5.1 0-2.5 1.6-4 2.1-6.1.3 1.1 1 1.9 1.7 2.1-.3-2.5.7-5 2.7-6.3-.5 2.1.3 3.3 1.5 4.5 1.4 1.4 2.6 3 2.6 5.8 0 2.9-2.1 5.1-5.2 5.1Z"/><polygon points="18.3,3 19.2,4.9 21.2,5.2 19.7,6.5 20.1,8.5 18.3,7.5 16.5,8.5 16.9,6.5 15.4,5.2 17.4,4.9" fill="currentColor" stroke="none"/>'
   };
 
   function html(name, cls) {

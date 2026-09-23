@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v1';
+var CACHE_VERSION = 'ki-cache-v2';
 
 var CORE_ASSETS = [
   './',
@@ -23,6 +23,7 @@ var CORE_ASSETS = [
   './js/core/icons.js',
   './js/core/store.js',
   './js/core/audio.js',
+  './js/core/haptics.js',
   './js/core/speech.js',
   './js/data/glossary.js',
   './js/data/vocabulary.js',
@@ -43,6 +44,7 @@ var CORE_ASSETS = [
   './js/ui/basics.js',
   './js/ui/compare.js',
   './js/ui/dictionary.js',
+  './js/ui/achievements.js',
   './js/ui/settings.js',
   './js/app.js',
   './assets/favicon.svg',

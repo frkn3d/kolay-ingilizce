@@ -37,7 +37,14 @@
     quizSize: 10,
     onlyLearned: false,
     fontSize: 'normal',   // small | normal | large
-    lessMotion: false
+    lessMotion: false,
+
+    /* --- başarımlar ve seri --- */
+    achievements: {},      // { achievementId: kazanılma zamanı (ms) }
+    quizzesCompleted: 0,
+    perfectQuizzes: 0,
+    streak: 0,
+    lastVisitDay: ''       // 'YYYY-M-D', gün değişince seriyi güncellemek için
   };
 
   var state = load();
@@ -60,6 +67,10 @@
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(state)); }
     catch (e) { /* yazılamıyorsa sessizce geç */ }
+    /* Her kayıtta başarım koşulları yeniden değerlendirilir; achievements.js
+       kendi içinde tekrar girişe (save() -> evaluate() -> set() -> save()) karşı
+       korumalıdır. */
+    if (KI.achievements) KI.achievements.evaluate();
   }
 
   var S = {
@@ -159,6 +170,9 @@
       save();
     },
     words: function () { return state.words.slice(); },
+    masteredWordCount: function () {
+      return state.words.filter(function (w) { return (w.box || 1) >= SRS_MAX_BOX; }).length;
+    },
 
     /* --- aralıklı tekrar (Leitner kutusu) --- */
     /* Eski kelime defteri kayıtlarında box/due alanı yoktur; olmayanlar
@@ -184,6 +198,38 @@
       for (k in defaults) fresh[k] = clone(defaults[k]);
       state = fresh;
       save();
+    },
+
+    /* --- alıştırma sayaçları (başarımlar için) --- */
+    recordQuizResult: function (correct, total) {
+      state.quizzesCompleted = (state.quizzesCompleted || 0) + 1;
+      if (total > 0 && correct === total) state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
+      save();
+    },
+
+    /* --- günlük seri: uygulama gün içinde ilk açıldığında bir kez çağrılır --- */
+    touchVisitStreak: function () {
+      var d = new Date();
+      var key = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+      if (state.lastVisitDay === key) return;
+      var y = new Date(d.getTime() - DAY);
+      var yKey = y.getFullYear() + '-' + (y.getMonth() + 1) + '-' + y.getDate();
+      state.streak = (state.lastVisitDay === yKey) ? (state.streak || 0) + 1 : 1;
+      state.lastVisitDay = key;
+      save();
+    },
+
+    /* --- veri dışa/içe aktarma: telefon değişince ilerleme kaybolmasın --- */
+    exportData: function () { return JSON.stringify(state, null, 2); },
+    importData: function (json) {
+      var data;
+      try { data = JSON.parse(json); } catch (e) { return false; }
+      if (!data || typeof data !== 'object') return false;
+      var k, fresh = {};
+      for (k in defaults) fresh[k] = Object.prototype.hasOwnProperty.call(data, k) ? data[k] : clone(defaults[k]);
+      state = fresh;
+      save();
+      return true;
     }
   };
 

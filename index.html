@@ -42,6 +42,10 @@
       <button class="iconbtn" id="btn-theme" type="button" title="Tema" aria-label="Açık/koyu tema">
         <span class="iconbtn__glyph" data-icon="moon"></span>
       </button>
+      <button class="iconbtn" id="btn-achievements" type="button" title="Başarımlar" aria-label="Başarımlar">
+        <span class="iconbtn__glyph" data-icon="trophy"></span>
+        <span class="iconbtn__badge" id="ach-badge" hidden>0</span>
+      </button>
       <button class="iconbtn" id="btn-settings" type="button" title="Ayarlar" aria-label="Ayarlar">
         <span class="iconbtn__glyph" data-icon="sliders"></span>
       </button>
@@ -91,6 +95,22 @@
   </div>
 </div>
 
+<!-- Başarımlar -->
+<div class="modal" id="achievements-modal" hidden role="dialog" aria-modal="true" aria-label="Başarımlar">
+  <div class="modal__card">
+    <div class="modal__head">
+      <h2>Başarımlar</h2>
+      <button class="iconbtn" id="achievements-close" type="button" aria-label="Kapat" data-icon="close"></button>
+    </div>
+    <div class="modal__body" id="achievements-body"></div>
+  </div>
+</div>
+
+<!-- Başarım kazanıldı kutlaması -->
+<div class="modal" id="ach-earned-modal" hidden role="dialog" aria-modal="true" aria-label="Başarım kazanıldı">
+  <div class="modal__card ach-pop" id="ach-earned-card"></div>
+</div>
+
 <div class="toast" id="toast" hidden></div>
 
 <!-- Çekirdek -->
@@ -121,6 +141,7 @@
 <script src="js/ui/basics.js"></script>
 <script src="js/ui/compare.js"></script>
 <script src="js/ui/dictionary.js"></script>
+<script src="js/ui/achievements.js"></script>
 <script src="js/ui/settings.js"></script>
 <script src="js/app.js"></script>
 </body>

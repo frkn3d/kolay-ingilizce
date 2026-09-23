@@ -168,6 +168,7 @@
       box.appendChild(U.el('h3', { html: mood + '  ' + correct + ' / ' + qs.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: pct >= 80 ? 'Çok iyi! Bu zamanı kavramışsın.' : pct >= 50 ? 'Fena değil. Örneklere bir daha göz at.' : 'Acele etme; önce mantık bölümünü tekrar oku.' }));
       if (opts.tenseId) KI.store.saveScore(opts.tenseId, correct, qs.length);
+      KI.store.recordQuizResult(correct, qs.length);
 
       /* Sıradaki adım önerisi */
       var worst = null, worstN = 0;
@@ -395,6 +396,7 @@
       var pct = Math.round(correct / items.length * 100);
       box.appendChild(U.el('h3', { html: KI.icons.html(pct >= 80 ? 'trophy' : pct >= 50 ? 'thumbsup' : 'sprout') + '  ' + correct + ' / ' + items.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: 'Cümle kurmak, kelime sırasını öğrenmenin en hızlı yoludur.' }));
+      KI.store.recordQuizResult(correct, items.length);
       var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
       again.addEventListener('click', function () { i = 0; correct = 0; items = U.shuffle(items); KI.audio.play('tap'); paint(); });
       var row = U.el('div', { class: 'row', style: 'margin-top:10px' }, [again]);
@@ -514,6 +516,7 @@
       var pct = Math.round(correct / items.length * 100);
       box.appendChild(U.el('h3', { html: KI.icons.html(pct >= 80 ? 'trophy' : pct >= 50 ? 'thumbsup' : 'sprout') + '  ' + correct + ' / ' + items.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: 'Dikte, dinlediğini anlamayı ve yazımı aynı anda çalıştırır.' }));
+      KI.store.recordQuizResult(correct, items.length);
       var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
       again.addEventListener('click', function () { i = 0; correct = 0; items = U.shuffle(items); KI.audio.play('tap'); paint(); });
       var row = U.el('div', { class: 'row', style: 'margin-top:10px' }, [again]);

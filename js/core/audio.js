@@ -6,8 +6,9 @@
 (function (KI) {
   'use strict';
 
-  var ctx = null, master = null, ready = false;
+  var ctx = null, master = null, accent = null, ready = false;
   var MASTER_GAIN = 0.16;   // kısık: uygulamanın önüne geçmesin
+  var ACCENT_GAIN = 0.75;   // başarım gibi nadir, kutlama anları: belirgin şekilde daha yüksek
 
   function init() {
     if (ready) return true;
@@ -17,12 +18,15 @@
       ctx = new AC();
       master = ctx.createGain();
       master.gain.value = MASTER_GAIN;
+      accent = ctx.createGain();
+      accent.gain.value = ACCENT_GAIN;
       // yumuşatıcı: tiz cızırtıyı kes, retro "oda" hissi ver
       var lp = ctx.createBiquadFilter();
       lp.type = 'lowpass';
       lp.frequency.value = 5200;
       lp.Q.value = 0.6;
       master.connect(lp);
+      accent.connect(lp);
       lp.connect(ctx.destination);
       ready = true;
       return true;
@@ -31,8 +35,10 @@
 
   function enabled() { return KI.store ? KI.store.get('sound') : true; }
 
-  /* Tek bir nota: frekans, süre, dalga türü, gecikme, seviye */
-  function tone(freq, dur, type, delay, level, slideTo) {
+  /* Tek bir nota: frekans, süre, dalga türü, gecikme, seviye, (varsa) bus.
+     bus verilmezse normal efekt seviyesindeki master'a bağlanır; başarım
+     gibi nadir kutlama sesleri accent bus'ını kullanır (bkz. ACCENT_GAIN). */
+  function tone(freq, dur, type, delay, level, slideTo, bus) {
     if (!ready) return;
     var t0 = ctx.currentTime + (delay || 0);
     var osc = ctx.createOscillator();
@@ -46,13 +52,13 @@
     g.gain.exponentialRampToValueAtTime(peak, t0 + 0.012);
     g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
 
-    osc.connect(g); g.connect(master);
+    osc.connect(g); g.connect(bus || master);
     osc.start(t0);
     osc.stop(t0 + dur + 0.04);
   }
 
   /* Kısa "tık": filtrelenmiş gürültü patlaması */
-  function click(level, freq) {
+  function click(level, freq, bus) {
     if (!ready) return;
     var t0 = ctx.currentTime;
     var len = Math.floor(ctx.sampleRate * 0.035);
@@ -67,7 +73,7 @@
     bp.Q.value = 1.1;
     var g = ctx.createGain();
     g.gain.value = (level === undefined ? 0.35 : level);
-    src.connect(bp); bp.connect(g); g.connect(master);
+    src.connect(bp); bp.connect(g); g.connect(bus || master);
     src.start(t0);
   }
 
@@ -93,6 +99,15 @@
       tone(659.25, 0.12, 'triangle', 0.10, 0.30);
       tone(783.99, 0.12, 'triangle', 0.20, 0.30);
       tone(1046.5, 0.30, 'triangle', 0.30, 0.30);
+    },
+    /* başarım kutlaması: nadir görülür, bu yüzden accent bus'ıyla
+       (bkz. ACCENT_GAIN = .75) diğer efektlerden belirgin biçimde yüksek çalar */
+    achievement: function () {
+      tone(523.25, 0.12, 'triangle', 0.00, 0.55, null, accent);
+      tone(659.25, 0.12, 'triangle', 0.10, 0.55, null, accent);
+      tone(783.99, 0.14, 'triangle', 0.20, 0.55, null, accent);
+      tone(1046.5, 0.32, 'triangle', 0.32, 0.55, null, accent);
+      tone(1318.5, 0.30, 'sine', 0.38, 0.4, null, accent);
     },
     star: function () { tone(1318.5, 0.08, 'sine', 0, 0.25); tone(1760, 0.14, 'sine', 0.07, 0.22); },
     toggle: function () { click(0.25, 1100); }
