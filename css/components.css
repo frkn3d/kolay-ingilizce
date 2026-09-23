@@ -171,22 +171,26 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 .tl--mini .tl-zone-future { fill: var(--tl-mini-future); }
 
 .grid-map { display: grid; gap: 12px; }
-.grid-map__headrow { display: flex; align-items: center; gap: 6px; }
-.grid-map__arrow { flex: 0 0 auto; color: var(--ink-mute); font-size: 1.1rem; line-height: 1; }
-@keyframes gridHeadIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
-.grid-map__headrow--intro { animation: gridHeadIn 1.2s cubic-bezier(.2, .7, .3, 1) both; }
-.grid-map__head { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; min-width: 0; }
-.grid-map__col {
-  text-align: center; font-family: var(--font-display); font-weight: 700;
-  padding: 6px 4px; border-radius: var(--r-sm);
-  border: 2px solid var(--line);
-  display: flex; flex-direction: column; gap: 1px;
+
+/* Uçtan uca tek ince ok: kalın rozetler yerine sade bir zaman şeridi. */
+.timebar { margin: 2px 0 14px; }
+.timebar__labels {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: .68rem; font-weight: 700;
+  letter-spacing: .1em; color: var(--ink-mute); margin-bottom: 5px;
 }
-.grid-map__col-tr { font-size: .78rem; }
-.grid-map__col-en { font-size: .6rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .72; }
-.grid-map__col--past { background: var(--past-bg); color: var(--past); }
-.grid-map__col--present { background: var(--present-bg); color: var(--present); }
-.grid-map__col--future { background: var(--future-bg); color: var(--future); }
+.timebar__label--now { color: var(--ink); }
+.timebar__line { position: relative; height: 2px; background: var(--line-2); margin: 0 7px; }
+.timebar__line::before, .timebar__line::after {
+  content: ''; position: absolute; top: 50%; width: 0; height: 0;
+  border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+  transform: translateY(-50%);
+}
+.timebar__line::before { left: -7px; border-right: 7px solid var(--line-2); }
+.timebar__line::after { right: -7px; border-left: 7px solid var(--line-2); }
+@keyframes timebarIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.timebar--intro { animation: timebarIn 1.2s cubic-bezier(.2, .7, .3, 1) both; }
+
 .grid-map__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .grid-map__aspect {
   grid-column: 1 / -1;

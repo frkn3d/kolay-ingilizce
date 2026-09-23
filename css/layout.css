@@ -199,12 +199,11 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
 /* ---------- Dar telefonlarda harita kartları ---------- */
 @media (max-width: 420px) {
   .view { padding: 14px 12px 26px; }
-  .grid-map__row, .grid-map__head { gap: 7px; }
+  .grid-map__row { gap: 7px; }
   .grid-map { gap: 9px; }
   .tcard { padding: 8px 8px 7px; min-height: 84px; }
   .tcard__en { font-size: .82rem; }
   .tcard__tr { font-size: .68rem; }
-  .grid-map__col { font-size: .82rem; padding: 6px 2px; }
   .hero { padding: 16px 15px; }
   .quicklinks { gap: 8px; }
   .quicklink { padding: 10px 11px; gap: 8px; }

@@ -41,21 +41,25 @@
      tutulur. */
   var introPlayed = false;
 
+  /* Kalın rozetler yerine ekranı uçtan uca kaplayan tek bir ince ok:
+     üstünde sade İngilizce etiketler (PAST / NOW / FUTURE), altında
+     iki ucu oklu tek bir çizgi. */
+  var TIMEBAR_EN = { past: 'PAST', present: 'NOW', future: 'FUTURE' };
+
   function grid() {
     var wrap = U.el('div', { class: 'grid-map' });
-    var headRow = U.el('div', { class: 'grid-map__headrow' + (introPlayed ? '' : ' grid-map__headrow--intro') });
+    var timebar = U.el('div', { class: 'timebar' + (introPlayed ? '' : ' timebar--intro') });
     introPlayed = true;
-    headRow.appendChild(U.el('span', { class: 'grid-map__arrow', 'aria-hidden': 'true', text: '←' }));
-    var head = U.el('div', { class: 'grid-map__head' });
+    var labels = U.el('div', { class: 'timebar__labels' });
     KI.tenses.groups.forEach(function (g) {
-      head.appendChild(U.el('div', { class: 'grid-map__col grid-map__col--' + g.id }, [
-        U.el('span', { class: 'grid-map__col-tr', text: g.tr }),
-        U.el('span', { class: 'grid-map__col-en', text: g.en })
-      ]));
+      labels.appendChild(U.el('span', {
+        class: 'timebar__label' + (g.id === 'present' ? ' timebar__label--now' : ''),
+        text: TIMEBAR_EN[g.id] || g.en.toUpperCase()
+      }));
     });
-    headRow.appendChild(head);
-    headRow.appendChild(U.el('span', { class: 'grid-map__arrow', 'aria-hidden': 'true', text: '→' }));
-    wrap.appendChild(headRow);
+    timebar.appendChild(labels);
+    timebar.appendChild(U.el('div', { class: 'timebar__line', 'aria-hidden': 'true' }));
+    wrap.appendChild(timebar);
 
     KI.tenses.aspects.forEach(function (a) {
       wrap.appendChild(U.el('div', { class: 'grid-map__aspect', text: a.tr, title: a.hint }));
