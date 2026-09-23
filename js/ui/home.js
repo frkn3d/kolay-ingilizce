@@ -136,7 +136,7 @@
     var primary = lastT
       ? U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
       : U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
-    actions.appendChild(U.el('div', { class: 'row' }, [
+    actions.appendChild(U.el('div', { class: 'row row--between' }, [
       primary,
       U.el('a', { class: 'btn btn--sm', href: '#/temeller', 'data-sfx': 'nav', html: KI.icons.html('wall') + ' Temeller' })
     ]));
