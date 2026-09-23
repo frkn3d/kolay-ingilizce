@@ -533,6 +533,26 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 }
 .setrow__lbl { font-weight: 600; font-size: .9rem; color: var(--ink-soft); margin-right: auto; }
 .modecard { text-decoration: none; color: inherit; display: block; }
+
+/* ---------- sözlük giriş ekranı: iki büyük buton ---------- */
+.hub-grid { display: grid; gap: 14px; }
+.hub-card { display: flex; align-items: center; gap: 16px; padding: 22px 20px; }
+.hub-card__ico {
+  flex: 0 0 auto; width: 56px; height: 56px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: var(--green-100); color: var(--green-700);
+  border: 2px solid var(--green-200);
+}
+html[data-theme="dark"] .hub-card__ico { background: var(--present-bg); color: var(--green-300); border-color: var(--line-2); }
+.hub-card__ico .icon { width: 30px; height: 30px; }
+.hub-card h3 { margin: 0 0 .2em; font-size: 1.2rem; }
+.hub-card p { margin: 0; }
+
+/* ---------- hikaye okuma ekranı ---------- */
+.story-body { padding-top: 16px; }
+.story-sentence { margin-bottom: .15em; }
+.story-sentence.speaking { padding: 2px 6px; margin: 0 -6px .15em; }
+.story-tr { margin: 0 0 .85em; font-size: .92rem; font-style: italic; }
 .countpill {
   display: inline-block; margin-left: .5em;
   font-family: var(--font-mono); font-size: .72rem; font-weight: 700;

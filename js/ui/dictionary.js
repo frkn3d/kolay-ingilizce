@@ -81,11 +81,46 @@
     return out;
   }
 
+  /* Sözlük sekmesine girince ilk görünen seçim ekranı: kelimeler mi,
+     hikayeler mi. */
+  function hub() {
+    var frag = document.createDocumentFragment();
+    frag.appendChild(U.el('div', { class: 'page-head' }, [
+      U.el('p', { class: 'eyebrow', text: 'Sözlük' }),
+      U.el('h1', { text: 'Sözlük ve Hikayeler' }),
+      U.el('p', { text: 'Kelime dağarcığını çalış ya da bir hikaye okuyarak kelimelere doğal bağlamda rastla.' })
+    ]));
+
+    var grid = U.el('div', { class: 'hub-grid' });
+
+    var wordsCard = U.el('a', { class: 'card modecard hub-card', href: '#/sozluk/kelimeler', 'data-sfx': 'nav' }, [
+      U.el('span', { class: 'hub-card__ico', html: KI.icons.html('book') }),
+      U.el('span', {}, [
+        U.el('h3', { text: 'Sözlük' }),
+        U.el('p', { class: 'soft', text: KI.glossary.size() + ' kelime · türüne göre süz, dinle, defterine ekle.' })
+      ])
+    ]);
+    grid.appendChild(wordsCard);
+
+    var storiesCard = U.el('a', { class: 'card modecard hub-card', href: '#/sozluk/hikayeler', 'data-sfx': 'nav' }, [
+      U.el('span', { class: 'hub-card__ico', html: KI.icons.html('chat') }),
+      U.el('span', {}, [
+        U.el('h3', { text: 'Hikayeler' }),
+        U.el('p', { class: 'soft', text: (KI.stories ? KI.stories.length : 0) + ' anonim halk hikayesi · Nasreddin Hoca ve daha fazlası, okutma ve kelime tıklama ile.' })
+      ])
+    ]);
+    grid.appendChild(storiesCard);
+
+    frag.appendChild(grid);
+    return frag;
+  }
+
   function view() {
     active = 'all';
     shown = 60;
     var frag = document.createDocumentFragment();
 
+    frag.appendChild(U.el('a', { class: 'crumb', href: '#/sozluk', 'data-sfx': 'back', text: '← Sözlük' }));
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Sözlük' }),
       U.el('h1', { text: 'Kelimeler' }),
@@ -183,5 +218,5 @@
     return frag;
   }
 
-  KI.viewDictionary = { render: view };
+  KI.viewDictionary = { render: hub, words: view };
 })(window.KI);

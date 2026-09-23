@@ -38,7 +38,10 @@
     { re: /^\/alistirma\/([a-z-]+)\/?$/, tab: 'alistirma', run: function (m) { return KI.viewPractice.render(m[1]); } },
     { re: /^\/karsilastir\/?$/, tab: 'temeller',  run: function () { return KI.viewCompare.render(null); } },
     { re: /^\/karsilastir\/([a-z-]+)\/?$/, tab: 'temeller', run: function (m) { return KI.viewCompare.render(m[1]); } },
-    { re: /^\/sozluk\/?$/,            tab: 'sozluk',    run: function () { return KI.viewDictionary.render(); } }
+    { re: /^\/sozluk\/?$/,            tab: 'sozluk',    run: function () { return KI.viewDictionary.render(); } },
+    { re: /^\/sozluk\/kelimeler\/?$/, tab: 'sozluk',    run: function () { return KI.viewDictionary.words(); } },
+    { re: /^\/sozluk\/hikayeler\/?$/, tab: 'sozluk',    run: function () { return KI.viewStories.list(); } },
+    { re: /^\/sozluk\/hikayeler\/([a-z0-9-]+)\/?$/, tab: 'sozluk', run: function (m) { return KI.viewStories.detail(m[1]); } }
   ];
 
   var lastPath = null;

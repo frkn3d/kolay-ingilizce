@@ -30,6 +30,7 @@ global.window = { KI: {} };
   'js/data/examples-extra-6.js',
   'js/data/examples-extra-7.js',
   'js/data/basics.js',
+  'js/data/stories.js',
   'js/data/exercises.js',
   'js/data/compare.js',
   'js/data/exercises-2.js'
@@ -91,15 +92,28 @@ KI.compare.list.forEach(function (c) {
   });
 });
 
+/* ---- hikayelerdeki her kelime sözlükte var mı ---- */
+(KI.stories || []).forEach(function (s) {
+  (s.sentences || []).forEach(function (sen) {
+    sen.en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
+      var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
+      if (!clean) return;
+      if (!KI.glossary.lookup(clean)) fail('stories/' + s.id + ': sözlükte yok "' + clean + '" ("' + sen.en + '")');
+    });
+  });
+});
+
 /* ---- sayaçlar ---- */
 var tenseQuiz = 0; KI.tenses.list.forEach(function (t) { tenseQuiz += (t.quiz || []).length; });
 var compareQuiz = 0; KI.compare.list.forEach(function (c) { compareQuiz += (c.quiz || []).length; });
 var exampleCount = 0; KI.tenses.list.forEach(function (t) { exampleCount += (t.examples || []).length; });
+var storySentences = 0; (KI.stories || []).forEach(function (s) { storySentences += (s.sentences || []).length; });
 
 console.log('Zamanlar:', KI.tenses.list.length);
 console.log('Karşılaştırma sayfaları:', KI.compare.list.length);
 console.log('Örnek cümleler:', exampleCount);
 console.log('Sorular (zaman + karşılaştırma):', tenseQuiz + compareQuiz);
+console.log('Hikayeler:', (KI.stories || []).length, '(' + storySentences + ' cümle)');
 console.log('Sözlük kelime sayısı:', KI.glossary.size());
 console.log('Düzensiz fiil sayısı:', KI.glossary.irregularVerbs.length);
 console.log('');
