@@ -8,13 +8,14 @@
   'use strict';
   var U = KI.util;
 
+  /* Sayı artık hemen üstündeki başlıkta ("X / 12 öğrenildi") olduğu için
+     çubuğun yanında tekrar yazılmıyor — yalnız görsel oran kalıyor. */
   function progressBox() {
     var total = KI.tenses.list.length;
     var done = KI.store.learnedCount();
     var fill = U.el('div', { class: 'progress__fill' });
     var box = U.el('div', { class: 'progress' }, [
-      U.el('div', { class: 'progress__bar' }, [fill]),
-      U.el('span', { class: 'progress__num', text: done + '/' + total })
+      U.el('div', { class: 'progress__bar' }, [fill])
     ]);
     setTimeout(function () { fill.style.width = Math.round(done / total * 100) + '%'; }, 60);
     return box;
@@ -130,32 +131,31 @@
   function view() {
     var frag = document.createDocumentFragment();
 
-    /* --- karşılama --- */
+    /* --- karşılama, artık ayrı bir kutu değil; harita başlığının içinde --- */
     var last = KI.store.get('lastTense');
     var lastT = last ? KI.tenses.get(last) : null;
     var done = KI.store.learnedCount();
 
-    var hero = U.el('section', { class: 'hero reveal' });
-    hero.appendChild(U.el('h1', { text: 'Her şey zamanın neresinde?' }));
-    hero.appendChild(U.el('p', { text: 'İngilizcede cümle kurmadan önce tek bir soru sorulur. 12 zamanın hepsi aşağıdaki haritada, yerli yerinde.' }));
-    hero.appendChild(progressBox());
-
-    var play = KI.icons.html('play');
-    var primary = lastT
-      ? U.el('a', { class: 'btn btn--mustard', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
-      : U.el('a', { class: 'btn btn--mustard', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
-    hero.appendChild(U.el('div', { class: 'row', style: 'margin-top:14px' }, [
-      primary,
-      U.el('a', { class: 'btn', href: '#/temeller', 'data-sfx': 'nav', html: KI.icons.html('wall') + ' Temeller' })
-    ]));
-    frag.appendChild(hero);
-
-    /* --- harita --- */
     var head = U.el('div', { class: 'maphead reveal' }, [
-      U.el('h2', { text: 'Zaman Haritası' }),
+      U.el('h1', { text: 'Her şey zamanın neresinde?' }),
       U.el('span', { class: 'maphead__num', text: done + ' / ' + KI.tenses.list.length + ' öğrenildi' })
     ]);
     frag.appendChild(head);
+    frag.appendChild(U.el('p', { class: 'maphead__desc reveal',
+      text: 'İngilizcede cümle kurmadan önce tek bir soru sorulur. 12 zamanın hepsi aşağıdaki haritada, yerli yerinde.' }));
+
+    var actions = U.el('div', { class: 'maphead__actions reveal' });
+    actions.appendChild(progressBox());
+    var play = KI.icons.html('play');
+    var primary = lastT
+      ? U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
+      : U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
+    actions.appendChild(U.el('div', { class: 'row', style: 'margin-top:10px' }, [
+      primary,
+      U.el('a', { class: 'btn btn--sm', href: '#/temeller', 'data-sfx': 'nav', html: KI.icons.html('wall') + ' Temeller' })
+    ]));
+    frag.appendChild(actions);
+
     frag.appendChild(howTo());
     frag.appendChild(grid());
 

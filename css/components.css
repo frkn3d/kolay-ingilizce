@@ -250,7 +250,6 @@ html[data-theme="dark"] .tcard__done .icon { color: var(--green-300); }
 .progress__bar { flex: 1; height: 12px; border-radius: 999px; background: var(--surface-2); border: 1.5px solid var(--line); overflow: hidden; }
 .progress__fill { height: 100%; width: 0%; transition: width .5s ease;
   background: repeating-linear-gradient(45deg, var(--green-500) 0 8px, var(--green-600) 8px 16px); }
-.progress__num { font-family: var(--font-mono); font-size: .85rem; color: var(--ink-soft); }
 
 .wlist { display: grid; gap: 8px; }
 .wrow {
@@ -381,8 +380,6 @@ table.tbl tr:last-child td { border-bottom: 0; }
 .tl .tl-pop { animation: tlpop .45s cubic-bezier(.2,1.4,.5,1) both; transform-origin: center; }
 @keyframes tlpop { from { opacity: 0; transform: translateY(8px) scale(.85); } to { opacity: 1; transform: none; } }
 .tcard .tl-wrap { padding: 0; border: 0; background: transparent; }
-.hero .tl-wrap { background: rgba(0,0,0,.22); border-color: rgba(251,246,233,.3); }
-.hero .tl-caption { color: rgba(251,246,233,.75); }
 .speaking { background: color-mix(in srgb, var(--mustard) 55%, transparent) !important; border-radius: 4px; }
 .pill-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px; -webkit-overflow-scrolling: touch; }
 .pill-row .btn { flex: 0 0 auto; }
@@ -466,13 +463,15 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 .disclose__list { margin: 0; padding-left: 18px; font-size: .92rem; }
 .disclose__list li { margin-bottom: .3em; }
 
-/* ---------- Harita başlığı ---------- */
+/* ---------- Harita başlığı: eski ayrı "hero" kutusunun yerini alır ---------- */
 .maphead {
   display: flex; align-items: baseline; justify-content: space-between;
-  gap: 10px; margin: 26px 0 10px;
+  gap: 10px; margin: 10px 0 6px;
 }
-.maphead h2 { margin: 0; }
+.maphead h1, .maphead h2 { margin: 0; font-size: clamp(1.15rem, 3.2vw, 1.55rem); }
 .maphead__num { font-family: var(--font-mono); font-size: .78rem; color: var(--ink-mute); flex: 0 0 auto; }
+.maphead__desc { color: var(--ink-soft); font-size: .84rem; margin: 0 0 12px; }
+.maphead__actions { margin-bottom: 8px; }
 
 
 /* ---------- Alıştırma oturum ayarı ---------- */

@@ -87,38 +87,6 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
 .row--between { justify-content: space-between; }
 .spacer { flex: 1; }
 
-.hero {
-  background:
-    radial-gradient(1200px 260px at 15% -40%, var(--hero-glow), transparent 60%),
-    var(--hero-bg);
-  color: var(--hero-ink);
-  border: 2px solid var(--hero-edge);
-  border-radius: var(--r-lg);
-  padding: 20px 18px;
-  box-shadow: var(--shadow-hard);
-  margin-bottom: 18px;
-}
-.hero h1 { color: var(--hero-ink); margin-bottom: .3em; font-size: clamp(1.1rem, 3vw, 1.5rem); }
-
-/* Hero üzerindeki düğmeler: koyu temada da zeminden ayrılsın */
-.hero .btn {
-  background: rgba(251, 246, 233, .18);
-  color: var(--hero-ink);
-  border-color: rgba(251, 246, 233, .5);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, .3);
-}
-.hero .btn:hover { background: rgba(251, 246, 233, .3); box-shadow: 4px 4px 0 rgba(0, 0, 0, .3); }
-.hero .btn--mustard {
-  background: var(--mustard);
-  color: #3a2a06;
-  border-color: var(--mustard-d);
-  font-weight: 700;
-}
-.hero .btn--mustard:hover { background: #e8b257; }
-.hero p { color: rgba(251, 246, 233, .85); margin-bottom: .7em; font-size: .82rem; }
-.hero .progress__bar { background: rgba(0,0,0,.28); border-color: rgba(251,246,233,.28); }
-.hero .progress__num { color: rgba(251,246,233,.85); }
-
 .crumb {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: .85rem; color: var(--ink-mute); text-decoration: none;
@@ -172,7 +140,6 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
     background: var(--cream); color: var(--green-800);
   }
   .toast { bottom: 26px; }
-  .hero { padding: 26px 24px; }
 }
 
 @media (min-width: 1000px) {
@@ -195,5 +162,4 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
   .tcard { padding: 8px 8px 7px; min-height: 84px; }
   .tcard__en { font-size: .82rem; }
   .tcard__tr { font-size: .68rem; }
-  .hero { padding: 16px 15px; }
 }

@@ -47,10 +47,6 @@
   --no-bg:     #efc9b6;
   --no-edge:   #9d4525;
   --no-key:    var(--cream);
-  --hero-bg:   var(--green-800);
-  --hero-edge: var(--green-900);
-  --hero-ink:  #fbf6e9;
-  --hero-glow: rgba(217,160,60,.28);
 
   /* Zaman grupları */
   --past:      #9d4525;
@@ -105,10 +101,6 @@ html[data-theme="dark"] {
   --no-bg:     #85462b;
   --no-edge:   #e5a284;
   --no-key:    #2b1408;
-  --hero-bg:   #275438;
-  --hero-edge: #3d7d55;
-  --hero-ink:  #f6f0e0;
-  --hero-glow: rgba(217,160,60,.20);
 
   --past:      #e08a63;
   --past-bg:   #33231c;
