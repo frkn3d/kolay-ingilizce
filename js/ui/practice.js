@@ -641,23 +641,15 @@
     var frag = document.createDocumentFragment();
     var mode = MODES.filter(function (m) { return m.id === modeId; })[0];
 
-    frag.appendChild(U.el('div', { class: 'page-head' }, [
+    frag.appendChild(U.el('div', { class: 'page-head' + (mode ? ' page-head--tight' : '') }, [
       U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
       U.el('h1', { text: mode ? mode.t : 'Kendini dene' }),
       U.el('p', { text: mode ? mode.d : 'Bir mod seç; her yanlıştan sonra doğrusu ve nedeni gösterilir.' })
     ]));
 
-    /* kısayol şeridi yalnız bir mod açıkken gerekli; liste ekranında
-       aynı bilgiyi kartlar zaten veriyor */
-    var row = U.el('div', { class: 'pill-row' });
-    MODES.forEach(function (m) {
-      var a = U.el('a', {
-        class: 'btn btn--sm' + (mode && mode.id === m.id ? ' btn--primary' : ''),
-        href: '#/alistirma/' + m.id, 'data-sfx': 'nav', html: m.ico + ' ' + m.t
-      });
-      row.appendChild(a);
-    });
-    if (mode) frag.appendChild(row);
+    /* Mod açıkken kısayol şeridi kaldırıldı: alıştırma sırasında bir
+       soruyu cevapladıktan sonra kaydırma mesafesini kısaltmak için
+       (bkz. sürüm notları). Moda geçiş için "← Modlara dön" yeterli. */
 
     if (!mode) {
       /* oturum boyu */

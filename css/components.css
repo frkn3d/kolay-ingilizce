@@ -274,19 +274,19 @@ html[data-theme="dark"] .tcard__done .icon { color: var(--green-300); }
 }
 .input:focus { outline: none; box-shadow: var(--ring); border-color: var(--green-500); }
 
-.quiz__q { font-size: 1.15rem; font-family: var(--font-display); margin-bottom: .8em; line-height: 1.6; }
-.quiz__opts { display: grid; gap: 9px; }
+.quiz__q { font-size: 1.05rem; font-family: var(--font-display); margin-bottom: .5em; line-height: 1.4; }
+.quiz__opts { display: grid; gap: 7px; }
 .opt {
   text-align: left; width: 100%;
   border: 2px solid var(--line-2); border-radius: var(--r-sm);
-  background: var(--surface); padding: .7em .9em; cursor: pointer;
+  background: var(--surface); padding: .5em .8em; cursor: pointer;
   display: flex; align-items: center; gap: .6em;
   transition: transform .1s ease, background .15s ease, border-color .15s ease;
 }
 .opt:hover { background: var(--surface-2); transform: translateX(3px); }
-.opt__key { width: 26px; height: 26px; flex: 0 0 auto; border-radius: 50%;
+.opt__key { width: 23px; height: 23px; flex: 0 0 auto; border-radius: 50%;
   background: var(--surface-2); border: 1.5px solid var(--line-2);
-  display: grid; place-items: center; font-size: .78rem; font-weight: 700; }
+  display: grid; place-items: center; font-size: .72rem; font-weight: 700; }
 .opt.is-right {
   background: var(--ok-bg); border-color: var(--ok-edge);
   box-shadow: 0 0 0 1px var(--ok-edge);

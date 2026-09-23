@@ -6,8 +6,9 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.4';
+  var APP_VERSION = '0.4.1';
   var CHANGELOG = [
+    { v: '0.4.1', d: 'Zaman sayfalarındaki örnek cümle sayısı 148’den 1000’in üzerine çıktı (yerel kültürden yeni temalarla); artık her girişte örnekler ve "Kendini dene" soruları havuzdan rastgele seçiliyor, aynı sorular tekrar etmiyor. Üst bant sadeleştirildi (alt yazı kaldırıldı). Alıştırma ekranı sıkılaştırıldı: mod kısayol şeridi kaldırıldı, başlık ve şıklar daraltıldı — bir soruyu cevapladıktan sonra aşağı kaydırmaya neredeyse hiç gerek kalmıyor.' },
     { v: '0.4', d: 'Başarım sistemi eklendi: el çizimi rozetlerle 15 başarım, kazanınca sesli/titreşimli kutlama kutusu (uygulama çubuğundaki kupa simgesinden erişilir). Dokunsal geri bildirim (titreşim): tıklamalarda minik, yanlış cevapta belirgin titreşim; ayarlardan kapatılabilir. İlerlemeyi bir dosyaya kaydedip başka bir cihazda geri yükleme (dışa/içe aktar).' },
     { v: '0.3', d: 'Emoji kaldırıldı, tüm ikonlar elle çizilmiş SVG’ye taşındı. Sözlük 3000’ün üzerine çıktı, alıştırma sayısı 327’ye ulaştı. Mobil zaman çizgileri yeniden tasarlandı (renk kontrastı, ince çizgiler, çakışan işaretlerin ayrılması). Aralıklı tekrar (Leitner kutusu) ve "Bugünkü Tekrar" modu, modal fiiller ve "used to" bölümleri, 6. karşılaştırma sayfası, sıklığa göre ayrılmış düzensiz fiiller, gerçek çevrimdışı çalışma. Ana sayfa sadeleştirildi: tek okla zaman şeridi, kaydırdıkça beliren animasyonlar.' },
     { v: '0.2', d: 'Sözlük B2 seviyesine genişletildi, alıştırma sayısı artırıldı. Karanlık modda okunabilirlik düzeltmeleri (baştan başla butonu, seçili cevap kontrastı). Dede Korkut ve Keloğlan gibi halk hikâyelerinden, günlük hayattan yeni örnek cümleler.' },

@@ -71,6 +71,14 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
 .page-head h1 { margin-bottom: .18em; }
 .page-head p { color: var(--ink-soft); margin: 0; }
 
+/* Bir alıştırma modu açıkken (soru ekranı) başlık bloğu daha az yer
+   kaplasın diye sıkıştırılmış hâli: cevaplayınca aşağı kaydırma
+   mesafesi kısalsın. */
+.page-head--tight { margin-bottom: 8px; }
+.page-head--tight .eyebrow { margin-bottom: .15em; }
+.page-head--tight h1 { font-size: clamp(1.2rem, 3.6vw, 1.55rem); margin-bottom: .08em; }
+.page-head--tight p { font-size: .84rem; line-height: 1.35; }
+
 .section { margin: 26px 0 0; }
 .section__title {
   display: flex; align-items: center; gap: 10px;
