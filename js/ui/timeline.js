@@ -90,8 +90,12 @@
       var g2 = n('g');
       g2.appendChild(nn('line', { x1: x, y1: y, x2: x + 0.01, y2: y,
         stroke: 'var(--surface)', 'stroke-width': w + 3, 'stroke-linecap': 'round' }));
+      /* Nokta işareti kasıtlı olarak çizginin/okun rengiyle (--tlc) aynı
+         değil: hep --mustard. Böylece "tam olarak bu an" işareti, hangi
+         zaman grubunda olursa olsun aynı renkte kalıp çizginin/bayrağın
+         içinde kaybolmaz. */
       g2.appendChild(nn('line', { x1: x, y1: y, x2: x + 0.01, y2: y,
-        stroke: 'var(--tlc)', 'stroke-width': w, 'stroke-linecap': 'round' }));
+        stroke: 'var(--mustard)', 'stroke-width': w, 'stroke-linecap': 'round' }));
       return g2;
     }
     var color = 'var(--' + tense.group + ')';
@@ -155,14 +159,14 @@
       if (m.t === 'dot') {
         g.appendChild(mini
           ? dotAt(px(m.x), AY, 9)
-          : n('circle', { cx: px(m.x), cy: AY, r: 13, fill: 'var(--tlc)', stroke: 'var(--surface)', 'stroke-width': 3 }));
+          : n('circle', { cx: px(m.x), cy: AY, r: 13, fill: 'var(--mustard)', stroke: 'var(--surface)', 'stroke-width': 3 }));
         if (!mini && m.l) g.appendChild(txt(px(m.x), belowY(), m.l));
 
       } else if (m.t === 'dots') {
         (m.xs || []).forEach(function (x) {
           g.appendChild(mini
             ? dotAt(px(x), AY, 7)
-            : n('circle', { cx: px(x), cy: AY, r: 11, fill: 'var(--tlc)', stroke: 'var(--surface)', 'stroke-width': 3 }));
+            : n('circle', { cx: px(x), cy: AY, r: 11, fill: 'var(--mustard)', stroke: 'var(--surface)', 'stroke-width': 3 }));
         });
         if (!mini && m.l) g.appendChild(txt(CX, belowY(), m.l));
 
