@@ -10,7 +10,7 @@
   var CHANGELOG = [
     { v: '0.3', d: 'Emoji kaldırıldı, tüm ikonlar elle çizilmiş SVG’ye taşındı. Sözlük 3000’ün üzerine çıktı, alıştırma sayısı 327’ye ulaştı. Mobil zaman çizgileri yeniden tasarlandı (renk kontrastı, ince çizgiler, çakışan işaretlerin ayrılması). Aralıklı tekrar (Leitner kutusu) ve "Bugünkü Tekrar" modu, modal fiiller ve "used to" bölümleri, 6. karşılaştırma sayfası, sıklığa göre ayrılmış düzensiz fiiller, gerçek çevrimdışı çalışma. Ana sayfa sadeleştirildi: tek okla zaman şeridi, kaydırdıkça beliren animasyonlar.' },
     { v: '0.2', d: 'Sözlük B2 seviyesine genişletildi, alıştırma sayısı artırıldı. Karanlık modda okunabilirlik düzeltmeleri (baştan başla butonu, seçili cevap kontrastı). Dede Korkut ve Keloğlan gibi halk hikâyelerinden, günlük hayattan yeni örnek cümleler.' },
-    { v: '0.1', d: 'İlk sürüm: 12 zamanın tam haritası ve zaman çizgisi görselleştirmesi, Türk ve Osmanlı kültüründen örnek cümleler, tıklanabilir sözlük, cihaz üstü sesli okuma, kısık ses efektleri.' }
+    { v: '0.1', d: 'İlk sürüm: 12 zamanın tam haritası ve zaman çizgisi görselleştirmesi, günlük hayattan ve yerel kültürden örnek cümleler, tıklanabilir sözlük, cihaz üstü sesli okuma, kısık ses efektleri.' }
   ];
 
   function switchRow(label, hint, key, onChange) {
