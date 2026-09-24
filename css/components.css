@@ -44,7 +44,7 @@ html[data-theme="dark"] .btn--primary { background: var(--green-500); color: #0d
 
 .iconbtn {
   position: relative;
-  width: 40px; height: 40px; flex: 0 0 auto;
+  width: 44px; height: 44px; flex: 0 0 auto;
   display: inline-grid; place-items: center;
   border: 2px solid var(--line-2); border-radius: 50%;
   background: var(--surface); cursor: pointer;

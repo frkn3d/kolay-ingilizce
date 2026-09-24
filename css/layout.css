@@ -27,7 +27,7 @@ html[data-theme="dark"] .appbar { background: #13231a; border-bottom-color: #081
 
 .appbar__actions { display: flex; gap: 7px; flex: 0 0 auto; }
 .appbar .iconbtn {
-  width: 36px; height: 36px;
+  width: 44px; height: 44px;
   background: rgba(251, 246, 233, .1);
   border-color: rgba(251, 246, 233, .3);
   color: var(--cream);

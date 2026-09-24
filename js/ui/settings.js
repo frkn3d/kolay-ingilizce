@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.6.4';
+  var APP_VERSION = '0.6.5';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.6.5', d: 'Üst çubuktaki canlar/başarımlar/ayarlar düğmeleri ve pencere kapatma düğmeleri 40-36px\'ten 44×44px\'e büyütüldü — Apple/Android\'in önerdiği en küçük dokunma hedefine (44×44) uysun diye, özellikle küçük telefonlarda yanlışlıkla komşu düğmeye basmayı azaltır.' },
     { v: '0.6.4', d: 'Görülebilirlik ve erişilebilirlik turu: Ayarlar/Başarımlar/Canlar/Sıfırlama pencereleri artık açılınca odağı içine alıyor, Tab tuşuyla pencere dışına çıkılamıyor, kapanınca odak açan düğmeye geri dönüyor. Bildirim baloncukları (toast) artık ekran okuyuculara da duyuruluyor. Oyun Modu\'nun mor vurgu rengi biraz koyulaştırıldı (kontrast standardını geçmesi için). Sayfa daha hızlı açılsın diye script dosyaları artık paralel yükleniyor. Oyun Modu haritasına ilk girişte ve haritanın en altında, ilerlemenin yalnızca bu cihazda saklandığını hatırlatan küçük bir not eklendi. Giriş ekranının en altına küçük bir "Logspace" ve sürüm notu eklendi.' },
     { v: '0.6.3', d: 'Oyun Modu haritasındaki patika artık düz bir çizgi yerine düzensiz, sağa sola kıvrılan eğrilerle ilerliyor: her durak farklı genlikte bir yöne kayıyor ve aralarındaki bağlantı da buna göre yumuşak bir eğri çiziyor — hiçbir zaman yatay kaydırma gerektirmeyecek şekilde sınırlandırıldı.' },
     { v: '0.6.2', d: 'Oyun Modu\'nun arka planı yeniden tasarlandı: kağıt/defter kimliğinden tamamen ayrışan, açık/koyu tema tercihinden bağımsız koyu lacivert-mor bir "gece haritası" gradyanı geldi (yeşilden bilerek uzak duruldu). Kartlar, soru şıkları, düğmeler gibi Oyun Modu\'ndaki her şey bu yeni palete göre yeniden renklendirildi ki her ekran tutarlı ve göze yorucu gelmeyen bir bütün oluştursun. Ayarlar\'daki "Tüm ilerlemeyi sıfırla" düğmesi artık tek tıkla çalışmıyor: düğmeyi 3 saniye basılı tutmak gerekiyor, ardından açılan onay penceresindeki "Evet, hepsini sil" düğmesi de 3 saniye daha bekleyip aktifleşiyor — yanlışlıkla tüm ilerlemenin silinmesi zorlaştırıldı.' },
