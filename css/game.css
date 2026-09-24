@@ -6,25 +6,25 @@
    kullanır; burada yalnız haritaya ve giriş ekranına özgü stiller var.
    ============================================================ */
 
-/* Oyun Modu'na özel, eğlenceli bir başlık yazı tipi. Uygulama tamamen
+/* Oyun Modu'na özel, sans-serif bir başlık yazı tipi. Uygulama tamamen
    çevrimdışı çalıştığı için (bkz. sw.js) Google Fonts'a bağlanmak yerine
    dosyalar assets/fonts altında birlikte gönderiliyor; internet olmasa
    da yüklenir ve service worker tarafından önbelleğe alınır. */
 @font-face {
-  font-family: 'Baloo 2';
+  font-family: 'Quicksand';
   font-style: normal; font-weight: 700; font-display: swap;
-  src: url('assets/fonts/baloo2-700-latin.woff2') format('woff2');
+  src: url('assets/fonts/quicksand-700-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
 }
 @font-face {
-  font-family: 'Baloo 2';
+  font-family: 'Quicksand';
   font-style: normal; font-weight: 700; font-display: swap;
-  src: url('assets/fonts/baloo2-700-latin-ext.woff2') format('woff2');
+  src: url('assets/fonts/quicksand-700-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+1E00-1E9F, U+2020;
 }
 /* Yalnız #view içindeki (modallar hariç) başlıklara uygulanır. */
 html[data-section="oyun"] #view {
-  --font-display: 'Baloo 2', "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-display: 'Quicksand', var(--font-body);
 }
 
 .brand__logo { width: 34px; height: 34px; display: block; }
@@ -156,9 +156,9 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__node-ico .icon { width: 30px; height: 30px; }
 
 .gmap__node--locked {
-  background: var(--surface-2); border-color: var(--line-2);
-  box-shadow: 0 5px 0 var(--line-2);
-  color: var(--ink-mute); cursor: not-allowed;
+  background: #4b4f54; border-color: #34373b;
+  box-shadow: 0 5px 0 #34373b;
+  color: #fff; cursor: not-allowed;
 }
 .gmap__node--locked:hover { transform: none; }
 

@@ -281,12 +281,6 @@
     KI.store.gameTouchDay();
     var frag = document.createDocumentFragment();
 
-    frag.appendChild(U.el('div', { class: 'page-head' }, [
-      U.el('p', { class: 'eyebrow', text: 'Oyun Modu' }),
-      U.el('h1', { text: 'Zaman Haritası' }),
-      U.el('p', { text: 'Aşağı doğru ilerle. Sarı İleri Sar durakları her zaman açıktır; birini geçersen o noktaya kadarki tüm duraklar açılır.' })
-    ]));
-
     var wrap = U.el('div', { class: 'gmap' });
 
     LEVELS.forEach(function (level, li) {

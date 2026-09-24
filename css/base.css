@@ -160,6 +160,18 @@ html[data-theme="dark"][data-section="alistirma"] body { background-color: color
 html[data-theme="dark"][data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--future) 4%); }
 html[data-theme="dark"][data-section="oyun"] body { background-color: color-mix(in srgb, color-mix(in srgb, var(--bg) 96%, var(--present) 4%) 80%, black 20%); }
 
+/* Oyun Modu defter (kareli) dokusunu kullanmaz; onun yerine noktalardan
+   oluşan, hafifçe kaydırılmış geometrik bir doku var — "oyun tahtası"
+   hissi versin diye. Aynı --bg-grain tonunu kullandığı için her iki
+   temada da aynı ölçüde belli belirsiz kalır. */
+html[data-section="oyun"] body {
+  background-image:
+    radial-gradient(circle at center, var(--bg-grain) 0 2.2px, transparent 2.2px),
+    radial-gradient(circle at center, var(--bg-grain) 0 2.2px, transparent 2.2px);
+  background-size: 34px 34px, 34px 34px;
+  background-position: 0 0, 17px 17px;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 700;

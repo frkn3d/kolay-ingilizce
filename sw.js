@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v10';
+var CACHE_VERSION = 'ki-cache-v11';
 
 var CORE_ASSETS = [
   './',
@@ -66,8 +66,8 @@ var CORE_ASSETS = [
   './assets/logo.svg',
   './assets/icon-mode-game.svg',
   './assets/icon-mode-study.svg',
-  './assets/fonts/baloo2-700-latin.woff2',
-  './assets/fonts/baloo2-700-latin-ext.woff2'
+  './assets/fonts/quicksand-700-latin.woff2',
+  './assets/fonts/quicksand-700-latin-ext.woff2'
 ];
 
 self.addEventListener('install', function (event) {
