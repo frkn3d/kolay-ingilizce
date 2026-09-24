@@ -115,6 +115,25 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
   display: grid; place-items: center; color: #3a2a06;
 }
 .gmap__node-star .icon { width: 14px; height: 14px; }
+.gmap__node-star--skip { background: var(--sky); color: var(--cream); }
+
+/* İleri Sar: her seviyede aynı, seviyeden bağımsız altın renk; her
+   zaman açık olduğu için hiçbir zaman "locked" görünmez. */
+.gmap__stop--cp { margin-bottom: 34px; }
+.gmap__node--checkpoint {
+  border-radius: var(--r-lg);
+  background: var(--mustard); border-color: var(--mustard-d);
+  box-shadow: 0 5px 0 var(--mustard-d), var(--shadow-soft);
+  color: #3a2a06;
+}
+.gmap__node--checkpoint:active { box-shadow: 0 2px 0 var(--mustard-d); }
+.gmap__node--checkpoint.gmap__node--done { background: var(--mustard-d); color: var(--cream); }
+.gmap__node--checkpoint.gmap__node--next { animation: gnode-pulse-cp 1.9s ease-in-out infinite; }
+@keyframes gnode-pulse-cp {
+  0%, 100% { box-shadow: 0 5px 0 var(--mustard-d), 0 0 0 0 color-mix(in srgb, var(--mustard) 50%, transparent); }
+  50%      { box-shadow: 0 5px 0 var(--mustard-d), 0 0 0 9px color-mix(in srgb, var(--mustard) 0%, transparent); }
+}
+.gmap__label--cp b { color: var(--mustard-d); }
 
 .gmap__label { text-align: center; margin-top: 8px; max-width: 122px; }
 .gmap__label b { display: block; font-size: .8rem; line-height: 1.22; }

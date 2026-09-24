@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v6';
+var CACHE_VERSION = 'ki-cache-v7';
 
 var CORE_ASSETS = [
   './',
@@ -44,6 +44,7 @@ var CORE_ASSETS = [
   './js/data/compare.js',
   './js/data/exercises-2.js',
   './js/data/game-questions.js',
+  './js/data/game-questions-2.js',
   './js/ui/timeline.js',
   './js/ui/sentence.js',
   './js/ui/home.js',

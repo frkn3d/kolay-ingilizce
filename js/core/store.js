@@ -263,6 +263,7 @@
       var lv = state.game.progress[level] || (state.game.progress[level] = {});
       var cur = lv[topicId] || { done: false, best: 0 };
       cur.done = true;
+      cur.skipped = false;
       if (correct > cur.best) cur.best = correct;
       lv[topicId] = cur;
       state.quizzesCompleted = (state.quizzesCompleted || 0) + 1;
@@ -273,6 +274,17 @@
     isGameTopicDone: function (level, topicId) {
       var p = S.gameProgress(level, topicId);
       return !!(p && p.done);
+    },
+    /* İleri Sar sınavı geçilince komşu düğüm oynanmamış olsa da "geçildi"
+       sayılır; gerçekten oynanmış bir kayıt varsa üzerine yazılmaz. */
+    markGameNodeSkipped: function (level, nodeId) {
+      var lv = state.game.progress[level] || (state.game.progress[level] = {});
+      var cur = lv[nodeId];
+      if (cur && cur.done) return cur;
+      cur = { done: true, skipped: true, best: 0 };
+      lv[nodeId] = cur;
+      save();
+      return cur;
     },
 
     /* --- veri dışa/içe aktarma: telefon değişince ilerleme kaybolmasın --- */

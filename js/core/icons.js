@@ -104,6 +104,7 @@ window.KI = window.KI || {};
     lock: '<rect x="5" y="10.6" width="14" height="10" rx="1.8"/><path d="M8 10.6V7.6a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.1" r="1.3" fill="currentColor" stroke="none"/>',
     'aspect-simple': '<line x1="3.5" y1="12" x2="20.5" y2="12"/><circle cx="12" cy="12" r="2.8" fill="currentColor" stroke="none"/>',
     'aspect-cont': '<path d="M2.5 13c1.7-3.4 3.4-3.4 5.1 0s3.4 3.4 5.1 0 3.4-3.4 5.1 0 3.4 3.4 5.1 0"/>',
+    'fast-forward': '<polygon points="3.5,4.5 12,12 3.5,19.5" fill="currentColor" stroke="none"/><polygon points="12,4.5 20.5,12 12,19.5" fill="currentColor" stroke="none"/>',
 
     /* --- başarım ikonları: her biri tek bir başarımı temsil eder --- */
     'ach-step': '<circle cx="5.5" cy="18.5" r="1.6" fill="currentColor" stroke="none"/><line x1="7" y1="17" x2="16.5" y2="7.5"/><polyline points="12,7.5 16.5,7.5 16.5,13"/>',
