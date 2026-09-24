@@ -32,6 +32,16 @@ html[data-theme="dark"] .btn--primary { background: var(--green-500); color: #0d
 .btn--block { width: 100%; }
 .btn[disabled] { opacity: .5; cursor: not-allowed; transform: none !important; }
 
+/* ---------- Basılı tutarak onaylama (yanlışlıkla tetiklenmesin diye) ---------- */
+.holdbtn { position: relative; overflow: hidden; touch-action: none; }
+.holdbtn__fill {
+  position: absolute; inset: 0; width: 0%;
+  background: color-mix(in srgb, var(--no-edge) 45%, transparent);
+  border-radius: inherit; z-index: 0;
+}
+.holdbtn.is-holding .holdbtn__fill { width: 100%; transition: width 3s linear; }
+.holdbtn__label { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: .5em; }
+
 .iconbtn {
   position: relative;
   width: 40px; height: 40px; flex: 0 0 auto;

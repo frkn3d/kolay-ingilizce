@@ -22,10 +22,54 @@
   src: url('assets/fonts/quicksand-700-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+1E00-1E9F, U+2020;
 }
-/* Yalnız #view içindeki (modallar hariç) başlıklara uygulanır. */
+/* Yalnız #view içinde (modallar hariç) geçerli: Oyun Modu'nun kendi,
+   açık/koyu tema tercihinden bağımsız "gece haritası" paleti. Yazı
+   tipiyle birlikte kart/yüzey/çizgi/vurgu renklerini de değiştirir ki
+   soru kartları, butonlar, sohbet baloncukları vb. her şey arka
+   plandaki lacivert-mor geçişle uyumlu olsun. --mustard/--terra/
+   --green-* gibi anlamı olan renkler (seviye rengi, doğru/yanlış,
+   canlar, İleri Sar) bilerek değişmez. */
 html[data-section="oyun"] #view {
   --font-display: 'Quicksand', var(--font-body);
+  /* body { color: var(--ink); } zaten çözülmüş bir renk olarak miras
+     kaldığından, --ink'i burada geçersiz kılmak tek başına yetmez;
+     rengi #view üzerinde yeniden var(--ink) ile beyan etmek gerekiyor
+     ki tüm alt öğeler (opt, h1, p...) yeni tondan miras alsın. */
+  color: var(--ink);
+
+  --surface: #232a4d;
+  --surface-2: #2b3257;
+  --ink: #f1f2fb;
+  --ink-soft: #c5c9e8;
+  --ink-mute: #9195c1;
+  --line: #383f6c;
+  --line-2: #4a5286;
+  --accent: #7c6ce0;
+  --accent-ink: #f5f3ff;
+  /* --shadow-hard, --line-2'ye referans veriyor; iç içe değişkenler bir
+     üst öğede (bu durumda #view) yeniden yazılmadan miras alınmaz, o
+     yüzden burada tekrar yazılıyor ki gölgeler de yeni tonu yansıtsın. */
+  --shadow-hard: 3px 3px 0 var(--line-2);
 }
+
+/* .btn--primary normalde markanın yeşili; Oyun Modu'nda yeni vurgu
+   rengini (--accent) kullanır. */
+html[data-section="oyun"] #view .btn--primary {
+  background: var(--accent); color: var(--accent-ink); border-color: #5b4bc4;
+}
+
+/* Cümle kurmada yerleştirilen kelime: açık temanın soluk mint yeşili
+   koyu zeminde uyumsuz kalıyordu, yerine koyu bir yeşil geldi. */
+html[data-section="oyun"] #view .wchip--placed {
+  background: #223a2c; border-color: #4f9b71;
+}
+
+/* Seviye afişinin soluk zemin rengi de tema tercihinden bağımsız hep
+   koyu kalsın (aksi halde açık temada göz alıcı, uyumsuz bir leke gibi
+   görünüyordu). */
+html[data-section="oyun"] #view .gmap__level             { --lvl-soft: #17301f; }
+html[data-section="oyun"] #view .gmap__level[data-level="orta"]  { --lvl-soft: #3a2c10; }
+html[data-section="oyun"] #view .gmap__level[data-level="ileri"] { --lvl-soft: #33231c; }
 
 .brand__logo { width: 34px; height: 34px; display: block; }
 

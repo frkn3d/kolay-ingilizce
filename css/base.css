@@ -152,24 +152,26 @@ body {
 html[data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--terra) 8%); }
 html[data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--mustard) 8%); }
 html[data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--future) 8%); }
-/* Oyun Modu diğer sekmelerden %20 daha koyu (istek üzerine). */
-html[data-section="oyun"] body { background-color: color-mix(in srgb, color-mix(in srgb, var(--bg) 92%, var(--plum) 8%) 80%, black 20%); }
-
 html[data-theme="dark"][data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--past) 4%); }
 html[data-theme="dark"][data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--mustard) 4%); }
 html[data-theme="dark"][data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--future) 4%); }
-html[data-theme="dark"][data-section="oyun"] body { background-color: color-mix(in srgb, color-mix(in srgb, var(--bg) 96%, var(--present) 4%) 80%, black 20%); }
 
-/* Oyun Modu defter (kareli) dokusunu kullanmaz; onun yerine noktalardan
-   oluşan, hafifçe kaydırılmış geometrik bir doku var — "oyun tahtası"
-   hissi versin diye. Aynı --bg-grain tonunu kullandığı için her iki
-   temada da aynı ölçüde belli belirsiz kalır. */
+/* Oyun Modu, Eğitim Modu'nun kağıt/defter kimliğinden tamamen ayrışan,
+   açık/koyu tema tercihinden bağımsız (Giriş ekranı gibi) kendi koyu
+   lacivert-mor "gece haritası" paletini kullanır: köşede yumuşak bir
+   mor parıltı, lacivertten mora geçen bir geçiş ve üstünde yıldız gibi
+   duran hafif bir nokta deseni. Bilerek yeşilden uzak duruyor ki Eğitim
+   Modu'nun ana rengiyle karışmasın. */
 html[data-section="oyun"] body {
+  background-color: #14162b;
   background-image:
-    radial-gradient(circle at center, var(--bg-grain) 0 2.2px, transparent 2.2px),
-    radial-gradient(circle at center, var(--bg-grain) 0 2.2px, transparent 2.2px);
-  background-size: 34px 34px, 34px 34px;
-  background-position: 0 0, 17px 17px;
+    radial-gradient(58% 46% at 84% 4%, rgba(124, 108, 224, .28) 0%, transparent 70%),
+    linear-gradient(160deg, #14162b 0%, #1b1c3a 55%, #241f42 100%),
+    radial-gradient(circle at center, rgba(255, 255, 255, .055) 0 2.1px, transparent 2.1px),
+    radial-gradient(circle at center, rgba(255, 255, 255, .055) 0 2.1px, transparent 2.1px);
+  background-size: auto, auto, 34px 34px, 34px 34px;
+  background-position: 0 0, 0 0, 0 0, 17px 17px;
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4 {

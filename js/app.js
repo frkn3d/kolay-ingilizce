@@ -153,9 +153,24 @@
     document.getElementById('hearts-close').addEventListener('click', closeHeartsModal);
     heartsModal.addEventListener('click', function (e) { if (e.target === heartsModal) closeHeartsModal(); });
 
+    /* Tüm ilerlemeyi sıfırlama onayı: açılışı settings.js yönetir (3 saniye
+       basılı tutunca); burada yalnız dışına tıklama/Escape ile kapatma ve
+       o sırada işleyen geri sayımın temizlenmesi ele alınıyor. */
+    var resetModal = document.getElementById('reset-confirm-modal');
+    function closeResetModal() {
+      resetModal.hidden = true;
+      KI.audio.play('close');
+      if (KI.settings && KI.settings.cancelResetTimers) KI.settings.cancelResetTimers();
+    }
+    resetModal.addEventListener('click', function (e) { if (e.target === resetModal) closeResetModal(); });
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        if (!modal.hidden) closeModal();
+        /* reset-confirm-modal her zaman Ayarlar'ın üstünde açılır, o yüzden
+           öncelik sırasında ondan önce kontrol edilmeli — yoksa Escape,
+           üstündeki onay yerine altındaki Ayarlar penceresini kapatırdı. */
+        if (!resetModal.hidden) closeResetModal();
+        else if (!modal.hidden) closeModal();
         else if (!achModal.hidden) closeAchModal();
         else if (!heartsModal.hidden) closeHeartsModal();
         else KI.sentence.sheet.hide();
