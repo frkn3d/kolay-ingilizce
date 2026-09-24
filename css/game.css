@@ -176,14 +176,17 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__banner--locked .gmap__banner-ico { background: var(--ink-mute); }
 .gmap__banner--locked h2 { color: var(--ink-mute); }
 
-.gmap__track { position: relative; padding: 4px 0 6px; display: flex; flex-direction: column; align-items: center; }
-.gmap__track::before {
-  content: ''; position: absolute; top: 4px; bottom: 26px; left: 50%; width: 5px; margin-left: -2.5px;
-  background: repeating-linear-gradient(var(--line-2) 0 8px, transparent 8px 17px);
-  border-radius: 3px; z-index: 0;
-}
-.gmap__stop { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
-.gmap__stop:last-child { margin-bottom: 0; }
+.gmap__track { position: relative; padding: 4px 0 2px; display: flex; flex-direction: column; align-items: center; }
+.gmap__stop { position: relative; display: flex; flex-direction: column; align-items: center; }
+
+/* Duraklar arası eğri bağlantı: her durağın kendi yatay ofsetinden bir
+   sonrakinin ofsetine yumuşak bir Bezier eğrisiyle geçen, sabit
+   yükseklikli bir blok (bkz. js/ui/game.js buildConnector). Böylece
+   patika düz bir çizgi yerine düzensiz, sağa-sola kıvrılan bir yol gibi
+   görünür; hiçbir zaman yatay kaydırmaya yol açmayacak kadar dar tutulur. */
+.gmap__connector { display: flex; justify-content: center; }
+.gmap__connector svg { display: block; overflow: visible; }
+.gmap__connector-line { stroke: var(--line-2); stroke-width: 5; stroke-dasharray: 8 9; }
 
 .gmap__node {
   position: relative;
@@ -225,7 +228,6 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 
 /* İleri Sar: her seviyede aynı, seviyeden bağımsız altın renk; her
    zaman açık olduğu için hiçbir zaman "locked" görünmez. */
-.gmap__stop--cp { margin-bottom: 34px; }
 .gmap__node--checkpoint {
   border-radius: var(--r-lg);
   background: var(--mustard); border-color: var(--mustard-d);

@@ -19,7 +19,27 @@
   'use strict';
   var U = KI.util;
 
-  var ZIGZAG = [0, 58, -58, 58, -58, 58, -58, 58];
+  /* Düz, hep aynı aralıkla sağa-sola zıplayan bir zikzak yerine düzensiz
+     genlikli, ara sıra aynı yöne art arda kayan bir "patika" hissi versin
+     diye elle ayarlanmış bir dizi. Değerler px cinsinde; en büyük genlik
+     (66px) dar telefonlarda bile yatay kaydırmaya yol açmayacak şekilde
+     seçildi (bkz. gmap__connector genişliği ve .gmap__node çapı). */
+  var ZIGZAG = [0, 42, 66, 24, -58, -20, 50, -66, 14, -40, 62, -12, 36, -62, 48, -30];
+
+  /* Duraklar arasındaki eğri bağlantı çizgisi: sabit yükseklikli bir
+     "connector" bloğu içine, iki durağın yatay ofsetini birleştiren tek
+     bir kübik Bezier eğrisi çizilir. viewBox genişliği ZIGZAG'ın en büyük
+     genliğinden belirgin ölçüde geniş tutulur ki eğri hiçbir zaman kırpılmasın. */
+  var CONNECTOR_W = 200, CONNECTOR_H = 46, CONNECTOR_H_TALL = 58;
+  function buildConnector(fromX, toX, tall) {
+    var h = tall ? CONNECTOR_H_TALL : CONNECTOR_H;
+    var x1 = CONNECTOR_W / 2 + fromX, x2 = CONNECTOR_W / 2 + toX;
+    var mid = h / 2;
+    var d = 'M' + x1 + ' 0 C ' + x1 + ' ' + mid + ' ' + x2 + ' ' + mid + ' ' + x2 + ' ' + h;
+    var svg = '<svg width="' + CONNECTOR_W + '" height="' + h + '" viewBox="0 0 ' + CONNECTOR_W + ' ' + h + '" aria-hidden="true">' +
+      '<path class="gmap__connector-line" d="' + d + '" fill="none" stroke-linecap="round"></path></svg>';
+    return U.el('div', { class: 'gmap__connector', html: svg });
+  }
 
   /* Haritada aynı zaman ismi ("Present Simple") tur boyunca defalarca
      tekrar etmesin diye her ders düğümüne, hangi zamanı çalıştırdığından
@@ -296,12 +316,19 @@
       ]));
 
       var track = U.el('div', { class: 'gmap__track' });
+      var prevOffset = 0;
       level.path.forEach(function (node, i) {
         var isCp = node.kind === 'checkpoint';
         var tUnlocked = unlocked && isNodeUnlocked(level, i);
         var done = unlocked && isNodeDone(level, node);
         var prog = KI.store.gameProgress(level.id, node.id);
         var offset = isCp ? 0 : ZIGZAG[i % ZIGZAG.length];
+
+        if (i > 0) {
+          var prevIsCp = level.path[i - 1].kind === 'checkpoint';
+          track.appendChild(buildConnector(prevOffset, offset, isCp || prevIsCp));
+        }
+        prevOffset = offset;
 
         var stop = U.el('div', { class: 'gmap__stop' + (isCp ? ' gmap__stop--cp' : ''), style: 'transform:translateX(' + offset + 'px)' });
 
