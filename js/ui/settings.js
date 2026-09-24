@@ -6,8 +6,9 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.5.0';
+  var APP_VERSION = '0.5.1';
   var CHANGELOG = [
+    { v: '0.5.1', d: 'Oyun Modu düzeltmesi: soru bankasında doğru şık çoğunlukla A ya da B’de kalıyordu (kaynak metnin yapısından); artık her soru gösterildiğinde şıklar karıştırılıyor ve doğru cevap A/B/C/D arasında eşit olasılıkla dağılıyor. Sorular zaten havuzdan rastgele seçiliyordu (her durakta 10/60), tekrar oynadıkça farklı sorular geliyor.' },
     { v: '0.5.0', d: 'Büyük güncelleme: uygulama artık "Gramer Atlası" ismini taşıyor, yeni bir logo ve animasyonlu simgeler eklendi. Açılışta Oyun Modu / Eğitim Modu seçim ekranı geldi (logoya her zaman buradan dönülür). Eğitim Modu bugüne kadarki her şeyi (harita, temeller, alıştırma, sözlük, hikayeler) içeriyor. Yeni Oyun Modu: 3 zorluk seviyesi (Başlangıç yeşil, Orta mustard, İleri terra) için aşağı doğru uzanan bir harita, her seviyenin kendi renginde 4-5 durağı, her durakta 720 özgün sorudan (Türk kültüründen örneklerle) rastgele seçilen 10 soruluk kısa sınavlar. Günlük 5 can hakkı: yanlış cevap bir can eksiltir, video izleyerek veya Premium’a geçerek can kazanılır (şimdilik deneme modunda, gerçek reklam/ödeme sonra eklenecek); duraklar sırayla açılır.' },
     { v: '0.4.5', d: 'Sekmelerin arka planına çok hafif, birbirinden farklı tonlar eklendi (Temeller, Alıştırma, Sözlük); koyuluk aynı kalıyor, sadece renk hafifçe kayıyor. Karanlık modda daha da belli belirsiz. Harita sekmesi değişmedi.' },
     { v: '0.4.4', d: 'Üst çubuktaki ses açma/kapama düğmesi kaldırıldı; aynı ayar zaten Ayarlar → Ses altında duruyor, tekrarı gereksizdi.' },

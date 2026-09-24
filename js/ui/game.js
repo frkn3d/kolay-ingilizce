@@ -264,7 +264,16 @@
       box.appendChild(U.el('p', { class: 'quiz__q', text: it.q }));
       var list = U.el('div', { class: 'quiz__opts' });
       var answered = false;
-      it.opts.forEach(function (o, k) {
+
+      /* questions.md'deki doğru şık dağılımı A/B'ye yüklüydü (kaynak
+         içerikte doğru cevap çoğunlukla ilk sıralarda yazılmış); her
+         gösterimde şıkları karıştırıp doğru indeksi buna göre yeniden
+         hesaplıyoruz ki oyuncu harfe göre değil bilgiye göre cevaplasın. */
+      var order = U.shuffle([0, 1, 2, 3]);
+      var opts = order.map(function (idx) { return it.opts[idx]; });
+      var correctK = order.indexOf(it.a);
+
+      opts.forEach(function (o, k) {
         var b = U.el('button', { class: 'opt', type: 'button' }, [
           U.el('span', { class: 'opt__key', text: 'ABCD'.charAt(k) }),
           U.el('span', { class: 'opt__txt', text: o })
@@ -272,13 +281,13 @@
         b.addEventListener('click', function () {
           if (answered) return;
           answered = true;
-          var ok = (k === it.a);
-          var rightBtn = list.children[it.a];
+          var ok = (k === correctK);
+          var rightBtn = list.children[correctK];
           rightBtn.classList.add('is-right'); rightBtn.querySelector('.opt__key').textContent = '✓';
           if (!ok) { b.classList.add('is-wrong'); b.querySelector('.opt__key').textContent = '✕'; }
-          U.qsa('.opt', list).forEach(function (x, idx) { x.disabled = true; if (idx !== k && idx !== it.a) x.classList.add('is-dim'); });
+          U.qsa('.opt', list).forEach(function (x, idx) { x.disabled = true; if (idx !== k && idx !== correctK) x.classList.add('is-dim'); });
           if (ok) { correct++; KI.audio.play('correct'); } else { KI.audio.play('wrong'); onWrong(); }
-          stepFooter(ok, it.opts[it.a]);
+          stepFooter(ok, opts[correctK]);
         });
         list.appendChild(b);
       });
