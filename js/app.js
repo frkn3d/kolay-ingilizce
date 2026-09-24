@@ -84,6 +84,15 @@
     var tabbarEl = document.getElementById('tabbar');
     if (tabbarEl) tabbarEl.hidden = !showTabbar;
     document.body.classList.toggle('no-tabbar', !showTabbar);
+
+    /* Giriş ekranının (kök) kendi tasarımı var: üst çubuk da gizlenir,
+       tek ekrana sığsın diye; .view ve body'nin ambient dolguları da
+       bu sayfada sıfırlanır (bkz. game.css .is-gate). */
+    var isGate = !!(hit && hit.tab === 'root');
+    var appbarEl = document.getElementById('appbar');
+    if (appbarEl) appbarEl.hidden = isGate;
+    document.body.classList.toggle('is-gate', isGate);
+
     if (KI.viewGame) KI.viewGame.syncChrome(hit ? hit.tab : null);
 
     if (lastPath !== null && lastPath !== path) U.scrollTop();
