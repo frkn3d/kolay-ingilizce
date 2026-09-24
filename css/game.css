@@ -44,7 +44,9 @@ html[data-section="oyun"] #view {
   --ink-mute: #9195c1;
   --line: #383f6c;
   --line-2: #4a5286;
-  --accent: #7c6ce0;
+  /* #7c6ce0 üstüne beyaz yazı WCAG AA kontrastını (4.5:1) geçmiyordu
+     (3.77:1); bu ton aynı renk ailesinde ama biraz koyu (4.76:1). */
+  --accent: #6a5ad4;
   --accent-ink: #f5f3ff;
   /* --shadow-hard, --line-2'ye referans veriyor; iç içe değişkenler bir
      üst öğede (bu durumda #view) yeniden yazılmadan miras alınmaz, o
@@ -55,7 +57,7 @@ html[data-section="oyun"] #view {
 /* .btn--primary normalde markanın yeşili; Oyun Modu'nda yeni vurgu
    rengini (--accent) kullanır. */
 html[data-section="oyun"] #view .btn--primary {
-  background: var(--accent); color: var(--accent-ink); border-color: #5b4bc4;
+  background: var(--accent); color: var(--accent-ink); border-color: #4c40a3;
 }
 
 /* Cümle kurmada yerleştirilen kelime: açık temanın soluk mint yeşili
@@ -137,6 +139,12 @@ body.is-gate {
 .gate__card p { color: #47584c; margin: 0 0 .25em; font-size: .76rem; line-height: 1.25; }
 .gate__cta { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .03em; color: var(--green-700); font-weight: 700; }
 
+.gate__footnote {
+  text-align: center; margin: 4px 0 0;
+  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .03em;
+  color: color-mix(in srgb, var(--cream) 55%, transparent);
+}
+
 @media (max-width: 360px) {
   .gate__ico { width: 64px; height: 64px; }
   .gate__card { padding: 12px 8px 10px; }
@@ -187,6 +195,8 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__connector { display: flex; justify-content: center; }
 .gmap__connector svg { display: block; overflow: visible; }
 .gmap__connector-line { stroke: var(--line-2); stroke-width: 5; stroke-dasharray: 8 9; }
+
+.gmap__footnote { text-align: center; font-size: .74rem; margin: 26px 0 4px; opacity: .75; }
 
 .gmap__node {
   position: relative;

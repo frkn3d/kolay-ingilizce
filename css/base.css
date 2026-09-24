@@ -165,7 +165,7 @@ html[data-theme="dark"][data-section="sozluk"] body { background-color: color-mi
 html[data-section="oyun"] body {
   background-color: #14162b;
   background-image:
-    radial-gradient(58% 46% at 84% 4%, rgba(124, 108, 224, .28) 0%, transparent 70%),
+    radial-gradient(58% 46% at 84% 4%, rgba(106, 90, 212, .28) 0%, transparent 70%),
     linear-gradient(160deg, #14162b 0%, #1b1c3a 55%, #241f42 100%),
     radial-gradient(circle at center, rgba(255, 255, 255, .055) 0 2.1px, transparent 2.1px),
     radial-gradient(circle at center, rgba(255, 255, 255, .055) 0 2.1px, transparent 2.1px);

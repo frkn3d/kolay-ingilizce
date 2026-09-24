@@ -93,10 +93,61 @@ window.KI = window.KI || {};
   U.toast = function (msg, ms) {
     var box = document.getElementById('toast');
     if (!box) return;
-    box.textContent = msg;
-    box.hidden = false;
     clearTimeout(toastTimer);
+    box.hidden = false;
+    /* aria-live bölgesi zaten görünürken değişen metni ekran okuyucular
+       daha güvenilir duyuruyor; gizliliği kaldırmakla metni yazmak aynı
+       anda olursa bazı ekran okuyucular duyuruyu kaçırabiliyor. */
+    box.textContent = '';
+    setTimeout(function () { box.textContent = msg; }, 0);
     toastTimer = setTimeout(function () { box.hidden = true; }, ms || 1900);
+  };
+
+  /* ---------- Modal odak yönetimi ----------
+     Açılışta odağı modalın içine taşır, Tab'ı modal içinde döngüye alır,
+     kapanışta odağı modalı açan öğeye geri verir. Aynı anda tek modal
+     için geçerlidir (uygulamada modallar zaten üst üste açılmıyor, tek
+     istisna reset-confirm-modal'ın Ayarlar'ın üstünde açılması — o da
+     kendi tetikleyicisini/odağını ayrıca yönetir). */
+  var FOCUSABLE_SEL = 'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])';
+  /* İçe aktar için kullanılan gizli (display:none) dosya input'u gibi
+     görünmez öğeler seçiciye uyuyor ama gerçekte odaklanamıyor; bunları
+     dışarıda bırakmazsak "son öğe" yanlış hesaplanır. */
+  function focusablesIn(modal) {
+    return U.qsa(FOCUSABLE_SEL, modal).filter(function (el) {
+      return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+    });
+  }
+  var activeTrap = null;
+  U.openModal = function (modal, triggerEl) {
+    modal.hidden = false;
+    var focusables = focusablesIn(modal);
+    var first = focusables[0];
+    if (!first) { modal.setAttribute('tabindex', '-1'); first = modal; }
+    first.focus();
+    function onKeydown(e) {
+      if (e.key !== 'Tab') return;
+      var els = focusablesIn(modal);
+      if (!els.length) return;
+      var firstEl = els[0], lastEl = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+    }
+    modal.addEventListener('keydown', onKeydown);
+    activeTrap = { modal: modal, onKeydown: onKeydown, trigger: triggerEl || null };
+  };
+  U.closeModal = function (modal) {
+    modal.hidden = true;
+    if (activeTrap && activeTrap.modal === modal) {
+      modal.removeEventListener('keydown', activeTrap.onKeydown);
+      var trigger = activeTrap.trigger;
+      /* Tarayıcı, gizlenen modalın içindeki odaklı öğe için kendi "focus
+         fixup" adımını bir sonraki tick'te çalıştırıyor; hemen burada
+         çağrılan focus() bu adımla yarışıp geçersiz kalabiliyor. Bir
+         tick geciktirmek bizimkinin son söz olmasını garantiler. */
+      if (trigger && typeof trigger.focus === 'function') setTimeout(function () { trigger.focus(); }, 0);
+      activeTrap = null;
+    }
   };
 
   U.scrollTop = function () {

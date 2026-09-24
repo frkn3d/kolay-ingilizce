@@ -26,3 +26,16 @@ node tests/smoke.js
 9 alıştırma modunu gezer, konsol hatası ya da boş kalan bir ikon olup
 olmadığını raporlar. `npm install --no-save` paketi `package.json`'a
 yazmadan geçici olarak indirir; proje yine bağımlılıksız kalır.
+
+## Oyun Modu mantık testleri (jsdom gerekir)
+
+```bash
+npm install --no-save jsdom
+node tests/unit-game.js
+```
+
+Haritanın kilit/açma mantığını (`isNodeUnlocked`, checkpoint geçişi,
+seviye kilidi) render edilen DOM üzerinden sınar. Bu proje üzerinde daha
+önce gerçekten yaşanmış 4 hatayı regresyona karşı kilitler — bkz. dosyanın
+başındaki yorum. Oyun Modu'nun kilit/açma mantığına dokunan her
+değişiklikten sonra çalıştırılmalı.

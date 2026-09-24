@@ -301,6 +301,17 @@
     KI.store.gameTouchDay();
     var frag = document.createDocumentFragment();
 
+    /* İlerleme yalnızca bu cihazda saklanıyor; Oyun Modu'na ilk kez
+       girildiğinde bir kerelik, yedeklemeyi hatırlatan bir uyarı çıkar
+       (bkz. gmap__backup-hint için haritanın en altındaki kalıcı, minik
+       hatırlatma). */
+    if (!KI.store.hasSeenGameBackupHint()) {
+      KI.store.markGameBackupHintSeen();
+      setTimeout(function () {
+        U.toast('İlerlemen yalnızca bu cihazda saklanıyor. Ayarlar\'dan yedekleyebilirsin.', 4200);
+      }, 500);
+    }
+
     var wrap = U.el('div', { class: 'gmap' });
 
     LEVELS.forEach(function (level, li) {
@@ -330,7 +341,7 @@
         }
         prevOffset = offset;
 
-        var stop = U.el('div', { class: 'gmap__stop' + (isCp ? ' gmap__stop--cp' : ''), style: 'transform:translateX(' + offset + 'px)' });
+        var stop = U.el('div', { class: 'gmap__stop' + (isCp ? ' gmap__stop--cp' : ''), style: 'transform:translateX(' + offset + 'px)', 'data-node': node.id });
 
         var nodeCls = 'gmap__node' + (isCp ? ' gmap__node--checkpoint' : '') +
           (done ? ' gmap__node--done' : (tUnlocked ? ' gmap__node--next' : ' gmap__node--locked'));
@@ -369,6 +380,8 @@
     });
 
     frag.appendChild(wrap);
+    frag.appendChild(U.el('p', { class: 'gmap__footnote soft',
+      text: 'İlerlemen yalnızca bu cihazda saklanıyor · Ayarlar\'dan yedekleyebilirsin' }));
     return frag;
   }
 
@@ -386,6 +399,17 @@
     });
     return all;
   }
+  /* İleri Sar geçildiğinde, kendisine kadar olan tüm önceki dersler
+     (haritada kilit gösterse bile) geçilmiş sayılır — tek bir komşu
+     değil, o noktaya kadarki bütün yol açılır. finish() bunu gerçek bir
+     sınav bittiğinde çağırır; simulateCheckpointResult de (tests/) aynı
+     fonksiyonu kullanarak birim testlerinde aynı davranışı sınar. */
+  function unlockPrecedingLessons(levelId, level, idx) {
+    for (var b = 0; b < idx; b++) {
+      if (level.path[b].kind === 'lesson') KI.store.markGameNodeSkipped(levelId, level.path[b].id);
+    }
+  }
+
   function buildCheckpointItems(level) {
     var pool = levelPool(level);
     var builds = pool.filter(function (q) { return q.type === 'build'; });
@@ -597,14 +621,7 @@
 
       if (isCp) {
         var passed = correct >= CHECKPOINT_PASS;
-        if (passed) {
-          /* İleri Sar geçildiğinde, kendisine kadar olan tüm önceki
-             dersler (haritada kilit gösterse bile) geçilmiş sayılır —
-             tek bir komşu değil, o noktaya kadarki bütün yol açılır. */
-          for (var b = 0; b < idx; b++) {
-            if (level.path[b].kind === 'lesson') KI.store.markGameNodeSkipped(levelId, level.path[b].id);
-          }
-        }
+        if (passed) unlockPrecedingLessons(levelId, level, idx);
         box.appendChild(U.el('h3', { html: KI.icons.html(passed ? 'trophy' : 'thumbsup') + '  ' + correct + ' / ' + total + ' doğru' }));
         if (passed) {
           box.appendChild(U.el('div', { class: 'callout callout--tip' }, [
@@ -664,6 +681,19 @@
     quiz: renderQuiz,
     syncChrome: syncChrome,
     buildHeartsModal: function () { mountHearts(document.getElementById('hearts-body')); },
-    totalNodes: function () { return LEVELS.reduce(function (n, lv) { return n + lv.path.length; }, 0); }
+    totalNodes: function () { return LEVELS.reduce(function (n, lv) { return n + lv.path.length; }, 0); },
+    /* Gerçek bir İleri Sar sınavının bitişini simüle eder (sonucu kaydeder,
+       geçildiyse önceki dersleri açar) — finish()'teki checkpoint dalıyla
+       birebir aynı unlockPrecedingLessons'ı çağırır. Yalnızca
+       tests/unit-game.js tarafından kullanılır; uygulama arayüzünden
+       tetiklenmez. */
+    simulateCheckpointResult: function (levelId, nodeId, correct, total) {
+      var level = levelById(levelId);
+      var idx = level ? nodeIndex(level, nodeId) : -1;
+      if (idx < 0) return false;
+      KI.store.recordGameResult(levelId, nodeId, correct, total);
+      if (correct >= CHECKPOINT_PASS) unlockPrecedingLessons(levelId, level, idx);
+      return true;
+    }
   };
 })(window.KI);

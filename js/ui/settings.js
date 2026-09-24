@@ -6,8 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.6.3';
+  var APP_VERSION = '0.6.4';
+  KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.6.4', d: 'Görülebilirlik ve erişilebilirlik turu: Ayarlar/Başarımlar/Canlar/Sıfırlama pencereleri artık açılınca odağı içine alıyor, Tab tuşuyla pencere dışına çıkılamıyor, kapanınca odak açan düğmeye geri dönüyor. Bildirim baloncukları (toast) artık ekran okuyuculara da duyuruluyor. Oyun Modu\'nun mor vurgu rengi biraz koyulaştırıldı (kontrast standardını geçmesi için). Sayfa daha hızlı açılsın diye script dosyaları artık paralel yükleniyor. Oyun Modu haritasına ilk girişte ve haritanın en altında, ilerlemenin yalnızca bu cihazda saklandığını hatırlatan küçük bir not eklendi. Giriş ekranının en altına küçük bir "Logspace" ve sürüm notu eklendi.' },
     { v: '0.6.3', d: 'Oyun Modu haritasındaki patika artık düz bir çizgi yerine düzensiz, sağa sola kıvrılan eğrilerle ilerliyor: her durak farklı genlikte bir yöne kayıyor ve aralarındaki bağlantı da buna göre yumuşak bir eğri çiziyor — hiçbir zaman yatay kaydırma gerektirmeyecek şekilde sınırlandırıldı.' },
     { v: '0.6.2', d: 'Oyun Modu\'nun arka planı yeniden tasarlandı: kağıt/defter kimliğinden tamamen ayrışan, açık/koyu tema tercihinden bağımsız koyu lacivert-mor bir "gece haritası" gradyanı geldi (yeşilden bilerek uzak duruldu). Kartlar, soru şıkları, düğmeler gibi Oyun Modu\'ndaki her şey bu yeni palete göre yeniden renklendirildi ki her ekran tutarlı ve göze yorucu gelmeyen bir bütün oluştursun. Ayarlar\'daki "Tüm ilerlemeyi sıfırla" düğmesi artık tek tıkla çalışmıyor: düğmeyi 3 saniye basılı tutmak gerekiyor, ardından açılan onay penceresindeki "Evet, hepsini sil" düğmesi de 3 saniye daha bekleyip aktifleşiyor — yanlışlıkla tüm ilerlemenin silinmesi zorlaştırıldı.' },
     { v: '0.6.1', d: 'Oyun Modu haritasında ince ayar: kilitli duraklar artık koyu gri, kilit simgesi beyaz. Haritanın en üstündeki "Oyun Modu / Zaman Haritası" başlığı ve açıklama yazısı kaldırıldı, gereksiz yer kaplıyordu. Yazı tipi eğlenceli ama daha belirgin bir sans-serif olan Quicksand’a çevrildi. Arka plandaki defter (kareli) dokusu Oyun Modu’nda kaldırıldı; yerine noktalardan oluşan, kaydırmalı geometrik bir doku geldi — diğer sekmelerdeki defter dokusu değişmedi.' },
@@ -162,7 +164,7 @@
       holdTimer = setTimeout(function () {
         holdTimer = null;
         reset.classList.remove('is-holding');
-        openResetConfirm();
+        openResetConfirm(reset);
       }, 3000);
     }
     function holdCancel() {
@@ -250,7 +252,7 @@
      gösterir; bu süre boyunca ekranın dışına tıklamak veya Escape'e basmak
      app.js'teki closeResetModal üzerinden cancelResetTimers'ı çağırıp geri
      sayımı temizler. */
-  function openResetConfirm() {
+  function openResetConfirm(triggerEl) {
     var modal = document.getElementById('reset-confirm-modal');
     var card = document.getElementById('reset-confirm-card');
     if (!modal || !card) return;
@@ -280,14 +282,14 @@
 
     function close() {
       cleanup();
-      modal.hidden = true;
+      KI.util.closeModal(modal);
       KI.audio.play('close');
     }
     cancelBtn.addEventListener('click', close);
     confirmBtn.addEventListener('click', function () {
       if (confirmBtn.disabled) return;
       cleanup();
-      modal.hidden = true;
+      KI.util.closeModal(modal);
       KI.store.reset();
       KI.audio.play('wrong');
       U.toast('Her şey sıfırlandı');
@@ -300,7 +302,7 @@
       text: 'İşaretlenen zamanlar, test sonuçların, kelime defterin ve Oyun Modu ilerlemen (canlar, başarımlar, harita) kalıcı olarak silinecek. Bu işlem geri alınamaz.' }));
     card.appendChild(U.el('div', { class: 'row', style: 'margin-top:16px;justify-content:flex-end' }, [cancelBtn, confirmBtn]));
 
-    modal.hidden = false;
+    KI.util.openModal(modal, triggerEl);
     KI.audio.play('open');
   }
 

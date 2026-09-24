@@ -54,7 +54,8 @@
       progress: {},         // { level: { topicId: { done: true, best: 0..10, skipped: bool } } }
       perfectGameQuizzes: 0,
       bestCombo: 0,
-      videoWatches: 0
+      videoWatches: 0,
+      seenBackupHint: false  // Oyun Modu haritasına ilk girişte gösterilen "yedekle" hatırlatması
     }
   };
 
@@ -309,6 +310,8 @@
     noteGameCombo: function (n) {
       if (n > (state.game.bestCombo || 0)) { state.game.bestCombo = n; save(); }
     },
+    hasSeenGameBackupHint: function () { return !!state.game.seenBackupHint; },
+    markGameBackupHintSeen: function () { state.game.seenBackupHint = true; save(); },
     /* İleri Sar sınavı geçilince komşu düğüm oynanmamış olsa da "geçildi"
        sayılır; gerçekten oynanmış bir kayıt varsa üzerine yazılmaz. */
     markGameNodeSkipped: function (level, nodeId) {

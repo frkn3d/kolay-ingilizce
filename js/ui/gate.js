@@ -47,6 +47,9 @@
     }));
     wrap.appendChild(grid);
 
+    wrap.appendChild(U.el('p', { class: 'gate__footnote',
+      text: 'Logspace' + (KI.appVersion ? ' · v' + KI.appVersion : '') }));
+
     frag.appendChild(wrap);
     return frag;
   }

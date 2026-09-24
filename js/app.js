@@ -122,34 +122,37 @@
 
     /* ayarlar */
     var modal = document.getElementById('settings-modal');
-    document.getElementById('btn-settings').addEventListener('click', function () {
+    var btnSettings = document.getElementById('btn-settings');
+    btnSettings.addEventListener('click', function () {
       KI.settings.build();
-      modal.hidden = false;
+      KI.util.openModal(modal, btnSettings);
       KI.audio.play('open');
     });
-    function closeModal() { modal.hidden = true; KI.audio.play('close'); }
+    function closeModal() { KI.util.closeModal(modal); KI.audio.play('close'); }
     document.getElementById('settings-close').addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
 
     /* başarımlar */
     var achModal = document.getElementById('achievements-modal');
-    document.getElementById('btn-achievements').addEventListener('click', function () {
+    var btnAchievements = document.getElementById('btn-achievements');
+    btnAchievements.addEventListener('click', function () {
       KI.achievements.buildList();
-      achModal.hidden = false;
+      KI.util.openModal(achModal, btnAchievements);
       KI.audio.play('open');
     });
-    function closeAchModal() { achModal.hidden = true; KI.audio.play('close'); }
+    function closeAchModal() { KI.util.closeModal(achModal); KI.audio.play('close'); }
     document.getElementById('achievements-close').addEventListener('click', closeAchModal);
     achModal.addEventListener('click', function (e) { if (e.target === achModal) closeAchModal(); });
 
     /* Oyun Modu: canlar */
     var heartsModal = document.getElementById('hearts-modal');
-    document.getElementById('btn-hearts').addEventListener('click', function () {
+    var btnHearts = document.getElementById('btn-hearts');
+    btnHearts.addEventListener('click', function () {
       KI.viewGame.buildHeartsModal();
-      heartsModal.hidden = false;
+      KI.util.openModal(heartsModal, btnHearts);
       KI.audio.play('open');
     });
-    function closeHeartsModal() { heartsModal.hidden = true; KI.audio.play('close'); }
+    function closeHeartsModal() { KI.util.closeModal(heartsModal); KI.audio.play('close'); }
     document.getElementById('hearts-close').addEventListener('click', closeHeartsModal);
     heartsModal.addEventListener('click', function (e) { if (e.target === heartsModal) closeHeartsModal(); });
 
@@ -158,7 +161,7 @@
        o sırada işleyen geri sayımın temizlenmesi ele alınıyor. */
     var resetModal = document.getElementById('reset-confirm-modal');
     function closeResetModal() {
-      resetModal.hidden = true;
+      KI.util.closeModal(resetModal);
       KI.audio.play('close');
       if (KI.settings && KI.settings.cancelResetTimers) KI.settings.cancelResetTimers();
     }
