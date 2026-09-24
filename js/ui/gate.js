@@ -34,16 +34,16 @@
 
     var grid = U.el('div', { class: 'gate__grid' });
     grid.appendChild(card({
-      mod: 'game', href: '#/oyun', img: 'assets/icon-mode-game.svg',
-      title: 'Oyun Modu',
-      desc: 'Harita, canlar, kısa sınavlar.',
-      cta: 'Haritaya gir'
-    }));
-    grid.appendChild(card({
       mod: 'study', href: '#/harita', img: 'assets/icon-mode-study.svg',
       title: 'Eğitim Modu',
       desc: 'Zaman çizgisi, temeller, sözlük.',
       cta: 'Başla'
+    }));
+    grid.appendChild(card({
+      mod: 'game', href: '#/oyun', img: 'assets/icon-mode-game.svg',
+      title: 'Oyun Modu',
+      desc: 'Harita, canlar, kısa sınavlar.',
+      cta: 'Haritaya gir'
     }));
     wrap.appendChild(grid);
 

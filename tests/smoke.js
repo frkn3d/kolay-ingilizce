@@ -32,7 +32,7 @@ var ROUTES = [
   '#/zaman/present-simple', '#/zaman/future-perfect-continuous',
   '#/oyun', '#/oyun/baslangic/temeller-1', '#/oyun/baslangic/present-simple-2',
   '#/oyun/baslangic/checkpoint-1', '#/oyun/orta/past-continuous-1',
-  '#/oyun/ileri/future-perfect-continuous-1', '#/oyun/ileri/checkpoint-3'
+  '#/oyun/ileri/future-perfect-continuous-1', '#/oyun/ileri/checkpoint-2'
 ].concat(['karisik', 'zorlandiklarim', 'tekrar', 'cumle', 'cizgi', 'bosluk', 'kur', 'dikte', 'kelime', 'fiil']
   .map(function (m) { return '#/alistirma/' + m; }));
 

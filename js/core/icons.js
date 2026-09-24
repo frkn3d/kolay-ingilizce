@@ -106,6 +106,21 @@ window.KI = window.KI || {};
     'aspect-cont': '<path d="M2.5 13c1.7-3.4 3.4-3.4 5.1 0s3.4 3.4 5.1 0 3.4-3.4 5.1 0 3.4 3.4 5.1 0"/>',
     'fast-forward': '<polygon points="3.5,4.5 12,12 3.5,19.5" fill="currentColor" stroke="none"/><polygon points="12,4.5 20.5,12 12,19.5" fill="currentColor" stroke="none"/>',
 
+    /* --- Oyun Modu harita durak temaları: günlük hayattan, zaman
+       adı yerine kullanılan farklı simgeler --- */
+    'tea-glass': '<path d="M8 4.2h8l-1.3 9.2c-.35 3.4-4.35 3.4-4.7 0L8 4.2Z"/><line x1="7.2" y1="4.2" x2="16.8" y2="4.2"/><ellipse cx="12" cy="19" rx="5" ry="1.3"/>',
+    simit: '<circle cx="12" cy="12" r="7.4"/><circle cx="12" cy="12" r="3.1"/><circle cx="9" cy="6.9" r=".6" fill="currentColor" stroke="none"/><circle cx="15.3" cy="7.4" r=".6" fill="currentColor" stroke="none"/><circle cx="17.3" cy="12.3" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="16.8" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="16.6" r=".6" fill="currentColor" stroke="none"/><circle cx="6.8" cy="12" r=".6" fill="currentColor" stroke="none"/>',
+    minibus: '<path d="M3.5 15V10.6a2 2 0 0 1 1.5-1.9l1.9-3.1A2 2 0 0 1 8.6 4.6h6.8a2 2 0 0 1 1.7 1l1.9 3.1a2 2 0 0 1 1.5 1.9V15"/><line x1="3.5" y1="15" x2="20.5" y2="15"/><circle cx="7.6" cy="16.4" r="1.8"/><circle cx="16.4" cy="16.4" r="1.8"/><line x1="8" y1="8.8" x2="16" y2="8.8"/>',
+    tray: '<rect x="3" y="14.2" width="18" height="3" rx="1.2"/><circle cx="9" cy="9" r="4"/><path d="M15.3 6.3h3.4v4a1.7 1.7 0 0 1-3.4 0Z"/>',
+    basket: '<path d="M4.5 10.5h15l-1.7 9.3a2 2 0 0 1-2 1.6H8.2a2 2 0 0 1-2-1.6Z"/><path d="M8 10.5 10.6 5M16 10.5 13.4 5"/><line x1="3" y1="10.5" x2="21" y2="10.5"/>',
+    minaret: '<line x1="9" y1="21" x2="15" y2="21"/><rect x="10.2" y="9" width="3.6" height="10.5"/><path d="M10.2 9c0-2.6 1-4.4 1.8-5.8.8 1.4 1.8 3.2 1.8 5.8Z"/><circle cx="12" cy="2.4" r=".9" fill="currentColor" stroke="none"/><line x1="8.6" y1="12.8" x2="10.2" y2="12.8"/><line x1="13.8" y1="12.8" x2="15.4" y2="12.8"/>',
+    backgammon: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="12" r="3.1"/><circle cx="15" cy="12" r="3.1"/>',
+    lantern: '<path d="M9.3 3.5h5.4M12 3.5v2.2"/><path d="M7.6 5.7h8.8l-1.2 3.4H8.8Z"/><rect x="7" y="9.6" width="10" height="7" rx="1.4"/><path d="M8.8 16.6h6.4l-1 3.4h-4.4Z"/><line x1="9.6" y1="11.5" x2="9.6" y2="14.7"/><line x1="12" y1="11.5" x2="12" y2="14.7"/><line x1="14.4" y1="11.5" x2="14.4" y2="14.7"/>',
+    ferry: '<path d="M3.5 14.5h17l-2 4.1a2 2 0 0 1-1.8 1.1H7.3a2 2 0 0 1-1.8-1.1Z"/><rect x="7.5" y="8.6" width="9" height="4.4" rx=".8"/><line x1="12" y1="8.6" x2="12" y2="4.4"/><path d="M12 4.4h4.4"/><line x1="5.6" y1="14.5" x2="5.6" y2="12.2"/><line x1="18.4" y1="14.5" x2="18.4" y2="12.2"/>',
+    mountain: '<path d="M2.5 18.5 8.5 8l4.2 6.2 2.3-3.2 6.5 7.5Z"/>',
+    nazar: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>',
+    'coffee-cup': '<path d="M5.5 9.5h10v5.5a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3Z"/><path d="M15.5 10.4h1.8a2.2 2.2 0 0 1 0 4.4h-1.8"/><ellipse cx="10.5" cy="19" rx="7" ry="1.4"/><path d="M8.5 4.5c0 1-1 1-1 2s1 1 1 2M12.5 4.5c0 1-1 1-1 2s1 1 1 2"/>',
+
     /* --- başarım ikonları: her biri tek bir başarımı temsil eder --- */
     'ach-step': '<circle cx="5.5" cy="18.5" r="1.6" fill="currentColor" stroke="none"/><line x1="7" y1="17" x2="16.5" y2="7.5"/><polyline points="12,7.5 16.5,7.5 16.5,13"/>',
     'ach-half': '<circle cx="12" cy="12" r="8.4"/><path d="M12 3.6a8.4 8.4 0 0 1 0 16.8Z" fill="currentColor" stroke="none"/>',

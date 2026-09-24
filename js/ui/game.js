@@ -19,8 +19,33 @@
   'use strict';
   var U = KI.util;
 
-  var ASPECT_ICON = { simple: 'aspect-simple', cont: 'aspect-cont', perfect: 'check-circle', perfectcont: 'history' };
   var ZIGZAG = [0, 58, -58, 58, -58, 58, -58, 58];
+
+  /* Haritada aynı zaman ismi ("Present Simple") tur boyunca defalarca
+     tekrar etmesin diye her ders düğümüne, hangi zamanı çalıştırdığından
+     bağımsız, günlük hayattan farklı bir tema (ikon + başlık) atanır.
+     Gerçek zaman adı sınav sayfasında eyebrow olarak hâlâ görünür. */
+  var THEME_POOL = [
+    { ico: 'tea-glass', t: 'Çay Saati' },
+    { ico: 'simit', t: 'Simit Arabası' },
+    { ico: 'minibus', t: 'Dolmuş Durağı' },
+    { ico: 'tray', t: 'Kahvaltı Sofrası' },
+    { ico: 'basket', t: 'Pazar Günü' },
+    { ico: 'minaret', t: 'Akşam Ezanı' },
+    { ico: 'backgammon', t: 'Kıraathane Tavlası' },
+    { ico: 'lantern', t: 'Kapalıçarşı Gezisi' },
+    { ico: 'ferry', t: 'Vapur Yolculuğu' },
+    { ico: 'mountain', t: 'Yayla Havası' },
+    { ico: 'nazar', t: 'Nazar Boncuğu' },
+    { ico: 'coffee-cup', t: 'Kahve Falı' },
+    { ico: 'sprout', t: 'Bahçe İşi' }
+  ];
+  var themeCursor = 0;
+  function nextTheme() {
+    var th = THEME_POOL[themeCursor % THEME_POOL.length];
+    themeCursor++;
+    return th;
+  }
   var LESSON_SIZE = 10;       // her ders/sınav 10 soru
   var CHECKPOINT_EVERY = 8;   // her 8 dersten sonra bir İleri Sar sınavı
   var CHECKPOINT_PASS = 7;    // İleri Sar'ı geçmek için gereken en az doğru sayısı (10 üzerinden)
@@ -51,13 +76,16 @@
     var lessons = [];
     for (var r = 1; r <= level.rounds; r++) {
       level.topics.forEach(function (tp) {
-        lessons.push({ kind: 'lesson', id: tp.id + '-' + r, topic: tp, round: r });
+        lessons.push({ kind: 'lesson', id: tp.id + '-' + r, topic: tp, round: r, theme: nextTheme() });
       });
     }
     var path = [], cpCount = 0;
     lessons.forEach(function (node, idx) {
       path.push(node);
-      if ((idx + 1) % CHECKPOINT_EVERY === 0) {
+      /* Son dersten hemen sonraya sınav koymuyoruz: orada açılacak bir
+         "sonraki durak" olmadığı için mantıksız bir bitiş olurdu. */
+      var isLastLesson = (idx === lessons.length - 1);
+      if (!isLastLesson && (idx + 1) % CHECKPOINT_EVERY === 0) {
         cpCount++;
         path.push({ kind: 'checkpoint', id: 'checkpoint-' + cpCount, n: cpCount });
       }
@@ -210,14 +238,14 @@
           href: tUnlocked ? ('#/oyun/' + level.id + '/' + node.id) : null,
           'data-sfx': tUnlocked ? 'nav' : null,
           'aria-disabled': tUnlocked ? null : 'true',
-          title: isCp ? 'İleri Sar' : node.topic.t
+          title: isCp ? 'İleri Sar' : (node.theme.t + ' (' + node.topic.t + ')')
         });
         if (!tUnlocked) {
           node_.addEventListener('click', function () { KI.audio.play('toggle'); U.toast('Önce bir önceki durağı bitir'); });
         }
-        var icoName = isCp ? 'fast-forward' : (node.topic.aspect ? ASPECT_ICON[node.topic.aspect] : 'wall');
+        var icoName = isCp ? 'fast-forward' : node.theme.ico;
         node_.appendChild(U.el('span', {
-          class: 'gmap__node-ico' + (!isCp && node.topic.time ? ' gmap__node-ico--' + node.topic.time : ''),
+          class: 'gmap__node-ico',
           html: KI.icons.html((tUnlocked || done) ? icoName : 'lock')
         }));
         if (done) {
@@ -227,7 +255,7 @@
         stop.appendChild(node_);
 
         stop.appendChild(U.el('div', { class: 'gmap__label' + (isCp ? ' gmap__label--cp' : '') }, [
-          U.el('b', { text: isCp ? 'İleri Sar' : node.topic.t }),
+          U.el('b', { text: isCp ? 'İleri Sar' : node.theme.t }),
           isCp ? U.el('span', { class: 'gmap__label-score', text: (prog ? prog.best : 0) + '/10' })
             : (prog && !prog.skipped ? U.el('span', { class: 'gmap__label-score', text: prog.best + '/10' })
               : (prog && prog.skipped ? U.el('span', { class: 'gmap__label-score', text: 'atlandı' }) : null))
@@ -308,10 +336,10 @@
       return frag;
     }
 
-    frag.appendChild(U.el('a', { class: 'crumb', href: '#/oyun', 'data-sfx': 'back', html: '← ' + U.esc(level.t) }));
+    frag.appendChild(U.el('a', { class: 'btn gquiz__back', href: '#/oyun', 'data-sfx': 'back', text: '← Geri dön' }));
     frag.appendChild(U.el('div', { class: 'page-head page-head--tight' }, [
-      U.el('p', { class: 'eyebrow', text: level.t + (isCp ? '' : ' · ' + node.round + '. tur') }),
-      U.el('h1', { text: isCp ? 'İleri Sar' : node.topic.t })
+      U.el('p', { class: 'eyebrow', text: isCp ? level.t : (level.t + ' · ' + node.topic.t + ' · ' + node.round + '. tur') }),
+      U.el('h1', { text: isCp ? 'İleri Sar' : node.theme.t })
     ]));
     if (isCp) {
       frag.appendChild(U.el('p', { class: 'soft', style: 'margin:-6px 0 12px',

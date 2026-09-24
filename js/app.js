@@ -11,8 +11,6 @@
     var t = (name === 'dark') ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
     KI.store.set('theme', t);
-    var g = U.qs('#btn-theme .iconbtn__glyph');
-    if (g) g.innerHTML = KI.icons.html(t === 'dark' ? 'sun' : 'moon');
     var meta = U.qs('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', t === 'dark' ? '#0d1711' : '#14361f');
   };
@@ -121,12 +119,6 @@
     /* günlük seri ve başarımlar: sayfa her açıldığında bir kez kontrol edilir */
     KI.store.touchVisitStreak();
     if (KI.achievements) KI.achievements.evaluate();
-
-    /* tema düğmesi */
-    document.getElementById('btn-theme').addEventListener('click', function () {
-      KI.setTheme(KI.store.get('theme') === 'dark' ? 'light' : 'dark');
-      KI.audio.play('toggle');
-    });
 
     /* ayarlar */
     var modal = document.getElementById('settings-modal');
