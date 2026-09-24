@@ -176,7 +176,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Oyun Modu' }),
       U.el('h1', { text: 'Zaman Haritası' }),
-      U.el('p', { text: 'Aşağı doğru ilerle. Sarı İleri Sar durakları her zaman açıktır; onları geçersen komşu duraklar da açılır.' })
+      U.el('p', { text: 'Aşağı doğru ilerle. Sarı İleri Sar durakları her zaman açıktır; birini geçersen o noktaya kadarki tüm duraklar açılır.' })
     ]));
 
     var wrap = U.el('div', { class: 'gmap' });
@@ -315,7 +315,7 @@
     ]));
     if (isCp) {
       frag.appendChild(U.el('p', { class: 'soft', style: 'margin:-6px 0 12px',
-        text: 'Bu seviyenin en zor sorularından 10 tanesi. ' + CHECKPOINT_PASS + '/10 veya üstü yaparsan önceki ve sonraki ilk durak da açılır.' }));
+        text: 'Bu seviyenin en zor sorularından 10 tanesi. ' + CHECKPOINT_PASS + '/10 veya üstü yaparsan buraya kadarki tüm duraklar ve bir sonraki ilk durak açılır.' }));
     }
 
     var box = U.el('div', { class: 'card gquiz', 'data-level': level.id });
@@ -461,13 +461,18 @@
       if (isCp) {
         var passed = correct >= CHECKPOINT_PASS;
         if (passed) {
-          if (idx > 0 && level.path[idx - 1].kind === 'lesson') KI.store.markGameNodeSkipped(levelId, level.path[idx - 1].id);
+          /* İleri Sar geçildiğinde, kendisine kadar olan tüm önceki
+             dersler (haritada kilit gösterse bile) geçilmiş sayılır —
+             tek bir komşu değil, o noktaya kadarki bütün yol açılır. */
+          for (var b = 0; b < idx; b++) {
+            if (level.path[b].kind === 'lesson') KI.store.markGameNodeSkipped(levelId, level.path[b].id);
+          }
         }
         box.appendChild(U.el('h3', { html: KI.icons.html(passed ? 'trophy' : 'thumbsup') + '  ' + correct + ' / ' + total + ' doğru' }));
         if (passed) {
           box.appendChild(U.el('div', { class: 'callout callout--tip' }, [
             U.el('b', { class: 'callout__t', text: '✓ İleri Sar’ı geçtin!' }),
-            U.el('span', { text: 'Bu sınavdan önceki ve sonraki ilk durak açıldı; istersen sırayı takip etmeden devam edebilirsin.' })
+            U.el('span', { text: 'Bu sınava kadarki tüm duraklar ve bir sonraki ilk durak açıldı; istersen sırayı takip etmeden devam edebilirsin.' })
           ]));
         } else {
           box.appendChild(U.el('div', { class: 'callout callout--warn' }, [
