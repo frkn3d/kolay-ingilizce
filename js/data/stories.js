@@ -310,7 +310,7 @@
   'whoever|her kim ki|zamir', 'wisest|en bilge|sıfat', 'gold|altın|isim',
   'messenger|haberci|isim', 'heavier|daha ağır|sıfat', 'feather|tüy|isim',
   'step|adım atmak, adım|fiil', 'forward|ileri, öne|zarf', 'nothing|hiçbir şey|zamir',
-  'else|başka|zarf', 'happily|mutlu bir şekilde|zarf', 'keloğlan|Keloğlan (halk hikayesi kahramanı)|özel isim',
+  'else|başka|zarf', 'happily|mutlu bir şekilde|zarf',
 
   'beside|yanında|edat', 'float|yüzmek (su üstünde)|fiil', 'himself|kendisi (erkek)|zamir',
   'rake|tırmık|isim', 'balance|denge|isim', 'splash|şapırtı (su sesi)|isim',

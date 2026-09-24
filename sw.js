@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v7';
+var CACHE_VERSION = 'ki-cache-v10';
 
 var CORE_ASSETS = [
   './',
@@ -25,6 +25,7 @@ var CORE_ASSETS = [
   './js/core/store.js',
   './js/core/audio.js',
   './js/core/haptics.js',
+  './js/core/confetti.js',
   './js/core/speech.js',
   './js/data/glossary.js',
   './js/data/vocabulary.js',
@@ -38,6 +39,7 @@ var CORE_ASSETS = [
   './js/data/examples-extra-5.js',
   './js/data/examples-extra-6.js',
   './js/data/examples-extra-7.js',
+  './js/data/game-vocabulary.js',
   './js/data/basics.js',
   './js/data/stories.js',
   './js/data/exercises.js',
@@ -63,7 +65,9 @@ var CORE_ASSETS = [
   './assets/icon-512.svg',
   './assets/logo.svg',
   './assets/icon-mode-game.svg',
-  './assets/icon-mode-study.svg'
+  './assets/icon-mode-study.svg',
+  './assets/fonts/baloo2-700-latin.woff2',
+  './assets/fonts/baloo2-700-latin-ext.woff2'
 ];
 
 self.addEventListener('install', function (event) {

@@ -40,6 +40,25 @@ var KI = window.KI;
 var failures = [];
 function fail(msg) { failures.push(msg); }
 
+/* Türkçede zaten aynı yazılan/okunan özel isimler (şehir, kişi adı,
+   halk hikâyesi kahramanı vb.) kasıtlı olarak sözlükte yok — bir
+   Türkçe konuşana "Ankara" kelimesinin çevirisini göstermenin bir
+   faydası yok (bkz. glossary.js/vocabulary.js "özel isimler" notu).
+   Bu yüzden kapsama kontrolünden muaf tutuluyorlar. */
+var UNTRANSLATED_PROPER_NOUNS = {
+  istanbul: 1, bursa: 1, konya: 1, edirne: 1, ankara: 1, topkapi: 1,
+  suleymaniye: 1, selimiye: 1, sinan: 1, mimar: 1, fatih: 1, mehmet: 1,
+  mehmed: 1, ayse: 1, elif: 1, zeynep: 1, hasan: 1, ali: 1, fatma: 1,
+  yunus: 1, emre: 1, mevlana: 1, mesnevi: 1, hereke: 1, eminonu: 1,
+  nasreddin: 1, usta: 1, diyarbakir: 1, fethiye: 1, izmir: 1, rize: 1,
+  erzurum: 1, antalya: 1, trabzon: 1, mardin: 1, bombasi: 1, dede: 1,
+  korkut: 1, keloglan: 1, karagoz: 1, hacivat: 1, kayseri: 1, keloğlan: 1
+};
+function isExemptWord(clean) {
+  var w = clean.toLowerCase().replace(/['’]s$/, '');
+  return !!UNTRANSLATED_PROPER_NOUNS[w];
+}
+
 /* ---- answer indeksleri sınır içinde mi ---- */
 function checkQuizArray(items, label) {
   (items || []).forEach(function (q, i) {
@@ -59,7 +78,7 @@ KI.tenses.list.forEach(function (t) {
     ex.en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
       var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
       if (!clean) return;
-      if (!KI.glossary.lookup(clean)) missing[clean.toLowerCase()] = (missing[clean.toLowerCase()] || 0) + 1;
+      if (!KI.glossary.lookup(clean) && !isExemptWord(clean)) missing[clean.toLowerCase()] = (missing[clean.toLowerCase()] || 0) + 1;
     });
   });
 });
@@ -73,7 +92,7 @@ KI.basics.forEach(function (b) {
       ex.en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
         var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
         if (!clean) return;
-        if (!KI.glossary.lookup(clean)) fail('basics/' + b.id + ': sözlükte yok "' + clean + '" ("' + ex.en + '")');
+        if (!KI.glossary.lookup(clean) && !isExemptWord(clean)) fail('basics/' + b.id + ': sözlükte yok "' + clean + '" ("' + ex.en + '")');
       });
     });
   });
@@ -86,7 +105,7 @@ KI.compare.list.forEach(function (c) {
       en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
         var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
         if (!clean) return;
-        if (!KI.glossary.lookup(clean)) fail('compare/' + c.id + ' pair#' + i + ': sözlükte yok "' + clean + '"');
+        if (!KI.glossary.lookup(clean) && !isExemptWord(clean)) fail('compare/' + c.id + ' pair#' + i + ': sözlükte yok "' + clean + '"');
       });
     });
   });
@@ -98,7 +117,7 @@ KI.compare.list.forEach(function (c) {
     sen.en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
       var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
       if (!clean) return;
-      if (!KI.glossary.lookup(clean)) fail('stories/' + s.id + ': sözlükte yok "' + clean + '" ("' + sen.en + '")');
+      if (!KI.glossary.lookup(clean) && !isExemptWord(clean)) fail('stories/' + s.id + ': sözlükte yok "' + clean + '" ("' + sen.en + '")');
     });
   });
 });

@@ -48,12 +48,18 @@
 
     /* --- Oyun Modu: canlar, premium, harita ilerlemesi --- */
     game: {
-      hearts: 5,
-      heartsDay: '',        // 'YYYY-M-D', gün değişince canlar 5'e döner
+      hearts: 7,
+      heartsDay: '',        // 'YYYY-M-D', gün değişince canlar 7'ye döner
       premium: false,
-      progress: {}          // { level: { topicId: { done: true, best: 0..10 } } }
+      progress: {},         // { level: { topicId: { done: true, best: 0..10, skipped: bool } } }
+      perfectGameQuizzes: 0,
+      bestCombo: 0,
+      videoWatches: 0
     }
   };
+
+  var GAME_MAX_HEARTS = 7;
+  var GAME_VIDEO_BONUS = 3;
 
   var state = load();
 
@@ -227,18 +233,19 @@
       save();
     },
 
-    /* --- Oyun Modu: günlük 5 can, video/premium ile kazanma, harita ilerlemesi ---
-       Can sayısı günde bir kez 5'e sıfırlanır (gerçek zamanlı yenilenme değil,
+    /* --- Oyun Modu: günlük 7 can, video/premium ile kazanma, harita ilerlemesi ---
+       Can sayısı günde bir kez 7'ye sıfırlanır (gerçek zamanlı yenilenme değil,
        basit "günlük hak" mantığı). Premium hesapta can hiç tükenmez. */
     gameTouchDay: function () {
       var d = new Date();
       var key = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
       if (state.game.heartsDay === key) return;
       state.game.heartsDay = key;
-      state.game.hearts = 5;
+      state.game.hearts = GAME_MAX_HEARTS;
       save();
     },
     heartsCount: function () { return state.game.premium ? Infinity : state.game.hearts; },
+    maxHearts: function () { return GAME_MAX_HEARTS; },
     isPremium: function () { return !!state.game.premium; },
     canPlayGame: function () { return state.game.premium || state.game.hearts > 0; },
     loseHeart: function () {
@@ -247,9 +254,11 @@
       save();
       return state.game.hearts;
     },
+    /* Video izleyince +3 can verilir, ama 7'yi hiç geçmez. */
     gainHeart: function () {
       if (state.game.premium) return state.game.hearts;
-      state.game.hearts = Math.min(5, state.game.hearts + 1);
+      state.game.hearts = Math.min(GAME_MAX_HEARTS, state.game.hearts + GAME_VIDEO_BONUS);
+      state.game.videoWatches = (state.game.videoWatches || 0) + 1;
       save();
       return state.game.hearts;
     },
@@ -267,13 +276,38 @@
       if (correct > cur.best) cur.best = correct;
       lv[topicId] = cur;
       state.quizzesCompleted = (state.quizzesCompleted || 0) + 1;
-      if (total > 0 && correct === total) state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
+      if (total > 0 && correct === total) {
+        state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
+        state.game.perfectGameQuizzes = (state.game.perfectGameQuizzes || 0) + 1;
+      }
       save();
       return cur;
     },
     isGameTopicDone: function (level, topicId) {
       var p = S.gameProgress(level, topicId);
       return !!(p && p.done);
+    },
+    /* --- Oyun Modu başarımları için sayaçlar --- */
+    gameNodesDoneCount: function () {
+      var n = 0;
+      Object.keys(state.game.progress).forEach(function (lv) {
+        Object.keys(state.game.progress[lv]).forEach(function (id) {
+          if (state.game.progress[lv][id].done) n++;
+        });
+      });
+      return n;
+    },
+    hasPassedAnyCheckpoint: function () {
+      var found = false;
+      Object.keys(state.game.progress).forEach(function (lv) {
+        Object.keys(state.game.progress[lv]).forEach(function (id) {
+          if (id.indexOf('checkpoint-') === 0 && state.game.progress[lv][id].best >= 7) found = true;
+        });
+      });
+      return found;
+    },
+    noteGameCombo: function (n) {
+      if (n > (state.game.bestCombo || 0)) { state.game.bestCombo = n; save(); }
     },
     /* İleri Sar sınavı geçilince komşu düğüm oynanmamış olsa da "geçildi"
        sayılır; gerçekten oynanmış bir kayıt varsa üzerine yazılmaz. */

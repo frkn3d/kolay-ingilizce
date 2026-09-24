@@ -152,12 +152,13 @@ body {
 html[data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--terra) 8%); }
 html[data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--mustard) 8%); }
 html[data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--future) 8%); }
-html[data-section="oyun"] body { background-color: color-mix(in srgb, var(--bg) 92%, var(--plum) 8%); }
+/* Oyun Modu diğer sekmelerden %20 daha koyu (istek üzerine). */
+html[data-section="oyun"] body { background-color: color-mix(in srgb, color-mix(in srgb, var(--bg) 92%, var(--plum) 8%) 80%, black 20%); }
 
 html[data-theme="dark"][data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--past) 4%); }
 html[data-theme="dark"][data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--mustard) 4%); }
 html[data-theme="dark"][data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--future) 4%); }
-html[data-theme="dark"][data-section="oyun"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--present) 4%); }
+html[data-theme="dark"][data-section="oyun"] body { background-color: color-mix(in srgb, color-mix(in srgb, var(--bg) 96%, var(--present) 4%) 80%, black 20%); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);

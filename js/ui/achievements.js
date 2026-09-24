@@ -55,10 +55,32 @@
       check: function () { return (KI.store.get('streak') || 0) >= 3; } },
     { id: 'bir-hafta', cat: 'Bağlılık', title: 'Bir Hafta Boyunca', icon: 'ach-flame-star',
       desc: '7 gün art arda çalış.',
-      check: function () { return (KI.store.get('streak') || 0) >= 7; } }
+      check: function () { return (KI.store.get('streak') || 0) >= 7; } },
+
+    { id: 'harita-ilk-adim', cat: 'Oyun Modu', title: 'Haritada İlk Adım', icon: 'flag',
+      desc: 'Oyun Modu’nda bir durağı tamamla.',
+      check: function () { return KI.store.gameNodesDoneCount() >= 1; } },
+    { id: 'harita-on-durak', cat: 'Oyun Modu', title: '10 Durak', icon: 'map',
+      desc: 'Oyun Modu’nda 10 durak tamamla.',
+      check: function () { return KI.store.gameNodesDoneCount() >= 10; } },
+    { id: 'harita-tam-gezi', cat: 'Oyun Modu', title: 'Tüm Haritayı Gezdim', icon: 'trophy',
+      desc: 'Oyun Modu haritasındaki bütün durakları tamamla.',
+      check: function () { return KI.viewGame && KI.store.gameNodesDoneCount() >= KI.viewGame.totalNodes(); } },
+    { id: 'ileri-sar-ilk', cat: 'Oyun Modu', title: 'İlk İleri Sar', icon: 'fast-forward',
+      desc: 'Bir İleri Sar sınavını geç (10 üzerinden en az 7).',
+      check: function () { return KI.store.hasPassedAnyCheckpoint(); } },
+    { id: 'oyun-kusursuz', cat: 'Oyun Modu', title: 'Kusursuz Sınav', icon: 'star',
+      desc: 'Oyun Modu’nda bir durağı 10/10 bitir.',
+      check: function () { return (KI.store.get('game').perfectGameQuizzes || 0) >= 1; } },
+    { id: 'yedili-kombo', cat: 'Oyun Modu', title: '7’li Kombo', icon: 'chart',
+      desc: 'Bir sınavda üst üste 7 doğru cevap ver.',
+      check: function () { return (KI.store.get('game').bestCombo || 0) >= 7; } },
+    { id: 'video-izleyici', cat: 'Oyun Modu', title: 'Video İzleyici', icon: 'play',
+      desc: 'Can kazanmak için bir video izle.',
+      check: function () { return (KI.store.get('game').videoWatches || 0) >= 1; } }
   ];
 
-  var CATS = ['Zaman Haritası', 'Alıştırma', 'Kelime', 'Bağlılık'];
+  var CATS = ['Zaman Haritası', 'Alıştırma', 'Kelime', 'Bağlılık', 'Oyun Modu'];
 
   function unlockedMap() { return KI.store.get('achievements') || {}; }
 

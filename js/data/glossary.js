@@ -219,19 +219,14 @@
   ]);
 
   /* --- özel isimler --- */
+  /* Not: Türkçede zaten aynı yazılan/okunan özel isimler (şehir, kişi
+     adı vb. — eskiden burada duran "ankara|Ankara" gibi) sözlükten
+     çıkarıldı; bir Türkçe konuşan için çevirisi kendisiyle aynı olan
+     bir kelimeyi sözlükte görmenin bir faydası yok. Yalnızca gerçekten
+     farklı yazılan (Anatolia/Anadolu, Bosphorus/Boğaziçi gibi) girişler kaldı. */
   add([
-  'istanbul|İstanbul|özel isim', 'bursa|Bursa|özel isim', 'konya|Konya|özel isim',
-  'edirne|Edirne|özel isim', 'ankara|Ankara|özel isim', 'anatolia|Anadolu|özel isim',
-  'bosphorus|Boğaziçi|özel isim', 'topkapi|Topkapı|özel isim',
-  'suleymaniye|Süleymaniye|özel isim', 'selimiye|Selimiye|özel isim',
-  'sinan|Sinan|özel isim', 'mimar|mimar|özel isim', 'fatih|Fatih|özel isim',
-  'mehmet|Mehmet|özel isim', 'mehmed|Mehmed|özel isim', 'ayse|Ayşe|özel isim',
-  'elif|Elif|özel isim', 'zeynep|Zeynep|özel isim', 'hasan|Hasan|özel isim',
-  'ali|Ali|özel isim', 'fatma|Fatma|özel isim', 'yunus|Yunus|özel isim',
-  'emre|Emre|özel isim', 'mevlana|Mevlânâ|özel isim', 'mesnevi|Mesnevî|özel isim',
+  'anatolia|Anadolu|özel isim', 'bosphorus|Boğaziçi|özel isim',
   "qur'an|Kur'an|özel isim", 'quran|Kur\u2019an|özel isim',
-  'hereke|Hereke (halı merkezi)|özel isim', 'eminonu|Eminönü|özel isim',
-  'nasreddin|Nasreddin|özel isim', 'usta|usta (unvan)|özel isim',
   'grand|büyük|sıfat', 'eid|bayram|isim'
   ]);
 

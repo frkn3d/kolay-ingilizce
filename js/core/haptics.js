@@ -10,6 +10,8 @@
   var TAP_MS = 8;
   var WRONG_MS = 200;
   var ACHIEVEMENT_PATTERN = [70, 90, 70, 90, 70];   // art arda üç vuruş
+  var COMBO_PATTERN = [30, 40, 30];                 // 3/5/7 kombo: iki kısa vuruş
+  var FLAWLESS_PATTERN = [60, 60, 60, 60, 60, 60, 90]; // 10/10 kutlaması: uzun seri
 
   function supported() {
     return typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function';
@@ -28,6 +30,8 @@
       try {
         if (name === 'wrong') navigator.vibrate(WRONG_MS);
         else if (name === 'achievement') navigator.vibrate(ACHIEVEMENT_PATTERN);
+        else if (name === 'combo') navigator.vibrate(COMBO_PATTERN);
+        else if (name === 'flawless') navigator.vibrate(FLAWLESS_PATTERN);
         else navigator.vibrate(TAP_MS);
       } catch (e) {}
     },

@@ -110,7 +110,23 @@
       tone(1318.5, 0.30, 'sine', 0.38, 0.4, null, accent);
     },
     star: function () { tone(1318.5, 0.08, 'sine', 0, 0.25); tone(1760, 0.14, 'sine', 0.07, 0.22); },
-    toggle: function () { click(0.25, 1100); }
+    toggle: function () { click(0.25, 1100); },
+
+    /* Oyun Modu: üst üste 3/5/7 doğru — kısa, parlak bir "ding" */
+    combo: function () {
+      tone(880, 0.08, 'sine', 0.00, 0.4);
+      tone(1318.5, 0.14, 'sine', 0.05, 0.36);
+    },
+    /* Oyun Modu: bir durağı 10/10 bitirme — daha uzun, daha büyük kutlama
+       (achievement gibi accent bus'ında, ama farklı ve daha uzun bir ezgiyle) */
+    flawless: function () {
+      tone(523.25, 0.12, 'triangle', 0.00, 0.5, null, accent);
+      tone(659.25, 0.12, 'triangle', 0.10, 0.5, null, accent);
+      tone(783.99, 0.12, 'triangle', 0.20, 0.5, null, accent);
+      tone(1046.5, 0.12, 'triangle', 0.30, 0.5, null, accent);
+      tone(1318.5, 0.14, 'sine', 0.40, 0.45, null, accent);
+      tone(1567.98, 0.45, 'sine', 0.50, 0.4, null, accent);
+    }
   };
 
   var A = {

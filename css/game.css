@@ -6,6 +6,27 @@
    kullanır; burada yalnız haritaya ve giriş ekranına özgü stiller var.
    ============================================================ */
 
+/* Oyun Modu'na özel, eğlenceli bir başlık yazı tipi. Uygulama tamamen
+   çevrimdışı çalıştığı için (bkz. sw.js) Google Fonts'a bağlanmak yerine
+   dosyalar assets/fonts altında birlikte gönderiliyor; internet olmasa
+   da yüklenir ve service worker tarafından önbelleğe alınır. */
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url('assets/fonts/baloo2-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+}
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url('assets/fonts/baloo2-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+1E00-1E9F, U+2020;
+}
+/* Yalnız #view içindeki (modallar hariç) başlıklara uygulanır. */
+html[data-section="oyun"] #view {
+  --font-display: 'Baloo 2', "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
 .brand__logo { width: 34px; height: 34px; display: block; }
 
 body.no-tabbar { padding-bottom: max(14px, env(safe-area-inset-bottom, 0px)); }
@@ -177,7 +198,7 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__label--cp b { color: var(--mustard-d); }
 
 .gmap__label { text-align: center; margin-top: 8px; max-width: 122px; }
-.gmap__label b { display: block; font-size: .8rem; line-height: 1.22; }
+.gmap__label b { display: block; font-size: .8rem; line-height: 1.22; font-family: var(--font-display); }
 .gmap__label-score { display: inline-block; margin-top: 2px; font-family: var(--font-mono); font-size: .7rem; color: var(--ink-mute); }
 
 /* ---------- Oyun Modu: sınav ekranı ---------- */
@@ -205,4 +226,17 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
   .gmap__node { width: 66px; height: 66px; }
   .gmap__node-ico .icon { width: 26px; height: 26px; }
   .gmap__label { max-width: 100px; }
+}
+
+/* ---------- Oyun Modu: kombo / kusursuz bitirme konfetisi ---------- */
+.confetti-burst { position: fixed; inset: 0; z-index: 400; pointer-events: none; overflow: hidden; }
+.confetti-piece {
+  position: absolute; top: 18%;
+  width: 8px; height: 14px;
+  animation: confetti-fall var(--dur, 1.1s) cubic-bezier(.25, .46, .45, .94) forwards;
+  opacity: 0;
+}
+@keyframes confetti-fall {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx, 0), 74vh) rotate(560deg); opacity: 0; }
 }

@@ -438,16 +438,12 @@
 (function (KI) {
   'use strict';
   KI.glossary.addWords([
-  /* yer adları */
-  'diyarbakir|Diyarbakır|özel isim', 'fethiye|Fethiye|özel isim', 'izmir|İzmir|özel isim',
-  'rize|Rize|özel isim', 'erzurum|Erzurum|özel isim', 'cappadocia|Kapadokya|özel isim',
-  'antalya|Antalya|özel isim', 'trabzon|Trabzon|özel isim', 'mardin|Mardin|özel isim',
-  'bombasi|bombası (İzmir bombası tatlısı)|özel isim',
+  /* yer adları (Türkçede zaten aynı yazılan/okunan şehir adları
+     kaldırıldı; yalnız gerçekten farklı yazılan kaldı) */
+  'cappadocia|Kapadokya|özel isim',
 
   /* halk hikâyeleri */
-  'dede|dede (Dede Korkut)|özel isim', 'korkut|Korkut (Dede Korkut)|özel isim',
-  'oghuz|Oğuz|özel isim', 'keloglan|Keloğlan|özel isim',
-  'karagoz|Karagöz|özel isim', 'hacivat|Hacivat|özel isim',
+  'oghuz|Oğuz|özel isim',
   'shadow|gölge|isim', 'tale|masal|isim', 'folk|halk|sıfat', 'legend|efsane|isim',
   'hero|kahraman|isim', 'wisdom|bilgelik|isim',
 

@@ -265,7 +265,7 @@
   'compete|yarışmak|fiil', 'favourite|en sevilen|sıfat', 'herself|kendisi (kadın)|zamir',
   'firework|havai fişek|isim', 'asleep|uykuda; fall asleep: uyuyakalmak|sıfat', 'twist|burkmak|fiil',
   'ankle|ayak bileği|isim', 'wolf|kurt|isim', 'wolves|kurtlar|isim',
-  'kayseri|Kayseri (şehir)|özel isim', 'gift|hediye|isim', 'wonderful|harika|sıfat'
+  'gift|hediye|isim', 'wonderful|harika|sıfat'
   ]);
 
   /* ---- her zamanın examples dizisine ekle ---- */

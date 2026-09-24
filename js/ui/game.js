@@ -23,8 +23,10 @@
 
   /* Haritada aynı zaman ismi ("Present Simple") tur boyunca defalarca
      tekrar etmesin diye her ders düğümüne, hangi zamanı çalıştırdığından
-     bağımsız, günlük hayattan farklı bir tema (ikon + başlık) atanır.
-     Gerçek zaman adı sınav sayfasında eyebrow olarak hâlâ görünür. */
+     bağımsız, günlük hayattan bir tema (ikon + başlık) atanır. Havuz
+     tüm haritadaki ders sayısından (73) fazla olduğu için tek bir
+     baştan-sona geçişte hiçbir başlık tekrar etmez. Gerçek zaman adı
+     sınav sayfasında eyebrow olarak hâlâ görünür. */
   var THEME_POOL = [
     { ico: 'tea-glass', t: 'Çay Saati' },
     { ico: 'simit', t: 'Simit Arabası' },
@@ -38,7 +40,84 @@
     { ico: 'mountain', t: 'Yayla Havası' },
     { ico: 'nazar', t: 'Nazar Boncuğu' },
     { ico: 'coffee-cup', t: 'Kahve Falı' },
-    { ico: 'sprout', t: 'Bahçe İşi' }
+    { ico: 'sprout', t: 'Bahçe İşi' },
+    { ico: 'briefcase', t: 'Ofis Toplantısı' },
+    { ico: 'graduation-cap', t: 'Okul Zili' },
+    { ico: 'phone', t: 'Telefon Sohbeti' },
+    { ico: 'laptop', t: 'Bilgisayar Başında' },
+    { ico: 'ball', t: 'Mahalle Maçı' },
+    { ico: 'music-note', t: 'Radyo Türküleri' },
+    { ico: 'film-clapper', t: 'Sinema Gecesi' },
+    { ico: 'flower', t: 'Çiçekçi Dükkanı' },
+    { ico: 'fish', t: 'Balıkçı Teknesi' },
+    { ico: 'snowflake', t: 'Kar Tatili' },
+    { ico: 'umbrella', t: 'Yağmurlu Gün' },
+    { ico: 'gift', t: 'Doğum Günü' },
+    { ico: 'envelope', t: 'Mektup Yazmak' },
+    { ico: 'train', t: 'Tren İstasyonu' },
+    { ico: 'camera', t: 'Aile Fotoğrafı' },
+    { ico: 'kite', t: 'Uçurtma Şenliği' },
+    { ico: 'bicycle', t: 'Bisiklet Turu' },
+    { ico: 'clock', t: 'Mesai Saati' },
+    { ico: 'paintbrush', t: 'Ebru Atölyesi' },
+    { ico: 'book', t: 'Kütüphane Köşesi' },
+    { ico: 'chat', t: 'Komşu Sohbeti' },
+    { ico: 'headphones', t: 'Kulaklıkla Yolda' },
+    { ico: 'sun', t: 'Güneşli Balkon' },
+    { ico: 'moon', t: 'Ay Işığında' },
+    { ico: 'map', t: 'Şehir Turu' },
+    { ico: 'target', t: 'Ok Atışı' },
+    { ico: 'calendar', t: 'Takvim Yaprağı' },
+    { ico: 'star', t: 'Yıldızlı Gece' },
+    { ico: 'flag', t: 'Bayrak Töreni' },
+    { ico: 'trophy', t: 'Kupa Töreni' },
+    { ico: 'dice', t: 'Zar Oyunu' },
+    { ico: 'puzzle', t: 'Bulmaca Vakti' },
+    { ico: 'key', t: 'Kayıp Anahtar' },
+    { ico: 'history', t: 'Tarih Dersi' },
+    { ico: 'box', t: 'Taşınma Günü' },
+    { ico: 'tag', t: 'Fiyat Etiketi' },
+    { ico: 'mirror', t: 'Ayna Karşısı' },
+    { ico: 'person', t: 'Yeni Komşu' },
+    { ico: 'bell', t: 'Kapı Zili' },
+    { ico: 'notebook', t: 'Not Defteri' },
+    { ico: 'pencil', t: 'Ödev Saati' },
+    { ico: 'compass', t: 'Pusula ile Yol' },
+    { ico: 'turtle', t: 'Yavaş Kaplumbağa' },
+    { ico: 'bulb', t: 'Parlak Fikir' },
+    { ico: 'repeat', t: 'Tekrar Turu' },
+    { ico: 'thumbsup', t: 'Başparmak Yukarı' },
+    { ico: 'search', t: 'Kayıp Eşya' },
+    { ico: 'eye', t: 'Göz Muayenesi' },
+    { ico: 'help-circle', t: 'Bilmece Zamanı' },
+    { ico: 'logic', t: 'Mantık Oyunu' },
+    { ico: 'formula', t: 'Matematik Saati' },
+    { ico: 'bicycle', t: 'Sabah Sporu' },
+    { ico: 'coffee-cup', t: 'Kahve Molası' },
+    { ico: 'mountain', t: 'Akşam Yürüyüşü' },
+    { ico: 'fish', t: 'Deniz Kenarı' },
+    { ico: 'sprout', t: 'Bahar Temizliği' },
+    { ico: 'book', t: 'Kitap Fuarı' },
+    { ico: 'envelope', t: 'Kartpostal' },
+    { ico: 'train', t: 'Yolculuk Hazırlığı' },
+    { ico: 'graduation-cap', t: 'Sınav Heyecanı' },
+    { ico: 'chat', t: 'Kahvaltıda Sohbet' },
+    { ico: 'notebook', t: 'Ders Çalışma' },
+    { ico: 'phone', t: 'Telefon Rehberi' },
+    { ico: 'briefcase', t: 'Yeni İş Günü' },
+    { ico: 'moon', t: 'Gökyüzü Manzarası' },
+    { ico: 'book', t: 'Kütüphane Sessizliği' },
+    { ico: 'clock', t: 'Pazartesi Sabahı' },
+    { ico: 'minaret', t: 'Cuma Namazı' },
+    { ico: 'gift', t: 'Bayram Ziyareti' },
+    { ico: 'mountain', t: 'Doğa Yürüyüşü' },
+    { ico: 'fish', t: 'Balık Tutma' },
+    { ico: 'music-note', t: 'Müzik Kursu' },
+    { ico: 'paintbrush', t: 'Resim Sergisi' },
+    { ico: 'ball', t: 'Spor Salonu' },
+    { ico: 'minibus', t: 'Otobüs Bekleme' },
+    { ico: 'ferry', t: 'Vapur İskelesi' },
+    { ico: 'coffee-cup', t: 'Kahve Dükkanı' }
   ];
   var themeCursor = 0;
   function nextTheme() {
@@ -154,10 +233,11 @@
       KI.store.gameTouchDay();
       var premium = KI.store.isPremium();
       var n = KI.store.heartsCount();
+      var max = KI.store.maxHearts();
 
       container.appendChild(U.el('div', { class: 'hearts__count' }, [
         U.el('span', { html: KI.icons.html('ach-heart') }),
-        U.el('b', { text: premium ? 'Sınırsız can' : (n + ' / 5 can') })
+        U.el('b', { text: premium ? 'Sınırsız can' : (n + ' / ' + max + ' can') })
       ]));
 
       if (premium) {
@@ -166,12 +246,12 @@
       }
 
       var watch = U.el('button', { class: 'btn btn--primary btn--block', type: 'button',
-        html: KI.icons.html('play') + ' Video izle · +1 can' });
-      if (n >= 5) watch.disabled = true;
+        html: KI.icons.html('play') + ' Video izle · +3 can' });
+      if (n >= max) watch.disabled = true;
       watch.addEventListener('click', function () {
         KI.audio.play('tap');
         KI.store.gainHeart();
-        U.toast('Bir can kazandın');
+        U.toast('3 can kazandın');
         paintHeartsBadge();
         paint();
         if (onChange) onChange();
@@ -360,7 +440,7 @@
       return frag;
     }
 
-    var i = 0, correct = 0;
+    var i = 0, correct = 0, combo = 0;
 
     function paint() {
       if (!KI.store.canPlayGame()) { U.clear(box); box.appendChild(outOfHeartsBlock(function () { if (KI.store.canPlayGame()) paint(); })); return; }
@@ -376,7 +456,15 @@
       if (it.type === 'choice') paintChoice(it); else paintBuild(it);
     }
 
-    function onWrong() { KI.store.loseHeart(); paintHeartsBadge(); }
+    function onWrong() { KI.store.loseHeart(); paintHeartsBadge(); combo = 0; }
+    function onCorrect() {
+      combo++;
+      KI.store.noteGameCombo(combo);
+      if (combo === 3 || combo === 5 || combo === 7) {
+        KI.confetti.burst();
+        KI.audio.play('combo');
+      }
+    }
 
     function stepFooter(ok, correctText) {
       var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
@@ -417,7 +505,7 @@
           rightBtn.classList.add('is-right'); rightBtn.querySelector('.opt__key').textContent = '✓';
           if (!ok) { b.classList.add('is-wrong'); b.querySelector('.opt__key').textContent = '✕'; }
           U.qsa('.opt', list).forEach(function (x, idx2) { x.disabled = true; if (idx2 !== k && idx2 !== correctK) x.classList.add('is-dim'); });
-          if (ok) { correct++; KI.audio.play('correct'); } else { KI.audio.play('wrong'); onWrong(); }
+          if (ok) { correct++; onCorrect(); KI.audio.play('correct'); } else { KI.audio.play('wrong'); onWrong(); }
           stepFooter(ok, opts[correctK]);
         });
         list.appendChild(b);
@@ -459,7 +547,7 @@
       check.addEventListener('click', function () {
         var answer = placed.map(function (p) { return p.w; }).join(' ');
         var ok = answer.toLowerCase() === target.toLowerCase();
-        if (ok) { correct++; KI.audio.play('correct'); } else { KI.audio.play('wrong'); onWrong(); }
+        if (ok) { correct++; onCorrect(); KI.audio.play('correct'); } else { KI.audio.play('wrong'); onWrong(); }
         check.disabled = true;
         U.qsa('.wchip', box).forEach(function (c) { c.disabled = true; });
         line.classList.add(ok ? 'is-right' : 'is-wrong');
@@ -519,11 +607,18 @@
 
       var row = U.el('div', { class: 'row', style: 'margin-top:10px' });
       var again = U.el('button', { class: 'btn', type: 'button', html: '↻ Tekrar dene' });
-      again.addEventListener('click', function () { i = 0; correct = 0; items = isCp ? buildCheckpointItems(level) : buildLessonItems(level, node.topic.id); KI.audio.play('tap'); paint(); });
+      again.addEventListener('click', function () { i = 0; correct = 0; combo = 0; items = isCp ? buildCheckpointItems(level) : buildLessonItems(level, node.topic.id); KI.audio.play('tap'); paint(); });
       row.appendChild(again);
       row.appendChild(U.el('a', { class: 'btn btn--primary', href: '#/oyun', 'data-sfx': 'nav', text: 'Haritaya dön →' }));
       box.appendChild(row);
-      KI.audio.play('finish');
+
+      /* Hepsini doğru bitirince: daha uzun konfeti + daha uzun, ayrı bir ses. */
+      if (correct === total) {
+        KI.confetti.burst({ big: true });
+        KI.audio.play('flawless');
+      } else {
+        KI.audio.play('finish');
+      }
     }
 
     paint();
@@ -547,6 +642,7 @@
     map: renderMap,
     quiz: renderQuiz,
     syncChrome: syncChrome,
-    buildHeartsModal: function () { mountHearts(document.getElementById('hearts-body')); }
+    buildHeartsModal: function () { mountHearts(document.getElementById('hearts-body')); },
+    totalNodes: function () { return LEVELS.reduce(function (n, lv) { return n + lv.path.length; }, 0); }
   };
 })(window.KI);
