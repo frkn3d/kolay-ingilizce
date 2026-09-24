@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — speech.js
+   Gramer Atlası — speech.js
    Cihazın kendi konuşma motoru (Web Speech API). İnternet / API yok.
    Windows, macOS, Android ve iOS tarayıcılarında çalışır.
    ============================================================ */

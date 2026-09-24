@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — audio.js
+   Gramer Atlası — audio.js
    Web Audio ile üretilen kısık, sıcak, retro ses efektleri.
    Hiçbir ses dosyası indirilmez; sesler tarayıcıda sentezlenir.
    ============================================================ */

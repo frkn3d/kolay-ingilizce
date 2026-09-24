@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — basics.js
+   Gramer Atlası — basics.js
    Zamanlara geçmeden önce bilinmesi gereken en sade temeller.
    Blok türleri: text | list | table | examples | callout | verbs
    ============================================================ */

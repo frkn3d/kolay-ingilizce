@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — store.js
+   Gramer Atlası — store.js
    Ayarlar, ilerleme ve kelime defteri: localStorage üzerinde.
    ============================================================ */
 (function (KI) {
@@ -44,7 +44,15 @@
     quizzesCompleted: 0,
     perfectQuizzes: 0,
     streak: 0,
-    lastVisitDay: ''       // 'YYYY-M-D', gün değişince seriyi güncellemek için
+    lastVisitDay: '',      // 'YYYY-M-D', gün değişince seriyi güncellemek için
+
+    /* --- Oyun Modu: canlar, premium, harita ilerlemesi --- */
+    game: {
+      hearts: 5,
+      heartsDay: '',        // 'YYYY-M-D', gün değişince canlar 5'e döner
+      premium: false,
+      progress: {}          // { level: { topicId: { done: true, best: 0..10 } } }
+    }
   };
 
   var state = load();
@@ -217,6 +225,54 @@
       state.streak = (state.lastVisitDay === yKey) ? (state.streak || 0) + 1 : 1;
       state.lastVisitDay = key;
       save();
+    },
+
+    /* --- Oyun Modu: günlük 5 can, video/premium ile kazanma, harita ilerlemesi ---
+       Can sayısı günde bir kez 5'e sıfırlanır (gerçek zamanlı yenilenme değil,
+       basit "günlük hak" mantığı). Premium hesapta can hiç tükenmez. */
+    gameTouchDay: function () {
+      var d = new Date();
+      var key = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+      if (state.game.heartsDay === key) return;
+      state.game.heartsDay = key;
+      state.game.hearts = 5;
+      save();
+    },
+    heartsCount: function () { return state.game.premium ? Infinity : state.game.hearts; },
+    isPremium: function () { return !!state.game.premium; },
+    canPlayGame: function () { return state.game.premium || state.game.hearts > 0; },
+    loseHeart: function () {
+      if (state.game.premium) return state.game.hearts;
+      state.game.hearts = Math.max(0, state.game.hearts - 1);
+      save();
+      return state.game.hearts;
+    },
+    gainHeart: function () {
+      if (state.game.premium) return state.game.hearts;
+      state.game.hearts = Math.min(5, state.game.hearts + 1);
+      save();
+      return state.game.hearts;
+    },
+    setPremium: function (on) { state.game.premium = !!on; save(); },
+
+    gameProgress: function (level, topicId) {
+      var lv = state.game.progress[level];
+      return (lv && lv[topicId]) || null;
+    },
+    recordGameResult: function (level, topicId, correct, total) {
+      var lv = state.game.progress[level] || (state.game.progress[level] = {});
+      var cur = lv[topicId] || { done: false, best: 0 };
+      cur.done = true;
+      if (correct > cur.best) cur.best = correct;
+      lv[topicId] = cur;
+      state.quizzesCompleted = (state.quizzesCompleted || 0) + 1;
+      if (total > 0 && correct === total) state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
+      save();
+      return cur;
+    },
+    isGameTopicDone: function (level, topicId) {
+      var p = S.gameProgress(level, topicId);
+      return !!(p && p.done);
     },
 
     /* --- veri dışa/içe aktarma: telefon değişince ilerleme kaybolmasın --- */

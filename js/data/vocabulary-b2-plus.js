@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — vocabulary-b2-plus.js
+   Gramer Atlası — vocabulary-b2-plus.js
    Sözlüğü 3000 kelimeye taşıyan ikinci ek dalga: daha özel ve
    daha az sık kullanılan B2 kelimeleri.
    Biçim:  ingilizce|türkçe|tür|not

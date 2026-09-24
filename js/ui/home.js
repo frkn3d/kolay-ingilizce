@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — home.js
+   Gramer Atlası — home.js
    "Zaman Haritası": 3 sütun (geçmiş / şimdi / gelecek) x 4 satır.
    Karşılama ekranı sade tutulur; açıklamalar "Nasıl okunur?"
    ipucunun altında saklıdır.

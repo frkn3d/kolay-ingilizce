@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — app.js
+   Gramer Atlası — app.js
    Yönlendirici (hash tabanlı), tema, ses düğmeleri, başlatma.
    ============================================================ */
 (function (KI) {
@@ -28,8 +28,10 @@
   };
 
   /* ---------------- yönlendirici ---------------- */
+  var EDU_TABS = ['harita', 'temeller', 'alistirma', 'sozluk'];
+
   var routes = [
-    { re: /^\/?$/,                    tab: 'harita',    run: function () { return KI.viewHome.render(); } },
+    { re: /^\/?$/,                    tab: 'root',      run: function () { return KI.viewGate.render(); } },
     { re: /^\/harita\/?$/,            tab: 'harita',    run: function () { return KI.viewHome.render(); } },
     { re: /^\/zaman\/([a-z-]+)\/?$/,  tab: 'harita',    run: function (m) { return KI.viewTense.render(m[1]); } },
     { re: /^\/temeller\/?$/,          tab: 'temeller',  run: function () { return KI.viewBasics.render(null); } },
@@ -41,7 +43,9 @@
     { re: /^\/sozluk\/?$/,            tab: 'sozluk',    run: function () { return KI.viewDictionary.render(); } },
     { re: /^\/sozluk\/kelimeler\/?$/, tab: 'sozluk',    run: function () { return KI.viewDictionary.words(); } },
     { re: /^\/sozluk\/hikayeler\/?$/, tab: 'sozluk',    run: function () { return KI.viewStories.list(); } },
-    { re: /^\/sozluk\/hikayeler\/([a-z0-9-]+)\/?$/, tab: 'sozluk', run: function (m) { return KI.viewStories.detail(m[1]); } }
+    { re: /^\/sozluk\/hikayeler\/([a-z0-9-]+)\/?$/, tab: 'sozluk', run: function (m) { return KI.viewStories.detail(m[1]); } },
+    { re: /^\/oyun\/?$/,              tab: 'oyun',      run: function () { return KI.viewGame.map(); } },
+    { re: /^\/oyun\/([a-z]+)\/([a-z0-9-]+)\/?$/, tab: 'oyun', run: function (m) { return KI.viewGame.quiz(m[1], m[2]); } }
   ];
 
   var lastPath = null;
@@ -72,7 +76,15 @@
     U.qsa('.tab').forEach(function (a) {
       a.classList.toggle('is-active', hit && a.getAttribute('data-route') === hit.tab);
     });
-    document.documentElement.setAttribute('data-section', hit ? hit.tab : 'harita');
+    document.documentElement.setAttribute('data-section', hit ? hit.tab : 'root');
+
+    /* Eğitim Modu'nun 4 sekmesi dışında (giriş ekranı, Oyun Modu) alt
+       sekme çubuğu gizlenir; o modların kendi iç gezinmesi vardır. */
+    var showTabbar = !!(hit && EDU_TABS.indexOf(hit.tab) >= 0);
+    var tabbarEl = document.getElementById('tabbar');
+    if (tabbarEl) tabbarEl.hidden = !showTabbar;
+    document.body.classList.toggle('no-tabbar', !showTabbar);
+    if (KI.viewGame) KI.viewGame.syncChrome(hit ? hit.tab : null);
 
     if (lastPath !== null && lastPath !== path) U.scrollTop();
     lastPath = path;
@@ -129,10 +141,22 @@
     document.getElementById('achievements-close').addEventListener('click', closeAchModal);
     achModal.addEventListener('click', function (e) { if (e.target === achModal) closeAchModal(); });
 
+    /* Oyun Modu: canlar */
+    var heartsModal = document.getElementById('hearts-modal');
+    document.getElementById('btn-hearts').addEventListener('click', function () {
+      KI.viewGame.buildHeartsModal();
+      heartsModal.hidden = false;
+      KI.audio.play('open');
+    });
+    function closeHeartsModal() { heartsModal.hidden = true; KI.audio.play('close'); }
+    document.getElementById('hearts-close').addEventListener('click', closeHeartsModal);
+    heartsModal.addEventListener('click', function (e) { if (e.target === heartsModal) closeHeartsModal(); });
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         if (!modal.hidden) closeModal();
         else if (!achModal.hidden) closeAchModal();
+        else if (!heartsModal.hidden) closeHeartsModal();
         else KI.sentence.sheet.hide();
       }
     });
@@ -160,7 +184,7 @@
       paint();
     });
 
-    if (!location.hash) location.replace('#/harita');
+    if (!location.hash) location.replace('#/');
     paint();
   }
 

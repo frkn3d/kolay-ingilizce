@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — timeline.js
+   Gramer Atlası — timeline.js
    Zaman çizgisini SVG olarak çizer.
    x değerleri: -1 (uzak geçmiş) … 0 (ŞİMDİ) … +1 (uzak gelecek)
    ============================================================ */

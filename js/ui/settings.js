@@ -1,13 +1,14 @@
 /* ============================================================
-   Kolay İngilizce — settings.js
+   Gramer Atlası — settings.js
    Ayarlar penceresi: ses, tema, okuma hızı, telaffuz sesi.
    ============================================================ */
 (function (KI) {
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.4.5';
+  var APP_VERSION = '0.5.0';
   var CHANGELOG = [
+    { v: '0.5.0', d: 'Büyük güncelleme: uygulama artık "Gramer Atlası" ismini taşıyor, yeni bir logo ve animasyonlu simgeler eklendi. Açılışta Oyun Modu / Eğitim Modu seçim ekranı geldi (logoya her zaman buradan dönülür). Eğitim Modu bugüne kadarki her şeyi (harita, temeller, alıştırma, sözlük, hikayeler) içeriyor. Yeni Oyun Modu: 3 zorluk seviyesi (Başlangıç yeşil, Orta mustard, İleri terra) için aşağı doğru uzanan bir harita, her seviyenin kendi renginde 4-5 durağı, her durakta 720 özgün sorudan (Türk kültüründen örneklerle) rastgele seçilen 10 soruluk kısa sınavlar. Günlük 5 can hakkı: yanlış cevap bir can eksiltir, video izleyerek veya Premium’a geçerek can kazanılır (şimdilik deneme modunda, gerçek reklam/ödeme sonra eklenecek); duraklar sırayla açılır.' },
     { v: '0.4.5', d: 'Sekmelerin arka planına çok hafif, birbirinden farklı tonlar eklendi (Temeller, Alıştırma, Sözlük); koyuluk aynı kalıyor, sadece renk hafifçe kayıyor. Karanlık modda daha da belli belirsiz. Harita sekmesi değişmedi.' },
     { v: '0.4.4', d: 'Üst çubuktaki ses açma/kapama düğmesi kaldırıldı; aynı ayar zaten Ayarlar → Ses altında duruyor, tekrarı gereksizdi.' },
     { v: '0.4.3', d: 'Hikayeler bölümüne 8 yeni anonim hikaye eklendi: 5 yeni Nasreddin Hoca fıkrası (Ay’dan Yoğurt, Ye Kürküm Ye, On Üçüncü Eşek, Eşek Evde Yok, Ne Diyeceğimi Biliyor musunuz) ve 3 yeni Keloğlan hikayesi. Toplam hikaye sayısı 15’e çıktı.' },
@@ -199,7 +200,7 @@
     /* --- hakkında --- */
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px;border-top:1px dashed var(--line);padding-top:14px', text: 'Hakkında' }));
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
-      text: 'Kolay İngilizce · Zaman çizgisiyle gramer · ' + KI.tenses.list.length + ' zaman · ' + KI.glossary.size() + ' kelime.' }));
+      text: 'Gramer Atlası · Zaman çizgisiyle gramer · ' + KI.tenses.list.length + ' zaman · ' + KI.glossary.size() + ' kelime.' }));
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.82rem',
       text: 'Bu bir Logspace uygulamasıdır. Sesler cihazınızın kendi konuşma motoruyla üretilir; hiçbir veri dışarı gönderilmez, her şey yalnızca bu cihazda saklanır.' }));
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.8rem;font-family:var(--font-mono)', text: 'Sürüm ' + APP_VERSION }));

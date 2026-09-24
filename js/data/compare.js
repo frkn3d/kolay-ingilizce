@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — compare.js
+   Gramer Atlası — compare.js
    Birbirine karışan zamanların yan yana karşılaştırılması.
    ============================================================ */
 (function (KI) {

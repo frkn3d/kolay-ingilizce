@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="t2 d2">
+  <title id="t2">Oyun Modu simgesi</title>
+  <desc id="d2">Kıvrılan noktalı bir yol üzerinde sırayla zıplayan animasyonlu bir yıldız.</desc>
+  <defs>
+    <style>
+      .token { animation: token-hop 3.6s ease-in-out infinite; }
+      .ring { transform-origin: center; animation: ring-pulse 3.6s ease-in-out infinite; }
+      @keyframes token-hop {
+        0%, 24% { transform: translate(32px, 158px) scale(1); }
+        30% { transform: translate(32px, 158px) scale(1.22); }
+        36%, 58% { transform: translate(100px, 100px) scale(1); }
+        64% { transform: translate(100px, 100px) scale(1.22); }
+        70%, 96% { transform: translate(154px, 46px) scale(1); }
+        100% { transform: translate(32px, 158px) scale(1); }
+      }
+      @keyframes ring-pulse {
+        0%, 24% { r: 13px; opacity: .55; }
+        30% { r: 20px; opacity: 0; }
+        31%, 100% { r: 13px; opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .token, .ring { animation: none; transform: translate(100px, 100px); }
+      }
+    </style>
+  </defs>
+
+  <path d="M32 158C32 118 92 138 92 100 92 62 152 82 154 46" fill="none" stroke="#8ec2a0" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 15"/>
+
+  <circle cx="32" cy="158" r="9" fill="#5aa077" stroke="#111827" stroke-width="4"/>
+  <circle cx="100" cy="100" r="9" fill="#fbf6e9" stroke="#111827" stroke-width="4"/>
+  <circle cx="154" cy="46" r="9" fill="none" stroke="#8ec2a0" stroke-width="4"/>
+
+  <circle class="ring" cx="0" cy="0" r="13" fill="none" stroke="#d9a03c" stroke-width="3" transform="translate(32,158)"/>
+
+  <g class="token">
+    <path d="M0 -14l4.2 8.6 9.5 1.4-6.9 6.7 1.6 9.4L0 7.8l-8.4 4.3 1.6-9.4-6.9-6.7 9.5-1.4Z" fill="#d9a03c" stroke="#111827" stroke-width="3.4" stroke-linejoin="round"/>
+  </g>
+</svg>

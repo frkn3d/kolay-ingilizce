@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — tenses.js
+   Gramer Atlası — tenses.js
    12 zaman: mantık, formül, zaman çizgisi işaretleri, örnekler.
    Örnekler Türk ve Osmanlı kültüründen seçilmiştir.
 

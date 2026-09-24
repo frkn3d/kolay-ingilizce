@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — glossary.js
+   Gramer Atlası — glossary.js
    Kelime => Türkçe karşılık.  Biçim:  ingilizce|türkçe|tür|not
    Çekimli hâller (drinks, drinking, built...) otomatik çözülür.
    ============================================================ */

@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — tests/validate-content.js
+   Gramer Atlası — tests/validate-content.js
    Bağımlılık gerektirmez (düz Node). Veri dosyalarını sırayla
    window.KI üzerinde birleştirip şunları doğrular:
      - her quiz sorusunun answer indeksi options sınırları içinde mi

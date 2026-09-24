@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — basics.js (arayüz)
+   Gramer Atlası — basics.js (arayüz)
    Temel gramer bölümlerini kartlar hâlinde çizer.
    ============================================================ */
 (function (KI) {

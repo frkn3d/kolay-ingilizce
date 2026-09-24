@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — exercises-2.js
+   Gramer Atlası — exercises-2.js
    Alıştırma sayısını 300'ün üzerine çıkaran ikinci soru dalgası.
    Biçim: { q, options, answer (0'dan başlar), why }
    ============================================================ */

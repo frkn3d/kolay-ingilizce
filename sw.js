@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — sw.js (service worker)
+   Gramer Atlası — sw.js (service worker)
    Çevrimdışı çalışmayı sağlar. Strateji: ağ öncelikli — çevrimiçiyken
    her zaman en güncel dosya alınır ve önbelleğe yazılır; ağ yoksa
    (uçakta, metroda, çekim olmayan yerde) önbellekten sunulur.
@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v5';
+var CACHE_VERSION = 'ki-cache-v6';
 
 var CORE_ASSETS = [
   './',
@@ -19,6 +19,7 @@ var CORE_ASSETS = [
   './css/base.css',
   './css/components.css',
   './css/layout.css',
+  './css/game.css',
   './js/core/utils.js',
   './js/core/icons.js',
   './js/core/store.js',
@@ -42,6 +43,7 @@ var CORE_ASSETS = [
   './js/data/exercises.js',
   './js/data/compare.js',
   './js/data/exercises-2.js',
+  './js/data/game-questions.js',
   './js/ui/timeline.js',
   './js/ui/sentence.js',
   './js/ui/home.js',
@@ -53,9 +55,14 @@ var CORE_ASSETS = [
   './js/ui/stories.js',
   './js/ui/achievements.js',
   './js/ui/settings.js',
+  './js/ui/gate.js',
+  './js/ui/game.js',
   './js/app.js',
   './assets/favicon.svg',
-  './assets/icon-512.svg'
+  './assets/icon-512.svg',
+  './assets/logo.svg',
+  './assets/icon-mode-game.svg',
+  './assets/icon-mode-study.svg'
 ];
 
 self.addEventListener('install', function (event) {

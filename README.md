@@ -1,10 +1,12 @@
-# Kolay İngilizce — Zamanlarla Öğren
+# Gramer Atlası — Zamanlarla Öğren
 
 İngilizcenin temelini **zaman çizgisi** üzerinden anlatan, tamamen tarayıcıda çalışan ücretsiz bir öğrenme uygulaması. Her cümle, zaman çizgisinde tam olarak nereye düştüğü gösterilerek öğretilir.
 
 Örnekler **Türkiye’deki günlük hayattan** seçilmiştir: zeytin hasadı, çatıda salça, Diyarbakır karpuzu, dolmuş beklemek, Fethiye’nin turkuaz denizi, kıraathanede tavla, bayram şekeri, Kapadokya balonları… Aralarında Dede Korkut, Keloğlan, Nasreddin Hoca ve Karagöz-Hacivat’tan birkaç cümle ile Mimar Sinan, Kapalıçarşı gibi kültür ögeleri de var.
 
 > Tek soru: **Bu iş zamanın neresinde duruyor?** Uygulamanın tamamı bu sorunun üstüne kuruludur.
+
+Uygulama açılışta iki mod sunar: **Eğitim Modu** (aşağıdaki tüm özellikler — zaman haritası, temeller, alıştırmalar, sözlük, hikayeler) ve **Oyun Modu** (aşağı doğru uzanan, 3 zorluk seviyeli bir harita üzerinde ilerlenen, günlük can hakkı olan kısa sınavlar).
 
 ## Ne yapar?
 
@@ -34,6 +36,7 @@
 | 📱 **Mobil uyumlu** | Telefonda alt sekme çubuğu, masaüstünde üst menü. Ana ekrana eklenebilir (PWA manifest). |
 | ✏️ **Emojisiz, tek stil ikonlar** | Uygulamada hiçbir platform emojisi yok; tüm ikonlar `js/core/icons.js` içinde elle çizilmiş, tema renklerine uyan SVG'lerdir. |
 | 📡 **Gerçek çevrimdışı çalışma** | `sw.js` service worker'ı bir kez ziyaret edildikten sonra tüm dosyaları önbelleğe alır; internetsizken (uçak, metro) uygulama tam çalışır durumda kalır. |
+| 🕹️ **Oyun Modu** | Duolingo tarzı, aşağı doğru uzanan bir harita: Başlangıç (yeşil) · Orta (mustard) · İleri (terra) olmak üzere 3 zorluk seviyesi, her biri kendi renginde. Duraklar sırayla açılır; her durakta 720 sorudan (`questions.md`) rastgele seçilen 10 soruluk kısa bir sınav var. Günlük 5 can hakkı; yanlış cevap bir can eksiltir, video izleyerek veya Premium'a geçerek can kazanılır. |
 
 Öğrenilen zamanlar, test sonuçları ve kelime defteri yalnızca **kendi cihazınızda** (localStorage) saklanır; hiçbir veri dışarı gönderilmez.
 

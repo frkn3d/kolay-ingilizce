@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — tests/smoke.js
+   Gramer Atlası — tests/smoke.js
    Uygulamayı gerçek bir tarayıcı gibi (jsdom ile dosyadan) yükler,
    her rotayı gezer ve konsol hatası / boş ikon / kırık sayaç olup
    olmadığını kontrol eder.
@@ -25,11 +25,13 @@ try {
 
 var fileUrl = 'file:///' + root.split(path.sep).join('/').replace(/ /g, '%20') + '/index.html';
 var ROUTES = [
-  '#/harita', '#/temeller', '#/alistirma', '#/sozluk',
+  '#/', '#/harita', '#/temeller', '#/alistirma', '#/sozluk',
   '#/sozluk/kelimeler', '#/sozluk/hikayeler', '#/sozluk/hikayeler/ay-mi-gunes-mi',
   '#/sozluk/hikayeler/keloglan-pasa',
   '#/karsilastir', '#/karsilastir/past-simple-present-perfect',
-  '#/zaman/present-simple', '#/zaman/future-perfect-continuous'
+  '#/zaman/present-simple', '#/zaman/future-perfect-continuous',
+  '#/oyun', '#/oyun/baslangic/temeller', '#/oyun/baslangic/present-simple',
+  '#/oyun/orta/present-perfect', '#/oyun/ileri/future-perfect-continuous'
 ].concat(['karisik', 'zorlandiklarim', 'tekrar', 'cumle', 'cizgi', 'bosluk', 'kur', 'dikte', 'kelime', 'fiil']
   .map(function (m) { return '#/alistirma/' + m; }));
 

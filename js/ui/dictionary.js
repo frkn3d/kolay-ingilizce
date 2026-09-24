@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — dictionary.js
+   Gramer Atlası — dictionary.js
    Sözlük araması, türlere göre süzme ve kelime defteri.
    ============================================================ */
 (function (KI) {

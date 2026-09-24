@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — vocabulary.js
+   Gramer Atlası — vocabulary.js
    A1'den B2'ye günlük ve akademik kelime dağarcığı.
    Biçim:  ingilizce|türkçe|tür|not
    Yeni kelime eklemek için uygun temaya bir satır yazmanız yeterli.

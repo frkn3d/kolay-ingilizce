@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — sentence.js
+   Gramer Atlası — sentence.js
    Tıklanabilir kelimeler, "Çevir" düğmesi, sesli okuma
    ve alttan açılan kelime kartı.
    ============================================================ */

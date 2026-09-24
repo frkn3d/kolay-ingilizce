@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — utils.js
+   Gramer Atlası — utils.js
    Küçük yardımcılar. Her modül window.KI altında yaşar.
    ============================================================ */
 window.KI = window.KI || {};

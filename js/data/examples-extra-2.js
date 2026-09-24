@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — examples-extra-2.js
+   Gramer Atlası — examples-extra-2.js
    Sıradan insanların günlük yaşamından ikinci örnek dalgası:
    iş, ev, komşuluk, çarşı, aile, sokak hayatı.
    tenses.js yüklendikten sonra her zamanın examples dizisine eklenir.

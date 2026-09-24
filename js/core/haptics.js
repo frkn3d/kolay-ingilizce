@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — haptics.js
+   Gramer Atlası — haptics.js
    Dokunsal geri bildirim: KI.audio.play() ile aynı isim setini
    kullanır, böylece her ses efekti otomatik olarak uygun titreşimi
    de tetikler. Yeni bir çağrı noktası eklemek yeterli olur.

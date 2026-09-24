@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — vocabulary-b2.js
+   Gramer Atlası — vocabulary-b2.js
    Sözlüğü B2 seviyesine taşıyan ek kelime dağarcığı: teknoloji,
    iş hayatı, sağlık, bilim, hukuk ve daha fazlası.
    Biçim:  ingilizce|türkçe|tür|not

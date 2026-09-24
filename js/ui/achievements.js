@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — achievements.js
+   Gramer Atlası — achievements.js
    Başarım tanımları, koşul kontrolü ve arayüzü (rozet, liste,
    kazanılınca çıkan kutlama kutusu).
    ============================================================ */

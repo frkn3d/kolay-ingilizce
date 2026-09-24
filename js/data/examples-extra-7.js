@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — examples-extra-7.js
+   Gramer Atlası — examples-extra-7.js
    Yedinci ve tamamlayıcı örnek dalgası: müzik, sağlık, mutfak,
    iş hayatı. tenses.js yüklendikten sonra examples dizisine
    eklenir. Bu dalgayla örnek havuzu ~7 katına tamamlanır.

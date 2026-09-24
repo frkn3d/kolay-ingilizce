@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — examples-extra-3.js
+   Gramer Atlası — examples-extra-3.js
    Üçüncü örnek dalgası: köy ve şehir hayatı, esnaf, aile, doğa.
    Amaç, her zamanın örnek havuzunu büyütüp her girişte farklı
    cümleler görünmesini sağlamak (tense.js artık havuzdan rastgele

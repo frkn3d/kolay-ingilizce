@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — examples-extra-6.js
+   Gramer Atlası — examples-extra-6.js
    Altıncı örnek dalgası: okul, komşuluk yardımlaşması, hayvanlar,
    tatil/seyahat, teknoloji. tenses.js yüklendikten sonra examples
    dizisine eklenir. Bu dalgayla örnek havuzu ~7 katına ulaşır.

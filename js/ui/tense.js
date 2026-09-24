@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — tense.js
+   Gramer Atlası — tense.js
    Tek bir zamanın sayfası: çizgi, mantık, formül, örnekler, hatalar, test.
    ============================================================ */
 (function (KI) {

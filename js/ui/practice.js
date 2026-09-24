@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — practice.js
+   Gramer Atlası — practice.js
    Çoktan seçmeli motor + üç alıştırma modu.
    ============================================================ */
 (function (KI) {

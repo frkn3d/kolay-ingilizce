@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — stories.js
+   Gramer Atlası — stories.js
    Hikayeler: liste ve okuma ekranı. Kelimelere dokunulunca anlamı
    görünür (KI.sentence.render), "Hikayeyi oku" ile cümle cümle
    sesli okuma ve okunan cümlenin vurgulanması.

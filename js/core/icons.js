@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — icons.js
+   Gramer Atlası — icons.js
    Uygulamadaki tüm ikonlar. Emoji kullanılmaz; platforma göre
    değişen, renkli emoji yerine tek stil, çizgisel SVG ikonlar.
    Kullanım: KI.icons.html('star') -> '<svg ...>...</svg>'
@@ -99,6 +99,11 @@ window.KI = window.KI || {};
 
     upload: '<path d="M12 15V4"/><polyline points="7,8.5 12,3.5 17,8.5"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>',
     download: '<path d="M12 4v11"/><polyline points="7,10.5 12,15.5 17,10.5"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>',
+
+    /* --- Oyun Modu haritası: kilit ve zaman türü (aspect) simgeleri --- */
+    lock: '<rect x="5" y="10.6" width="14" height="10" rx="1.8"/><path d="M8 10.6V7.6a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.1" r="1.3" fill="currentColor" stroke="none"/>',
+    'aspect-simple': '<line x1="3.5" y1="12" x2="20.5" y2="12"/><circle cx="12" cy="12" r="2.8" fill="currentColor" stroke="none"/>',
+    'aspect-cont': '<path d="M2.5 13c1.7-3.4 3.4-3.4 5.1 0s3.4 3.4 5.1 0 3.4-3.4 5.1 0 3.4 3.4 5.1 0"/>',
 
     /* --- başarım ikonları: her biri tek bir başarımı temsil eder --- */
     'ach-step': '<circle cx="5.5" cy="18.5" r="1.6" fill="currentColor" stroke="none"/><line x1="7" y1="17" x2="16.5" y2="7.5"/><polyline points="12,7.5 16.5,7.5 16.5,13"/>',

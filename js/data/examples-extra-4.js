@@ -1,5 +1,5 @@
 /* ============================================================
-   Kolay İngilizce — examples-extra-4.js
+   Gramer Atlası — examples-extra-4.js
    Dördüncü örnek dalgası: çarşı, düğün, festival, güreş, halk
    hikâyeleri (Nasreddin Hoca), doğa. tenses.js yüklendikten sonra
    examples dizisine eklenir.
