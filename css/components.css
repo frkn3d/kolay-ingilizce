@@ -588,6 +588,14 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 .setrow__lbl { font-weight: 600; font-size: .9rem; color: var(--ink-soft); margin-right: auto; }
 .modecard { text-decoration: none; color: inherit; display: block; }
 
+/* Mini Test zorluk kartları: sol kenarlık, kolaydan zora doğru
+   koyulaşan bir renk sırası (yeşil → hardal → kiremit → erik). */
+.minitest-card { border-left-width: 5px; }
+.minitest-card--kolay { border-left-color: var(--green-600); }
+.minitest-card--orta { border-left-color: var(--mustard); }
+.minitest-card--zor { border-left-color: var(--terra); }
+.minitest-card--cok-zor { border-left-color: var(--plum); }
+
 /* ---------- sözlük giriş ekranı: iki büyük buton ---------- */
 .hub-grid { display: grid; gap: 14px; }
 .hub-card { display: flex; align-items: center; gap: 16px; padding: 22px 20px; }

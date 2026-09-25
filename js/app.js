@@ -36,6 +36,7 @@
     { re: /^\/temeller\/?$/,          tab: 'temeller',  run: function () { return KI.viewBasics.render(null); } },
     { re: /^\/temeller\/([a-z-]+)\/?$/, tab: 'temeller', run: function (m) { return KI.viewBasics.render(m[1]); } },
     { re: /^\/alistirma\/?$/,         tab: 'alistirma', run: function () { return KI.viewPractice.render(null); } },
+    { re: /^\/alistirma\/minitest\/([a-z-]+)\/?$/, tab: 'alistirma', run: function (m) { return KI.viewPractice.render('minitest', m[1]); } },
     { re: /^\/alistirma\/([a-z-]+)\/?$/, tab: 'alistirma', run: function (m) { return KI.viewPractice.render(m[1]); } },
     { re: /^\/karsilastir\/?$/, tab: 'temeller',  run: function () { return KI.viewCompare.render(null); } },
     { re: /^\/karsilastir\/([a-z-]+)\/?$/, tab: 'temeller', run: function (m) { return KI.viewCompare.render(m[1]); } },

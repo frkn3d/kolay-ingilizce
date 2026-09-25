@@ -34,7 +34,8 @@ global.window = { KI: {} };
   'js/data/timeline-journey.js',
   'js/data/exercises.js',
   'js/data/compare.js',
-  'js/data/exercises-2.js'
+  'js/data/exercises-2.js',
+  'js/data/minitest.js'
 ].forEach(function (rel) { require(path.join(root, rel)); });
 
 var KI = window.KI;
@@ -137,6 +138,23 @@ if ((KI.timelineJourney || []).length !== KI.tenses.list.length) {
   fail('timeline-journey: kayıt sayısı (' + (KI.timelineJourney || []).length + ') zaman sayısıyla (' + KI.tenses.list.length + ') eşleşmiyor');
 }
 
+/* ---- Mini Test: yalnız yapısal denetim (mini test.md dış kaynaklı bir
+   metin dosyası; sözlük kapsamı denetimi burada uygulanmaz çünkü içinde
+   özel isimler ve sözlükte olmayan meslek/konu kelimeleri var). Yalnız
+   her satırın geçerli bir seviyeye, iki şıkka ve 0/1 bir cevaba sahip
+   olduğu kontrol edilir. Kaynaktaki bozuk (A şıkkı = B şıkkı) satırlar
+   uygulama tarafında zaten oyuna girmeden elenir; burada sadece sayılıp
+   bilgi amaçlı raporlanır. */
+var MINITEST_LEVELS = { kolay: 1, orta: 1, zor: 1, 'cok-zor': 1 };
+var minitestDupOptions = 0;
+(KI.minitest ? KI.minitest.items : []).forEach(function (it, i) {
+  if (!MINITEST_LEVELS[it.level]) fail('minitest#' + i + ': geçersiz seviye "' + it.level + '"');
+  if (!it.en) fail('minitest#' + i + ': boş soru metni');
+  if (!Array.isArray(it.options) || it.options.length !== 2) fail('minitest#' + i + ': iki şık bekleniyor');
+  if (it.answer !== 0 && it.answer !== 1) fail('minitest#' + i + ': cevap 0 ya da 1 olmalı');
+  if (it.options && it.options[0] === it.options[1]) minitestDupOptions++;
+});
+
 /* ---- sayaçlar ---- */
 var tenseQuiz = 0; KI.tenses.list.forEach(function (t) { tenseQuiz += (t.quiz || []).length; });
 var compareQuiz = 0; KI.compare.list.forEach(function (c) { compareQuiz += (c.quiz || []).length; });
@@ -151,6 +169,8 @@ console.log('Hikayeler:', (KI.stories || []).length, '(' + storySentences + ' c�
 console.log('Zaman Yolculuğu kaydı:', (KI.timelineJourney || []).length);
 console.log('Sözlük kelime sayısı:', KI.glossary.size());
 console.log('Düzensiz fiil sayısı:', KI.glossary.irregularVerbs.length);
+console.log('Mini Test sorusu:', (KI.minitest ? KI.minitest.items.length : 0),
+  '(' + minitestDupOptions + ' tanesinde A/B şıkkı aynı — kaynak dosyada bozuk, oyuna girmiyor)');
 console.log('');
 
 if (failures.length) {

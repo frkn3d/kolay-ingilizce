@@ -606,6 +606,60 @@
     return box;
   }
 
+  /* --------- Mini Test: dış kaynaklı 500 soruluk sabit havuz ---------
+     js/data/minitest.js -> KI.minitest.items, dört zorluk seviyesi
+     (kolay/orta/zor/cok-zor). Kaynak dosyada aynı sorular birkaç kez
+     tekrarlanıyor (150/150/150/50 satır ama çok daha az benzersiz
+     soru); bir tur içinde aynı sorunun iki kez çıkmaması için havuz
+     metne göre benzersizleştirilip öyle karıştırılıyor. Ayrıca A/B
+     şıkları birebir aynı olan birkaç bozuk satır (kaynak dosyanın
+     kendi hatası) oyuna hiç girmesin diye elenir. */
+  function tipTenseId(tip) {
+    var t = KI.tenses.list.filter(function (x) { return tip.indexOf(x.en) >= 0; })[0];
+    return t ? t.id : null;
+  }
+
+  function minitestQuestions(level, count) {
+    var seen = {};
+    var pool = (KI.minitest ? KI.minitest.items : []).filter(function (it) {
+      if (it.level !== level) return false;
+      if (it.options[0] === it.options[1]) return false;
+      if (seen[it.en]) return false;
+      seen[it.en] = true;
+      return true;
+    });
+    return U.shuffle(pool).slice(0, count).map(function (it) {
+      var tId = tipTenseId(it.tip);
+      return {
+        kind: 'minitest', head: it.tip,
+        sentence: it.en, options: it.options.slice(), answer: it.answer,
+        tenseId: tId, link: tId ? '#/zaman/' + tId : null,
+        blank: { q: it.en, options: it.options, answer: it.answer, why: '' }
+      };
+    });
+  }
+
+  /* Zorluk seçim ekranı: "Mini Test" kartına tıklayınca önce burası açılır. */
+  function minitestPicker() {
+    var frag = document.createDocumentFragment();
+    frag.appendChild(U.el('a', { class: 'crumb', href: '#/alistirma', 'data-sfx': 'back', text: '← Modlara dön' }));
+    frag.appendChild(U.el('div', { class: 'page-head' }, [
+      U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
+      U.el('h1', { text: 'Mini Test' }),
+      U.el('p', { style: 'font-size:.84rem', text: 'Önce zorluğunu seç, hemen başla. Her seviyede 500 soruluk havuzdan sürpriz sorular çıkar.' })
+    ]));
+    var grid = U.el('div', { class: 'stack' });
+    (KI.minitest ? KI.minitest.levels : []).forEach(function (lv) {
+      var card = U.el('a', { class: 'card modecard minitest-card minitest-card--' + lv.id,
+        href: '#/alistirma/minitest/' + lv.id, 'data-sfx': 'nav' });
+      card.appendChild(U.el('h3', { text: lv.tr, style: 'margin-bottom:.2em' }));
+      card.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.84rem', text: lv.hint }));
+      grid.appendChild(card);
+    });
+    frag.appendChild(grid);
+    return frag;
+  }
+
   /* --------- alıştırma sayfası --------- */
   function size() {
     var n = Number(KI.store.get('quizSize'));
@@ -613,6 +667,8 @@
   }
 
   var MODES = [
+    { id: 'minitest', ico: KI.icons.html('target'), t: 'Mini Test', minitest: true,
+      d: '500 soruluk kısa test havuzu; önce zorluğunu seç, hemen başla.' },
     { id: 'karisik', ico: KI.icons.html('dice'), t: 'Karışık', d: 'Her türden soru: cümle, çizgi, boşluk, kelime, fiil.',
       make: function () {
         var n = size();
@@ -640,15 +696,27 @@
       make: function () { return verbQuestions(size()); } }
   ];
 
-  function view(modeId) {
+  function view(modeId, sub) {
     var frag = document.createDocumentFragment();
     var mode = MODES.filter(function (m) { return m.id === modeId; })[0];
 
+    if (mode && mode.minitest && !sub) return minitestPicker();
+    var levelMeta = (mode && mode.minitest && KI.minitest)
+      ? KI.minitest.levels.filter(function (l) { return l.id === sub; })[0] : null;
+
     frag.appendChild(U.el('div', { class: 'page-head' + (mode ? ' page-head--tight' : '') }, [
       U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
-      U.el('h1', { text: mode ? mode.t : 'Kendini dene' }),
-      U.el('p', { style: 'font-size:.84rem', text: mode ? mode.d : 'Bir mod seç; her yanlıştan sonra doğrusu ve nedeni gösterilir.' })
+      U.el('h1', { text: mode ? (levelMeta ? mode.t + ' · ' + levelMeta.tr : mode.t) : 'Kendini dene' }),
+      U.el('p', { style: 'font-size:.84rem', text: mode ? (levelMeta ? levelMeta.hint : mode.d) : 'Bir mod seç; her yanlıştan sonra doğrusu ve nedeni gösterilir.' })
     ]));
+
+    if (mode && mode.minitest && !levelMeta) {
+      frag.appendChild(U.el('div', { class: 'empty' }, [
+        U.el('h3', { text: 'Zorluk bulunamadı' }),
+        U.el('a', { class: 'btn btn--primary', href: '#/alistirma/minitest', 'data-sfx': 'nav', text: '← Zorluk seç' })
+      ]));
+      return frag;
+    }
 
     /* Mod açıkken kısayol şeridi kaldırıldı: alıştırma sırasında bir
        soruyu cevapladıktan sonra kaydırma mesafesini kısaltmak için
@@ -709,7 +777,7 @@
       return frag;
     }
 
-    var qs = mode.make();
+    var qs = mode.minitest ? minitestQuestions(sub, size()) : mode.make();
     if (!qs.length) {
       if (mode.id === 'zorlandiklarim') {
         frag.appendChild(U.el('div', { class: 'empty' }, [
