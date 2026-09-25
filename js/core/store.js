@@ -14,6 +14,11 @@
   var SRS_MAX_BOX = SRS_INTERVAL_DAYS.length - 1;
   var DAY = 24 * 60 * 60 * 1000;
 
+  function todayKey(d) {
+    d = d || new Date();
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  }
+
   var defaults = {
     sound: true,
     haptics: true,
@@ -28,6 +33,10 @@
     visits: 0,
     lastTense: '',
     seenHelpHint: false,   // giriş ekranındaki "Nasıl Kullanılır" el ipucu, yalnız ilk açılışta gösterilir
+
+    /* --- tek seferlik olay bayrakları (bazı başarımlar bunu okur) --- */
+    flags: {},          // { bayrakAdi: kazanılma zamanı (ms) }
+    minitestDone: {},   // { zorlukId: true } - Mini Test'i o zorlukta en az bir kez bitirdin mi
 
     /* --- yanlışlardan öğrenme --- */
     weak: {},          // { tenseId: {wrong: n, right: n} }
@@ -54,9 +63,12 @@
       premium: false,
       progress: {},         // { level: { topicId: { done: true, best: 0..10, skipped: bool } } }
       perfectGameQuizzes: 0,
+      goodGameQuizzes: 0,   // correct/total >= %80 olan durak sınavları (checkpoint hariç)
       bestCombo: 0,
       videoWatches: 0,
-      seenBackupHint: false  // Oyun Modu haritasına ilk girişte gösterilen "yedekle" hatırlatması
+      seenBackupHint: false,  // Oyun Modu haritasına ilk girişte gösterilen "yedekle" hatırlatması
+      zeroDay: '',       // canların en son 0'a düştüğü gün ('YYYY-M-D')
+      comebackDay: ''    // o gün 0'dan sonra tekrar can kazanılan gün (Pes Etmedim başarımı için)
     }
   };
 
@@ -220,6 +232,7 @@
     recordQuizResult: function (correct, total) {
       state.quizzesCompleted = (state.quizzesCompleted || 0) + 1;
       if (total > 0 && correct === total) state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
+      S.noteFinishHour();
       save();
     },
 
@@ -257,17 +270,22 @@
     loseHeart: function () {
       if (state.game.premium) return state.game.hearts;
       state.game.hearts = Math.max(0, state.game.hearts - 1);
+      if (state.game.hearts === 0) state.game.zeroDay = todayKey();
       save();
       return state.game.hearts;
     },
-    /* Video izleyince +3 can verilir, ama 7'yi hiç geçmez. */
+    /* Video izleyince +3 can verilir, ama 7'yi hiç geçmez. Aynı gün canlar
+       0'a düşmüşse bu "geri dönüş" ayrıca işaretlenir (bkz. hasComebackToday -
+       Pes Etmedim başarımı). */
     gainHeart: function () {
       if (state.game.premium) return state.game.hearts;
+      if (state.game.zeroDay === todayKey()) state.game.comebackDay = todayKey();
       state.game.hearts = Math.min(GAME_MAX_HEARTS, state.game.hearts + GAME_VIDEO_BONUS);
       state.game.videoWatches = (state.game.videoWatches || 0) + 1;
       save();
       return state.game.hearts;
     },
+    hasComebackToday: function () { return state.game.comebackDay === todayKey(); },
     setPremium: function (on) { state.game.premium = !!on; save(); },
 
     gameProgress: function (level, topicId) {
@@ -286,8 +304,44 @@
         state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
         state.game.perfectGameQuizzes = (state.game.perfectGameQuizzes || 0) + 1;
       }
+      var isCp = topicId.indexOf('checkpoint-') === 0;
+      if (!isCp && total > 0 && correct / total >= 0.8) {
+        state.game.goodGameQuizzes = (state.game.goodGameQuizzes || 0) + 1;
+      }
+      S.noteFinishHour();
       save();
       return cur;
+    },
+    /* Bazı başarımlar gün içindeki saate bakar (Erkenci / Gece Bekçisi);
+       hem Oyun Modu durakları hem Alıştırma/Mini Test sınavları için
+       tek, ortak bir yerden işaretlenir. */
+    noteFinishHour: function () {
+      var h = new Date().getHours();
+      if (h >= 6 && h < 8) S.setFlag('erkenci');
+      if (h === 23) S.setFlag('gece-bekci');
+    },
+    setFlag: function (name) {
+      state.flags = state.flags || {};
+      if (state.flags[name]) return;
+      state.flags[name] = Date.now();
+      save();
+    },
+    hasFlag: function (name) { return !!(state.flags && state.flags[name]); },
+    recordMinitestDone: function (level) {
+      state.minitestDone = state.minitestDone || {};
+      if (state.minitestDone[level]) return;
+      state.minitestDone[level] = true;
+      save();
+    },
+    minitestDoneLevels: function () { return Object.keys(state.minitestDone || {}); },
+    passedCheckpointCount: function () {
+      var n = 0;
+      Object.keys(state.game.progress).forEach(function (lv) {
+        Object.keys(state.game.progress[lv]).forEach(function (id) {
+          if (id.indexOf('checkpoint-') === 0 && state.game.progress[lv][id].best >= 7) n++;
+        });
+      });
+      return n;
     },
     isGameTopicDone: function (level, topicId) {
       var p = S.gameProgress(level, topicId);

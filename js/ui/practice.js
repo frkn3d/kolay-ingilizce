@@ -168,6 +168,7 @@
       box.appendChild(U.el('h3', { html: mood + '  ' + correct + ' / ' + qs.length + ' doğru' }));
       box.appendChild(U.el('p', { class: 'soft', text: pct >= 80 ? 'Çok iyi! Bu zamanı kavramışsın.' : pct >= 50 ? 'Fena değil. Örneklere bir daha göz at.' : 'Acele etme; önce mantık bölümünü tekrar oku.' }));
       if (opts.tenseId) KI.store.saveScore(opts.tenseId, correct, qs.length);
+      if (opts.minitestLevel) KI.store.recordMinitestDone(opts.minitestLevel);
       KI.store.recordQuizResult(correct, qs.length);
 
       /* Sıradaki adım önerisi */
@@ -806,6 +807,7 @@
         return U.el('a', { class: 'btn', href: '#/alistirma', 'data-sfx': 'back', text: '← Modlara dön' });
       }
     };
+    if (mode.minitest) opts.minitestLevel = sub;
     if (mode.id === 'zorlandiklarim') {
       var clr = U.el('button', { class: 'btn btn--sm btn--ghost', type: 'button', html: KI.icons.html('trash') + ' Listeyi temizle' });
       clr.addEventListener('click', function () {

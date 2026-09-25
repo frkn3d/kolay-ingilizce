@@ -237,6 +237,18 @@
     return !!(lastCp && isNodeDone(prev, lastCp));
   }
 
+  /* Başarımlar için: bir seviye id'sinin (baslangic/orta/ileri) açık olup
+     olmadığı ve içindeki tüm durakların bitip bitmediği. */
+  function isLevelUnlockedById(id) {
+    var li = levelIdx(id);
+    return li >= 0 && isLevelUnlocked(li);
+  }
+  function isLevelFullyDone(id) {
+    var level = levelById(id);
+    if (!level) return false;
+    return level.path.every(function (node) { return isNodeDone(level, node); });
+  }
+
   /* "Kaldığımız yer": haritadaki ilk açık ama henüz bitmemiş durak,
      seviyeler baştan sona sırayla taranarak bulunur. Her şey bitmişse
      null döner (harita tamamlanmış demektir). */
@@ -492,6 +504,12 @@
     }
 
     var isCp = node.kind === 'checkpoint';
+    /* Bazı başarımlar bu ekrana GİRİLDİĞİ ANDAKİ duruma bakar (bu turda
+       değil): daha önce bitirilmiş bir durağı tekrar çözmek (Geri Döndüm)
+       ve bir İleri Sar'ı hiç denenmemişken ilk seferde geçmek (Cesur
+       Kısayol) - bu yüzden "tekrar dene" ile sıfırlanmazlar. */
+    var wasAlreadyDone = isNodeDone(level, node);
+    var priorAttempt = KI.store.gameProgress(levelId, nodeId);
     var levelOpen = isLevelUnlocked(levelIdx(levelId));
     var nodeOpen = levelOpen && isNodeUnlocked(level, idx);
     KI.store.gameTouchDay();
@@ -531,6 +549,7 @@
     }
 
     var i = 0, correct = 0, combo = 0;
+    var startHearts = KI.store.heartsCount(), minHearts = startHearts;
 
     function paint() {
       if (!KI.store.canPlayGame()) { U.clear(box); box.appendChild(outOfHeartsBlock(function () { if (KI.store.canPlayGame()) paint(); })); return; }
@@ -546,7 +565,10 @@
       if (it.type === 'choice') paintChoice(it); else paintBuild(it);
     }
 
-    function onWrong() { KI.store.loseHeart(); paintHeartsBadge(); combo = 0; }
+    function onWrong() {
+      KI.store.loseHeart(); paintHeartsBadge(); combo = 0;
+      minHearts = Math.min(minHearts, KI.store.heartsCount());
+    }
     function onCorrect() {
       combo++;
       KI.store.noteGameCombo(combo);
@@ -676,8 +698,16 @@
       KI.store.recordGameResult(levelId, nodeId, correct, total);
       paintHeartsBadge();
 
+      /* Başarımlar: bu turun ekrana girildiğindeki/hayatındaki durumuna
+         bakanlar (bkz. wasAlreadyDone/priorAttempt/startHearts/minHearts
+         yukarıda) - hepsi tek seferlik bayrak olarak işaretlenir. */
+      if (wasAlreadyDone) KI.store.setFlag('geri-dondum');
+      if (startHearts <= 1 || minHearts <= 1) KI.store.setFlag('son-hak-kahramani');
+      if (KI.store.hasComebackToday()) KI.store.setFlag('pes-etmedim');
+
       if (isCp) {
         var passed = correct >= CHECKPOINT_PASS;
+        if (passed && !priorAttempt) KI.store.setFlag('cesur-kisayol');
         if (passed) unlockPrecedingLessons(levelId, level, idx);
         box.appendChild(U.el('h3', { html: KI.icons.html(passed ? 'trophy' : 'thumbsup') + '  ' + correct + ' / ' + total + ' doğru' }));
         if (passed) {
@@ -702,7 +732,12 @@
 
       var row = U.el('div', { class: 'row', style: 'margin-top:10px' });
       var again = U.el('button', { class: 'btn', type: 'button', html: '↻ Tekrar dene' });
-      again.addEventListener('click', function () { i = 0; correct = 0; combo = 0; items = isCp ? buildCheckpointItems(level) : buildLessonItems(level, node.topic.id); KI.audio.play('tap'); paint(); });
+      again.addEventListener('click', function () {
+        i = 0; correct = 0; combo = 0;
+        startHearts = KI.store.heartsCount(); minHearts = startHearts;
+        items = isCp ? buildCheckpointItems(level) : buildLessonItems(level, node.topic.id);
+        KI.audio.play('tap'); paint();
+      });
       row.appendChild(again);
       row.appendChild(U.el('a', { class: 'btn btn--primary', href: '#/oyun', 'data-sfx': 'nav', text: 'Haritaya dön →' }));
       box.appendChild(row);
@@ -739,6 +774,8 @@
     syncChrome: syncChrome,
     buildHeartsModal: function () { mountHearts(document.getElementById('hearts-body')); },
     totalNodes: function () { return LEVELS.reduce(function (n, lv) { return n + lv.path.length; }, 0); },
+    levelUnlocked: isLevelUnlockedById,
+    levelDone: isLevelFullyDone,
     /* Gerçek bir İleri Sar sınavının bitişini simüle eder (sonucu kaydeder,
        geçildiyse önceki dersleri açar) - finish()'teki checkpoint dalıyla
        birebir aynı unlockPrecedingLessons'ı çağırır. Yalnızca

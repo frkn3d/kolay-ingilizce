@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.7';
+  var APP_VERSION = '0.8.8';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.8', d: 'Başarımlara 22 yeni rozet eklendi: Oyun Modu haritasında durak sayısı ve seviye tamamlama (Yolcu, Patika Açıldı, Harita Gezgini, Başlangıç/Orta/İleri seviye kapıları ve bitişleri), İleri Sar ve can yönetimi (İleri Sar Ustası, Cesur Kısayol, Canı Korumak, Son Hak Kahramanı, Pes Etmedim, Geri Döndüm, 10\'da 10 Akış, Kusursuz Seri, Yıldız Avcısı), gün içi saat (Erkenci, Gece Bekçisi) ve Mini Test (Mini Test Yolcusu, Çok Zor Demedim).' },
     { v: '0.8.7', d: 'Düzen ve cila turu: Zaman Haritası\'nda "Haritayı nasıl okumalı?" açıklaması artık en altta (üstte yalnız "Baştan başla" kalır, tekrarlayan Temeller düğmesi kaldırıldı - zaten alt sekmede duruyor). Giriş ekranındaki "Nasıl Kullanılır" ve "İstatistikler" düğmeleri artık üstteki Oyun/Eğitim Modu kartlarıyla aynı krem tasarımda ve tam altlarına hizalı. İlk açılış ipucundaki el işareti ve İstatistikler\'deki seri kutlama alevi, emoji yerine uygulamanın kendi çizgisel SVG ikon setiyle çiziliyor; Nasıl Kullanılır\'daki bölüm rozetleri de artık diğer sayfalardaki gibi sade rakam. Metinlerdeki uzun tire işareti kaldırıldı, yerine kısa çizgi kullanıldı. Kullanılmayan kaynak .md dosyaları (questions.md, questions2.md, story.md) "Yedekler ve Tavsiyeler" klasörüne taşındı.' },
     { v: '0.8.6', d: 'Sözlük\'te "Defterim" süzgeci en öne alındı ve hardal rengiyle diğerlerinden ayrışacak şekilde vurgulandı.' },
     { v: '0.8.5', d: 'Oyun Modu haritasının en üstüne bir "Devam et" düğmesi eklendi: kaldığın durağa tek dokunuşla döner, içinde haritanın toplam ilerlemesi yüzde olarak yazar. Kaldığın durak haritada da artık turkuaz bir halkayla, diğerlerinden farklı olarak vurgulanıyor.' },
