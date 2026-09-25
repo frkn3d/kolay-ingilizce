@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.7.7';
+  var APP_VERSION = '0.8.0';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.0', d: 'Yeni bölüm: İstatistikler. Giriş ekranındaki iki moddan hemen sonra küçük, çerçeveli bir düğmeyle açılıyor; ziyaret/seri, öğrenilen zamanlar, Oyun Modu ilerlemesi, kelime defteri ve kazanılan başarımlar tek bir koyu, eğlenceli panoda toplandı. Açılışta genel ilerleme halkası dolup sayılar sayarak yükseliyor; en iyi bildiğin ve üzerinde çalışman gereken zaman da ayrıca gösteriliyor.' },
     { v: '0.7.7', d: 'Sözlük, Hikayeler, Temeller, Alıştırma ve Karşılaştırma sekmelerinin ana menülerindeki ikincil açıklama yazıları küçültüldü — başlıklar aynı boyutta kalırken, altlarındaki uzun açıklamalar artık daha az yer kaplıyor.' },
     { v: '0.7.6', d: 'Eğitim Modu\'nun ana ekranındaki zaman çizgisinde "NOW" yazısı yerine, sürekli kısa dalgalar yayan kalın bir nokta geldi.' },
     { v: '0.7.5', d: 'Bir önceki sürümdeki kelime kayması düzeltmesi Eğitim Modu\'nun "Cümleyi kur" alıştırmasına da uygulandı (Alıştırma sekmesi) — aynı hata orada da vardı.' },

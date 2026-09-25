@@ -1,0 +1,154 @@
+/* ============================================================
+   Gramer Atlası — stats.css
+   "İstatistikler" sayfası: giriş ekranı ve Oyun Modu gibi, açık/koyu
+   tema tercihinden bağımsız kendi koyu paletini kullanır (bkz.
+   base.css html[data-section="istatistikler"] body). Global --ink/
+   --surface değişkenlerine dokunmadan, tamamen kendi --sp-* uçlarıyla
+   çalışır ki başka hiçbir bileşeni etkilemesin.
+   ============================================================ */
+
+.stats-page {
+  --sp-ink: #f4f1ea;
+  --sp-ink-soft: #cdd6e2;
+  --sp-ink-mute: #93a0b8;
+  --sp-card: rgba(255, 255, 255, .055);
+  --sp-card-b: rgba(255, 255, 255, .14);
+  --sp-line: rgba(255, 255, 255, .16);
+  --sp-gold: #e8b559;
+  --sp-teal: #6fd0d9;
+  --sp-past: #e8916a;
+  --sp-present: #7bd9a0;
+  --sp-future: #7ea8e0;
+
+  display: flex; flex-direction: column; gap: 22px;
+  color: var(--sp-ink);
+  padding-bottom: 8px;
+}
+
+.stats-back {
+  align-self: flex-start;
+  font-size: .85rem; font-weight: 600;
+  color: var(--sp-ink-mute); text-decoration: none;
+}
+.stats-back:hover { color: var(--sp-ink); }
+
+/* ---------- üst kahraman kartı: başlık + eğlenceli cümle + halka ---------- */
+.stats-hero {
+  text-align: center;
+  padding: 22px 18px 26px;
+  border: 1px solid var(--sp-card-b);
+  border-radius: var(--r-lg);
+  background: var(--sp-card);
+  backdrop-filter: blur(6px);
+}
+.stats-eyebrow {
+  margin: 0 0 .3em;
+  font-family: var(--font-mono); font-size: .72rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--sp-gold);
+}
+.stats-hero h1 { color: var(--sp-ink); margin-bottom: .2em; }
+.stats-hero__line { margin: 0 0 18px; color: var(--sp-ink-soft); font-size: .92rem; }
+
+.stats-hero__ring { display: flex; flex-direction: column; align-items: center; }
+.stats-ring-wrap { position: relative; width: 140px; height: 140px; }
+.stats-ring { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+.stats-ring__bg { fill: none; stroke: var(--sp-line); stroke-width: 10; }
+.stats-ring__fg {
+  fill: none; stroke: var(--sp-gold); stroke-width: 10; stroke-linecap: round;
+  transition: stroke-dashoffset 1.15s cubic-bezier(.2, .7, .2, 1);
+}
+.stats-ring__pct {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.7rem; color: var(--sp-ink);
+}
+.stats-ring__lbl { margin: 10px 0 0; font-size: .78rem; letter-spacing: .02em; color: var(--sp-ink-mute); }
+
+/* ---------- bölüm başlıkları ---------- */
+.stats-section { display: flex; flex-direction: column; gap: 12px; }
+.stats-section__title {
+  display: flex; align-items: center; gap: 8px;
+  margin: 0; font-family: var(--font-mono); font-size: .76rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--sp-ink-soft);
+}
+.stats-section__ico { display: grid; place-items: center; width: 20px; height: 20px; color: var(--sp-gold); }
+.stats-section__ico .icon { width: 18px; height: 18px; }
+.stats-section__title::after { content: ""; flex: 1; height: 1px; background: var(--sp-line); }
+
+/* ---------- sayı kutuları ---------- */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; }
+.stats-grid--single { grid-template-columns: minmax(150px, 230px); justify-content: center; }
+
+.stat-tile {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 12px;
+  border: 1px solid var(--sp-card-b); border-radius: var(--r);
+  background: var(--sp-card);
+}
+.stat-tile__ico {
+  flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center;
+  border-radius: 50%; background: rgba(232, 181, 89, .14); color: var(--sp-gold);
+}
+.stat-tile__ico .icon { width: 18px; height: 18px; }
+.stat-tile__body { min-width: 0; }
+.stat-tile__num {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; line-height: 1.1;
+  color: var(--sp-ink);
+}
+.stat-tile__lbl { font-size: .74rem; color: var(--sp-ink-mute); line-height: 1.25; }
+
+/* ---------- en iyi / en zayıf zaman kartları ---------- */
+.stats-highlight-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.stats-highlight {
+  flex: 1 1 200px;
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 12px 14px;
+  border: 1px solid var(--sp-card-b); border-left: 4px solid var(--sp-gold);
+  border-radius: var(--r); background: var(--sp-card);
+}
+.stats-highlight--past { border-left-color: var(--sp-past); }
+.stats-highlight--present { border-left-color: var(--sp-present); }
+.stats-highlight--future { border-left-color: var(--sp-future); }
+.stats-highlight__eyebrow { font-size: .7rem; letter-spacing: .04em; color: var(--sp-ink-mute); }
+.stats-highlight__name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--sp-ink); }
+.stats-highlight__meta { font-size: .8rem; color: var(--sp-ink-soft); }
+.stats-highlight--empty {
+  flex-direction: row; align-items: center; gap: 10px; border-left-color: var(--sp-line);
+}
+.stats-highlight--empty .stats-highlight__ico { color: var(--sp-gold); flex: 0 0 auto; }
+.stats-highlight--empty .stats-highlight__ico .icon { width: 20px; height: 20px; }
+.stats-highlight--empty p { margin: 0; font-size: .84rem; color: var(--sp-ink-soft); }
+
+/* ---------- 12 zamanın nokta haritası ---------- */
+.stats-tensemap-box {
+  padding: 16px 14px;
+  border: 1px solid var(--sp-card-b); border-radius: var(--r);
+  background: var(--sp-card);
+}
+.stats-tensemap__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.stats-tensemap__title { font-family: var(--font-display); font-weight: 700; font-size: .98rem; color: var(--sp-ink); }
+.stats-tensemap__count { font-family: var(--font-mono); font-size: .78rem; color: var(--sp-ink-mute); }
+.stats-tensemap {
+  display: grid; grid-template-columns: repeat(3, auto); gap: 12px 26px;
+  justify-content: center; margin-bottom: 14px;
+}
+.stats-dot {
+  display: inline-block; width: 15px; height: 15px; border-radius: 50%;
+  border: 2px solid var(--sp-line); background: transparent;
+}
+.stats-dot--sm { width: 9px; height: 9px; border-width: 2px; }
+.stats-dot--past { border-color: var(--sp-past); }
+.stats-dot--past.is-done { background: var(--sp-past); }
+.stats-dot--present { border-color: var(--sp-present); }
+.stats-dot--present.is-done { background: var(--sp-present); }
+.stats-dot--future { border-color: var(--sp-future); }
+.stats-dot--future.is-done { background: var(--sp-future); }
+.stats-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.stats-legend__item { display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; color: var(--sp-ink-mute); }
+
+/* ---------- kapanış cümlesi ---------- */
+.stats-footnote { margin: 4px 0 0; text-align: center; font-size: .86rem; color: var(--sp-ink-soft); }
+
+/* ---------- ilk açılış animasyonları: .reveal/.reveal--in ortak
+   sınıfları components.css'te tanımlı; burada yalnız kademeli görünüş
+   için gerekli başlangıç durumuna dokunuyoruz (setTimeout ile stats.js
+   tarafından tek tek tetiklenir). ---------- */

@@ -47,6 +47,12 @@
     }));
     wrap.appendChild(grid);
 
+    wrap.appendChild(U.el('a', { class: 'gate__stats', href: '#/istatistikler', 'data-sfx': 'nav' }, [
+      U.el('span', { class: 'gate__stats-ico', html: KI.icons.html('chart') }),
+      U.el('span', { text: 'İstatistikler' }),
+      U.el('span', { class: 'gate__stats-arrow', text: '→' })
+    ]));
+
     wrap.appendChild(U.el('p', { class: 'gate__footnote',
       text: 'Logspace' + (KI.appVersion ? ' · v' + KI.appVersion : '') }));
 
