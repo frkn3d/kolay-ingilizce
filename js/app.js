@@ -160,6 +160,14 @@
     document.getElementById('hearts-close').addEventListener('click', closeHeartsModal);
     heartsModal.addEventListener('click', function (e) { if (e.target === heartsModal) closeHeartsModal(); });
 
+    /* Giriş ekranı: "Bugünün Çalışması" - açma düğmesi gate.js'in kendi
+       içinde her render'da yeniden çizildiği için (kalıcı üst çubuk
+       düğmeleri gibi değil) açılışı orada, kapanışını burada yönetiriz. */
+    var dailyModal = document.getElementById('daily-modal');
+    function closeDailyModal() { KI.util.closeModal(dailyModal); KI.audio.play('close'); }
+    document.getElementById('daily-close').addEventListener('click', closeDailyModal);
+    dailyModal.addEventListener('click', function (e) { if (e.target === dailyModal) closeDailyModal(); });
+
     /* Tüm ilerlemeyi sıfırlama onayı: açılışı settings.js yönetir (3 saniye
        basılı tutunca); burada yalnız dışına tıklama/Escape ile kapatma ve
        o sırada işleyen geri sayımın temizlenmesi ele alınıyor. */
@@ -180,6 +188,7 @@
         else if (!modal.hidden) closeModal();
         else if (!achModal.hidden) closeAchModal();
         else if (!heartsModal.hidden) closeHeartsModal();
+        else if (!dailyModal.hidden) closeDailyModal();
         else KI.sentence.sheet.hide();
       }
     });

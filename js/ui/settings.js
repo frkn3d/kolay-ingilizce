@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.9';
+  var APP_VERSION = '0.8.10';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.10', d: '"Bugünün Çalışması" giriş ekranını kalabalıklaştırıyordu; artık tek satırlık bir menü düğmesi (görev sayısı rozetiyle), tıklanınca görevler bir pencerede açılıyor. Bu arada giriş ekranının en küçük telefonlarda bile hiç kaydırma gerektirmediği ayrıca doğrulandı.' },
     { v: '0.8.9', d: 'Giriş ekranının en altına "Bugünün Çalışması" eklendi: her gün 1 konu oku, birkaç soru çöz, birkaç kelime tekrar et ve bir oyun durağı tamamla gibi 4 küçük görev; hedef sayılar 7 günlük bir döngüyle değişiyor, tamamlananlar tik alıp üzeri çiziliyor. Mini Test\'in tanıtım yazısı "her seviyede 500 soru" gibi yanlış anlaşılabiliyordu; 500 sorunun toplam havuz olduğu netleştirildi. Sözlük ana ekranındaki Hikayeler açıklaması güncellendi.' },
     { v: '0.8.8', d: 'Başarımlara 22 yeni rozet eklendi: Oyun Modu haritasında durak sayısı ve seviye tamamlama (Yolcu, Patika Açıldı, Harita Gezgini, Başlangıç/Orta/İleri seviye kapıları ve bitişleri), İleri Sar ve can yönetimi (İleri Sar Ustası, Cesur Kısayol, Canı Korumak, Son Hak Kahramanı, Pes Etmedim, Geri Döndüm, 10\'da 10 Akış, Kusursuz Seri, Yıldız Avcısı), gün içi saat (Erkenci, Gece Bekçisi) ve Mini Test (Mini Test Yolcusu, Çok Zor Demedim).' },
     { v: '0.8.7', d: 'Düzen ve cila turu: Zaman Haritası\'nda "Haritayı nasıl okumalı?" açıklaması artık en altta (üstte yalnız "Baştan başla" kalır, tekrarlayan Temeller düğmesi kaldırıldı - zaten alt sekmede duruyor). Giriş ekranındaki "Nasıl Kullanılır" ve "İstatistikler" düğmeleri artık üstteki Oyun/Eğitim Modu kartlarıyla aynı krem tasarımda ve tam altlarına hizalı. İlk açılış ipucundaki el işareti ve İstatistikler\'deki seri kutlama alevi, emoji yerine uygulamanın kendi çizgisel SVG ikon setiyle çiziliyor; Nasıl Kullanılır\'daki bölüm rozetleri de artık diğer sayfalardaki gibi sade rakam. Metinlerdeki uzun tire işareti kaldırıldı, yerine kısa çizgi kullanıldı. Kullanılmayan kaynak .md dosyaları (questions.md, questions2.md, story.md) "Yedekler ve Tavsiyeler" klasörüne taşındı.' },

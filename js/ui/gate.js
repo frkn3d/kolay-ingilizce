@@ -32,21 +32,49 @@
     var epochDay = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
     return ((epochDay % 7) + 7) % 7;
   }
-  function dailySection() {
+  function dailyDoneCount(progress, targets) {
+    var n = 0;
+    DAILY_TASKS.forEach(function (task, i) { if ((progress[task.key] || 0) >= targets[i]) n++; });
+    return n;
+  }
+
+  /* Ana ekran sade kalsın diye görevler burada değil, tek satırlık bir
+     menü düğmesinde: tıklanınca modal içinde açılır (bkz. app.js'teki
+     daily-modal kapanış kablolaması, açılış burada yapılır çünkü bu
+     düğme kalıcı üst çubuktaki gibi değil, her render'da yeniden çizilir). */
+  function dailyButton() {
     var targets = DAILY_TARGETS[dailyCycleIndex()];
     var progress = KI.store.dailyProgress();
-    var wrap = U.el('div', { class: 'gate__daily' });
-    wrap.appendChild(U.el('p', { class: 'gate__daily-title' }, [
-      U.el('span', { html: KI.icons.html('calendar') }),
-      document.createTextNode('Bugünün Çalışması')
-    ]));
+    var doneCount = dailyDoneCount(progress, targets);
+    var allDone = doneCount === DAILY_TASKS.length;
+    var btn = U.el('button', { class: 'gate__daily-btn' + (allDone ? ' is-all-done' : ''), type: 'button' }, [
+      U.el('span', { class: 'gate__daily-btn-ico', html: KI.icons.html('calendar') }),
+      U.el('span', { class: 'gate__daily-btn-label', text: 'Bugünün Çalışması' }),
+      U.el('span', { class: 'gate__daily-btn-count', html: (allDone ? KI.icons.html('check-circle') : '') + ' ' + doneCount + '/' + DAILY_TASKS.length })
+    ]);
+    btn.addEventListener('click', function () {
+      buildDailyModal();
+      KI.util.openModal(document.getElementById('daily-modal'), btn);
+      KI.audio.play('open');
+    });
+    return btn;
+  }
+
+  /* Modal içeriği: gerçek görev listesi, tik/üstü çizili tamamlanma
+     durumuyla. app.js modalın kapanışını yönetir. */
+  function buildDailyModal() {
+    var body = document.getElementById('daily-body');
+    if (!body) return;
+    U.clear(body);
+    var targets = DAILY_TARGETS[dailyCycleIndex()];
+    var progress = KI.store.dailyProgress();
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.9rem;margin:0 0 10px',
+      text: 'Her gün küçük bir hedef seti; 7 günde bir aynı hedefler geri gelir.' }));
     var list = U.el('div', { class: 'gate__daily-list' });
-    var doneCount = 0;
     DAILY_TASKS.forEach(function (task, i) {
       var target = targets[i];
       var count = Math.min(progress[task.key] || 0, target);
       var done = count >= target;
-      if (done) doneCount++;
       list.appendChild(U.el('div', { class: 'gate__daily-item' + (done ? ' is-done' : '') }, [
         U.el('span', { class: 'gate__daily-check', html: KI.icons.html(done ? 'check-circle' : 'circle') }),
         U.el('span', { class: 'gate__daily-ico', html: KI.icons.html(task.icon) }),
@@ -54,9 +82,7 @@
         U.el('span', { class: 'gate__daily-count', text: count + '/' + target })
       ]));
     });
-    if (doneCount === DAILY_TASKS.length) list.classList.add('is-all-done');
-    wrap.appendChild(list);
-    return wrap;
+    body.appendChild(list);
   }
 
   function card(opts) {
@@ -125,10 +151,15 @@
 
     wrap.appendChild(actions);
 
-    wrap.appendChild(dailySection());
-
-    wrap.appendChild(U.el('p', { class: 'gate__footnote',
+    /* Düğme + footnote aynı sarmalayıcıda: .gate'in dış gap'ine yeni bir
+       yuva eklenmesin diye (en küçük ekranlarda taşmaya yol açıyordu),
+       ikisi kendi aralarında daha dar bir boşlukla, tek bir "alt blok"
+       olarak sayılır. */
+    var bottom = U.el('div', { class: 'gate__bottom' });
+    bottom.appendChild(dailyButton());
+    bottom.appendChild(U.el('p', { class: 'gate__footnote',
       text: 'Logspace' + (KI.appVersion ? ' · v' + KI.appVersion : '') }));
+    wrap.appendChild(bottom);
 
     frag.appendChild(wrap);
     return frag;
