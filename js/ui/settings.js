@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.7.6';
+  var APP_VERSION = '0.7.7';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.7.7', d: 'Sözlük, Hikayeler, Temeller, Alıştırma ve Karşılaştırma sekmelerinin ana menülerindeki ikincil açıklama yazıları küçültüldü — başlıklar aynı boyutta kalırken, altlarındaki uzun açıklamalar artık daha az yer kaplıyor.' },
     { v: '0.7.6', d: 'Eğitim Modu\'nun ana ekranındaki zaman çizgisinde "NOW" yazısı yerine, sürekli kısa dalgalar yayan kalın bir nokta geldi.' },
     { v: '0.7.5', d: 'Bir önceki sürümdeki kelime kayması düzeltmesi Eğitim Modu\'nun "Cümleyi kur" alıştırmasına da uygulandı (Alıştırma sekmesi) — aynı hata orada da vardı.' },
     { v: '0.7.4', d: 'Oyun Modu\'ndaki "cümle kurma" alıştırmasında bir hata düzeltildi: kelime havuzundan bir kelimeye dokununca aşağıdaki/sağdaki diğer kelimeler yerinden oynuyor, bu yüzden art arda dokunuşlar yanlış kelimeye denk gelebiliyordu. Artık seçilen kelime yerini koruyor, diğer kelimeler hiç kaymıyor.' },

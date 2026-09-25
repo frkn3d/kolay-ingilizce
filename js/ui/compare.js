@@ -80,13 +80,13 @@
       frag.appendChild(U.el('div', { class: 'page-head' }, [
         U.el('p', { class: 'eyebrow', text: 'Karşılaştırma' }),
         U.el('h1', { text: 'Karışan zamanlar' }),
-        U.el('p', { text: 'Türkçe konuşanların en çok karıştırdığı ' + KI.compare.list.length + ' çift. Her sayfada iki zaman yan yana durur, farkı tek bakışta görünür.' })
+        U.el('p', { style: 'font-size:.84rem', text: 'Türkçe konuşanların en çok karıştırdığı ' + KI.compare.list.length + ' çift. Her sayfada iki zaman yan yana durur, farkı tek bakışta görünür.' })
       ]));
       var stack = U.el('div', { class: 'stack' });
       KI.compare.list.forEach(function (c) {
         var card = U.el('a', { class: 'card modecard', href: '#/karsilastir/' + c.id, 'data-sfx': 'nav' });
         card.appendChild(U.el('h3', { text: c.title, style: 'margin-bottom:.2em' }));
-        card.appendChild(U.el('p', { class: 'soft', style: 'margin:0', text: c.short }));
+        card.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.84rem', text: c.short }));
         stack.appendChild(card);
       });
       frag.appendChild(stack);

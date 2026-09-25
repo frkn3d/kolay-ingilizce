@@ -647,7 +647,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' + (mode ? ' page-head--tight' : '') }, [
       U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
       U.el('h1', { text: mode ? mode.t : 'Kendini dene' }),
-      U.el('p', { text: mode ? mode.d : 'Bir mod seç; her yanlıştan sonra doğrusu ve nedeni gösterilir.' })
+      U.el('p', { style: 'font-size:.84rem', text: mode ? mode.d : 'Bir mod seç; her yanlıştan sonra doğrusu ve nedeni gösterilir.' })
     ]));
 
     /* Mod açıkken kısayol şeridi kaldırıldı: alıştırma sırasında bir
@@ -684,7 +684,7 @@
           title.appendChild(U.el('span', { class: 'countpill' + (nd ? '' : ' countpill--zero'), text: String(nd) }));
         }
         card.appendChild(title);
-        card.appendChild(U.el('p', { class: 'soft', text: m.d, style: 'margin:0' }));
+        card.appendChild(U.el('p', { class: 'soft', text: m.d, style: 'margin:0;font-size:.84rem' }));
         grid.appendChild(card);
       });
       frag.appendChild(grid);

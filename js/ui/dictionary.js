@@ -88,7 +88,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Sözlük' }),
       U.el('h1', { text: 'Sözlük ve Hikayeler' }),
-      U.el('p', { text: 'Kelime dağarcığını çalış ya da bir hikaye okuyarak kelimelere doğal bağlamda rastla.' })
+      U.el('p', { style: 'font-size:.84rem', text: 'Kelime dağarcığını çalış ya da bir hikaye okuyarak kelimelere doğal bağlamda rastla.' })
     ]));
 
     var grid = U.el('div', { class: 'hub-grid' });

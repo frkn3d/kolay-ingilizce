@@ -203,7 +203,7 @@
         cmps.forEach(function (c) {
           var card = U.el('a', { class: 'card modecard', href: '#/karsilastir/' + c.id, 'data-sfx': 'nav' });
           card.appendChild(U.el('h3', { text: c.title, style: 'margin-bottom:.2em' }));
-          card.appendChild(U.el('p', { class: 'soft', style: 'margin:0', text: c.short }));
+          card.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.84rem', text: c.short }));
           cs.appendChild(card);
         });
         frag.appendChild(cs);

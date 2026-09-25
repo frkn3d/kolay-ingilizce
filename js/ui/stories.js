@@ -21,7 +21,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Hikayeler' }),
       U.el('h1', { text: 'Hikayeler' }),
-      U.el('p', { text: 'Anonim halk hikayelerini oku ya da dinle; herhangi bir kelimeye dokunarak anlamını gör.' })
+      U.el('p', { style: 'font-size:.84rem', text: 'Anonim halk hikayelerini oku ya da dinle; herhangi bir kelimeye dokunarak anlamını gör.' })
     ]));
 
     CATS.forEach(function (cat) {

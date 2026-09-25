@@ -600,7 +600,7 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 html[data-theme="dark"] .hub-card__ico { background: var(--present-bg); color: var(--green-300); border-color: var(--line-2); }
 .hub-card__ico .icon { width: 30px; height: 30px; }
 .hub-card h3 { margin: 0 0 .2em; font-size: 1.2rem; }
-.hub-card p { margin: 0; }
+.hub-card p { margin: 0; font-size: .84rem; line-height: 1.35; }
 
 /* ---------- hikaye okuma ekranı ---------- */
 .story-body { padding-top: 16px; }
