@@ -8,7 +8,7 @@
   'use strict';
   var U = KI.util;
 
-  function tenseCard(t) {
+  function tenseCard(t, registry) {
     var card = U.el('a', {
       class: 'tcard tcard--' + t.group + ' reveal',
       href: '#/zaman/' + t.id,
@@ -18,27 +18,14 @@
     card.appendChild(U.el('span', { class: 'tcard__en', text: t.en }));
     var trEl = U.el('span', { class: 'tcard__tr', text: t.tr });
     card.appendChild(trEl);
-    var mini = U.el('button', { class: 'tcard__mini', type: 'button', 'aria-label': 'Kuralları gör: ' + t.en });
+    var mini = U.el('div', { class: 'tcard__mini' });
     mini.appendChild(KI.timeline.render(t, { mini: true }));
     card.appendChild(mini);
     if (KI.store.isLearned(t.id)) card.appendChild(U.el('span', { class: 'tcard__done', html: KI.icons.html('check-circle') }));
 
-    /* Zaman çizgisine dokununca alttaki Türkçe ad, o zamanın kuralına
-       (olumlu → olumsuz → soru → ada geri) kısaca yer değiştirerek geçer.
-       Kart <a> olduğu için tıklama önce bu düğmenin kendi işini yapıp
-       navigasyona gitmesin diye durduruluyor. */
-    var RULES = [null, t.formula.pos, t.formula.neg, t.formula.que];
-    var ruleStep = 0;
-    mini.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      ruleStep = (ruleStep + 1) % RULES.length;
-      trEl.classList.remove('tcard__tr--swap');
-      void trEl.offsetWidth; // reflow: aynı animasyonu art arda tıklamada da yeniden başlatır
-      trEl.classList.add('tcard__tr--swap');
-      trEl.innerHTML = RULES[ruleStep] || U.esc(t.tr);
-      KI.audio.play('tap');
-    });
+    /* Kartın kendi kural döngüsü yok artık — en üstteki ana zaman
+       çizgisine dokununca TÜM kartlar birlikte döner (bkz. grid()). */
+    if (registry) registry.push({ trEl: trEl, tense: t });
 
     return card;
   }
@@ -65,7 +52,8 @@
       }));
     });
     timebar.appendChild(labels);
-    var trackwrap = U.el('div', { class: 'timebar__trackwrap', 'aria-hidden': 'true' }, [
+    var trackwrap = U.el('button', { class: 'timebar__trackwrap', type: 'button',
+      'aria-label': 'Zamanların olumlu, olumsuz ve soru kurallarını sırayla göster' }, [
       U.el('span', { class: 'timebar__cap timebar__cap--l' }),
       U.el('span', { class: 'timebar__line' }),
       U.el('span', { class: 'timebar__cap timebar__cap--r' })
@@ -73,15 +61,34 @@
     timebar.appendChild(trackwrap);
     wrap.appendChild(timebar);
 
+    var registry = [];
     KI.tenses.aspects.forEach(function (a) {
       wrap.appendChild(U.el('div', { class: 'grid-map__aspect reveal', text: a.tr, title: a.hint }));
       var row = U.el('div', { class: 'grid-map__row' });
       KI.tenses.groups.forEach(function (g) {
         var t = KI.tenses.byCell(g.id, a.id);
-        row.appendChild(t ? tenseCard(t) : U.el('div'));
+        row.appendChild(t ? tenseCard(t, registry) : U.el('div'));
       });
       wrap.appendChild(row);
     });
+
+    /* Ana zaman çizgisine dokununca bütün kartların Türkçe adı, o zamanın
+       kuralına (olumlu → olumsuz → soru → ada geri) birlikte, kısaca yer
+       değiştirerek geçer. */
+    var RULE_KEYS = [null, 'pos', 'neg', 'que'];
+    var ruleStep = 0;
+    trackwrap.addEventListener('click', function () {
+      ruleStep = (ruleStep + 1) % RULE_KEYS.length;
+      var key = RULE_KEYS[ruleStep];
+      registry.forEach(function (item) {
+        item.trEl.classList.remove('tcard__tr--swap');
+        void item.trEl.offsetWidth; // reflow: animasyonu her tıklamada yeniden başlatır
+        item.trEl.classList.add('tcard__tr--swap');
+        item.trEl.innerHTML = key ? item.tense.formula[key] : U.esc(item.tense.tr);
+      });
+      KI.audio.play('tap');
+    });
+
     return wrap;
   }
 

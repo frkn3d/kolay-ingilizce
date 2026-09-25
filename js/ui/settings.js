@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.7.2';
+  var APP_VERSION = '0.7.3';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.7.3', d: 'Harita sekmesindeki kural gösterimi tek tek kartlardan alındı; artık en üstteki ana zaman çizgisine dokununca bütün kartların Türkçe adı birlikte, kısaca yer değiştirerek o zamanın olumlu/olumsuz/soru kuralını gösteriyor. Sürekli "nefes alma" animasyonu da tek tek kartlardan bu ana çizgiye taşındı.' },
     { v: '0.7.2', d: 'Zaman Yolculuğu\'nda ince ayar: ŞİMDİ çizgisi artık kalın, hafif parlamalı ve dolgulu bir rozet ile çok daha belirgin. Sağ ve sol uçlara, kaydırma pozisyonundan bağımsız hep sabit kalan "← Geçmiş" / "Gelecek →" yön etiketleri eklendi. Dokunmatik ekranlarda parmağın doğal titremesi yüzünden bazı dokunuşlar sürükleme sanılıp cümle hiç açılmıyordu; dokunma toleransı artırıldı ve bir cümle seçilince Türkçe/açıklama kutusu gerekirse otomatik görünüme kaydırılıyor.' },
     { v: '0.7.1', d: 'Harita sekmesindeki zaman çizgileri artık sürekli hafifçe "nefes alıyor"; birine dokununca altındaki Türkçe ad kısaca yer değiştirip o zamanın olumlu kuralını gösteriyor, tekrar dokununca olumsuz, tekrar dokununca soru kuralını gösteriyor (kart boyu değişmiyor). Servis çalışanı artık her istekte sunucuyla mutlaka doğrulama yapıyor — GitHub Pages\'in 10 dakikalık tarayıcı önbelleği yüzünden bir güncellemeden sonra bazen eski dosyaların görünmesi ihtimalini ortadan kaldırır. Oyun Modu\'nda bir cümle çevirisindeki eksiklik (balkon çiçekleri) düzeltildi.' },
     { v: '0.7.0', d: 'Sözlük\'e üçüncü bir bölüm eklendi: Zaman Yolculuğu. Aynı cümle ("Mehmet büyükannesine mektup yazıyor") 12 zamanın hepsinde, tek ve uzun bir zaman çizgisi üzerinde gösteriliyor. Çizgi iki parmakla yakınlaştırılıp uzaklaştırılabiliyor, sürükleyerek gezilebiliyor; masaüstünde fare tekerleğiyle imlecin altındaki noktayı sabit tutarak yakınlaşılıyor, sürükleyerek gezilebiliyor. Alta bir yakınlaştırma çubuğu ve "Tümünü gör" düğmesi eklendi. Bir cümleye dokununca Türkçesi ve o zamanın neden kullanıldığını açıklayan kısa bir not beliriyor. Klavyeyle gezinirken de odaklanılan cümle otomatik olarak görünüme kayıyor.' },
