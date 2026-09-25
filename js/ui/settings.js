@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.4';
+  var APP_VERSION = '0.8.5';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.5', d: 'Oyun Modu haritasının en üstüne bir "Devam et" düğmesi eklendi: kaldığın durağa tek dokunuşla döner, içinde haritanın toplam ilerlemesi yüzde olarak yazar. Kaldığın durak haritada da artık turkuaz bir halkayla, diğerlerinden farklı olarak vurgulanıyor.' },
     { v: '0.8.4', d: 'İstatistikler sayfasına "Şimdi ne yapmalısın?" önerisi eklendi: en çok karıştırdığın zamanı gösterip seni doğrudan o zamanın kural özetine ya da benzer sorularla alıştırma yapacağın "Zorlandıklarım" moduna yönlendiriyor.' },
     { v: '0.8.3', d: 'Zaman Haritası üç zorluk katmanına ayrıldı: Başlangıç, Orta, İleri. Her katman Oyun Modu\'ndaki seviye renkleriyle uyumlu (yeşil → hardal → kiremit) ayrı bir zeminde duruyor ve aşağı indikçe zemin biraz daha koyulaşıyor; her katmanın yanında kaç zaman öğrenildiği de ayrıca gösteriliyor.' },
     { v: '0.8.2', d: 'Giriş ekranına yeni bir "Nasıl Kullanılır" rehberi eklendi (İstatistikler düğmesinin soluna); ilk açılışta üstünde birkaç kez dokunma hareketi yapan bir el işareti dikkat çekiyor. Rehber önce Oyun Modu\'nu özetliyor, sonra kolaydan zora nasıl ilerlenir basitçe anlatılıyor, en sonda uygulamadaki her bölüm tek tek listeleniyor.' },

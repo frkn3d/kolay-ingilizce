@@ -237,6 +237,24 @@
     return !!(lastCp && isNodeDone(prev, lastCp));
   }
 
+  /* "Kaldığımız yer": haritadaki ilk açık ama henüz bitmemiş durak,
+     seviyeler baştan sona sırayla taranarak bulunur. Her şey bitmişse
+     null döner (harita tamamlanmış demektir). */
+  function findCurrentNode() {
+    for (var li = 0; li < LEVELS.length; li++) {
+      if (!isLevelUnlocked(li)) break;
+      var level = LEVELS[li];
+      for (var i = 0; i < level.path.length; i++) {
+        if (isNodeUnlocked(level, i) && !isNodeDone(level, level.path[i])) {
+          return { level: level, node: level.path[i], idx: i };
+        }
+      }
+    }
+    return null;
+  }
+
+  function totalNodesCount() { return LEVELS.reduce(function (n, lv) { return n + lv.path.length; }, 0); }
+
   /* ---------- canlar: paylaşılan mini bileşen ---------- */
   function heartsLine() {
     var n = KI.store.heartsCount();
@@ -312,6 +330,31 @@
       }, 500);
     }
 
+    /* "Devam et": haritada kaldığın yere tek dokunuşla dön. İçindeki
+       yüzde, o durağın değil, HARİTANIN TAMAMININ ilerlemesidir. */
+    var current = findCurrentNode();
+    var pct = Math.round(KI.store.gameNodesDoneCount() / totalNodesCount() * 100);
+    if (current) {
+      var isCp = current.node.kind === 'checkpoint';
+      frag.appendChild(U.el('a', { class: 'gmap__continue', href: '#/oyun/' + current.level.id + '/' + current.node.id, 'data-sfx': 'nav' }, [
+        U.el('span', { class: 'gmap__continue-ico', html: KI.icons.html('play') }),
+        U.el('span', { class: 'gmap__continue-text' }, [
+          U.el('b', { text: 'Devam et' }),
+          U.el('span', { text: isCp ? 'İleri Sar · ' + current.level.t : current.node.theme.t + ' · ' + current.node.topic.t })
+        ]),
+        U.el('span', { class: 'gmap__continue-pct', text: '%' + pct })
+      ]));
+    } else {
+      frag.appendChild(U.el('div', { class: 'gmap__continue gmap__continue--done' }, [
+        U.el('span', { class: 'gmap__continue-ico', html: KI.icons.html('trophy') }),
+        U.el('span', { class: 'gmap__continue-text' }, [
+          U.el('b', { text: 'Haritayı tamamladın!' }),
+          U.el('span', { text: 'Tekrar çalışmak için istediğin durağa dokunabilirsin.' })
+        ]),
+        U.el('span', { class: 'gmap__continue-pct', text: '%' + pct })
+      ]));
+    }
+
     var wrap = U.el('div', { class: 'gmap' });
 
     LEVELS.forEach(function (level, li) {
@@ -341,10 +384,12 @@
         }
         prevOffset = offset;
 
+        var isCurrent = !!(current && current.level.id === level.id && current.node.id === node.id);
         var stop = U.el('div', { class: 'gmap__stop' + (isCp ? ' gmap__stop--cp' : ''), style: 'transform:translateX(' + offset + 'px)', 'data-node': node.id });
 
         var nodeCls = 'gmap__node' + (isCp ? ' gmap__node--checkpoint' : '') +
-          (done ? ' gmap__node--done' : (tUnlocked ? ' gmap__node--next' : ' gmap__node--locked'));
+          (done ? ' gmap__node--done' : (tUnlocked ? ' gmap__node--next' : ' gmap__node--locked')) +
+          (isCurrent ? ' gmap__node--current' : '');
         var node_ = U.el(tUnlocked ? 'a' : 'div', {
           class: nodeCls,
           href: tUnlocked ? ('#/oyun/' + level.id + '/' + node.id) : null,

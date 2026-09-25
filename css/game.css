@@ -242,6 +242,39 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 
 .gmap__footnote { text-align: center; font-size: .74rem; margin: 26px 0 4px; opacity: .75; }
 
+/* "Devam et": haritanın en üstünde, kaldığın durağa tek dokunuşla
+   dönmeni sağlayan kart. İçindeki yüzde durağın değil TÜM haritanın
+   ilerlemesi (bkz. renderMap, KI.store.gameNodesDoneCount). */
+.gmap__continue {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 15px; margin-bottom: 20px;
+  border-radius: var(--r-lg);
+  background: var(--surface); border: 2px solid var(--mustard);
+  box-shadow: var(--shadow-hard);
+  text-decoration: none; color: inherit;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.gmap__continue:hover { transform: translate(-2px, -2px); }
+.gmap__continue:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--line-2); }
+.gmap__continue-ico {
+  flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--mustard); color: #3a2a06;
+}
+.gmap__continue-ico .icon { width: 21px; height: 21px; }
+.gmap__continue-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.gmap__continue-text b { font-family: var(--font-display); font-size: 1.02rem; line-height: 1.2; }
+.gmap__continue-text span { font-size: .78rem; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gmap__continue-pct {
+  flex: 0 0 auto; font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem;
+  color: var(--mustard-d);
+  background: color-mix(in srgb, var(--mustard) 20%, var(--surface));
+  border-radius: 999px; padding: 5px 11px;
+}
+.gmap__continue--done { border-color: var(--green-600); cursor: default; }
+.gmap__continue--done:hover { transform: none; }
+.gmap__continue--done .gmap__continue-ico { background: var(--green-600); color: var(--cream); }
+.gmap__continue--done .gmap__continue-pct { color: var(--green-700); background: color-mix(in srgb, var(--green-600) 20%, var(--surface)); }
+
 .gmap__node {
   position: relative;
   width: 76px; height: 76px; border-radius: 50%;
@@ -296,6 +329,23 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
   50%      { box-shadow: 0 5px 0 var(--mustard-d), 0 0 0 9px color-mix(in srgb, var(--mustard) 0%, transparent); }
 }
 .gmap__label--cp b { color: var(--mustard-d); }
+
+/* Haritada kaldığın yer: seviye/İleri Sar renginden bilerek ayrışan
+   tek bir sabit renk (turkuaz) — hangi seviyede ya da durak tipinde
+   olursan ol "buradasın" anlamı hep aynı renkle taşınır. İkinci kural,
+   .gmap__node--checkpoint.gmap__node--next ile aynı özgüllükte (iki
+   sınıf) olup ondan SONRA tanımlandığı için durak bir İleri Sar olsa
+   bile kazanır. */
+.gmap__node--current { animation: gnode-pulse-current 1.6s ease-in-out infinite; }
+@keyframes gnode-pulse-current {
+  0%, 100% { box-shadow: 0 5px 0 var(--lvl-d), 0 0 0 4px var(--sky), 0 0 0 4px color-mix(in srgb, var(--sky) 55%, transparent); }
+  50%      { box-shadow: 0 5px 0 var(--lvl-d), 0 0 0 4px var(--sky), 0 0 0 14px color-mix(in srgb, var(--sky) 0%, transparent); }
+}
+.gmap__node--checkpoint.gmap__node--current { animation-name: gnode-pulse-current-cp; }
+@keyframes gnode-pulse-current-cp {
+  0%, 100% { box-shadow: 0 5px 0 var(--mustard-d), 0 0 0 4px var(--sky), 0 0 0 4px color-mix(in srgb, var(--sky) 55%, transparent); }
+  50%      { box-shadow: 0 5px 0 var(--mustard-d), 0 0 0 4px var(--sky), 0 0 0 14px color-mix(in srgb, var(--sky) 0%, transparent); }
+}
 
 .gmap__label { text-align: center; margin-top: 8px; max-width: 122px; }
 .gmap__label b { display: block; font-size: .8rem; line-height: 1.22; font-family: var(--font-display); }
