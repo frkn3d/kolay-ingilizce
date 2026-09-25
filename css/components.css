@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — components.css (1/3: butonlar, kartlar, rozetler)
+   Gramer Atlası - components.css (1/3: butonlar, kartlar, rozetler)
    ============================================================ */
 
 /* Emoji yerine tek stil çizgisel ikonlar (bkz. js/core/icons.js).
@@ -189,7 +189,7 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 /* Küçük kart çizgisinde --past-bg / --future-bg neredeyse aynı parlaklıkta
    olduğundan (özellikle koyu temada) mobilde ayırt edilmiyordu. --tl-mini-*
    (bkz. base.css) --past/--future rengiyle önceden karıştırılmış, sabit bir
-   değerdir — color-mix() gibi eski tarayıcılarda desteklenmeyebilecek bir
+   değerdir - color-mix() gibi eski tarayıcılarda desteklenmeyebilecek bir
    fonksiyona bağımlı olmadan her yerde aynı ısı farkını verir. */
 .tl .tl-zone-past { fill: var(--past-bg); }
 .tl .tl-zone-future { fill: var(--future-bg); }
@@ -243,7 +243,7 @@ html[data-theme="dark"] .grid-map__tier-name--ileri { color: var(--past); }
   letter-spacing: .1em; color: var(--ink-mute); margin-bottom: 5px;
 }
 .timebar__label--now { color: var(--ink); display: inline-flex; align-items: center; }
-/* "NOW" yazısı yerine kalın, sürekli kısa dalgalar yayan bir nokta —
+/* "NOW" yazısı yerine kalın, sürekli kısa dalgalar yayan bir nokta -
    iki iç içe halka, aralarında gecikmeyle sürekliymiş hissi verir. */
 .timebar__now-dot {
   position: relative; width: 8px; height: 8px; border-radius: 50%;
@@ -322,7 +322,7 @@ html[data-theme="dark"] .grid-map__tier-name--ileri { color: var(--past); }
 .tcard:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--line-2); border-color: var(--accent); }
 .tcard__en { font-family: var(--font-display); font-weight: 700; font-size: .93rem; line-height: 1.2; }
 /* Sabit yükseklik: en üstteki ana zaman çizgisine dokununca (bkz.
-   .timebar__trackwrap, home.js) ad yerine kural metni gelir — metin
+   .timebar__trackwrap, home.js) ad yerine kural metni gelir - metin
    uzunluğu değişse de kart büyümesin diye iki satırlık yer baştan
    ayrılır, taşan kısım kırpılır. */
 .tcard__tr {
@@ -765,7 +765,7 @@ table.tbl--cmp th, table.tbl--cmp td { padding: 8px 10px; }
   box-shadow: var(--shadow-hard);
 }
 
-/* Sağ/sol uç yön ipuçları: .tj__stage'in DIŞINDA, viewport'a sabit —
+/* Sağ/sol uç yön ipuçları: .tj__stage'in DIŞINDA, viewport'a sabit -
    pan/zoom'dan etkilenmez, her zaman görünür kalır. */
 .tj__edge {
   position: absolute; top: 50%; transform: translateY(-50%);

@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — game.js
+   Gramer Atlası - game.js
    Oyun Modu: aşağı doğru uzanan zaman haritası + can sistemi.
 
    Her seviyenin kendi konuları vardır (ör. Başlangıç: Temeller,
@@ -8,7 +8,7 @@
    bir "İleri Sar" sınavı eklenir: bu sınavlar her zaman açıktır, o
    seviyenin en zor (cümle kurma tipi) sorularından oluşur; geçilirse
    (10 üzerinden en az 7) kendisinden hemen önceki ve hemen sonraki
-   ilk düğüm de açılır — sırayı takip etmeden ileri atlanabilir.
+   ilk düğüm de açılır - sırayı takip etmeden ileri atlanabilir.
 
    Sorular js/data/game-questions.js dosyasından (questions.md'den
    üretildi) gelir. İleride "questions2" ile gelecek ek sorular aynı
@@ -445,7 +445,7 @@
     return all;
   }
   /* İleri Sar geçildiğinde, kendisine kadar olan tüm önceki dersler
-     (haritada kilit gösterse bile) geçilmiş sayılır — tek bir komşu
+     (haritada kilit gösterse bile) geçilmiş sayılır - tek bir komşu
      değil, o noktaya kadarki bütün yol açılır. finish() bunu gerçek bir
      sınav bittiğinde çağırır; simulateCheckpointResult de (tests/) aynı
      fonksiyonu kullanarak birim testlerinde aynı davranışı sınar. */
@@ -740,7 +740,7 @@
     buildHeartsModal: function () { mountHearts(document.getElementById('hearts-body')); },
     totalNodes: function () { return LEVELS.reduce(function (n, lv) { return n + lv.path.length; }, 0); },
     /* Gerçek bir İleri Sar sınavının bitişini simüle eder (sonucu kaydeder,
-       geçildiyse önceki dersleri açar) — finish()'teki checkpoint dalıyla
+       geçildiyse önceki dersleri açar) - finish()'teki checkpoint dalıyla
        birebir aynı unlockPrecedingLessons'ı çağırır. Yalnızca
        tests/unit-game.js tarafından kullanılır; uygulama arayüzünden
        tetiklenmez. */

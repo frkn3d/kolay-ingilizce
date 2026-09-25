@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — compare.js
+   Gramer Atlası - compare.js
    Birbirine karışan zamanların yan yana karşılaştırılması.
    ============================================================ */
 (function (KI) {
@@ -96,7 +96,7 @@
         why: 'Solda söz veriliyor. Sağda tarih belli bir plan var.' }
     ],
     quiz: [
-      { q: 'Kapı çaldı. — Ben açarım. → The door rang. — I ___ it.', options: ['am going to open', 'will open', 'open', 'opened'], answer: 1, why: 'O anda verilen karar: will.' },
+      { q: 'Kapı çaldı. - Ben açarım. → The door rang. - I ___ it.', options: ['am going to open', 'will open', 'open', 'opened'], answer: 1, why: 'O anda verilen karar: will.' },
       { q: 'Biletleri aldık, cumartesi Fethiye’ye gidiyoruz.', options: ['We will go to Fethiye.', 'We are going to go to Fethiye on Saturday.', 'We go to Fethiye.', 'We went to Fethiye.'], answer: 1, why: 'Hazırlığı yapılmış plan: be going to.' }
     ]
   });

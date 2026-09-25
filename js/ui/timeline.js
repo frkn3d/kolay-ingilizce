@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — timeline.js
+   Gramer Atlası - timeline.js
    Zaman çizgisini SVG olarak çizer.
    x değerleri: -1 (uzak geçmiş) … 0 (ŞİMDİ) … +1 (uzak gelecek)
    ============================================================ */
@@ -26,7 +26,7 @@
      Kart daralınca bu birkaç piksele sıkışıp tek bir leke gibi görünüyordu.
      Bu yüzden mini modda, aynı zamanın bütün işaretlerinin kapladığı x
      aralığı çok darsa, ortak bir merkez etrafında orantılı olarak genişletilir
-     — okun/notaların birbirine göre sırası ve göreli konumu korunur. */
+     - okun/notaların birbirine göre sırası ve göreli konumu korunur. */
   var MINI_MIN_SPREAD = 0.75;
   function spreadMini(marks) {
     var xs = [];
@@ -120,7 +120,7 @@
     svg.appendChild(defs);
 
     /* geçmiş / gelecek bölgeleri: mini gösterimde ince bir çizgi hâlinde,
-       eksenin hemen üzerinde — kartı kaplayan kalın bir blok değil, sade
+       eksenin hemen üzerinde - kartı kaplayan kalın bir blok değil, sade
        ve zayıf bir renk ipucu. */
     var zh = mini ? 30 : 80;
     svg.appendChild(n('rect', { x: 0, y: AY - zh / 2, width: CX, height: zh, class: 'tl-zone-past', opacity: mini ? '.9' : '.5', rx: mini ? 5 : 8 }));

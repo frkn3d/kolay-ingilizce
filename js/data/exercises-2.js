@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — exercises-2.js
+   Gramer Atlası - exercises-2.js
    Alıştırma sayısını 300'ün üzerine çıkaran ikinci soru dalgası.
    Biçim: { q, options, answer (0'dan başlar), why }
    ============================================================ */
@@ -164,7 +164,7 @@
     { q: 'Bence yarın hava soğuk olacak. → I think it ___ cold tomorrow.', options: ['is', 'will be', 'was', 'has been'], answer: 1, why: 'Tahmin: will be.' },
     { q: 'Hangisi doğru?', options: ['I will to call you later.', 'I will call you later.', 'I am will call you later.', 'I will calling you later.'], answer: 1, why: 'will + yalın fiil.' },
     { q: 'Merak etme, sana yardım edeceğim. → Don’t worry, I ___ you.', options: ['help', 'will help', 'am helping', 'helped'], answer: 1, why: 'Yerinde verilen söz.' },
-    { q: 'Kapı çaldı — ben açarım. → The door rang. I ___ it.', options: ['open', 'will open', 'am opening', 'opened'], answer: 1, why: 'Anlık karar: will.' },
+    { q: 'Kapı çaldı - ben açarım. → The door rang. I ___ it.', options: ['open', 'will open', 'am opening', 'opened'], answer: 1, why: 'Anlık karar: will.' },
     { q: 'Hangisi yanlış?', options: ['She will arrive at six.', 'She wills arrive at six.', 'Will you help me?', 'They will not come.'], answer: 1, why: 'will hiçbir özneyle -s almaz.' },
     { q: 'Yarın yağmur yağacağını sanmıyorum. → I don’t think it ___ tomorrow.', options: ['rains', 'will rain', 'is raining', 'rained'], answer: 1, why: 'Gelecekle ilgili tahmin.' },
     { q: 'Gelecek yıl kırk yaşında olacak. → He ___ forty next year.', options: ['is', 'will be', 'was', 'has been'], answer: 1, why: 'Gelecekle ilgili basit bilgi.' },

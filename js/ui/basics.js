@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — basics.js (arayüz)
+   Gramer Atlası - basics.js (arayüz)
    Temel gramer bölümlerini kartlar hâlinde çizer.
    ============================================================ */
 (function (KI) {
@@ -59,7 +59,7 @@
     wrap.appendChild(tb);
     box.appendChild(wrap);
     box.appendChild(U.el('p', { class: 'soft', style: 'font-size:.82rem;margin:8px 0 0',
-      text: 'Bu ' + common.length + ' fiil, günlük İngilizcenin büyük bölümünü karşılar — önce bunları öğren.' }));
+      text: 'Bu ' + common.length + ' fiil, günlük İngilizcenin büyük bölümünü karşılar - önce bunları öğren.' }));
 
     if (rest.length) {
       var moreWrap = U.el('div', { class: 'tablewrap', style: 'max-height:360px;overflow:auto', hidden: true });

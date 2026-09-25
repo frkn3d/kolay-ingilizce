@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — tests/unit-game.js
+   Gramer Atlası - tests/unit-game.js
    Oyun Modu haritasının kilit/açma mantığını (isNodeUnlocked,
    isNodeDone, isLevelUnlocked, checkpoint geçişi) doğrudan render
    edilen DOM üzerinden sınar. Bu dosya, bu proje üzerinde daha önce

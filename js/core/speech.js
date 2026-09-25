@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — speech.js
+   Gramer Atlası - speech.js
    Cihazın kendi konuşma motoru (Web Speech API). İnternet / API yok.
    Windows, macOS, Android ve iOS tarayıcılarında çalışır.
    ============================================================ */
@@ -63,7 +63,7 @@
         }
         return false;
       }
-      /* Zaten bir şey okunmuyorsa cancel() çağırmaya gerek yok — Safari'de
+      /* Zaten bir şey okunmuyorsa cancel() çağırmaya gerek yok - Safari'de
          cancel() hemen ardından aynı anda speak() çağrılması bazen konuşmayı
          sessizce iptal ediyor. */
       if (synth.speaking || synth.pending) { try { synth.cancel(); } catch (e) {} }

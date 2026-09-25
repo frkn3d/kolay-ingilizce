@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — app.js
+   Gramer Atlası - app.js
    Yönlendirici (hash tabanlı), tema, ses düğmeleri, başlatma.
    ============================================================ */
 (function (KI) {
@@ -174,7 +174,7 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         /* reset-confirm-modal her zaman Ayarlar'ın üstünde açılır, o yüzden
-           öncelik sırasında ondan önce kontrol edilmeli — yoksa Escape,
+           öncelik sırasında ondan önce kontrol edilmeli - yoksa Escape,
            üstündeki onay yerine altındaki Ayarlar penceresini kapatırdı. */
         if (!resetModal.hidden) closeResetModal();
         else if (!modal.hidden) closeModal();

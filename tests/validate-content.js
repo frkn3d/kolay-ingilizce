@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — tests/validate-content.js
+   Gramer Atlası - tests/validate-content.js
    Bağımlılık gerektirmez (düz Node). Veri dosyalarını sırayla
    window.KI üzerinde birleştirip şunları doğrular:
      - her quiz sorusunun answer indeksi options sınırları içinde mi
@@ -43,7 +43,7 @@ var failures = [];
 function fail(msg) { failures.push(msg); }
 
 /* Türkçede zaten aynı yazılan/okunan özel isimler (şehir, kişi adı,
-   halk hikâyesi kahramanı vb.) kasıtlı olarak sözlükte yok — bir
+   halk hikâyesi kahramanı vb.) kasıtlı olarak sözlükte yok - bir
    Türkçe konuşana "Ankara" kelimesinin çevirisini göstermenin bir
    faydası yok (bkz. glossary.js/vocabulary.js "özel isimler" notu).
    Bu yüzden kapsama kontrolünden muaf tutuluyorlar. */
@@ -66,7 +66,7 @@ function checkQuizArray(items, label) {
   (items || []).forEach(function (q, i) {
     if (!q.options || q.options.length < 2) { fail(label + '#' + i + ': seçenek sayısı yetersiz'); return; }
     if (typeof q.answer !== 'number' || q.answer < 0 || q.answer >= q.options.length) {
-      fail(label + '#' + i + ': answer indeksi sınır dışı (' + q.answer + ') — "' + q.q + '"');
+      fail(label + '#' + i + ': answer indeksi sınır dışı (' + q.answer + ') - "' + q.q + '"');
     }
   });
 }
@@ -170,7 +170,7 @@ console.log('Zaman Yolculuğu kaydı:', (KI.timelineJourney || []).length);
 console.log('Sözlük kelime sayısı:', KI.glossary.size());
 console.log('Düzensiz fiil sayısı:', KI.glossary.irregularVerbs.length);
 console.log('Mini Test sorusu:', (KI.minitest ? KI.minitest.items.length : 0),
-  '(' + minitestDupOptions + ' tanesinde A/B şıkkı aynı — kaynak dosyada bozuk, oyuna girmiyor)');
+  '(' + minitestDupOptions + ' tanesinde A/B şıkkı aynı - kaynak dosyada bozuk, oyuna girmiyor)');
 console.log('');
 
 if (failures.length) {

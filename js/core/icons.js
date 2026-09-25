@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — icons.js
+   Gramer Atlası - icons.js
    Uygulamadaki tüm ikonlar. Emoji kullanılmaz; platforma göre
    değişen, renkli emoji yerine tek stil, çizgisel SVG ikonlar.
    Kullanım: KI.icons.html('star') -> '<svg ...>...</svg>'
@@ -99,6 +99,9 @@ window.KI = window.KI || {};
 
     upload: '<path d="M12 15V4"/><polyline points="7,8.5 12,3.5 17,8.5"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>',
     download: '<path d="M12 4v11"/><polyline points="7,10.5 12,15.5 17,10.5"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>',
+
+    /* Dokunma ipucu: parmağı uzatılmış, aşağıyı gösteren bir el. */
+    'point-down': '<rect x="9.4" y="2" width="5.2" height="11" rx="2.6"/><rect x="5.5" y="11" width="13" height="9.5" rx="4.2"/><path d="M5.5 14.6c-1.7.25-2.9 1.5-2.9 3.1 0 1.85 1.55 3.3 3.5 3.3h1.1"/>',
 
     /* --- Oyun Modu haritası: kilit ve zaman türü (aspect) simgeleri --- */
     lock: '<rect x="5" y="10.6" width="14" height="10" rx="1.8"/><path d="M8 10.6V7.6a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.1" r="1.3" fill="currentColor" stroke="none"/>',

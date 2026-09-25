@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — store.js
+   Gramer Atlası - store.js
    Ayarlar, ilerleme ve kelime defteri: localStorage üzerinde.
    ============================================================ */
 (function (KI) {

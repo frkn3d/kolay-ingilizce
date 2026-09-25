@@ -1,8 +1,8 @@
 /* ============================================================
-   Gramer Atlası — timeline-journey.js
+   Gramer Atlası - timeline-journey.js
    "Zaman Yolculuğu": tek bir cümlenin (Mehmet büyükannesine mektup
    yazıyor) 12 zamandaki hâli, tek bir uzun zaman çizgisi üzerinde.
-   Amaç: özne/fiil/nesne hep aynı kalsın, yalnızca zaman değişsin —
+   Amaç: özne/fiil/nesne hep aynı kalsın, yalnızca zaman değişsin -
    böylece "zaman" kavramı tek bir sahne üzerinden somutlaşsın.
 
    x: -2.75 (en uzak geçmiş) … 0 (ŞİMDİ) … +2.75 (en uzak gelecek). Aralık

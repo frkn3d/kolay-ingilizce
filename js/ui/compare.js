@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — compare.js (arayüz)
+   Gramer Atlası - compare.js (arayüz)
    Karışan zamanları yan yana gösteren karşılaştırma sayfası.
    ============================================================ */
 (function (KI) {

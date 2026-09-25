@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — practice.js
+   Gramer Atlası - practice.js
    Çoktan seçmeli motor + üç alıştırma modu.
    ============================================================ */
 (function (KI) {
@@ -323,7 +323,7 @@
 
   /* 4b) Aralıklı tekrar: kelime defterinde tekrar zamanı gelmiş kelimeler.
      Doğru cevap kutu seviyesini yükseltir (tekrar tarihi ertelenir),
-     yanlış cevap kutuyu sıfırlar (bugün tekrar edilir) — bkz. store.js. */
+     yanlış cevap kutuyu sıfırlar (bugün tekrar edilir) - bkz. store.js. */
   function reviewQuestions(count) {
     var due = KI.store.dueWords();
     var dict = KI.glossary.dict;

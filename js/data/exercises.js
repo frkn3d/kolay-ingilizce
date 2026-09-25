@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — exercises.js
+   Gramer Atlası - exercises.js
    Zamanlara ait ek alıştırma soruları. tenses.js yüklendikten
    sonra çalışır ve her zamanın quiz dizisini genişletir.
    Biçim: { q, options, answer (0'dan başlar), why }

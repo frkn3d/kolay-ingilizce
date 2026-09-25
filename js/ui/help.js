@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — help.js
+   Gramer Atlası - help.js
    Giriş ekranındaki "Nasıl Kullanılır" rehberi: önce Oyun Modu'nu
    özetler, sonra kolaydan zora nasıl ilerleneceğini basitçe anlatır,
    en sonda uygulamadaki tüm bölümleri tek tek listeler.
@@ -8,9 +8,9 @@
   'use strict';
   var U = KI.util;
 
-  function sectionTitle(icon, text) {
+  function sectionTitle(num, text) {
     return U.el('h2', { class: 'section__title' }, [
-      U.el('span', { class: 'num', html: KI.icons.html(icon) }),
+      U.el('span', { class: 'num', text: num }),
       document.createTextNode(text)
     ]);
   }
@@ -27,7 +27,7 @@
 
     /* 1) Oyun Modu özeti */
     var s1 = U.el('section', { class: 'section' });
-    s1.appendChild(sectionTitle('flag', 'Önce Oyun Modu\'nu tanıyalım'));
+    s1.appendChild(sectionTitle('1', 'Önce Oyun Modu\'nu tanıyalım'));
     s1.appendChild(U.el('div', { class: 'card' }, [
       U.el('p', { style: 'margin-top:0', text: 'Oyun Modu, İngilizceyi bir "zaman haritası" üzerindeki küçük duraklarla öğretir. Her durak kısa bir sınav; doğru cevapladıkça sıradaki durak açılır.' }),
       U.el('ul', { class: 'disclose__list', style: 'margin-top:10px' }, [
@@ -41,7 +41,7 @@
 
     /* 2) Kolaydan zora nasıl ilerlenir */
     var s2 = U.el('section', { class: 'section' });
-    s2.appendChild(sectionTitle('graduation-cap', 'Kolaydan zora nasıl ilerlersin'));
+    s2.appendChild(sectionTitle('2', 'Kolaydan zora nasıl ilerlersin'));
     var ol = U.el('ol', { class: 'disclose__list' });
     [
       ['Temeller\'den başla', 'Zaman kurmak için gereken en küçük bilgi seti burada: özne, yardımcı fiil, olumlu/olumsuz/soru mantığı.'],
@@ -57,12 +57,12 @@
 
     /* 3) Uygulamadaki her şey */
     var s3 = U.el('section', { class: 'section' });
-    s3.appendChild(sectionTitle('compass', 'Uygulamadaki her şey'));
+    s3.appendChild(sectionTitle('3', 'Uygulamadaki her şey'));
     var grid = U.el('div', { class: 'stack' });
     [
       ['map', 'Harita (Eğitim Modu)', '12 zamanın tamamı; bir karta dokunup anlatımı, örnekleri ve mini sınavı gör.'],
       ['wall', 'Temeller', 'Özne, yardımcı fiil, düzensiz fiiller gibi zaman kurmadan önce bilinmesi gerekenler.'],
-      ['target', 'Alıştırma', 'Karışık, Zorlandıklarım, Bugünkü Tekrar, Cümleden/Çizgiden zaman bulma, Boşluk doldurma, Cümle kurma, Dinle-yaz, Kelime bilgisi, Düzensiz fiiller ve Mini Test — bir arada 11 farklı çalışma modu.'],
+      ['target', 'Alıştırma', 'Karışık, Zorlandıklarım, Bugünkü Tekrar, Cümleden/Çizgiden zaman bulma, Boşluk doldurma, Cümle kurma, Dinle-yaz, Kelime bilgisi, Düzensiz fiiller ve Mini Test - bir arada 11 farklı çalışma modu.'],
       ['book', 'Sözlük', 'Kelimeler (ara, dinle, defterine ekle), Hikayeler (halk hikayeleri) ve Zaman Yolculuğu (tek cümle, 12 zaman).'],
       ['flag', 'Oyun Modu', 'Harita üzerinde kısa sınavlarla ilerleme; canlar, başarımlar, konfeti.'],
       ['chart', 'İstatistikler', 'Ziyaret, seri, öğrenilen zaman, Oyun Modu ilerlemesi ve daha fazlasını tek panoda gör.'],

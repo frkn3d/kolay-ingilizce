@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — home.js
+   Gramer Atlası - home.js
    "Zaman Haritası": 3 sütun (geçmiş / şimdi / gelecek) x 4 satır.
    Karşılama ekranı sade tutulur; açıklamalar "Nasıl okunur?"
    ipucunun altında saklıdır.
@@ -13,7 +13,7 @@
       class: 'tcard tcard--' + t.group + ' reveal',
       href: '#/zaman/' + t.id,
       'data-sfx': 'nav',
-      title: t.en + ' — ' + t.tr
+      title: t.en + ' - ' + t.tr
     });
     card.appendChild(U.el('span', { class: 'tcard__en', text: t.en }));
     var trEl = U.el('span', { class: 'tcard__tr', text: t.tr });
@@ -23,7 +23,7 @@
     card.appendChild(mini);
     if (KI.store.isLearned(t.id)) card.appendChild(U.el('span', { class: 'tcard__done', html: KI.icons.html('check-circle') }));
 
-    /* Kartın kendi kural döngüsü yok artık — en üstteki ana zaman
+    /* Kartın kendi kural döngüsü yok artık - en üstteki ana zaman
        çizgisine dokununca TÜM kartlar birlikte döner (bkz. grid()). */
     if (registry) registry.push({ trEl: trEl, tense: t });
 
@@ -141,7 +141,7 @@
     return wrap;
   }
 
-  /* "Nasıl okunur?" — kapalı gelen açıklama kutusu */
+  /* "Nasıl okunur?" - kapalı gelen açıklama kutusu */
   function howTo(done) {
     var d = U.el('details', { class: 'disclose reveal' });
     d.appendChild(U.el('summary', { html: '<span>Haritayı nasıl okumalı?</span>' }));
@@ -164,7 +164,7 @@
 
     var ul = U.el('ul', { class: 'disclose__list' });
     KI.tenses.aspects.forEach(function (a) {
-      ul.appendChild(U.el('li', { html: '<b>' + U.esc(a.tr) + '</b> — ' + U.esc(a.hint) }));
+      ul.appendChild(U.el('li', { html: '<b>' + U.esc(a.tr) + '</b> - ' + U.esc(a.hint) }));
     });
     body.appendChild(ul);
 
@@ -174,7 +174,7 @@
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:14px', text: 'Nereden başlamalı?' }));
     var route = U.el('ol', { class: 'disclose__list' });
     /* Aşağıdaki sıralama, haritadaki Başlangıç/Orta/İleri katmanlarıyla
-       birebir aynı (bkz. grid()'teki TIERS) — ikisi arasında fark
+       birebir aynı (bkz. grid()'teki TIERS) - ikisi arasında fark
        olmasın diye. */
     [
       ['Başlangıç', ['temeller'].concat(tierTenseIds(TIERS[0]))],
@@ -214,14 +214,13 @@
     var primary = lastT
       ? U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
       : U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
-    actions.appendChild(U.el('div', { class: 'row row--between' }, [
-      primary,
-      U.el('a', { class: 'btn btn--sm', href: '#/temeller', 'data-sfx': 'nav', html: KI.icons.html('wall') + ' Temeller' })
-    ]));
+    actions.appendChild(U.el('div', { class: 'row' }, [primary]));
     frag.appendChild(actions);
 
-    frag.appendChild(howTo(done));
+    /* Önce harita, açıklama ("Haritayı nasıl okumalı?") en altta -
+       kullanıcı önce 12 zamanı görsün, ayrıntı isteyen altta bulsun. */
     frag.appendChild(grid());
+    frag.appendChild(howTo(done));
 
     setTimeout(setupReveal, 0);
     return frag;

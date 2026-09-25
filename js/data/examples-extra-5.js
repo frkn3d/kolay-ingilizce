@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — examples-extra-5.js
+   Gramer Atlası - examples-extra-5.js
    Beşinci örnek dalgası: mevsimler, doğa, çocukluk oyunları,
    spor, gelenekler, yolculuk. tenses.js yüklendikten sonra
    examples dizisine eklenir.

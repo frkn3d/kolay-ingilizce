@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — base.css
+   Gramer Atlası - base.css
    Retro-yeşil palet, tipografi, temel sıfırlama
    ============================================================ */
 
@@ -177,7 +177,7 @@ html[data-section="oyun"] body {
 /* İstatistikler sayfası da (giriş ekranı ve Oyun Modu gibi) açık/koyu
    tema tercihinden bağımsız hep koyu: bu kez lacivert-mordan değil,
    lacivert-turkuaza doğru bir geçiş, köşelerde sıcak bir altın ve
-   soğuk bir turkuaz parıltı ile — bir "kontrol paneli" hissi versin
+   soğuk bir turkuaz parıltı ile - bir "kontrol paneli" hissi versin
    diye Oyun Modu'nun mor "gece haritası"ndan bilerek ayrışıyor. */
 html[data-section="istatistikler"] body {
   background-color: #0a1420;

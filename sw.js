@@ -1,11 +1,11 @@
 /* ============================================================
-   Gramer Atlası — sw.js (service worker)
-   Çevrimdışı çalışmayı sağlar. Strateji: ağ öncelikli — çevrimiçiyken
+   Gramer Atlası - sw.js (service worker)
+   Çevrimdışı çalışmayı sağlar. Strateji: ağ öncelikli - çevrimiçiyken
    her zaman en güncel dosya alınır ve önbelleğe yazılır; ağ yoksa
    (uçakta, metroda, çekim olmayan yerde) önbellekten sunulur.
 
    Yeni bir yayında dosya listesi değiştiyse (yeni js/css dosyası
-   eklendi/kaldırıldı) CACHE_VERSION'ı artırın — eski önbellek otomatik
+   eklendi/kaldırıldı) CACHE_VERSION'ı artırın - eski önbellek otomatik
    silinir.
    ============================================================ */
 'use strict';
@@ -103,7 +103,7 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(
     /* GitHub Pages dosyalarını "Cache-Control: max-age=600" ile sunuyor;
        düz fetch() bu pencerede tarayıcının kendi HTTP önbelleğinden
-       (sunucuya hiç sormadan) eski bir sürüm döndürebiliyordu — "ağ
+       (sunucuya hiç sormadan) eski bir sürüm döndürebiliyordu - "ağ
        öncelikli" tasarımı sessizce boşa çıkarıyordu. cache:'no-cache'
        her istekte sunucuyla (ETag/Last-Modified ile) doğrulama yapılmasını
        zorunlu kılar; değişmemişse ucuz bir 304 döner, değiştiyse gerçek

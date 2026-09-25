@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — stories.js
+   Gramer Atlası - stories.js
    Hikayeler: liste ve okuma ekranı. Kelimelere dokunulunca anlamı
    görünür (KI.sentence.render), "Hikayeyi oku" ile cümle cümle
    sesli okuma ve okunan cümlenin vurgulanması.
@@ -57,7 +57,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: s.cat === 'nasreddin' ? 'Nasreddin Hoca' : 'Halk Hikayesi' }),
       U.el('h1', { text: s.title }),
-      U.el('p', { text: s.tr + ' — ' + s.summary })
+      U.el('p', { text: s.tr + ' - ' + s.summary })
     ]));
 
     var playBtn = U.el('button', { class: 'btn btn--primary btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Hikayeyi oku' });

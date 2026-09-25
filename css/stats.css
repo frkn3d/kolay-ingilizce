@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — stats.css
+   Gramer Atlası - stats.css
    "İstatistikler" sayfası: giriş ekranı ve Oyun Modu gibi, açık/koyu
    tema tercihinden bağımsız kendi koyu paletini kullanır (bkz.
    base.css html[data-section="istatistikler"] body). Global --ink/
@@ -47,7 +47,12 @@
   letter-spacing: .16em; text-transform: uppercase; color: var(--sp-gold);
 }
 .stats-hero h1 { color: var(--sp-ink); margin-bottom: .2em; }
-.stats-hero__line { margin: 0 0 18px; color: var(--sp-ink-soft); font-size: .92rem; }
+.stats-hero__line {
+  margin: 0 0 18px; color: var(--sp-ink-soft); font-size: .92rem;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.stats-hero__line-ico { display: inline-flex; color: var(--sp-gold); }
+.stats-hero__line-ico .icon { width: 16px; height: 16px; }
 
 .stats-hero__ring { display: flex; flex-direction: column; align-items: center; }
 .stats-ring-wrap { position: relative; width: 140px; height: 140px; }

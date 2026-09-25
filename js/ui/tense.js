@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — tense.js
+   Gramer Atlası - tense.js
    Tek bir zamanın sayfası: çizgi, mantık, formül, örnekler, hatalar, test.
    ============================================================ */
 (function (KI) {
@@ -18,7 +18,7 @@
       U.el('span', { class: 'badge', text: asp ? asp.tr : t.aspect })
     ]));
     left.appendChild(U.el('h1', { text: t.en }));
-    left.appendChild(U.el('p', { class: 'tense-head__tr', html: '<b>' + U.esc(t.tr) + '</b> — ' + U.esc(t.tagline) }));
+    left.appendChild(U.el('p', { class: 'tense-head__tr', html: '<b>' + U.esc(t.tr) + '</b> - ' + U.esc(t.tagline) }));
     top.appendChild(left);
 
     var btn = U.el('button', { class: 'btn btn--sm', type: 'button' });

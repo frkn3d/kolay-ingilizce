@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — basics.js
+   Gramer Atlası - basics.js
    Zamanlara geçmeden önce bilinmesi gereken en sade temeller.
    Blok türleri: text | list | table | examples | callout | verbs
    ============================================================ */
@@ -192,9 +192,9 @@
     id: 'modal',
     icon: KI.icons.html('key'),
     title: 'Modal Fiiller: can, must, should, may',
-    intro: 'Zamanlar bir işin <b>ne zaman</b> olduğunu anlatır. Modal fiiller ise bir işin ne kadar <b>mümkün, zorunlu ya da doğru</b> olduğunu anlatır. İkisi birlikte çalışır: <b>I can swim.</b> (şimdiki yetenek) — <b>I could swim when I was young.</b> (geçmişteki yetenek).',
+    intro: 'Zamanlar bir işin <b>ne zaman</b> olduğunu anlatır. Modal fiiller ise bir işin ne kadar <b>mümkün, zorunlu ya da doğru</b> olduğunu anlatır. İkisi birlikte çalışır: <b>I can swim.</b> (şimdiki yetenek) - <b>I could swim when I was young.</b> (geçmişteki yetenek).',
     blocks: [
-      { t: 'callout', kind: 'tip', title: 'Altın kural', text: 'Modal fiilden sonra her zaman <b>yalın fiil</b> gelir, "to" almaz: <b>can go</b>, <b>must go</b> — <i>to go</i> ya da <i>going</i> değil.' },
+      { t: 'callout', kind: 'tip', title: 'Altın kural', text: 'Modal fiilden sonra her zaman <b>yalın fiil</b> gelir, "to" almaz: <b>can go</b>, <b>must go</b> - <i>to go</i> ya da <i>going</i> değil.' },
       { t: 'table', head: ['Modal', 'Anlamı', 'Örnek'], rows: [
         ['<b>can</b>', 'yetenek, izin (şimdi)', 'I <b>can</b> speak three languages.'],
         ['<b>could</b>', 'geçmişte yetenek, kibar rica', '<b>Could</b> you open the window, please?'],
@@ -222,14 +222,14 @@
     id: 'used-to',
     icon: KI.icons.html('history'),
     title: '"used to": Eskiden Öyleydi',
-    intro: 'Geçmişte alışkanlık olan ama artık doğru olmayan bir şeyi anlatır. Present Simple ile karışır çünkü ikisi de "hep böyle" hissi verir — farkı şu: biri geçmişte kaldı, artık geçerli değil.',
+    intro: 'Geçmişte alışkanlık olan ama artık doğru olmayan bir şeyi anlatır. Present Simple ile karışır çünkü ikisi de "hep böyle" hissi verir - farkı şu: biri geçmişte kaldı, artık geçerli değil.',
     blocks: [
       { t: 'table', head: ['Kalıp', 'Örnek'], rows: [
         ['+ &nbsp; used to + yalın fiil', 'I <b>used to</b> live in a village.'],
         ['− &nbsp; didn’t use to + yalın fiil', 'I <b>didn’t use to</b> like tea.'],
         ['? &nbsp; Did + özne + use to?', '<b>Did</b> you <b>use to</b> play an instrument?']
       ] },
-      { t: 'callout', kind: 'warn', title: 'Dikkat', text: 'Olumsuz ve soruda <b>used</b> değil <b>use</b> yazılır: <i>didn’t use to</i>, <i>Did you use to...?</i> — sondaki -d düşer.' },
+      { t: 'callout', kind: 'warn', title: 'Dikkat', text: 'Olumsuz ve soruda <b>used</b> değil <b>use</b> yazılır: <i>didn’t use to</i>, <i>Did you use to...?</i> - sondaki -d düşer.' },
       { t: 'examples', items: [
         { en: 'We used to live in a small village near the sea.', tr: 'Eskiden deniz kenarındaki küçük bir köyde yaşardık.' },
         { en: 'I used to hate vegetables, but now I love them.', tr: 'Eskiden sebzelerden nefret ederdim, ama şimdi seviyorum.' },

@@ -1,9 +1,9 @@
 /* ============================================================
-   Gramer Atlası — timeline-journey.js
+   Gramer Atlası - timeline-journey.js
    "Zaman Yolculuğu": tek bir cümlenin 12 zamandaki hâli, pan/zoom
    yapılabilen tek bir uzun zaman çizgisi üzerinde (bkz.
    js/data/timeline-journey.js). Üçüncü parti bir kütüphane
-   kullanılmaz — projenin "bağımlılıksız" ilkesiyle tutarlı olarak
+   kullanılmaz - projenin "bağımlılıksız" ilkesiyle tutarlı olarak
    Pointer Events ile elle yazılmış basit bir pan/zoom denetleyicisi.
    ============================================================ */
 (function (KI) {
@@ -107,7 +107,7 @@
       pinchBase = ids.length >= 2 ? pinchInfo() : null;
       /* Pointer capture aktifken tarayıcının kendi ürettiği 'click' olayı
          .tj__item düğmesine değil, capture'ı üstlenen bu viewport'a gelir
-         (bkz. Pointer Events spec) — bu yüzden "dokunma" seçimini burada,
+         (bkz. Pointer Events spec) - bu yüzden "dokunma" seçimini burada,
          gerçek ekran koordinatından kendimiz buluyoruz. Hareketin tamamı
          (pointerdown'dan beri) tek parmakla oldu ve eşiği aşmadıysa tıklama
          sayılır; iki parmakla pinch yapılıp bırakılırken yanlışlıkla bir
@@ -193,7 +193,7 @@
         U.el('span', { class: 'tj__item-sentence', text: entry.en })
       ]);
       /* Fare/dokunma ile seçim createPanZoom'un onTap'i üzerinden gelir
-         (bkz. aşağısı) — pointer capture aktifken tarayıcının 'click'i bu
+         (bkz. aşağısı) - pointer capture aktifken tarayıcının 'click'i bu
          düğmeye değil, capture'ı üstlenen .tj'ye gider. Bu click dinleyici
          yalnızca klavye (Enter/Boşluk) etkinleştirmesi için kalıyor; o
          durumda pointer capture söz konusu olmadığından normal çalışır. */
@@ -244,7 +244,7 @@
     });
 
     /* Görüntü ilk açıldığında ŞİMDİ ortada, okunur bir yakınlıkta
-       başlasın diye — viewport DOM'a eklenmeden genişliği ölçülemez,
+       başlasın diye - viewport DOM'a eklenmeden genişliği ölçülemez,
        bu yüzden bir sonraki animasyon karesinde kurulur (bkz. app.js
        paint(): render()'ın döndürdüğü fragment hemen, senkron olarak
        #view'a ekleniyor). */

@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — glossary.js
+   Gramer Atlası - glossary.js
    Kelime => Türkçe karşılık.  Biçim:  ingilizce|türkçe|tür|not
    Çekimli hâller (drinks, drinking, built...) otomatik çözülür.
    ============================================================ */
@@ -220,7 +220,7 @@
 
   /* --- özel isimler --- */
   /* Not: Türkçede zaten aynı yazılan/okunan özel isimler (şehir, kişi
-     adı vb. — eskiden burada duran "ankara|Ankara" gibi) sözlükten
+     adı vb. - eskiden burada duran "ankara|Ankara" gibi) sözlükten
      çıkarıldı; bir Türkçe konuşan için çevirisi kendisiyle aynı olan
      bir kelimeyi sözlükte görmenin bir faydası yok. Yalnızca gerçekten
      farklı yazılan (Anatolia/Anadolu, Bosphorus/Boğaziçi gibi) girişler kaldı. */

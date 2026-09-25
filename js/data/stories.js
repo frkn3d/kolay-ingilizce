@@ -1,7 +1,7 @@
 /* ============================================================
-   Gramer Atlası — stories.js
+   Gramer Atlası - stories.js
    Anonim halk hikâyeleri: Nasreddin Hoca fıkraları ve diğer yerel
-   anonim hikâyeler. Basit, kısa cümlelerle — okuma alıştırması ve
+   anonim hikâyeler. Basit, kısa cümlelerle - okuma alıştırması ve
    kelime tıklama için uygun. Her hikâye cümle cümle dizilir; her
    cümlenin İngilizcesi ve Türkçesi birlikte tutulur.
    ============================================================ */

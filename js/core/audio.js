@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — audio.js
+   Gramer Atlası - audio.js
    Web Audio ile üretilen kısık, sıcak, retro ses efektleri.
    Hiçbir ses dosyası indirilmez; sesler tarayıcıda sentezlenir.
    ============================================================ */
@@ -112,12 +112,12 @@
     star: function () { tone(1318.5, 0.08, 'sine', 0, 0.25); tone(1760, 0.14, 'sine', 0.07, 0.22); },
     toggle: function () { click(0.25, 1100); },
 
-    /* Oyun Modu: üst üste 3/5/7 doğru — kısa, parlak bir "ding" */
+    /* Oyun Modu: üst üste 3/5/7 doğru - kısa, parlak bir "ding" */
     combo: function () {
       tone(880, 0.08, 'sine', 0.00, 0.4);
       tone(1318.5, 0.14, 'sine', 0.05, 0.36);
     },
-    /* Oyun Modu: bir durağı 10/10 bitirme — daha uzun, daha büyük kutlama
+    /* Oyun Modu: bir durağı 10/10 bitirme - daha uzun, daha büyük kutlama
        (achievement gibi accent bus'ında, ama farklı ve daha uzun bir ezgiyle) */
     flawless: function () {
       tone(523.25, 0.12, 'triangle', 0.00, 0.5, null, accent);

@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — confetti.js
+   Gramer Atlası - confetti.js
    Oyun Modu kutlama efekti: küçük renkli parçacıklar kısa süre
    ekrana saçılır. Saf CSS animasyonu kullanır; "daha az hareket"
    ayarı zaten global olarak tüm animasyon sürelerini sıfıra

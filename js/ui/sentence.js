@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — sentence.js
+   Gramer Atlası - sentence.js
    Tıklanabilir kelimeler, "Çevir" düğmesi, sesli okuma
    ve alttan açılan kelime kartı.
    ============================================================ */
@@ -63,7 +63,7 @@
       var b = document.getElementById('word-save');
       if (!b || !sheet.current) return;
       var saved = KI.store.hasWord(sheet.current.base || sheet.current.en);
-      b.innerHTML = KI.icons.html(saved ? 'star' : 'star-outline') + ' ' + (saved ? 'Defterimde — çıkar' : 'Kelime defterime ekle');
+      b.innerHTML = KI.icons.html(saved ? 'star' : 'star-outline') + ' ' + (saved ? 'Defterimde - çıkar' : 'Kelime defterime ekle');
     },
     show: function (raw, span) {
       if (!sheet.node) return;
@@ -73,7 +73,7 @@
 
       document.getElementById('word-title').textContent = clean;
       document.getElementById('word-pos').textContent = found ? (found.pos || '') : 'sözlükte yok';
-      document.getElementById('word-mean').textContent = found ? found.tr : 'Bu kelime sözlükte bulunamadı — yine de dinleyebilirsin.';
+      document.getElementById('word-mean').textContent = found ? found.tr : 'Bu kelime sözlükte bulunamadı - yine de dinleyebilirsin.';
       var noteEl = document.getElementById('word-note');
       var note = found && found.note ? found.note : '';
       if (found && found.base && found.base.toLowerCase() !== clean.toLowerCase()) {

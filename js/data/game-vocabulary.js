@@ -1,11 +1,11 @@
 /* ============================================================
-   Gramer Atlası — game-vocabulary.js
+   Gramer Atlası - game-vocabulary.js
    Oyun Modu soru bankasında (game-questions.js / game-questions-2.js)
    geçen ama ana sözlükte henüz olmayan kelimeler. Oyun Modu'ndaki
    sorular tıklanabilir kelime kartı kullanmaz; bu dosya yalnızca
    Sözlük sekmesinin bu kelimeleri de içermesi için eklenmiştir.
    Türkçede zaten aynı yazılan özel isimler (şehir/kişi adları vb.)
-   kasıtlı olarak eklenmedi — bkz. glossary.js "özel isimler" notu.
+   kasıtlı olarak eklenmedi - bkz. glossary.js "özel isimler" notu.
    ============================================================ */
 (function (KI) {
   'use strict';

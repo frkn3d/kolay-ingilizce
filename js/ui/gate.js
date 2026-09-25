@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — gate.js
+   Gramer Atlası - gate.js
    Uygulamanın ana giriş ekranı: Oyun Modu / Eğitim Modu seçimi.
    Logoya tıklayınca her zaman buraya dönülür (bkz. app.js kökü).
    ============================================================ */
@@ -49,23 +49,27 @@
 
     var actions = U.el('div', { class: 'gate__actions' });
 
+    /* İki düğme de aynı iskelette (.gate__action-slot > .gate__stats)
+       tutulur - yalnız birine ipucu eklenince flex genişlikleri
+       kaymasın diye (bkz. flex:1 1 0 dağılımı). */
     var helpBtn = U.el('a', { class: 'gate__stats', href: '#/nasil-kullanilir', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'gate__stats-ico', html: KI.icons.html('help-circle') }),
       U.el('span', { text: 'Nasıl Kullanılır' })
     ]);
-    var helpWrap = U.el('div', { class: 'gate__help-wrap' }, [helpBtn]);
+    var helpSlot = U.el('div', { class: 'gate__action-slot' }, [helpBtn]);
     /* İlk açılışta parmakla dokunma ipucu bir kez görünür, sonra
        bir daha hiç çıkmaz (bkz. KI.store.markHelpHintSeen). */
     if (!KI.store.hasSeenHelpHint()) {
-      helpWrap.appendChild(U.el('span', { class: 'gate__help-hint', 'aria-hidden': 'true', text: '👇' }));
+      helpSlot.appendChild(U.el('span', { class: 'gate__help-hint', 'aria-hidden': 'true', html: KI.icons.html('point-down') }));
       KI.store.markHelpHintSeen();
     }
-    actions.appendChild(helpWrap);
+    actions.appendChild(helpSlot);
 
-    actions.appendChild(U.el('a', { class: 'gate__stats', href: '#/istatistikler', 'data-sfx': 'nav' }, [
+    var statsBtn = U.el('a', { class: 'gate__stats', href: '#/istatistikler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'gate__stats-ico', html: KI.icons.html('chart') }),
       U.el('span', { text: 'İstatistikler' })
-    ]));
+    ]);
+    actions.appendChild(U.el('div', { class: 'gate__action-slot' }, [statsBtn]));
 
     wrap.appendChild(actions);
 

@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — examples-extra.js
+   Gramer Atlası - examples-extra.js
    Günlük hayattan ek örnek cümleler. Zeytin hasadı, pazar, dolmuş,
    bayram, tatil... Aralarında birkaç da halk hikâyesi var.
    tenses.js yüklendikten sonra her zamanın examples dizisine eklenir.

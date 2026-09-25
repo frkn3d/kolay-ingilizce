@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — utils.js
+   Gramer Atlası - utils.js
    Küçük yardımcılar. Her modül window.KI altında yaşar.
    ============================================================ */
 window.KI = window.KI || {};
@@ -107,7 +107,7 @@ window.KI = window.KI || {};
      Açılışta odağı modalın içine taşır, Tab'ı modal içinde döngüye alır,
      kapanışta odağı modalı açan öğeye geri verir. Aynı anda tek modal
      için geçerlidir (uygulamada modallar zaten üst üste açılmıyor, tek
-     istisna reset-confirm-modal'ın Ayarlar'ın üstünde açılması — o da
+     istisna reset-confirm-modal'ın Ayarlar'ın üstünde açılması - o da
      kendi tetikleyicisini/odağını ayrıca yönetir). */
   var FOCUSABLE_SEL = 'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])';
   /* İçe aktar için kullanılan gizli (display:none) dosya input'u gibi

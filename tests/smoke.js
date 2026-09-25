@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — tests/smoke.js
+   Gramer Atlası - tests/smoke.js
    Uygulamayı gerçek bir tarayıcı gibi (jsdom ile dosyadan) yükler,
    her rotayı gezer ve konsol hatası / boş ikon / kırık sayaç olup
    olmadığını kontrol eder.

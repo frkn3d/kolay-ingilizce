@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — stats.js
+   Gramer Atlası - stats.js
    Ana ekrandan girilen "İstatistikler" sayfası: hem Eğitim hem
    Oyun Modu'ndaki ilerlemeyi tek bir eğlenceli panoda toplar.
    Sayılar açılışta 0'dan hedefe sayar, genel ilerleme halkası
@@ -148,7 +148,7 @@
       document.createTextNode('Şimdi ne yapmalısın?')
     ]));
     card.appendChild(U.el('p', { class: 'stats-reco__line',
-      html: 'En çok <b>' + U.esc(wt.tr) + '</b> (' + U.esc(wt.en) + ') konusunda hata yaptın — ' + weak.wrong + ' kez karıştırmışsın.' }));
+      html: 'En çok <b>' + U.esc(wt.tr) + '</b> (' + U.esc(wt.en) + ') konusunda hata yaptın - ' + weak.wrong + ' kez karıştırmışsın.' }));
     var actions = U.el('div', { class: 'stats-reco__actions' });
     actions.appendChild(U.el('a', { class: 'stats-reco__btn', href: '#/zaman/' + wt.id, 'data-sfx': 'nav' }, [
       U.el('span', { html: KI.icons.html('repeat') }), document.createTextNode('Kuralın özetine dön, tekrar oku')
@@ -193,17 +193,17 @@
   }
 
   function heroLine(d) {
-    if (d.streak >= 7) return '🔥 ' + d.streak + ' gündür ara vermiyorsun — bu artık gerçek bir alışkanlık!';
-    if (d.streak >= 3) return d.streak + ' gün üst üste buradasın, tempo güzel gidiyor.';
-    if (d.visits <= 1) return 'İlk ziyaretin! Sayıların burada birikmeye başlayacak.';
-    return 'Bugüne kadarki serüvenin aşağıda seni bekliyor.';
+    if (d.streak >= 7) return { icon: 'ach-flame', text: d.streak + ' gündür ara vermiyorsun - bu artık gerçek bir alışkanlık!' };
+    if (d.streak >= 3) return { text: d.streak + ' gün üst üste buradasın, tempo güzel gidiyor.' };
+    if (d.visits <= 1) return { text: 'İlk ziyaretin! Sayıların burada birikmeye başlayacak.' };
+    return { text: 'Bugüne kadarki serüvenin aşağıda seni bekliyor.' };
   }
 
   function closingLine(pct) {
     if (pct >= 90) return 'Zamanlar konusunda artık neredeyse bir uzman sayılırsın!';
-    if (pct >= 60) return 'Gidişat çok iyi — bu tempoyla devam!';
+    if (pct >= 60) return 'Gidişat çok iyi - bu tempoyla devam!';
     if (pct >= 30) return 'İyi bir başlangıç yaptın, yolun yarısı bile sayılır.';
-    return 'Her büyük ilerleme küçük bir adımla başlar — devam et!';
+    return 'Her büyük ilerleme küçük bir adımla başlar - devam et!';
   }
 
   function computeData() {
@@ -277,7 +277,11 @@
     var hero = U.el('div', { class: 'stats-hero' });
     hero.appendChild(U.el('p', { class: 'stats-eyebrow', text: 'İSTATİSTİK' }));
     hero.appendChild(U.el('h1', { text: 'Senin Sayıların' }));
-    hero.appendChild(U.el('p', { class: 'stats-hero__line', text: heroLine(d) }));
+    var hl = heroLine(d);
+    var heroLineEl = U.el('p', { class: 'stats-hero__line' });
+    if (hl.icon) heroLineEl.appendChild(U.el('span', { class: 'stats-hero__line-ico', html: KI.icons.html(hl.icon) }));
+    heroLineEl.appendChild(document.createTextNode(hl.text));
+    hero.appendChild(heroLineEl);
     var ringBox = ring(pct);
     hero.appendChild(ringBox);
     page.appendChild(hero);

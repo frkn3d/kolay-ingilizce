@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — data/minitest.js
+   Gramer Atlası - data/minitest.js
    Alıştırma sekmesindeki "Mini Test" modu için soru havuzu.
    Kaynak: proje kökündeki "mini test.md" (500 soru, 4 zorluk).
    ============================================================ */

@@ -1,5 +1,5 @@
 /* ============================================================
-   Gramer Atlası — tenses.js
+   Gramer Atlası - tenses.js
    12 zaman: mantık, formül, zaman çizgisi işaretleri, örnekler.
    Örnekler Türk ve Osmanlı kültüründen seçilmiştir.
 
@@ -152,7 +152,7 @@
     aspect: 'perfect-continuous',
     en: 'Present Perfect Continuous',
     tr: 'Süregelen Yakın Geçmiş',
-    tagline: 'Geçmişte başladı, hâlâ sürüyor — süresi vurgulanır',
+    tagline: 'Geçmişte başladı, hâlâ sürüyor - süresi vurgulanır',
     formula: {
       pos: 'Özne + <b>have / has been</b> + V<b>-ing</b>',
       neg: 'Özne + have / has <b>not</b> been + V-ing',
@@ -196,7 +196,7 @@
     aspect: 'simple',
     en: 'Past Simple',
     tr: 'Geçmiş Zaman (‑di)',
-    tagline: 'Geçmişte oldu, bitti — tarihi bellidir',
+    tagline: 'Geçmişte oldu, bitti - tarihi bellidir',
     formula: {
       pos: 'Özne + <b>V2</b> (fiil + ed ya da düzensiz hâl)',
       neg: 'Özne + <b>did not</b> + V1',
