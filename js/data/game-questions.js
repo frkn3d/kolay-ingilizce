@@ -108,7 +108,7 @@
         { type: 'choice', q: 'My sister ___ for her university exam at the moment.', opts: ['studies', 'studied', 'is studying', 'will studied'], a: 2 },
         { type: 'choice', q: 'The cashier ___ a receipt now.', opts: ['gives', 'gave', 'is giving', 'will gave'], a: 2 },
         { type: 'build', tr: 'Belediye işçileri şu anda yolu temizliyor.', en: 'The municipal workers are cleaning the road now.' },
-        { type: 'build', tr: 'Annem şu anda balkonu suluyor.', en: 'My mother is watering the balcony plants now.' },
+        { type: 'build', tr: 'Annem şu anda balkon çiçeklerini suluyor.', en: 'My mother is watering the balcony plants now.' },
         { type: 'build', tr: 'Öğretmen şu anda tahtaya yazıyor.', en: 'The teacher is writing on the board now.' },
         { type: 'choice', q: 'Which sentence is happening now?', opts: ['The doctor visits the clinic daily.', 'The doctor is talking to a patient.', 'The doctor visited the clinic.', 'The doctor will talk later.'], a: 1 },
         { type: 'choice', q: 'Choose the correct question.', opts: ['Are you waiting for the tram?', 'Do you waiting for the tram?', 'Did you waiting for the tram?', 'Will you waiting for the tram?'], a: 0 },

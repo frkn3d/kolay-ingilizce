@@ -255,8 +255,20 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 }
 .tcard:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--line-2); border-color: var(--accent); }
 .tcard__en { font-family: var(--font-display); font-weight: 700; font-size: .93rem; line-height: 1.2; }
-.tcard__tr { font-size: .76rem; color: var(--ink-mute); margin-top: 2px; }
-.tcard__mini { margin-top: 8px; }
+/* Sabit yükseklik: zaman çizgisine dokununca ad yerine kural metni
+   gelir (bkz. home.js) — metin uzunluğu değişse de kart büyümesin diye
+   iki satırlık yer baştan ayrılır, taşan kısım kırpılır. */
+.tcard__tr {
+  display: block; font-size: .76rem; line-height: 1.2; color: var(--ink-mute); margin-top: 2px;
+  height: 2.4em; overflow: hidden;
+}
+.tcard__tr b { color: var(--ink-soft); }
+@keyframes tcardTrSwap { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+.tcard__tr--swap { animation: tcardTrSwap .25s ease; }
+
+.tcard__mini {
+  display: block; width: 100%; margin-top: 8px; padding: 0; border: 0; background: none; cursor: pointer;
+}
 .tcard--past   { border-top: 5px solid var(--past); }
 .tcard--present{ border-top: 5px solid var(--present); }
 .tcard--future { border-top: 5px solid var(--future); }
@@ -485,6 +497,15 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
 .tl--mini .tl-axis { stroke-width: 1.4; }
 .tl--mini .tl-now { stroke-width: 1.4; stroke-dasharray: 3 3; }
 .tcard__mini { margin-top: 6px; }
+
+/* Sürekli, hafif bir "nefes alma": dokunulabilir olduğunu belli belirsiz
+   hissettirir. data-motion="less" için base.css'teki genel kural zaten
+   tüm animasyon sürelerini sıfırlıyor, ayrıca özel bir işlem gerekmiyor. */
+@keyframes tlBreathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.035); opacity: .9; }
+}
+.tl--mini { animation: tlBreathe 3.4s ease-in-out infinite; transform-origin: center; }
 
 /* ---------- Açılır ipucu kutusu ---------- */
 .disclose {

@@ -97,7 +97,14 @@ self.addEventListener('fetch', function (event) {
   if (url.origin !== self.location.origin) return; // yalnız kendi dosyalarımız
 
   event.respondWith(
-    fetch(event.request).then(function (response) {
+    /* GitHub Pages dosyalarını "Cache-Control: max-age=600" ile sunuyor;
+       düz fetch() bu pencerede tarayıcının kendi HTTP önbelleğinden
+       (sunucuya hiç sormadan) eski bir sürüm döndürebiliyordu — "ağ
+       öncelikli" tasarımı sessizce boşa çıkarıyordu. cache:'no-cache'
+       her istekte sunucuyla (ETag/Last-Modified ile) doğrulama yapılmasını
+       zorunlu kılar; değişmemişse ucuz bir 304 döner, değiştiyse gerçek
+       güncel içerik gelir. */
+    fetch(event.request, { cache: 'no-cache' }).then(function (response) {
       var copy = response.clone();
       caches.open(CACHE_VERSION).then(function (cache) { cache.put(event.request, copy); });
       return response;

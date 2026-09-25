@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.7.0';
+  var APP_VERSION = '0.7.1';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.7.1', d: 'Harita sekmesindeki zaman çizgileri artık sürekli hafifçe "nefes alıyor"; birine dokununca altındaki Türkçe ad kısaca yer değiştirip o zamanın olumlu kuralını gösteriyor, tekrar dokununca olumsuz, tekrar dokununca soru kuralını gösteriyor (kart boyu değişmiyor). Servis çalışanı artık her istekte sunucuyla mutlaka doğrulama yapıyor — GitHub Pages\'in 10 dakikalık tarayıcı önbelleği yüzünden bir güncellemeden sonra bazen eski dosyaların görünmesi ihtimalini ortadan kaldırır. Oyun Modu\'nda bir cümle çevirisindeki eksiklik (balkon çiçekleri) düzeltildi.' },
     { v: '0.7.0', d: 'Sözlük\'e üçüncü bir bölüm eklendi: Zaman Yolculuğu. Aynı cümle ("Mehmet büyükannesine mektup yazıyor") 12 zamanın hepsinde, tek ve uzun bir zaman çizgisi üzerinde gösteriliyor. Çizgi iki parmakla yakınlaştırılıp uzaklaştırılabiliyor, sürükleyerek gezilebiliyor; masaüstünde fare tekerleğiyle imlecin altındaki noktayı sabit tutarak yakınlaşılıyor, sürükleyerek gezilebiliyor. Alta bir yakınlaştırma çubuğu ve "Tümünü gör" düğmesi eklendi. Bir cümleye dokununca Türkçesi ve o zamanın neden kullanıldığını açıklayan kısa bir not beliriyor. Klavyeyle gezinirken de odaklanılan cümle otomatik olarak görünüme kayıyor.' },
     { v: '0.6.6', d: 'Giriş ekranındaki logo büyütüldü.' },
     { v: '0.6.5', d: 'Üst çubuktaki canlar/başarımlar/ayarlar düğmeleri ve pencere kapatma düğmeleri 40-36px\'ten 44×44px\'e büyütüldü — Apple/Android\'in önerdiği en küçük dokunma hedefine (44×44) uysun diye, özellikle küçük telefonlarda yanlışlıkla komşu düğmeye basmayı azaltır.' },

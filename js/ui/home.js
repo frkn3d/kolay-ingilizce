@@ -16,11 +16,30 @@
       title: t.en + ' — ' + t.tr
     });
     card.appendChild(U.el('span', { class: 'tcard__en', text: t.en }));
-    card.appendChild(U.el('span', { class: 'tcard__tr', text: t.tr }));
-    var mini = U.el('div', { class: 'tcard__mini' });
+    var trEl = U.el('span', { class: 'tcard__tr', text: t.tr });
+    card.appendChild(trEl);
+    var mini = U.el('button', { class: 'tcard__mini', type: 'button', 'aria-label': 'Kuralları gör: ' + t.en });
     mini.appendChild(KI.timeline.render(t, { mini: true }));
     card.appendChild(mini);
     if (KI.store.isLearned(t.id)) card.appendChild(U.el('span', { class: 'tcard__done', html: KI.icons.html('check-circle') }));
+
+    /* Zaman çizgisine dokununca alttaki Türkçe ad, o zamanın kuralına
+       (olumlu → olumsuz → soru → ada geri) kısaca yer değiştirerek geçer.
+       Kart <a> olduğu için tıklama önce bu düğmenin kendi işini yapıp
+       navigasyona gitmesin diye durduruluyor. */
+    var RULES = [null, t.formula.pos, t.formula.neg, t.formula.que];
+    var ruleStep = 0;
+    mini.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      ruleStep = (ruleStep + 1) % RULES.length;
+      trEl.classList.remove('tcard__tr--swap');
+      void trEl.offsetWidth; // reflow: aynı animasyonu art arda tıklamada da yeniden başlatır
+      trEl.classList.add('tcard__tr--swap');
+      trEl.innerHTML = RULES[ruleStep] || U.esc(t.tr);
+      KI.audio.play('tap');
+    });
+
     return card;
   }
 
