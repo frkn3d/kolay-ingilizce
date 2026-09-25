@@ -131,6 +131,35 @@
     return row;
   }
 
+  /* "Şimdi ne yapmalısın?" önerisi: en çok karıştırılan zamana göre
+     iki somut eylem sunar. "Zorlandıklarım" modu zaten yanlış yapılan
+     sorularla birlikte zayıf zamanlardan ek cümle soruları da topladığı
+     için (bkz. practice.js troubleQuestions) "benzer sorularla alıştır"
+     için gerçekten uygun, var olan bir hedef. */
+  function recommendationCard() {
+    var weak = KI.store.weakTenses(1)[0];
+    if (!weak) return null;
+    var wt = KI.tenses.get(weak.id);
+    if (!wt) return null;
+
+    var card = U.el('div', { class: 'stats-reco reveal' });
+    card.appendChild(U.el('p', { class: 'stats-reco__eyebrow' }, [
+      U.el('span', { html: KI.icons.html('target') }),
+      document.createTextNode('Şimdi ne yapmalısın?')
+    ]));
+    card.appendChild(U.el('p', { class: 'stats-reco__line',
+      html: 'En çok <b>' + U.esc(wt.tr) + '</b> (' + U.esc(wt.en) + ') konusunda hata yaptın — ' + weak.wrong + ' kez karıştırmışsın.' }));
+    var actions = U.el('div', { class: 'stats-reco__actions' });
+    actions.appendChild(U.el('a', { class: 'stats-reco__btn', href: '#/zaman/' + wt.id, 'data-sfx': 'nav' }, [
+      U.el('span', { html: KI.icons.html('repeat') }), document.createTextNode('Kuralın özetine dön, tekrar oku')
+    ]));
+    actions.appendChild(U.el('a', { class: 'stats-reco__btn stats-reco__btn--primary', href: '#/alistirma/zorlandiklarim', 'data-sfx': 'nav' }, [
+      U.el('span', { html: KI.icons.html('target') }), document.createTextNode('Benzer sorularla alıştır')
+    ]));
+    card.appendChild(actions);
+    return card;
+  }
+
   /* 12 zamanın renkli nokta haritası: Harita sekmesindeki 3x4 düzenle
      aynı sırada (satır = süreç, sütun = geçmiş/şimdi/gelecek). */
   function tenseMap(learned, total) {
@@ -270,6 +299,8 @@
     eduGrid.appendChild(tile({ icon: 'map', num: d.learned, suffix: ' / ' + d.totalTenses, lbl: 'Öğrenilen zaman' }));
     eduSec.appendChild(eduGrid);
     eduSec.appendChild(highlightRow());
+    var reco = recommendationCard();
+    if (reco) eduSec.appendChild(reco);
     eduSec.appendChild(tenseMap(d.learned, d.totalTenses));
     page.appendChild(eduSec);
 
