@@ -7,14 +7,14 @@
   var U = KI.util;
 
   var FILTERS = [
+    { id: 'defter',   t: 'Defterim', ico: 'star', special: 'book' },
     { id: 'all',      t: 'Tümü',      fn: function () { return true; } },
     { id: 'isim',     t: 'İsim',      fn: function (d) { return /isim/.test(d.pos) && !/özel/.test(d.pos); } },
     { id: 'fiil',     t: 'Fiil',      fn: function (d) { return /fiil/.test(d.pos); } },
     { id: 'sifat',    t: 'Sıfat',     fn: function (d) { return /sıfat/.test(d.pos); } },
     { id: 'zarf',     t: 'Zarf',      fn: function (d) { return /zarf/.test(d.pos); } },
     { id: 'obek',     t: 'Öbek fiil', fn: function (d) { return /öbek/.test(d.pos); } },
-    { id: 'duzensiz', t: 'Düzensiz fiil', special: 'irregular' },
-    { id: 'defter',   t: 'Defterim', ico: 'star', special: 'book' }
+    { id: 'duzensiz', t: 'Düzensiz fiil', special: 'irregular' }
   ];
 
   var active = 'all';
@@ -158,7 +158,7 @@
       U.clear(chips);
       FILTERS.forEach(function (f) {
         var b = U.el('button', {
-          class: 'btn btn--sm' + (active === f.id ? ' btn--primary' : ''), type: 'button',
+          class: 'btn btn--sm' + (f.id === 'defter' ? ' btn--defter' : '') + (active === f.id ? ' btn--primary' : ''), type: 'button',
           html: (f.ico ? KI.icons.html(f.ico) + ' ' : '') + U.esc(f.t)
         });
         b.addEventListener('click', function () {

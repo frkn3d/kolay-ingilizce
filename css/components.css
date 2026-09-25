@@ -25,6 +25,12 @@
 .btn--primary { background: var(--green-700); color: var(--cream); border-color: var(--green-900); }
 html[data-theme="dark"] .btn--primary { background: var(--green-500); color: #0d1f14; border-color: #0a1a11; }
 .btn--mustard { background: var(--mustard); color: #3a2a06; border-color: var(--mustard-d); }
+/* Sözlükteki "Defterim" süzgeci: diğer düz kelime türü sekmelerinden
+   ayrışsın diye her zaman (seçili olmasa bile) hardal rengi taşır;
+   seçilince dolgu da hardal olur (yeşil değil). */
+.btn--defter { color: var(--mustard-d); border-color: var(--mustard-d); }
+html[data-theme="dark"] .btn--defter { color: var(--mustard); border-color: var(--mustard); }
+.btn--defter.btn--primary { background: var(--mustard); color: #3a2a06; border-color: var(--mustard-d); }
 .btn--ghost { background: transparent; box-shadow: none; border-style: dashed; }
 .btn--ghost:hover { background: var(--surface-2); box-shadow: none; transform: none; }
 .btn--sm { padding: .38em .8em; font-size: .82rem; border-width: 1.5px; box-shadow: 2px 2px 0 var(--line-2); }
