@@ -647,7 +647,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
       U.el('h1', { text: 'Mini Test' }),
-      U.el('p', { style: 'font-size:.84rem', text: 'Önce zorluğunu seç, hemen başla. Her seviyede 500 soruluk havuzdan sürpriz sorular çıkar.' })
+      U.el('p', { style: 'font-size:.84rem', text: '500 soruluk mini test havuzu; zorluğunu seç, hemen başla.' })
     ]));
     var grid = U.el('div', { class: 'stack' });
     (KI.minitest ? KI.minitest.levels : []).forEach(function (lv) {

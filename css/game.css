@@ -193,6 +193,45 @@ body.is-gate {
   color: color-mix(in srgb, var(--cream) 55%, transparent);
 }
 
+/* "Bugünün Çalışması": 4 sabit gorev, hedefler 7 gunluk dongude degisir
+   (bkz. gate.js DAILY_TARGETS). Ekranin en altinda, footnote'un hemen
+   ustunde - kartlardan sonra gelen ikincil bir bilgi kutusu. */
+.gate__daily {
+  max-width: 560px; margin: 0 auto; width: 100%;
+  padding: 14px 14px 6px;
+  border: 1.5px solid color-mix(in srgb, var(--cream) 22%, transparent);
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--cream) 6%, transparent);
+}
+.gate__daily-title {
+  display: flex; align-items: center; gap: 7px;
+  margin: 0 0 8px;
+  font-family: var(--font-mono); font-size: .74rem; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--cream) 85%, transparent);
+}
+.gate__daily-title .icon { width: 15px; height: 15px; }
+.gate__daily-list { display: flex; flex-direction: column; }
+.gate__daily-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 2px;
+  border-top: 1px solid color-mix(in srgb, var(--cream) 12%, transparent);
+}
+.gate__daily-item:first-child { border-top: none; }
+.gate__daily-check { flex: 0 0 auto; display: grid; place-items: center; color: color-mix(in srgb, var(--cream) 40%, transparent); }
+.gate__daily-check .icon { width: 19px; height: 19px; }
+.gate__daily-ico { flex: 0 0 auto; display: grid; place-items: center; color: var(--mustard); opacity: .85; }
+.gate__daily-ico .icon { width: 16px; height: 16px; }
+.gate__daily-label { flex: 1 1 auto; min-width: 0; font-size: .84rem; color: color-mix(in srgb, var(--cream) 90%, transparent); }
+.gate__daily-count { flex: 0 0 auto; font-family: var(--font-mono); font-size: .74rem; color: color-mix(in srgb, var(--cream) 55%, transparent); }
+.gate__daily-item.is-done .gate__daily-check,
+.gate__daily-item.is-done .gate__daily-count { color: var(--green-400); }
+.gate__daily-item.is-done .gate__daily-label {
+  color: color-mix(in srgb, var(--cream) 55%, transparent);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--cream) 30%, transparent);
+}
+
 @media (max-width: 360px) {
   .gate__ico { width: 64px; height: 64px; }
   .gate__card { padding: 12px 8px 10px; }

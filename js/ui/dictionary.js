@@ -106,7 +106,7 @@
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('chat') }),
       U.el('span', {}, [
         U.el('h3', { text: 'Hikayeler' }),
-        U.el('p', { class: 'soft', text: (KI.stories ? KI.stories.length : 0) + ' anonim halk hikayesi · Nasreddin Hoca ve daha fazlası, okutma ve kelime tıklama ile.' })
+        U.el('p', { class: 'soft', text: (KI.stories ? KI.stories.length : 0) + ' anonim ve yerelleşmiş hikaye; oku, dinle, kelimelere dokun.' })
       ])
     ]);
     grid.appendChild(storiesCard);

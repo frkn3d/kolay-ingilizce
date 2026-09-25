@@ -169,6 +169,7 @@
       return frag;
     }
     KI.store.set('lastTense', t.id);
+    KI.store.noteTopicRead();
 
     frag.appendChild(U.el('a', { class: 'crumb', href: '#/harita', 'data-sfx': 'back', text: '← Zaman haritası' }));
     frag.appendChild(head(t));

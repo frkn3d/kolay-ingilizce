@@ -56,6 +56,9 @@
     streak: 0,
     lastVisitDay: '',      // 'YYYY-M-D', gün değişince seriyi güncellemek için
 
+    /* --- "Bugünün Çalışması": günlük görev sayaçları, gün değişince sıfırlanır --- */
+    daily: { day: '', topicsRead: 0, questions: 0, wordsReviewed: 0, gameNodes: 0 },
+
     /* --- Oyun Modu: canlar, premium, harita ilerlemesi --- */
     game: {
       hearts: 7,
@@ -131,7 +134,7 @@
       if (!q) return;
       /* Sorulan kelime defterde kayıtlıysa (hangi moddan geldiğine
          bakmaksızın) aralıklı tekrar kutusunu da güncelle. */
-      if (q.word && q.word.en && S.hasWord(q.word.en)) S.reviewWord(q.word.en, ok);
+      if (q.word && q.word.en && S.hasWord(q.word.en)) { S.reviewWord(q.word.en, ok); S.noteWordReviewed(); }
       if (q.tenseId) {
         var w = state.weak[q.tenseId] || { wrong: 0, right: 0 };
         if (ok) w.right++; else w.wrong++;
@@ -233,8 +236,21 @@
       state.quizzesCompleted = (state.quizzesCompleted || 0) + 1;
       if (total > 0 && correct === total) state.perfectQuizzes = (state.perfectQuizzes || 0) + 1;
       S.noteFinishHour();
+      S.noteQuestionsAnswered(total);
       save();
     },
+
+    /* --- "Bugünün Çalışması": gün değişince sayaçlar sıfırlanır --- */
+    touchDaily: function () {
+      var key = todayKey();
+      if (state.daily && state.daily.day === key) return;
+      state.daily = { day: key, topicsRead: 0, questions: 0, wordsReviewed: 0, gameNodes: 0 };
+    },
+    noteTopicRead: function () { S.touchDaily(); state.daily.topicsRead++; save(); },
+    noteQuestionsAnswered: function (n) { S.touchDaily(); state.daily.questions += (n || 0); save(); },
+    noteWordReviewed: function () { S.touchDaily(); state.daily.wordsReviewed++; save(); },
+    noteGameNodeDone: function () { S.touchDaily(); state.daily.gameNodes++; save(); },
+    dailyProgress: function () { S.touchDaily(); return state.daily; },
 
     /* --- günlük seri: uygulama gün içinde ilk açıldığında bir kez çağrılır --- */
     touchVisitStreak: function () {
@@ -309,6 +325,8 @@
         state.game.goodGameQuizzes = (state.game.goodGameQuizzes || 0) + 1;
       }
       S.noteFinishHour();
+      S.noteQuestionsAnswered(total);
+      S.noteGameNodeDone();
       save();
       return cur;
     },
