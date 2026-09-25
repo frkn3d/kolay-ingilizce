@@ -42,6 +42,7 @@
     { re: /^\/sozluk\/kelimeler\/?$/, tab: 'sozluk',    run: function () { return KI.viewDictionary.words(); } },
     { re: /^\/sozluk\/hikayeler\/?$/, tab: 'sozluk',    run: function () { return KI.viewStories.list(); } },
     { re: /^\/sozluk\/hikayeler\/([a-z0-9-]+)\/?$/, tab: 'sozluk', run: function (m) { return KI.viewStories.detail(m[1]); } },
+    { re: /^\/sozluk\/zaman-yolculugu\/?$/, tab: 'sozluk', run: function () { return KI.viewTimelineJourney.render(); } },
     { re: /^\/oyun\/?$/,              tab: 'oyun',      run: function () { return KI.viewGame.map(); } },
     { re: /^\/oyun\/([a-z]+)\/([a-z0-9-]+)\/?$/, tab: 'oyun', run: function (m) { return KI.viewGame.quiz(m[1], m[2]); } }
   ];

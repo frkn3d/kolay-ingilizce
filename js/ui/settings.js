@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.6.6';
+  var APP_VERSION = '0.7.0';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.7.0', d: 'Sözlük\'e üçüncü bir bölüm eklendi: Zaman Yolculuğu. Aynı cümle ("Mehmet büyükannesine mektup yazıyor") 12 zamanın hepsinde, tek ve uzun bir zaman çizgisi üzerinde gösteriliyor. Çizgi iki parmakla yakınlaştırılıp uzaklaştırılabiliyor, sürükleyerek gezilebiliyor; masaüstünde fare tekerleğiyle imlecin altındaki noktayı sabit tutarak yakınlaşılıyor, sürükleyerek gezilebiliyor. Alta bir yakınlaştırma çubuğu ve "Tümünü gör" düğmesi eklendi. Bir cümleye dokununca Türkçesi ve o zamanın neden kullanıldığını açıklayan kısa bir not beliriyor. Klavyeyle gezinirken de odaklanılan cümle otomatik olarak görünüme kayıyor.' },
     { v: '0.6.6', d: 'Giriş ekranındaki logo büyütüldü.' },
     { v: '0.6.5', d: 'Üst çubuktaki canlar/başarımlar/ayarlar düğmeleri ve pencere kapatma düğmeleri 40-36px\'ten 44×44px\'e büyütüldü — Apple/Android\'in önerdiği en küçük dokunma hedefine (44×44) uysun diye, özellikle küçük telefonlarda yanlışlıkla komşu düğmeye basmayı azaltır.' },
     { v: '0.6.4', d: 'Görülebilirlik ve erişilebilirlik turu: Ayarlar/Başarımlar/Canlar/Sıfırlama pencereleri artık açılınca odağı içine alıyor, Tab tuşuyla pencere dışına çıkılamıyor, kapanınca odak açan düğmeye geri dönüyor. Bildirim baloncukları (toast) artık ekran okuyuculara da duyuruluyor. Oyun Modu\'nun mor vurgu rengi biraz koyulaştırıldı (kontrast standardını geçmesi için). Sayfa daha hızlı açılsın diye script dosyaları artık paralel yükleniyor. Oyun Modu haritasına ilk girişte ve haritanın en altında, ilerlemenin yalnızca bu cihazda saklandığını hatırlatan küçük bir not eklendi. Giriş ekranının en altına küçük bir "Logspace" ve sürüm notu eklendi.' },

@@ -31,6 +31,7 @@ global.window = { KI: {} };
   'js/data/examples-extra-7.js',
   'js/data/basics.js',
   'js/data/stories.js',
+  'js/data/timeline-journey.js',
   'js/data/exercises.js',
   'js/data/compare.js',
   'js/data/exercises-2.js'
@@ -122,6 +123,20 @@ KI.compare.list.forEach(function (c) {
   });
 });
 
+/* ---- Zaman Yolculuğu: her tenseId gerçek bir zamana karşılık geliyor mu,
+   her cümledeki her kelime sözlükte var mı ---- */
+(KI.timelineJourney || []).forEach(function (entry, i) {
+  if (!KI.tenses.get(entry.tenseId)) fail('timeline-journey#' + i + ': geçersiz tenseId "' + entry.tenseId + '"');
+  entry.en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
+    var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
+    if (!clean) return;
+    if (!KI.glossary.lookup(clean) && !isExemptWord(clean)) fail('timeline-journey/' + entry.tenseId + ': sözlükte yok "' + clean + '" ("' + entry.en + '")');
+  });
+});
+if ((KI.timelineJourney || []).length !== KI.tenses.list.length) {
+  fail('timeline-journey: kayıt sayısı (' + (KI.timelineJourney || []).length + ') zaman sayısıyla (' + KI.tenses.list.length + ') eşleşmiyor');
+}
+
 /* ---- sayaçlar ---- */
 var tenseQuiz = 0; KI.tenses.list.forEach(function (t) { tenseQuiz += (t.quiz || []).length; });
 var compareQuiz = 0; KI.compare.list.forEach(function (c) { compareQuiz += (c.quiz || []).length; });
@@ -133,6 +148,7 @@ console.log('Karşılaştırma sayfaları:', KI.compare.list.length);
 console.log('Örnek cümleler:', exampleCount);
 console.log('Sorular (zaman + karşılaştırma):', tenseQuiz + compareQuiz);
 console.log('Hikayeler:', (KI.stories || []).length, '(' + storySentences + ' cümle)');
+console.log('Zaman Yolculuğu kaydı:', (KI.timelineJourney || []).length);
 console.log('Sözlük kelime sayısı:', KI.glossary.size());
 console.log('Düzensiz fiil sayısı:', KI.glossary.irregularVerbs.length);
 console.log('');

@@ -111,6 +111,15 @@
     ]);
     grid.appendChild(storiesCard);
 
+    var journeyCard = U.el('a', { class: 'card modecard hub-card', href: '#/sozluk/zaman-yolculugu', 'data-sfx': 'nav' }, [
+      U.el('span', { class: 'hub-card__ico', html: KI.icons.html('compass') }),
+      U.el('span', {}, [
+        U.el('h3', { text: 'Zaman Yolculuğu' }),
+        U.el('p', { class: 'soft', text: 'Tek cümle, 12 zaman. Yakınlaş, gez, karşılaştır.' })
+      ])
+    ]);
+    grid.appendChild(journeyCard);
+
     frag.appendChild(grid);
     return frag;
   }
