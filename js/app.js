@@ -31,6 +31,7 @@
   var routes = [
     { re: /^\/?$/,                    tab: 'root',      run: function () { return KI.viewGate.render(); } },
     { re: /^\/istatistikler\/?$/,     tab: 'istatistikler', run: function () { return KI.viewStats.render(); } },
+    { re: /^\/nasil-kullanilir\/?$/,  tab: 'yardim',     run: function () { return KI.viewHelp.render(); } },
     { re: /^\/harita\/?$/,            tab: 'harita',    run: function () { return KI.viewHome.render(); } },
     { re: /^\/zaman\/([a-z-]+)\/?$/,  tab: 'harita',    run: function (m) { return KI.viewTense.render(m[1]); } },
     { re: /^\/temeller\/?$/,          tab: 'temeller',  run: function () { return KI.viewBasics.render(null); } },

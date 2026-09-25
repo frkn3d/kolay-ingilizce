@@ -47,11 +47,27 @@
     }));
     wrap.appendChild(grid);
 
-    wrap.appendChild(U.el('a', { class: 'gate__stats', href: '#/istatistikler', 'data-sfx': 'nav' }, [
+    var actions = U.el('div', { class: 'gate__actions' });
+
+    var helpBtn = U.el('a', { class: 'gate__stats', href: '#/nasil-kullanilir', 'data-sfx': 'nav' }, [
+      U.el('span', { class: 'gate__stats-ico', html: KI.icons.html('help-circle') }),
+      U.el('span', { text: 'Nasıl Kullanılır' })
+    ]);
+    var helpWrap = U.el('div', { class: 'gate__help-wrap' }, [helpBtn]);
+    /* İlk açılışta parmakla dokunma ipucu bir kez görünür, sonra
+       bir daha hiç çıkmaz (bkz. KI.store.markHelpHintSeen). */
+    if (!KI.store.hasSeenHelpHint()) {
+      helpWrap.appendChild(U.el('span', { class: 'gate__help-hint', 'aria-hidden': 'true', text: '👇' }));
+      KI.store.markHelpHintSeen();
+    }
+    actions.appendChild(helpWrap);
+
+    actions.appendChild(U.el('a', { class: 'gate__stats', href: '#/istatistikler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'gate__stats-ico', html: KI.icons.html('chart') }),
-      U.el('span', { text: 'İstatistikler' }),
-      U.el('span', { class: 'gate__stats-arrow', text: '→' })
+      U.el('span', { text: 'İstatistikler' })
     ]));
+
+    wrap.appendChild(actions);
 
     wrap.appendChild(U.el('p', { class: 'gate__footnote',
       text: 'Logspace' + (KI.appVersion ? ' · v' + KI.appVersion : '') }));

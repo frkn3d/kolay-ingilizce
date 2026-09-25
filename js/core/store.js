@@ -27,6 +27,7 @@
     words: [],       // [{en, tr, at}]
     visits: 0,
     lastTense: '',
+    seenHelpHint: false,   // giriş ekranındaki "Nasıl Kullanılır" el ipucu, yalnız ilk açılışta gösterilir
 
     /* --- yanlışlardan öğrenme --- */
     weak: {},          // { tenseId: {wrong: n, right: n} }
@@ -233,6 +234,10 @@
       state.lastVisitDay = key;
       save();
     },
+
+    /* --- giriş ekranındaki "Nasıl Kullanılır" el ipucu: yalnız ilk açılış --- */
+    hasSeenHelpHint: function () { return !!state.seenHelpHint; },
+    markHelpHintSeen: function () { state.seenHelpHint = true; save(); },
 
     /* --- Oyun Modu: günlük 7 can, video/premium ile kazanma, harita ilerlemesi ---
        Can sayısı günde bir kez 7'ye sıfırlanır (gerçek zamanlı yenilenme değil,

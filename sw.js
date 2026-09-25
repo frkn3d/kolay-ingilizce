@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v14';
+var CACHE_VERSION = 'ki-cache-v15';
 
 var CORE_ASSETS = [
   './',
@@ -62,6 +62,7 @@ var CORE_ASSETS = [
   './js/ui/timeline-journey.js',
   './js/ui/achievements.js',
   './js/ui/stats.js',
+  './js/ui/help.js',
   './js/ui/settings.js',
   './js/ui/gate.js',
   './js/ui/game.js',

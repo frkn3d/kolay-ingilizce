@@ -25,7 +25,7 @@ try {
 
 var fileUrl = 'file:///' + root.split(path.sep).join('/').replace(/ /g, '%20') + '/index.html';
 var ROUTES = [
-  '#/', '#/istatistikler', '#/harita', '#/temeller', '#/alistirma', '#/sozluk',
+  '#/', '#/istatistikler', '#/nasil-kullanilir', '#/harita', '#/temeller', '#/alistirma', '#/sozluk',
   '#/sozluk/kelimeler', '#/sozluk/hikayeler', '#/sozluk/hikayeler/ay-mi-gunes-mi',
   '#/sozluk/hikayeler/keloglan-pasa', '#/sozluk/zaman-yolculugu',
   '#/karsilastir', '#/karsilastir/past-simple-present-perfect',
