@@ -54,7 +54,10 @@ var UNTRANSLATED_PROPER_NOUNS = {
   yunus: 1, emre: 1, mevlana: 1, mesnevi: 1, hereke: 1, eminonu: 1,
   nasreddin: 1, usta: 1, diyarbakir: 1, fethiye: 1, izmir: 1, rize: 1,
   erzurum: 1, antalya: 1, trabzon: 1, mardin: 1, bombasi: 1, dede: 1,
-  korkut: 1, keloglan: 1, karagoz: 1, hacivat: 1, kayseri: 1, keloğlan: 1
+  korkut: 1, keloglan: 1, karagoz: 1, hacivat: 1, kayseri: 1, keloğlan: 1,
+  /* "İlik Sultan": baştaki Türkçe büyük İ harfi ASCII olmadığı için temizleme
+     regex'i onu atıyor, geriye "lik" kalıyor - ikisi de muaf tutulur. */
+  ilik: 1, lik: 1
 };
 function isExemptWord(clean) {
   var w = clean.toLowerCase().replace(/['’]s$/, '');

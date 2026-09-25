@@ -301,6 +301,213 @@
     ]
   });
 
+  /* ---- Nasreddin Hoca ve Keloğlan dışında, Anadolu masal motiflerinden
+     esinlenerek hazırlanmış özgün, yerelleşmiş anonim hikayeler ---- */
+  S.push({
+    id: 'karganin-dikeni',
+    cat: 'halk',
+    title: 'The Thorn in the Crow\'s Foot',
+    tr: 'Ayağına Diken Batan Karga',
+    summary: 'Ayağına diken batan bir karga, kendisine yardım eden yaşlı kadına küçük bir iyilikle karşılık verir.',
+    sentences: [
+      { en: 'A crow landed on a mulberry tree beside the village fountain, and a thin thorn stuck into its foot.', tr: 'Bir karga, köy çeşmesinin yanındaki dut ağacına konarken ayağına ince bir diken batırdı.' },
+      { en: 'At first, it cried loudly, but then it became quiet when it saw that no one understood it.', tr: 'Önce bağırıp çağırdı, sonra kimsenin onu anlamadığını görünce susup düşündü.' },
+      { en: 'An old woman came to the fountain and noticed that the crow was walking with difficulty.', tr: 'Çeşmeye gelen yaşlı bir kadın, karganın sekerek yürüdüğünü fark etti.' },
+      { en: 'She took a small cloth from her basket, came close without frightening the bird, and removed the thorn.', tr: 'Sepetinden küçük bir bez çıkardı, kargayı ürkütmeden yanına yaklaştı ve dikeni çıkardı.' },
+      { en: 'After that day, the crow began to collect bread crumbs around the fountain.', tr: 'Karga o günden sonra çeşmenin çevresinde yere düşen ekmek kırıntılarını toplamaya başladı.' },
+      { en: 'When children made the fountain dirty, it flapped its wings and warned them.', tr: 'Çocuklar çeşmenin başını kirletince kanat çırpıp onları uyardı.' },
+      { en: 'The villagers started to say, "One kindness can last longer than the shade of a tree."', tr: 'Köylüler, "Bir iyilik bazen bir ağacın gölgesinden daha uzun sürer," demeye başladı.' }
+    ]
+  });
+
+  S.push({
+    id: 'tencerecik',
+    cat: 'halk',
+    title: 'The Little Pot',
+    tr: 'Tencerecik',
+    summary: 'Kirli iade edilen bir tencere, sessiz ama etkili bir dille komşuya ders verir.',
+    sentences: [
+      { en: 'In a village, there was a small copper pot.', tr: 'Bir köyde küçük, bakır bir tencere varmış.' },
+      { en: 'Its owner was an old woman who lent it to every neighbor, but always wanted it back clean.', tr: 'Sahibi yaşlı bir kadınmış; tencereyi her komşusuna ödünç verir ama geri gelince mutlaka temiz istermiş.' },
+      { en: 'One day, a hurried neighbor returned the pot dirty.', tr: 'Bir gün aceleci bir komşu tencereyi kirli getirmiş.' },
+      { en: 'The woman said nothing; she only placed the pot by the window.', tr: 'Kadın hiçbir şey dememiş, sadece tencereyi pencerenin önüne koymuş.' },
+      { en: 'At night, the wind rose, and the pot made a soft clattering sound.', tr: 'Gece rüzgar çıkmış, tencere tıkır tıkır ses etmiş.' },
+      { en: 'The neighbor heard it and felt ashamed, so early in the morning she came back and washed the pot carefully.', tr: 'Komşu bu sesi duyunca utanmış; sabah erkenden gelip tencereyi güzelce yıkamış.' },
+      { en: 'The old woman smiled and said, "We think objects have no voice, but a borrowed thing always makes itself heard."', tr: 'Yaşlı kadın gülümsemiş: "Eşyanın dili yok sanırız, ama emanetin sesi vardır," demiş.' },
+      { en: 'From that day on, everything borrowed in the village was checked twice before it was returned.', tr: 'O günden sonra köyde ödünç alınan her şey iki kez kontrol edilerek geri verilmiş.' }
+    ]
+  });
+
+  S.push({
+    id: 'tik-sopam',
+    cat: 'halk',
+    title: 'My Tapping Stick',
+    tr: 'Tık Sopam',
+    summary: 'Bir çobanın bulduğu esrarengiz sopa, aslında yol göstereninin sopa değil niyet olduğunu öğretir.',
+    sentences: [
+      { en: 'A shepherd was looking for his lost lambs on the highland when he found a thin stick under an old juniper tree.', tr: 'Bir çoban, yaylada kaybolan kuzularını ararken eski bir ardıç ağacının altında ince bir sopa buldu.' },
+      { en: 'There were small marks on it.', tr: 'Sopanın üstünde küçük çizikler vardı.' },
+      { en: 'When the shepherd tapped the stick on the ground, it made a clear "tap" sound and bent as if it were showing the way.', tr: 'Çoban sopayı yere vurunca sopa "tık" diye ses verdi ve kuzuların gittiği tarafı gösterir gibi eğildi.' },
+      { en: 'The shepherd found the lambs, but he did not use the stick to become rich.', tr: 'Çoban kuzuları buldu, ama sopayı zengin olmak için kullanmadı.' },
+      { en: 'Whenever someone in the village lost a path or a cow ran into the hills, he took the stick and helped.', tr: 'Köyde kimin yolu kaybolsa, kimin ineği dağa kaçsa, sopayı alıp yardım etti.' },
+      { en: 'One day, a greedy man tried to steal it.', tr: 'Bir gün açgözlü biri sopayı çalmak istedi.' },
+      { en: 'In his hand, the stick made no sound at all.', tr: 'Sopa onun elinde hiç ses çıkarmadı.' },
+      { en: 'The shepherd smiled and said, "It was not the stick that showed the way, but the intention."', tr: 'Çoban gülüp, "Yol gösteren şey sopa değil, niyetmiş," dedi.' }
+    ]
+  });
+
+  S.push({
+    id: 'balikci-guzeli',
+    cat: 'halk',
+    title: 'The Fisherman\'s Fair Girl',
+    tr: 'Balıkçı Güzeli',
+    summary: 'Genç bir balıkçı kızı, yırtık bir ağı onararak ve en küçük balıkları serbest bırakarak gerçek bereketi öğretir.',
+    sentences: [
+      { en: 'A young girl lived by the sea and collected fishing nets with her father every morning.', tr: 'Deniz kıyısında yaşayan genç bir kız, babasıyla her sabah ağları toplarmış.' },
+      { en: 'People in the town called her "the fisherman\'s fair girl" because her words were as clear as her face was bright.', tr: 'Kasabadakiler ona "Balıkçı Güzeli" dermiş; çünkü yüzü kadar sözü de temizmiş.' },
+      { en: 'One morning, the nets came back empty.', tr: 'Bir sabah ağlar bomboş çıkmış.' },
+      { en: 'Her father was sad, but the girl did not get angry at the sea.', tr: 'Babası üzülmüş, ama kız denize kızmamış.' },
+      { en: 'That day, she found a small torn net on the shore.', tr: 'O gün kıyıda yırtılmış küçük bir ağ bulmuş.' },
+      { en: 'She sat for hours and repaired it.', tr: 'Saatlerce oturup ağı onarmış.' },
+      { en: 'The next morning, they cast the repaired net into the sea.', tr: 'Ertesi sabah onardığı ağı denize bırakmışlar.' },
+      { en: 'It came back full, but the girl released the smallest fish back into the water.', tr: 'Ağ dolu gelmiş, fakat kız balıkların en küçüklerini tekrar suya salmış.' },
+      { en: 'Her father said, "Blessing is not only knowing how to take, but also knowing how to let life continue."', tr: 'Babası, "Bereket sadece almak değil, yaşatmayı da bilmektir," demiş.' }
+    ]
+  });
+
+  S.push({
+    id: 'can-kusu',
+    cat: 'halk',
+    title: 'The Bird Inside the Heart',
+    tr: 'Can Kuşu',
+    summary: 'Genç bir demirci, öfkesini yenip sakin kalınca içindeki kuşun ne kadar güzel öttüğünü keşfeder.',
+    sentences: [
+      { en: 'In a village, people believed that an invisible bird lived in every heart.', tr: 'Bir köyde herkesin kalbinde görünmez bir kuş yaşadığına inanılırmış.' },
+      { en: 'When a person became angry, the bird beat its wings, and when a person did something kind, the bird sang.', tr: 'İnsan öfkelendiğinde kuş kanat çırpar, insan iyilik yaptığında kuş şarkı söylermiş.' },
+      { en: 'A young blacksmith became very angry at a man who treated him unfairly in the market.', tr: 'Genç bir demirci, çarşıda kendisine haksızlık eden adama çok kızmış.' },
+      { en: 'Just before shouting, he felt a small flutter in his chest.', tr: 'Tam bağıracakken göğsünde küçük bir çırpınma duymuş.' },
+      { en: 'The blacksmith went home and sat silently by the fire for a long time.', tr: 'Demirci eve dönmüş, ateşin başında uzun süre susmuş.' },
+      { en: 'The next day, he visited the man and spoke calmly.', tr: 'Ertesi gün adama gidip sakin konuşmuş.' },
+      { en: 'The man accepted his mistake.', tr: 'Adam hatasını kabul etmiş.' },
+      { en: 'That evening, the bird inside the blacksmith sang so beautifully that he understood he should listen to the voice inside him more than his loudest words.', tr: 'O akşam demircinin içindeki kuş ilk kez öyle güzel ötmüş ki demirci, kendi sesinden çok içindeki sesi dinlemesi gerektiğini anlamış.' }
+    ]
+  });
+
+  S.push({
+    id: 'cor-kusu',
+    cat: 'halk',
+    title: 'The Bird That Warned the Village',
+    tr: 'Çor Kuşu',
+    summary: 'Uğursuz sanılan bir kuşun sesi, aslında köyü büyük bir tehlikeden kurtaran bir uyarıymış.',
+    sentences: [
+      { en: 'In a mountain village, everyone feared a small gray bird that sang at night.', tr: 'Dağ köylerinden birinde, gece öten küçük gri bir kuştan herkes korkarmış.' },
+      { en: 'They called it the "Çor Bird" and closed their doors tightly when they heard its voice.', tr: 'Ona "Çor Kuşu" der, sesini duyunca kapıları sıkıca kapatırlarmış.' },
+      { en: 'One winter night, the bird sang again.', tr: 'Bir kış gecesi kuş yine ötmüş.' },
+      { en: 'The villagers were afraid, but a young girl noticed that the bird always flew in the same direction.', tr: 'Köylüler korkmuş, ama genç bir kız kuşun hep aynı yöne uçtuğunu fark etmiş.' },
+      { en: 'She woke her father.', tr: 'Kız babasını uyandırmış.' },
+      { en: 'Together, they followed the bird.', tr: 'Birlikte kuşun peşinden gitmişler.' },
+      { en: 'On the roof of the old storehouse, snow had piled up, and the roof was about to collapse.', tr: 'Eski ambarın çatısında kar birikmiş, çatı çökmek üzereymiş.' },
+      { en: 'The villagers came and cleared the snow in time.', tr: 'Köylüler yetişip karı temizlemiş.' },
+      { en: 'The next morning, everyone understood: the bird did not bring bad luck; it warned them of danger.', tr: 'Ertesi sabah herkes anlamış: Kuş uğursuzluk getirmiyor, tehlikeyi haber veriyormuş.' },
+      { en: 'After that day, every strange sound in the village was first listened to and only then judged.', tr: 'O günden sonra köyde her garip ses önce dinlenmiş, sonra yargılanmış.' }
+    ]
+  });
+
+  S.push({
+    id: 'ilik-sultan',
+    cat: 'halk',
+    title: 'İlik Sultan',
+    tr: 'İlik Sultan',
+    summary: 'Sarayı ve tacı olmayan sessiz bir genç kız, herkese yardım ettiği için gerçek bir sultan olarak anılır.',
+    sentences: [
+      { en: 'In a distant town, there lived a quiet young woman named İlik Sultan.', tr: 'Uzak bir kasabada İlik Sultan adında sessiz bir genç kız yaşarmış.' },
+      { en: 'No one knew why people called her "sultan," because she had no palace and no golden crown.', tr: 'Kimse onun neden "sultan" diye çağrıldığını bilmezmiş; çünkü ne sarayı varmış ne de altın tacı.' },
+      { en: 'Yet when two people argued, they went to her first; lost children were found with her directions, and she knew which soup would help a sick neighbor.', tr: 'Fakat kasabada iki kişi kavga etse önce ona gider, kaybolan çocuk onun tarifleriyle bulunur, hasta komşuya hangi çorbanın iyi geleceğini o bilirmiş.' },
+      { en: 'One day, a stranger came to the town and said, "A real sultan should look grand."', tr: 'Bir gün kasabaya yabancı bir bey gelmiş ve "Sultan dediğin gösterişli olur," demiş.' },
+      { en: 'İlik Sultan did not answer.', tr: 'İlik Sultan cevap vermemiş.' },
+      { en: 'She only cleaned the stones of the dry fountain and opened the blocked water channel.', tr: 'Sadece kurumuş çeşmenin taşlarını temizlemiş, su yolunu açmış.' },
+      { en: 'By evening, the fountain began to flow again.', tr: 'Akşama doğru çeşme akmaya başlamış.' },
+      { en: 'Then the stranger understood: some people\'s crowns are not on their heads, but in the work they do.', tr: 'Bey o zaman anlamış: Bazı insanların tacı başında değil, yaptığı iştedir.' }
+    ]
+  });
+
+  S.push({
+    id: 'zengin-hamami',
+    cat: 'halk',
+    title: 'The Rich Man\'s Bathhouse',
+    tr: 'Zengin Hamamı',
+    summary: 'Süslü ama soğuk bir hamamla eski ama sıcak bir hamam karşılaştırılır; asıl değerin süsten değil içtenlikten geldiği anlaşılır.',
+    sentences: [
+      { en: 'A new and fancy bathhouse opened in a town.', tr: 'Bir kasabada yeni ve süslü bir hamam açılmış.' },
+      { en: 'It had colored glass at the door and decorated bowls inside.', tr: 'Kapısında renkli camlar, içinde işlemeli taslar varmış.' },
+      { en: 'Its owner said, "Everyone who enters this bathhouse leaves like a rich person."', tr: 'Sahibi, "Bu hamama giren herkes zengin gibi çıkar," dermiş.' },
+      { en: 'But the water often stopped, and the workers treated tired people harshly.', tr: 'Fakat hamamın suyu sık sık kesilir, çalışanlar yorgun insanlara sert davranırmış.' },
+      { en: 'At the other end of the town, there was an old bathhouse.', tr: 'Kasabanın öbür ucunda eski bir hamam daha varmış.' },
+      { en: 'Its stones were cracked, but its water was warm, and its workers were kind.', tr: 'Taşları çatlakmış ama suyu sıcak, çalışanları güler yüzlüymüş.' },
+      { en: 'One day, a tired craftsman visited both bathhouses.', tr: 'Bir gün yol yorgunu bir usta iki hamama da gitmiş.' },
+      { en: 'When he came out, he said, "In one place, the marble shone, but in the other, my heart felt clean."', tr: 'Çıkınca, "Birinde mermer parladı, ötekinde içim ferahladı," demiş.' },
+      { en: 'After that, the townspeople did not forget that true cleanliness comes before decoration.', tr: 'Bundan sonra kasabalılar, temizliğin süsten önce geldiğini unutmamış.' }
+    ]
+  });
+
+  S.push({
+    id: 'helvaci-guzeli',
+    cat: 'halk',
+    title: 'The Halva Maker\'s Daughter',
+    tr: 'Helvacı Güzeli',
+    summary: 'Genç bir helvacı kızı, herkese aynı dürüst ölçüyle davranarak çarşının en saygın ustasının takdirini kazanır.',
+    sentences: [
+      { en: 'In the old bazaar, there lived the daughter of a halva maker.', tr: 'Eski çarşıda bir helvacının kızı yaşarmış.' },
+      { en: 'When her father became ill, she took care of the stall.', tr: 'Babası hastalanınca tezgahın başına o geçmiş.' },
+      { en: 'Some people tried to deceive her because she was young: some gave less money, others asked for more halva.', tr: 'Bazıları genç diye onu kandırmak istemiş; eksik para veren olmuş, fazla helva isteyen olmuş.' },
+      { en: 'She did not get angry, but placed the scale in the middle and served everyone with the same measure.', tr: 'Kız hiçbirine kızmamış, teraziyi ortaya koymuş ve herkese aynı ölçüyle helva vermiş.' },
+      { en: 'One day, an old man came and said, "Give me your sweetest halva."', tr: 'Bir gün yaşlı bir adam gelip "Bana en tatlı helvandan ver," demiş.' },
+      { en: 'The girl replied, "The sweetest part is not in the sugar, but in the honest measure," and adjusted the scale carefully.', tr: 'Kız, "En tatlısı şekerde değil, helal ölçüdedir," deyip teraziyi dikkatle ayarlamış.' },
+      { en: 'The man smiled; he was the oldest master in the bazaar.', tr: 'Adam gülümsemiş; meğer çarşının en eski ustasıymış.' },
+      { en: 'After that, people said they bought not only halva from her stall, but also honesty.', tr: 'O günden sonra herkes helvacı kızın tezgahından sadece helva değil, doğruluk da aldığını söylemiş.' }
+    ]
+  });
+
+  S.push({
+    id: 'tasa-kusu',
+    cat: 'halk',
+    title: 'The Worry Birds',
+    tr: 'Tasa Kuşu',
+    summary: 'Derdini içine atan bir kadın, komşusuyla konuşup paylaşınca omzundaki görünmez yükün hafiflediğini fark eder.',
+    sentences: [
+      { en: 'In a town, when people told no one about their troubles, small black birds landed on the roofs of their houses.', tr: 'Bir kasabada insanlar dertlerini kimseye söylemeyince evlerin saçaklarına küçük siyah kuşlar konarmış.' },
+      { en: 'These birds were called "worry birds."', tr: 'Bu kuşlara "Tasa Kuşu" denirmiş.' },
+      { en: 'At one woman\'s house, three birds waited every morning.', tr: 'Bir kadının evinde her sabah üç kuş bekler olmuş.' },
+      { en: 'She stayed silent because she did not want to upset anyone, but the more she stayed silent, the more the birds gathered.', tr: 'Kadın kimseyi üzmemek için susarmış, ama sustukça kuşlar çoğalırmış.' },
+      { en: 'One day, her neighbor brought her warm soup and simply said, "You can tell me if you want."', tr: 'Bir gün komşusu ona sıcak çorba getirmiş ve sadece, "İstersen anlat," demiş.' },
+      { en: 'The woman began to speak slowly, sharing her debt, her tiredness, and her fear.', tr: 'Kadın azar azar konuşmuş; borcunu, yorgunluğunu, korkusunu paylaşmış.' },
+      { en: 'As she spoke, one bird flew away, then the second, then the third.', tr: 'Konuştukça kuşlardan biri uçmuş, sonra ikincisi, sonra üçüncüsü.' },
+      { en: 'That day, the townspeople learned this: when a trouble is shared, it may not disappear, but it becomes lighter to carry.', tr: 'Kasabalılar o gün öğrenmiş: Dert paylaşıldığında yok olmayabilir, ama omuzdaki ağırlığı azalır.' }
+    ]
+  });
+
+  /* ---- yukarıdaki 10 yeni hikayede geçen, sözlükte eksik kelimeler ---- */
+  KI.glossary.addWords([
+    'mulberry|dut (ağacı)|isim', 'difficulty|zorluk|isim', 'cloth|bez, kumaş|isim',
+    'frighten|korkutmak|fiil', 'crumb|kırıntı|isim', 'flap|çırpmak (kanat)|fiil',
+    'wing|kanat|isim', 'longer|daha uzun|sıfat', 'clatter|tıkırdamak, tıkırtı|fiil',
+    'object|nesne, eşya|isim', 'itself|kendisi (cansız/hayvan için)|zamir', 'lamb|kuzu|isim',
+    'juniper|ardıç|isim', 'bent|eğildi, büktü (bend fiilinin geçmiş hâli)|fiil', 'path|yol, patika|isim',
+    'intention|niyet|isim', 'release|serbest bırakmak|fiil', 'smallest|en küçük|sıfat',
+    'invisible|görünmez|sıfat', 'blacksmith|demirci|isim', 'unfairly|haksızca|zarf',
+    'flutter|çırpınma, titreşim|isim', 'silently|sessizce|zarf', 'loudest|en yüksek sesli|sıfat',
+    'gray|gri|sıfat', 'tightly|sıkıca|zarf', 'storehouse|ambar, depo|isim',
+    'pile|yığmak, yığın|fiil', 'luck|şans, talih|isim', 'distant|uzak|sıfat',
+    'crown|taç|isim', 'fancy|süslü, gösterişli|sıfat', 'bathhouse|hamam|isim',
+    'harshly|sert bir şekilde|zarf', 'townspeople|kasaba halkı|isim', 'cleanliness|temizlik|isim',
+    'decoration|süsleme|isim', 'halva|helva|isim', 'maker|yapan, üretici|isim',
+    'deceive|kandırmak, aldatmak|fiil', 'less|daha az|sıfat', 'sweetest|en tatlı|sıfat',
+    'adjust|ayarlamak|fiil', 'oldest|en yaşlı, en eski|sıfat', 'honesty|dürüstlük|isim',
+    'tiredness|yorgunluk|isim', 'disappear|kaybolmak|fiil',
+    'copper|bakır|isim', 'block|engellemek, tıkamak|fiil', 'colored|renkli|sıfat',
+    'enter|girmek|fiil', 'crack|çatlamak, çatlak|fiil', 'part|parça, bölüm|isim'
+  ]);
+
   /* ---- hikayelerde geçen, sözlükte eksik kalan kelimeler ---- */
   KI.glossary.addWords([
   'cauldron|kazan|isim', 'birth|doğum (give birth: doğurmak)|isim', 'sorry|üzgün|sıfat',

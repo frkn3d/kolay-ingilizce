@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.10';
+  var APP_VERSION = '0.8.11';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.11', d: 'Hikayeler bölümüne, Nasreddin Hoca ve Keloğlan dışında 10 yeni özgün anonim halk hikayesi eklendi (Ayağına Diken Batan Karga, Tencerecik, Tık Sopam, Balıkçı Güzeli, Can Kuşu, Çor Kuşu, İlik Sultan, Zengin Hamamı, Helvacı Güzeli, Tasa Kuşu). Toplam hikaye sayısı 25\'e çıktı; yeni hikayelerde geçen kelimeler de sözlüğe eklendi.' },
     { v: '0.8.10', d: '"Bugünün Çalışması" giriş ekranını kalabalıklaştırıyordu; artık tek satırlık bir menü düğmesi (görev sayısı rozetiyle), tıklanınca görevler bir pencerede açılıyor. Bu arada giriş ekranının en küçük telefonlarda bile hiç kaydırma gerektirmediği ayrıca doğrulandı.' },
     { v: '0.8.9', d: 'Giriş ekranının en altına "Bugünün Çalışması" eklendi: her gün 1 konu oku, birkaç soru çöz, birkaç kelime tekrar et ve bir oyun durağı tamamla gibi 4 küçük görev; hedef sayılar 7 günlük bir döngüyle değişiyor, tamamlananlar tik alıp üzeri çiziliyor. Mini Test\'in tanıtım yazısı "her seviyede 500 soru" gibi yanlış anlaşılabiliyordu; 500 sorunun toplam havuz olduğu netleştirildi. Sözlük ana ekranındaki Hikayeler açıklaması güncellendi.' },
     { v: '0.8.8', d: 'Başarımlara 22 yeni rozet eklendi: Oyun Modu haritasında durak sayısı ve seviye tamamlama (Yolcu, Patika Açıldı, Harita Gezgini, Başlangıç/Orta/İleri seviye kapıları ve bitişleri), İleri Sar ve can yönetimi (İleri Sar Ustası, Cesur Kısayol, Canı Korumak, Son Hak Kahramanı, Pes Etmedim, Geri Döndüm, 10\'da 10 Akış, Kusursuz Seri, Yıldız Avcısı), gün içi saat (Erkenci, Gece Bekçisi) ve Mini Test (Mini Test Yolcusu, Çok Zor Demedim).' },
