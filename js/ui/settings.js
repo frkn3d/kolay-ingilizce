@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.7.4';
+  var APP_VERSION = '0.7.5';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.7.5', d: 'Bir önceki sürümdeki kelime kayması düzeltmesi Eğitim Modu\'nun "Cümleyi kur" alıştırmasına da uygulandı (Alıştırma sekmesi) — aynı hata orada da vardı.' },
     { v: '0.7.4', d: 'Oyun Modu\'ndaki "cümle kurma" alıştırmasında bir hata düzeltildi: kelime havuzundan bir kelimeye dokununca aşağıdaki/sağdaki diğer kelimeler yerinden oynuyor, bu yüzden art arda dokunuşlar yanlış kelimeye denk gelebiliyordu. Artık seçilen kelime yerini koruyor, diğer kelimeler hiç kaymıyor.' },
     { v: '0.7.3', d: 'Harita sekmesindeki kural gösterimi tek tek kartlardan alındı; artık en üstteki ana zaman çizgisine dokununca bütün kartların Türkçe adı birlikte, kısaca yer değiştirerek o zamanın olumlu/olumsuz/soru kuralını gösteriyor. Sürekli "nefes alma" animasyonu da tek tek kartlardan bu ana çizgiye taşındı.' },
     { v: '0.7.2', d: 'Zaman Yolculuğu\'nda ince ayar: ŞİMDİ çizgisi artık kalın, hafif parlamalı ve dolgulu bir rozet ile çok daha belirgin. Sağ ve sol uçlara, kaydırma pozisyonundan bağımsız hep sabit kalan "← Geçmiş" / "Gelecek →" yön etiketleri eklendi. Dokunmatik ekranlarda parmağın doğal titremesi yüzünden bazı dokunuşlar sürükleme sanılıp cümle hiç açılmıyordu; dokunma toleransı artırıldı ve bir cümle seçilince Türkçe/açıklama kutusu gerekirse otomatik görünüme kaydırılıyor.' },

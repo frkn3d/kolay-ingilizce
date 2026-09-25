@@ -427,7 +427,7 @@
           var chip = U.el('button', { class: 'wchip wchip--placed', type: 'button', text: p.w });
           chip.addEventListener('click', function () {
             placed.splice(idx, 1);
-            p.node.hidden = false;
+            p.node.classList.remove('wchip--used'); p.node.disabled = false;
             KI.audio.play('tap');
             refresh();
           });
@@ -436,11 +436,14 @@
         check.disabled = placed.length !== words.length;
       }
 
+      /* "hidden" ile DOM akışından tamamen çıkarmak yerine (kalan kelimelerin
+         flex-wrap içinde kaymasına ve yanlış kelimeye dokunulmasına yol
+         açıyordu) yerini koruyan bir "kullanıldı" durumuna geçiriyoruz. */
       U.shuffle(words.map(function (w, k) { return { w: w, k: k }; })).forEach(function (item) {
         var chip = U.el('button', { class: 'wchip', type: 'button', text: item.w });
         item.node = chip;
         chip.addEventListener('click', function () {
-          chip.hidden = true;
+          chip.classList.add('wchip--used'); chip.disabled = true;
           placed.push(item);
           KI.audio.play('word');
           refresh();
