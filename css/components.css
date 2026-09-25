@@ -673,12 +673,35 @@ table.tbl--cmp th, table.tbl--cmp td { padding: 8px 10px; }
 .tj__stage { position: absolute; top: 0; left: 0; transform-origin: 0 0; will-change: transform; }
 
 .tj__axis { position: absolute; left: 0; width: 100%; top: 160px; height: 3px; background: var(--line-2); border-radius: 2px; }
-.tj__now { position: absolute; top: 30px; bottom: 30px; width: 3px; background: var(--mustard); transform: translateX(-50%); }
-.tj__now-lbl {
-  position: absolute; top: 8px; transform: translateX(-50%);
-  font-family: var(--font-mono); font-size: .68rem; font-weight: 800;
-  letter-spacing: .1em; color: var(--mustard-d); white-space: nowrap;
+/* ŞİMDİ çizgisi bilerek belirgin: kalın, hafif bir hâle (glow) ile ve
+   sabit bir mustard dolgu üzerinde beyaz/koyu yazılı bir rozet. */
+.tj__now {
+  position: absolute; top: 20px; bottom: 20px; width: 4px; border-radius: 3px;
+  background: var(--mustard);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--mustard) 25%, transparent);
+  transform: translateX(-50%);
 }
+.tj__now-lbl {
+  position: absolute; top: 0; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: .7rem; font-weight: 800;
+  letter-spacing: .1em; white-space: nowrap;
+  background: var(--mustard); color: #3a2a06;
+  padding: 3px 10px; border-radius: 999px;
+  box-shadow: var(--shadow-hard);
+}
+
+/* Sağ/sol uç yön ipuçları: .tj__stage'in DIŞINDA, viewport'a sabit —
+   pan/zoom'dan etkilenmez, her zaman görünür kalır. */
+.tj__edge {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  padding: 5px 11px; border-radius: 999px;
+  background: var(--surface); border: 1.5px solid var(--line-2);
+  font-family: var(--font-mono); font-size: .64rem; font-weight: 800;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--ink-mute);
+  box-shadow: var(--shadow-hard); z-index: 2; pointer-events: none; white-space: nowrap;
+}
+.tj__edge--l { left: 8px; }
+.tj__edge--r { right: 8px; }
 
 .tj__item {
   position: absolute; transform: translateX(-50%);

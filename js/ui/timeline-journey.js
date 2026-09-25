@@ -15,7 +15,10 @@
      ile taşınır/yakınlaştırılır. */
   var STAGE_W = 2500, STAGE_H = 320, CENTER_X = 1250, AXIS_Y = 160, PX_PER_X = 380;
   var SCALE_MIN = 0.35, SCALE_MAX = 2.6, COMPACT_AT = 0.68, OVERVIEW_SCALE = 0.42;
-  var DRAG_THRESHOLD = 6;
+  /* Parmakla dokunuşta ekranda birkaç piksellik doğal titreme oluyor;
+     fare için yeterli olan eşik dokunmada gerçek dokunmaları "sürükleme"
+     sayıp sessizce yok sayıyordu (seçim hiç açılmıyordu). */
+  var DRAG_THRESHOLD_MOUSE = 6, DRAG_THRESHOLD_TOUCH = 16;
 
   function worldX(x) { return CENTER_X + x * PX_PER_X; }
 
@@ -64,6 +67,7 @@
       };
     }
 
+    var gesturePointerType = 'mouse';
     viewport.addEventListener('pointerdown', function (e) {
       if (e.button !== undefined && e.button !== 0 && e.pointerType === 'mouse') return;
       try { viewport.setPointerCapture(e.pointerId); } catch (err) { /* yoksay */ }
@@ -71,6 +75,7 @@
         /* yeni bir hareketin başlangıcı */
         moved = 0;
         multiTouch = false;
+        gesturePointerType = e.pointerType || 'mouse';
         downClientX = e.clientX; downClientY = e.clientY;
       }
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
@@ -107,7 +112,8 @@
          (pointerdown'dan beri) tek parmakla oldu ve eşiği aşmadıysa tıklama
          sayılır; iki parmakla pinch yapılıp bırakılırken yanlışlıkla bir
          öğe seçilmesin diye multiTouch bayrağı gerekiyor. */
-      if (ids.length === 0 && !multiTouch && moved <= DRAG_THRESHOLD && onTap) onTap(downClientX, downClientY);
+      var threshold = gesturePointerType === 'touch' ? DRAG_THRESHOLD_TOUCH : DRAG_THRESHOLD_MOUSE;
+      if (ids.length === 0 && !multiTouch && moved <= threshold && onTap) onTap(downClientX, downClientY);
     }
     viewport.addEventListener('pointerup', endPointer);
     viewport.addEventListener('pointercancel', endPointer);
@@ -161,6 +167,10 @@
       ex.appendChild(U.el('p', { class: 'example__tr', text: entry.tr }));
       ex.appendChild(U.el('p', { class: 'example__note', text: entry.note }));
       detail.appendChild(ex);
+      /* Detay kutusu haritanın hemen altında ama telefonda ekran dışında
+         kalmış olabilir; sonucu görmek için aşağı kaydırmak gerektiğini
+         fark etmeyen kullanıcı "Türkçesi çıkmadı" sanabiliyordu. */
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     var pz = null;
@@ -211,6 +221,8 @@
     }
 
     viewport.appendChild(stage);
+    viewport.appendChild(U.el('div', { class: 'tj__edge tj__edge--l', 'aria-hidden': 'true', text: '← Geçmiş' }));
+    viewport.appendChild(U.el('div', { class: 'tj__edge tj__edge--r', 'aria-hidden': 'true', text: 'Gelecek →' }));
     frag.appendChild(viewport);
 
     /* ---- zoom çubuğu ---- */
