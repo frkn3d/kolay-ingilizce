@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.2';
+  var APP_VERSION = '0.8.3';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.3', d: 'Zaman Haritası üç zorluk katmanına ayrıldı: Başlangıç, Orta, İleri. Her katman Oyun Modu\'ndaki seviye renkleriyle uyumlu (yeşil → hardal → kiremit) ayrı bir zeminde duruyor ve aşağı indikçe zemin biraz daha koyulaşıyor; her katmanın yanında kaç zaman öğrenildiği de ayrıca gösteriliyor.' },
     { v: '0.8.2', d: 'Giriş ekranına yeni bir "Nasıl Kullanılır" rehberi eklendi (İstatistikler düğmesinin soluna); ilk açılışta üstünde birkaç kez dokunma hareketi yapan bir el işareti dikkat çekiyor. Rehber önce Oyun Modu\'nu özetliyor, sonra kolaydan zora nasıl ilerlenir basitçe anlatılıyor, en sonda uygulamadaki her bölüm tek tek listeleniyor.' },
     { v: '0.8.1', d: 'Alıştırma sekmesine yeni bir mod eklendi: Mini Test. Önce Kolay/Orta/Zor/Çok Zor arasından zorluk seçiliyor, ardından 500 soruluk sabit bir havuzdan (mini test.md) sürpriz sorular geliyor; bir turda aynı soru iki kez çıkmıyor.' },
     { v: '0.8.0', d: 'Yeni bölüm: İstatistikler. Giriş ekranındaki iki moddan hemen sonra küçük, çerçeveli bir düğmeyle açılıyor; ziyaret/seri, öğrenilen zamanlar, Oyun Modu ilerlemesi, kelime defteri ve kazanılan başarımlar tek bir koyu, eğlenceli panoda toplandı. Açılışta genel ilerleme halkası dolup sayılar sayarak yükseliyor; en iyi bildiğin ve üzerinde çalışman gereken zaman da ayrıca gösteriliyor.' },

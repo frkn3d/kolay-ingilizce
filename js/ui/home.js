@@ -40,6 +40,40 @@
      iki ucu oklu tek bir çizgi. */
   var TIMEBAR_EN = { past: 'PAST', present: 'NOW', future: 'FUTURE' };
 
+  /* 12 zaman tek seferde biraz yoğun görünebiliyor; harita üç
+     zorluk katmanına ayrılır (Oyun Modu'ndaki Başlangıç/Orta/İleri
+     ile aynı renk kimliği: yeşil → hardal → kiremit), her katman
+     aşağı indikçe biraz daha koyu bir zemine oturur. */
+  var TIERS = [
+    { id: 'baslangic', num: '1', tr: 'BAŞLANGIÇ', hint: 'Basit yapılar: tek bir gerçek ya da alışkanlık.', aspects: ['simple'] },
+    { id: 'orta', num: '2', tr: 'ORTA', hint: 'Süren ve tamamlanmış işler.', aspects: ['continuous', 'perfect'] },
+    { id: 'ileri', num: '3', tr: 'İLERİ', hint: 'Süregelen, en ileri düzey yapılar.', aspects: ['perfect-continuous'] }
+  ];
+
+  function tierTenseIds(tier) {
+    var out = [];
+    tier.aspects.forEach(function (aspectId) {
+      KI.tenses.groups.forEach(function (g) {
+        var t = KI.tenses.byCell(g.id, aspectId);
+        if (t) out.push(t.id);
+      });
+    });
+    return out;
+  }
+
+  function tierHeader(tier) {
+    var ids = tierTenseIds(tier);
+    var learned = ids.filter(function (id) { return KI.store.isLearned(id); }).length;
+    return U.el('div', { class: 'grid-map__tier-head' }, [
+      U.el('span', { class: 'grid-map__tier-badge grid-map__tier-badge--' + tier.id, text: tier.num }),
+      U.el('div', { class: 'grid-map__tier-text' }, [
+        U.el('b', { class: 'grid-map__tier-name grid-map__tier-name--' + tier.id, text: tier.tr }),
+        U.el('span', { class: 'grid-map__tier-hint', text: tier.hint })
+      ]),
+      U.el('span', { class: 'grid-map__tier-count', text: learned + ' / ' + ids.length })
+    ]);
+  }
+
   function grid() {
     var wrap = U.el('div', { class: 'grid-map' });
     var timebar = U.el('div', { class: 'timebar' + (introPlayed ? '' : ' timebar--intro') });
@@ -70,14 +104,21 @@
     wrap.appendChild(timebar);
 
     var registry = [];
-    KI.tenses.aspects.forEach(function (a) {
-      wrap.appendChild(U.el('div', { class: 'grid-map__aspect reveal', text: a.tr, title: a.hint }));
-      var row = U.el('div', { class: 'grid-map__row' });
-      KI.tenses.groups.forEach(function (g) {
-        var t = KI.tenses.byCell(g.id, a.id);
-        row.appendChild(t ? tenseCard(t, registry) : U.el('div'));
+    TIERS.forEach(function (tier) {
+      var band = U.el('div', { class: 'grid-map__tier grid-map__tier--' + tier.id });
+      band.appendChild(tierHeader(tier));
+      tier.aspects.forEach(function (aspectId) {
+        var a = KI.tenses.aspects.filter(function (x) { return x.id === aspectId; })[0];
+        if (!a) return;
+        band.appendChild(U.el('div', { class: 'grid-map__aspect reveal', text: a.tr, title: a.hint }));
+        var row = U.el('div', { class: 'grid-map__row' });
+        KI.tenses.groups.forEach(function (g) {
+          var t = KI.tenses.byCell(g.id, a.id);
+          row.appendChild(t ? tenseCard(t, registry) : U.el('div'));
+        });
+        band.appendChild(row);
       });
-      wrap.appendChild(row);
+      wrap.appendChild(band);
     });
 
     /* Ana zaman çizgisine dokununca bütün kartların Türkçe adı, o zamanın
@@ -132,10 +173,13 @@
 
     body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:14px', text: 'Nereden başlamalı?' }));
     var route = U.el('ol', { class: 'disclose__list' });
+    /* Aşağıdaki sıralama, haritadaki Başlangıç/Orta/İleri katmanlarıyla
+       birebir aynı (bkz. grid()'teki TIERS) — ikisi arasında fark
+       olmasın diye. */
     [
-      ['Başlangıç', ['temeller', 'present-simple', 'present-continuous', 'past-simple', 'future-simple']],
-      ['Orta', ['past-continuous', 'present-perfect', 'future-continuous', 'past-perfect']],
-      ['İleri', ['present-perfect-continuous', 'past-perfect-continuous', 'future-perfect', 'future-perfect-continuous']]
+      ['Başlangıç', ['temeller'].concat(tierTenseIds(TIERS[0]))],
+      ['Orta', tierTenseIds(TIERS[1])],
+      ['İleri', tierTenseIds(TIERS[2])]
     ].forEach(function (step) {
       var li = U.el('li');
       li.appendChild(U.el('b', { text: step[0] + ': ' }));

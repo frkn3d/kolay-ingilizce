@@ -190,7 +190,44 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
 .tl--mini .tl-zone-past { fill: var(--tl-mini-past); }
 .tl--mini .tl-zone-future { fill: var(--tl-mini-future); }
 
-.grid-map { display: grid; gap: 12px; }
+.grid-map { display: flex; flex-direction: column; gap: 18px; }
+
+/* Zorluk katmanları (Başlangıç/Orta/İleri): her biri kendi grid
+   bağlamını taşır (eski .grid-map'in yaptığı gibi), böylece içindeki
+   .grid-map__aspect/.grid-map__row kuralları değişmeden çalışır. */
+.grid-map__tier { display: grid; gap: 12px; border-radius: var(--r-lg); padding: 14px 12px 16px; }
+.grid-map__tier--baslangic { background: color-mix(in srgb, var(--green-600) 7%, var(--surface)); }
+.grid-map__tier--orta      { background: color-mix(in srgb, var(--mustard) 10%, var(--surface)); }
+.grid-map__tier--ileri     { background: color-mix(in srgb, var(--terra) 13%, var(--surface)); }
+html[data-theme="dark"] .grid-map__tier--baslangic { background: color-mix(in srgb, var(--green-600) 12%, var(--surface)); }
+html[data-theme="dark"] .grid-map__tier--orta      { background: color-mix(in srgb, var(--mustard) 13%, var(--surface)); }
+html[data-theme="dark"] .grid-map__tier--ileri     { background: color-mix(in srgb, var(--terra) 17%, var(--surface)); }
+
+.grid-map__tier-head { display: flex; align-items: center; gap: 10px; }
+.grid-map__tier-badge {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: .8rem; font-weight: 700; color: var(--cream);
+}
+.grid-map__tier-badge--baslangic { background: var(--green-600); }
+.grid-map__tier-badge--orta { background: var(--mustard-d); }
+.grid-map__tier-badge--ileri { background: var(--terra); }
+.grid-map__tier-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.grid-map__tier-name {
+  font-family: var(--font-mono); font-size: .8rem; font-weight: 700; letter-spacing: .1em;
+}
+.grid-map__tier-name--baslangic { color: var(--green-700); }
+.grid-map__tier-name--orta { color: var(--mustard-d); }
+.grid-map__tier-name--ileri { color: var(--terra); }
+html[data-theme="dark"] .grid-map__tier-name--baslangic { color: var(--green-300); }
+html[data-theme="dark"] .grid-map__tier-name--orta { color: var(--mustard); }
+html[data-theme="dark"] .grid-map__tier-name--ileri { color: var(--past); }
+.grid-map__tier-hint { font-size: .74rem; color: var(--ink-mute); }
+.grid-map__tier-count {
+  flex: 0 0 auto; font-family: var(--font-mono); font-size: .74rem; color: var(--ink-mute);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+}
 
 /* Uçtan uca tek ince ok: kalın rozetler yerine sade bir zaman şeridi. */
 .timebar { margin: 2px 0 14px; }
