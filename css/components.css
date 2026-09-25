@@ -199,7 +199,23 @@ html[data-theme="dark"] .w--key { background: color-mix(in srgb, var(--green-500
   font-family: var(--font-mono); font-size: .68rem; font-weight: 700;
   letter-spacing: .1em; color: var(--ink-mute); margin-bottom: 5px;
 }
-.timebar__label--now { color: var(--ink); }
+.timebar__label--now { color: var(--ink); display: inline-flex; align-items: center; }
+/* "NOW" yazısı yerine kalın, sürekli kısa dalgalar yayan bir nokta —
+   iki iç içe halka, aralarında gecikmeyle sürekliymiş hissi verir. */
+.timebar__now-dot {
+  position: relative; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--mustard); box-shadow: 0 0 0 1px color-mix(in srgb, var(--mustard) 55%, transparent);
+}
+.timebar__now-dot::before, .timebar__now-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--mustard); opacity: .6;
+  animation: timebarNowPing 1.8s cubic-bezier(.3, .6, .4, 1) infinite;
+}
+.timebar__now-dot::after { animation-delay: .9s; }
+@keyframes timebarNowPing {
+  0% { transform: scale(1); opacity: .55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
 
 /* Artık dokunulabilir bir düğme: tıklanınca aşağıdaki bütün kartların
    kural metnini birlikte döndürür (bkz. home.js). Sürekli hafif bir

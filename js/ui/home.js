@@ -46,8 +46,16 @@
     introPlayed = true;
     var labels = U.el('div', { class: 'timebar__labels' });
     KI.tenses.groups.forEach(function (g) {
+      if (g.id === 'present') {
+        /* "NOW" yazısı yerine sürekli kısa dalgalar yayan kalın bir nokta;
+           yazı ekran okuyucular için aria-label olarak korunuyor. */
+        labels.appendChild(U.el('span', { class: 'timebar__label timebar__label--now', 'aria-label': 'NOW' }, [
+          U.el('span', { class: 'timebar__now-dot', 'aria-hidden': 'true' })
+        ]));
+        return;
+      }
       labels.appendChild(U.el('span', {
-        class: 'timebar__label' + (g.id === 'present' ? ' timebar__label--now' : ''),
+        class: 'timebar__label',
         text: TIMEBAR_EN[g.id] || g.en.toUpperCase()
       }));
     });
