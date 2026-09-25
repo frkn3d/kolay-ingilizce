@@ -573,16 +573,28 @@
         if (!placed.length) line.appendChild(U.el('span', { class: 'builder__hint', text: 'Cümlen burada oluşacak' }));
         placed.forEach(function (p, idx2) {
           var chip = U.el('button', { class: 'wchip wchip--placed', type: 'button', text: p.w });
-          chip.addEventListener('click', function () { placed.splice(idx2, 1); p.node.hidden = false; KI.audio.play('tap'); refresh(); });
+          chip.addEventListener('click', function () {
+            placed.splice(idx2, 1);
+            p.node.classList.remove('wchip--used'); p.node.disabled = false;
+            KI.audio.play('tap'); refresh();
+          });
           line.appendChild(chip);
         });
         check.disabled = placed.length !== words.length;
       }
 
+      /* Kelime havuzundan bir kelime seçilince "hidden" ile DOM akışından
+         tamamen çıkarmak yerine (bu, kalan kelimelerin flex-wrap içinde
+         kaymasına ve bir sonraki dokunuşun yanlış kelimeye denk gelmesine
+         yol açıyordu) yerini koruyan bir "kullanıldı" durumuna geçiriyoruz:
+         görünmez ama alanı sabit kalıyor, diğer kelimeler yerinden oynamıyor. */
       U.shuffle(words.map(function (w, k) { return { w: w, k: k }; })).forEach(function (item) {
         var chip = U.el('button', { class: 'wchip', type: 'button', text: item.w });
         item.node = chip;
-        chip.addEventListener('click', function () { chip.hidden = true; placed.push(item); KI.audio.play('word'); refresh(); });
+        chip.addEventListener('click', function () {
+          chip.classList.add('wchip--used'); chip.disabled = true;
+          placed.push(item); KI.audio.play('word'); refresh();
+        });
         pool.appendChild(chip);
       });
 

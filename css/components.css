@@ -492,6 +492,9 @@ html[data-theme="dark"] .ach-pop__ico { color: #2a1c04; }
 .wchip--placed { background: var(--green-100); border-color: var(--green-400); }
 html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-color: var(--green-500); }
 .wchip[disabled] { cursor: default; opacity: .85; transform: none; }
+/* Havuzdan seçilen kelime kaybolmaz, sadece görünmez olur; böylece
+   diğer kelimeler yerinden oynamaz (bkz. game.js paintBuild). */
+.wchip--used { visibility: hidden; pointer-events: none; }
 
 .quiz__q--big {
   text-align: center; font-size: 1.6rem; line-height: 1.3;
