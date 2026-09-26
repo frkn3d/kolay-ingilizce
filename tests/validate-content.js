@@ -29,6 +29,7 @@ global.window = { KI: {} };
   'js/data/examples-extra-5.js',
   'js/data/examples-extra-6.js',
   'js/data/examples-extra-7.js',
+  'js/data/game-vocabulary.js',
   'js/data/basics.js',
   'js/data/stories.js',
   'js/data/timeline-journey.js',
@@ -60,7 +61,10 @@ var UNTRANSLATED_PROPER_NOUNS = {
   ilik: 1, lik: 1,
   /* "Ayşe": ortadaki ş harfi silinmiyor (yalnız baş/son temizleniyor),
      bu yüzden ayse (ASCII) yanında ayşe (Türkçe ş'li) de eklenmeli. */
-  ayşe: 1
+  ayşe: 1, yusuf: 1,
+  /* "dolmuş": sondaki Türkçe ş harfi temizleme regex'i tarafından atılıyor,
+     geriye "dolmu" kalıyor. */
+  dolmu: 1
 };
 function isExemptWord(clean) {
   var w = clean.toLowerCase().replace(/['’]s$/, '');

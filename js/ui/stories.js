@@ -71,6 +71,7 @@
     var rows = s.sentences.map(function (sen) {
       var p = KI.sentence.render(sen.en, []);
       p.classList.add('story-sentence');
+      if (sen.brk) p.classList.add('story-sentence--brk');
       var trP = U.el('p', { class: 'story-tr soft', text: sen.tr, hidden: true });
       body.appendChild(p);
       body.appendChild(trP);

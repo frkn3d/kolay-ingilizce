@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.12';
+  var APP_VERSION = '0.8.13';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.13', d: 'Uzun hikayeler artık sahne değiştiğinde bir satır boşlukla paragraflara ayrılıyor, böylece nerede kaldığını takip etmek kolaylaşıyor. "Günlük Hayat" bölümüne ikinci bir özgün hikaye eklendi: "Bir Akşam Yürüyüşü" - sokakta yürüyen bir çift, ağaç kabuğundaki yosunlar üzerine şakalaşma, çiçek satan bir çocukla karşılaşma, dolmuş yolculuğu, markette alet alışverişi ve eve dönüp sakin bir akşam geçirme gibi gündelik anları 45 cümlede anlatıyor.' },
     { v: '0.8.12', d: 'Hikayeler\'in en başına yeni bir "Günlük Hayat" bölümü ve uzunca, özgün bir hikaye eklendi: "Evde Yoğun Bir Sabah" - okula hazırlanan iki çocuk, beslenme çantaları, bozuk bir musluğun tamiri, çatıcı çağırma, komşuyla duvar tamiri için anlaşma ve tavukları yemleme gibi gündelik hayat konularını 46 cümlede anlatıyor.' },
     { v: '0.8.11', d: 'Hikayeler bölümüne, Nasreddin Hoca ve Keloğlan dışında 10 yeni özgün anonim halk hikayesi eklendi (Ayağına Diken Batan Karga, Tencerecik, Tık Sopam, Balıkçı Güzeli, Can Kuşu, Çor Kuşu, İlik Sultan, Zengin Hamamı, Helvacı Güzeli, Tasa Kuşu). Toplam hikaye sayısı 25\'e çıktı; yeni hikayelerde geçen kelimeler de sözlüğe eklendi.' },
     { v: '0.8.10', d: '"Bugünün Çalışması" giriş ekranını kalabalıklaştırıyordu; artık tek satırlık bir menü düğmesi (görev sayısı rozetiyle), tıklanınca görevler bir pencerede açılıyor. Bu arada giriş ekranının en küçük telefonlarda bile hiç kaydırma gerektirmediği ayrıca doğrulandı.' },
