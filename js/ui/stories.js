@@ -9,6 +9,7 @@
   var U = KI.util;
 
   var CATS = [
+    { id: 'gunluk', title: 'Günlük Hayat' },
     { id: 'nasreddin', title: 'Nasreddin Hoca Fıkraları' },
     { id: 'halk', title: 'Diğer Halk Hikayeleri' }
   ];
@@ -55,7 +56,7 @@
 
     frag.appendChild(U.el('a', { class: 'crumb', href: '#/sozluk/hikayeler', 'data-sfx': 'back', text: '← Hikayeler' }));
     frag.appendChild(U.el('div', { class: 'page-head' }, [
-      U.el('p', { class: 'eyebrow', text: s.cat === 'nasreddin' ? 'Nasreddin Hoca' : 'Halk Hikayesi' }),
+      U.el('p', { class: 'eyebrow', text: s.cat === 'nasreddin' ? 'Nasreddin Hoca' : s.cat === 'gunluk' ? 'Günlük Hayat' : 'Halk Hikayesi' }),
       U.el('h1', { text: s.title }),
       U.el('p', { text: s.tr + ' - ' + s.summary })
     ]));

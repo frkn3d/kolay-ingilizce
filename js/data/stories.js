@@ -10,6 +10,77 @@
 
   var S = [];
 
+  /* ---- Hikayelerin en başı: özgün, uzunca bir "günlük hayat" hikayesi -
+     sıradan bir sabahta okula hazırlık, ev tamiratları ve komşuluk
+     ilişkileri gibi pratik gündelik İngilizce'yi tanıtır. ---- */
+  S.push({
+    id: 'yogun-bir-sabah',
+    cat: 'gunluk',
+    title: 'A Busy Morning at Home',
+    tr: 'Evde Yoğun Bir Sabah',
+    summary: 'Sıradan bir sabahta bir aile; okula hazırlık, bozuk bir musluk, akan bir çatı ve komşuyla çözülen bir duvar meselesiyle günlük hayatın küçük telaşlarını yaşar.',
+    sentences: [
+      { en: 'In a small house at the edge of town, a family was starting a busy morning.', tr: 'Kasabanın kenarındaki küçük bir evde bir aile, yoğun bir sabaha başlıyordu.' },
+      { en: 'The mother, Ayşe, was in the kitchen, and the father, Mehmet, was still half asleep at the table.', tr: 'Anne Ayşe mutfaktaydı, baba Mehmet ise hâlâ masada yarı uykuluydu.' },
+      { en: 'Their daughter, Elif, was seven years old, and their son, Emre, was five.', tr: 'Kızları Elif yedi yaşındaydı, oğulları Emre ise beş yaşındaydı.' },
+      { en: '"Elif, put on your uniform quickly, the school bus comes in twenty minutes," said Ayşe.', tr: 'Ayşe, "Elif, üniformanı çabuk giy, okul servisi yirmi dakikaya geliyor," dedi.' },
+      { en: 'Elif ran to her room, but she could not find her left shoe anywhere.', tr: 'Elif odasına koştu ama sol ayakkabısını hiçbir yerde bulamadı.' },
+      { en: '"It is under the bed, sweetheart," Ayşe called from the kitchen.', tr: 'Ayşe mutfaktan, "Yatağın altında canım," diye seslendi.' },
+      { en: 'Meanwhile, little Emre was trying to button his shirt by himself.', tr: 'Bu arada küçük Emre, gömleğini kendi başına iliklemeye çalışıyordu.' },
+      { en: 'He got two buttons wrong, so his shirt looked a little crooked.', tr: 'İki düğmeyi yanlış ilikledi, bu yüzden gömleği biraz çarpık durdu.' },
+      { en: 'Ayşe laughed gently and fixed the buttons for him.', tr: 'Ayşe hafifçe güldü ve düğmelerini onun için düzeltti.' },
+      { en: 'Then she packed two lunch boxes on the counter: one for Elif, one for Emre.', tr: 'Sonra tezgahın üstünde iki beslenme çantası hazırladı: biri Elif için, biri Emre için.' },
+      { en: 'She put a cheese sandwich, an apple, and a small bottle of water in each box.', tr: 'Her birinin içine peynirli sandviç, bir elma ve küçük bir su şişesi koydu.' },
+      { en: '"Do not forget your homework folder," she reminded Elif.', tr: '"Ödev dosyanı unutma," diye Elif\'e hatırlattı.' },
+      { en: 'While the children were eating breakfast, Ayşe went to wash her hands at the sink.', tr: 'Çocuklar kahvaltı yaparken Ayşe elini yıkamak için lavaboya gitti.' },
+      { en: 'But the tap only made a strange noise, and no water came out.', tr: 'Ama musluk sadece garip bir ses çıkardı ve hiç su akmadı.' },
+      { en: '"Mehmet, the tap in the kitchen is broken," she said with a worried voice.', tr: '"Mehmet, mutfaktaki musluk bozuk," dedi endişeli bir sesle.' },
+      { en: '"And that is not all," she added, "there is a wet spot on the ceiling in the hallway."', tr: '"Hepsi bu değil," diye ekledi, "koridordaki tavanda ıslak bir leke var."' },
+      { en: '"The roof must be leaking again, especially after last night\'s rain."', tr: '"Çatı yine akıyor olmalı, özellikle dün geceki yağmurdan sonra."' },
+      { en: 'Mehmet stood up quickly and rubbed his eyes.', tr: 'Mehmet hızlıca ayağa kalktı ve gözlerini ovuşturdu.' },
+      { en: '"Let me look at the tap first, it might be an easy fix," he said.', tr: '"Önce musluğa bakayım, kolay bir tamir olabilir," dedi.' },
+      { en: 'He took his toolbox from the garage and opened it on the kitchen floor.', tr: 'Garajdan alet çantasını aldı ve mutfak zemininde açtı.' },
+      { en: 'He turned off the water valve under the sink before starting the repair.', tr: 'Tamire başlamadan önce lavabonun altındaki su vanasını kapattı.' },
+      { en: 'With a wrench, he removed the old rubber washer inside the tap.', tr: 'Bir İngiliz anahtarıyla musluğun içindeki eski lastik contayı çıkardı.' },
+      { en: 'The washer was completely worn out, so he replaced it with a new one.', tr: 'Conta tamamen aşınmıştı, bu yüzden onu yenisiyle değiştirdi.' },
+      { en: 'He turned the water valve back on, and this time the tap worked perfectly.', tr: 'Su vanasını tekrar açtı ve bu sefer musluk kusursuz çalıştı.' },
+      { en: '"Good job, Dad!" said Elif, clapping her hands.', tr: 'Elif ellerini çırparak, "Aferin baba!" dedi.' },
+      { en: 'Next, Mehmet called a roofer named Hasan, who lived two streets away.', tr: 'Ardından Mehmet, iki sokak ötede oturan Hasan adında bir çatıcıyı aradı.' },
+      { en: '"Hasan, our roof is leaking near the chimney, can you take a look this week?" he asked.', tr: '"Hasan, çatımız baca yakınında akıtıyor, bu hafta bir bakar mısın?" diye sordu.' },
+      { en: 'Hasan promised to come on Saturday morning with his ladder and some new tiles.', tr: 'Hasan, cumartesi sabahı merdivenini ve birkaç yeni kiremidi alıp geleceğine söz verdi.' },
+      { en: 'Mehmet thanked him and hung up the phone with relief.', tr: 'Mehmet ona teşekkür etti ve rahatlamış bir şekilde telefonu kapattı.' },
+      { en: 'After breakfast, he walked out to the garden to check one more problem.', tr: 'Kahvaltıdan sonra bir sorunu daha kontrol etmek için bahçeye çıktı.' },
+      { en: 'The old wall between his garden and the neighbor\'s garden had a big crack.', tr: 'Kendi bahçesiyle komşusunun bahçesi arasındaki eski duvarda büyük bir çatlak vardı.' },
+      { en: 'He knocked on the neighbor\'s door to talk about it.', tr: 'Bu konuyu konuşmak için komşusunun kapısını çaldı.' },
+      { en: 'His neighbor, Ali, opened the door and greeted him warmly.', tr: 'Komşusu Ali kapıyı açtı ve onu sıcak bir şekilde karşıladı.' },
+      { en: '"Ali, the wall between our gardens needs some repair," Mehmet explained.', tr: 'Mehmet, "Ali, bahçelerimizin arasındaki duvarın biraz tamire ihtiyacı var," diye anlattı.' },
+      { en: '"You are right, I noticed the crack too," Ali agreed.', tr: 'Ali, "Haklısın, ben de çatlağı fark etmiştim," dedi.' },
+      { en: 'They decided to share the cost and repair the wall together next weekend.', tr: 'Masrafı paylaşmaya ve duvarı gelecek hafta sonu birlikte tamir etmeye karar verdiler.' },
+      { en: 'Mehmet felt happy that they found a simple solution so quickly.', tr: 'Mehmet bu kadar hızlı basit bir çözüm buldukları için mutlu oldu.' },
+      { en: 'Before going back inside, he stopped by the small chicken coop in the corner of the yard.', tr: 'İçeri girmeden önce bahçenin köşesindeki küçük kümesin yanına uğradı.' },
+      { en: 'He scattered some corn and grain for the hungry chickens.', tr: 'Aç tavuklar için biraz mısır ve tahıl serpti.' },
+      { en: 'The chickens gathered around him quickly and started pecking at the food.', tr: 'Tavuklar hemen etrafında toplandı ve yemi gagalamaya başladı.' },
+      { en: 'By the time Mehmet finished all his small jobs, the school bus was honking outside.', tr: 'Mehmet tüm küçük işlerini bitirdiğinde okul servisi dışarıda korna çalıyordu.' },
+      { en: 'Elif and Emre grabbed their bags and ran to the door.', tr: 'Elif ve Emre çantalarını kaptı ve kapıya koştu.' },
+      { en: '"Have a nice day at school!" Ayşe and Mehmet called after them together.', tr: 'Ayşe ve Mehmet birlikte arkalarından, "Okulda iyi günler!" diye seslendi.' },
+      { en: 'The house became quiet again, but it felt calmer than the busy morning before.', tr: 'Ev yeniden sessizleşti, ama az önceki yoğun sabahtan daha sakin hissettiriyordu.' },
+      { en: 'In one single morning, Mehmet had fixed a tap, called a roofer, solved a problem with the neighbor, and fed the chickens.', tr: 'Tek bir sabahta Mehmet bir musluğu tamir etmiş, bir çatıcıyı aramış, komşusuyla bir sorunu çözmüş ve tavukları yemlemişti.' },
+      { en: '"A house always finds new small jobs for us," he said to Ayşe with a smile, and they both laughed.', tr: 'Ayşe\'ye gülümseyerek, "Ev bize her zaman yeni küçük işler buluyor," dedi ve ikisi birlikte güldü.' }
+    ]
+  });
+
+  /* ---- yukarıdaki uzun hikayede geçen, sözlükte eksik kelimeler ---- */
+  KI.glossary.addWords([
+    'sweetheart|canım, sevgilim|isim', 'crooked|çarpık, eğri|sıfat', 'counter|tezgah|isim',
+    'bottle|şişe|isim', 'spot|leke, nokta|isim', 'hallway|koridor|isim',
+    'rub|ovuşturmak|fiil', 'toolbox|alet çantası|isim', 'valve|vana|isim',
+    'wrench|İngiliz anahtarı|isim', 'washer|conta, rondela|isim', 'dad|baba (samimi hitap)|isim',
+    'clap|alkışlamak, el çırpmak|fiil', 'roofer|çatıcı|isim', 'solution|çözüm|isim',
+    'scatter|serpmek, saçmak|fiil', 'peck|gagalamak|fiil', 'honk|korna çalmak|fiil',
+    'grab|kapmak|fiil', 'nice|güzel, hoş|sıfat', 'calm|sakin|sıfat', 'calmer|daha sakin|sıfat',
+    'box|kutu|isim'
+  ]);
+
   S.push({
     id: 'ay-mi-gunes-mi',
     cat: 'nasreddin',

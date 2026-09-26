@@ -57,7 +57,10 @@ var UNTRANSLATED_PROPER_NOUNS = {
   korkut: 1, keloglan: 1, karagoz: 1, hacivat: 1, kayseri: 1, keloğlan: 1,
   /* "İlik Sultan": baştaki Türkçe büyük İ harfi ASCII olmadığı için temizleme
      regex'i onu atıyor, geriye "lik" kalıyor - ikisi de muaf tutulur. */
-  ilik: 1, lik: 1
+  ilik: 1, lik: 1,
+  /* "Ayşe": ortadaki ş harfi silinmiyor (yalnız baş/son temizleniyor),
+     bu yüzden ayse (ASCII) yanında ayşe (Türkçe ş'li) de eklenmeli. */
+  ayşe: 1
 };
 function isExemptWord(clean) {
   var w = clean.toLowerCase().replace(/['’]s$/, '');
