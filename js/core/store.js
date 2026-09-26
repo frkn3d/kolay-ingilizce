@@ -14,6 +14,26 @@
   var SRS_MAX_BOX = SRS_INTERVAL_DAYS.length - 1;
   var DAY = 24 * 60 * 60 * 1000;
 
+  /* "Bugünün Çalışması" hedefleri: tek doğruluk kaynağı burası - gate.js
+     görevleri bu sırayla (konu/soru/kelime/durak) gösterir, buradaki
+     dailyTargets()'ı okur; başarımlar da aynı hedeflere göre tamamlanmayı
+     hesaplar (bkz. checkDailyCompletion). */
+  var DAILY_TASK_KEYS = ['topicsRead', 'questions', 'wordsReviewed', 'gameNodes'];
+  var DAILY_TARGETS = [
+    [1, 10, 5, 1],
+    [1, 8, 4, 2],
+    [2, 6, 5, 1],
+    [1, 12, 3, 1],
+    [1, 10, 6, 2],
+    [2, 8, 4, 1],
+    [1, 15, 5, 1]
+  ];
+  function dailyCycleIndex() {
+    var d = new Date();
+    var epochDay = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+    return ((epochDay % 7) + 7) % 7;
+  }
+
   function todayKey(d) {
     d = d || new Date();
     return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -58,6 +78,11 @@
 
     /* --- "Bugünün Çalışması": günlük görev sayaçları, gün değişince sıfırlanır --- */
     daily: { day: '', topicsRead: 0, questions: 0, wordsReviewed: 0, gameNodes: 0 },
+    /* --- "Bugünün Çalışması" ömür boyu sayaçları: gün değişince SIFIRLANMAZ,
+       başarımlar bunları okur (bkz. dailyStreak/dailyTotalDone) --- */
+    dailyStreak: 0,
+    dailyTotalDone: 0,
+    dailyLastDoneDay: '',
 
     /* --- Oyun Modu: canlar, premium, harita ilerlemesi --- */
     game: {
@@ -94,6 +119,22 @@
   }
 
   function clone(v) { return (v && typeof v === 'object') ? JSON.parse(JSON.stringify(v)) : v; }
+
+  /* "Bugünün Çalışması" tamamlanınca (4 görev de hedefine ulaşınca) bir kez
+     çalışır: ömür boyu toplam sayacı bir artırır ve art arda gün serisini
+     günceller (touchVisitStreak ile aynı desen). Aynı gün için yalnız bir
+     kez sayılır (dailyLastDoneDay bekçisi). */
+  function checkDailyCompletion() {
+    var key = todayKey();
+    if (state.dailyLastDoneDay === key) return;
+    var targets = DAILY_TARGETS[dailyCycleIndex()];
+    var allDone = DAILY_TASK_KEYS.every(function (k, i) { return (state.daily[k] || 0) >= targets[i]; });
+    if (!allDone) return;
+    state.dailyTotalDone = (state.dailyTotalDone || 0) + 1;
+    var yKey = todayKey(new Date(Date.now() - DAY));
+    state.dailyStreak = (state.dailyLastDoneDay === yKey) ? (state.dailyStreak || 0) + 1 : 1;
+    state.dailyLastDoneDay = key;
+  }
 
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(state)); }
@@ -246,11 +287,14 @@
       if (state.daily && state.daily.day === key) return;
       state.daily = { day: key, topicsRead: 0, questions: 0, wordsReviewed: 0, gameNodes: 0 };
     },
-    noteTopicRead: function () { S.touchDaily(); state.daily.topicsRead++; save(); },
-    noteQuestionsAnswered: function (n) { S.touchDaily(); state.daily.questions += (n || 0); save(); },
-    noteWordReviewed: function () { S.touchDaily(); state.daily.wordsReviewed++; save(); },
-    noteGameNodeDone: function () { S.touchDaily(); state.daily.gameNodes++; save(); },
+    noteTopicRead: function () { S.touchDaily(); state.daily.topicsRead++; checkDailyCompletion(); save(); },
+    noteQuestionsAnswered: function (n) { S.touchDaily(); state.daily.questions += (n || 0); checkDailyCompletion(); save(); },
+    noteWordReviewed: function () { S.touchDaily(); state.daily.wordsReviewed++; checkDailyCompletion(); save(); },
+    noteGameNodeDone: function () { S.touchDaily(); state.daily.gameNodes++; checkDailyCompletion(); save(); },
     dailyProgress: function () { S.touchDaily(); return state.daily; },
+    dailyTargets: function () { return DAILY_TARGETS[dailyCycleIndex()]; },
+    dailyStreakCount: function () { return state.dailyStreak || 0; },
+    dailyTotalDoneCount: function () { return state.dailyTotalDone || 0; },
 
     /* --- günlük seri: uygulama gün içinde ilk açıldığında bir kez çağrılır --- */
     touchVisitStreak: function () {

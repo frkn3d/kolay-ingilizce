@@ -6,6 +6,24 @@
 <meta name="theme-color" content="#1f5137" />
 <meta name="description" content="Zaman çizgisi üzerinden İngilizce zamanlarını öğreten, Türk kültüründen örneklerle hazırlanmış ücretsiz uygulama." />
 <title>Gramer Atlası - Zamanlarla Öğren</title>
+<script>
+/* Koyu tema tercihini CSS/içerik boyanmadan ÖNCE, senkron biçimde uygular -
+   yoksa <html data-theme="light"> ile açılıp js/app.js boot() çalışınca
+   koyu temaya dönerken kısa bir "beyaz çakma" (FOUC) oluyordu. store.js'in
+   kullandığı localStorage anahtarı burada bilerek tekrar yazılıyor, çünkü
+   store.js bu noktada henüz yüklenmedi. */
+(function () {
+  try {
+    var raw = localStorage.getItem('kolay-ingilizce/v1');
+    var theme = raw && JSON.parse(raw).theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', '#0d1711');
+    }
+  } catch (e) {}
+})();
+</script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="stylesheet" href="css/base.css" />

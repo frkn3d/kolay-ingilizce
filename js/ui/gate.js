@@ -7,31 +7,16 @@
   'use strict';
   var U = KI.util;
 
-  /* "Bugünün Çalışması": 4 sabit görev türü (konu/soru/kelime/durak),
-     hedef sayılar 7 günlük bir döngüyle değişir (bkz. DAILY_TARGETS) -
-     her gün biraz farklı, 7 günde bir aynı hedefler geri gelir. Sayaçlar
-     KI.store.daily* üzerinde tutulur ve gün değişince kendiliğinden
-     sıfırlanır (bkz. store.js touchDaily). */
+  /* "Bugünün Çalışması": 4 sabit görev türü (konu/soru/kelime/durak); hedef
+     sayılar (7 günlük bir döngüyle değişen) ve ilerleme sayaçları store.js'te
+     tutulur (bkz. store.js dailyTargets/dailyProgress) - burada yalnız
+     görsel etiket/ikon eşleşmesi tutulur, tek doğruluk kaynağı store.js'tir. */
   var DAILY_TASKS = [
     { key: 'topicsRead', icon: 'map', label: function (n) { return n + ' konu oku'; } },
     { key: 'questions', icon: 'target', label: function (n) { return n + ' soru çöz'; } },
     { key: 'wordsReviewed', icon: 'notebook', label: function (n) { return n + ' kelime tekrar et'; } },
     { key: 'gameNodes', icon: 'flag', label: function (n) { return n + ' oyun durağı tamamla'; } }
   ];
-  var DAILY_TARGETS = [
-    [1, 10, 5, 1],
-    [1, 8, 4, 2],
-    [2, 6, 5, 1],
-    [1, 12, 3, 1],
-    [1, 10, 6, 2],
-    [2, 8, 4, 1],
-    [1, 15, 5, 1]
-  ];
-  function dailyCycleIndex() {
-    var d = new Date();
-    var epochDay = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
-    return ((epochDay % 7) + 7) % 7;
-  }
   function dailyDoneCount(progress, targets) {
     var n = 0;
     DAILY_TASKS.forEach(function (task, i) { if ((progress[task.key] || 0) >= targets[i]) n++; });
@@ -43,7 +28,7 @@
      daily-modal kapanış kablolaması, açılış burada yapılır çünkü bu
      düğme kalıcı üst çubuktaki gibi değil, her render'da yeniden çizilir). */
   function dailyButton() {
-    var targets = DAILY_TARGETS[dailyCycleIndex()];
+    var targets = KI.store.dailyTargets();
     var progress = KI.store.dailyProgress();
     var doneCount = dailyDoneCount(progress, targets);
     var allDone = doneCount === DAILY_TASKS.length;
@@ -66,7 +51,7 @@
     var body = document.getElementById('daily-body');
     if (!body) return;
     U.clear(body);
-    var targets = DAILY_TARGETS[dailyCycleIndex()];
+    var targets = KI.store.dailyTargets();
     var progress = KI.store.dailyProgress();
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.9rem;margin:0 0 10px',
       text: 'Her gün küçük bir hedef seti; 7 günde bir aynı hedefler geri gelir.' }));
