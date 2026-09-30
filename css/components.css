@@ -501,6 +501,31 @@ html[data-theme="dark"] .ach-item__date { color: var(--green-400); }
 .ach-item.is-unlocked { border-color: var(--mustard-d); }
 .ach-item.is-unlocked .ach-item__ico { background: var(--mustard); border-color: var(--mustard-d); color: #3a2a06; }
 
+/* Başarımlar tek düze hardal + gri görünmesin diye her kategori kendi
+   rengini taşır (Alıştırma yukarıdaki varsayılan hardalda kalıyor, çünkü
+   zaten kendi sekmesinin rengiyle örtüşüyor). Kilitliyken hepsi aynı nötr
+   gri kalır - renk yalnızca kazanılınca ortaya çıkıyor. */
+.ach-cat--zaman { color: var(--green-700); }
+html[data-theme="dark"] .ach-cat--zaman { color: var(--green-300); }
+.ach-grid--zaman .ach-item.is-unlocked { border-color: var(--green-600); }
+.ach-grid--zaman .ach-item.is-unlocked .ach-item__ico { background: var(--green-600); border-color: var(--green-700); color: var(--cream); }
+html[data-theme="dark"] .ach-grid--zaman .ach-item.is-unlocked .ach-item__ico { background: var(--green-400); border-color: var(--green-300); color: #0f2a1c; }
+
+.ach-cat--kelime { color: var(--future); }
+.ach-grid--kelime .ach-item.is-unlocked { border-color: var(--future); }
+.ach-grid--kelime .ach-item.is-unlocked .ach-item__ico { background: var(--future); border-color: var(--future); color: var(--future-bg); }
+
+.ach-cat--baglilik { color: var(--terra); }
+html[data-theme="dark"] .ach-cat--baglilik { color: var(--past); }
+.ach-grid--baglilik .ach-item.is-unlocked { border-color: var(--terra); }
+html[data-theme="dark"] .ach-grid--baglilik .ach-item.is-unlocked { border-color: var(--past); }
+.ach-grid--baglilik .ach-item.is-unlocked .ach-item__ico { background: var(--terra); border-color: var(--terra); color: var(--cream); }
+html[data-theme="dark"] .ach-grid--baglilik .ach-item.is-unlocked .ach-item__ico { background: var(--past); border-color: var(--past); color: #2b1408; }
+
+.ach-cat--oyun { color: var(--plum); }
+.ach-grid--oyun .ach-item.is-unlocked { border-color: var(--plum); }
+.ach-grid--oyun .ach-item.is-unlocked .ach-item__ico { background: var(--plum); border-color: var(--plum); color: var(--cream); }
+
 /* ---------- Bugünün Çalışması: modal içindeki görev listesi ---------- */
 .gate__daily-list { display: flex; flex-direction: column; gap: 8px; }
 .gate__daily-item {

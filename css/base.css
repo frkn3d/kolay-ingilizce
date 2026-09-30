@@ -206,6 +206,18 @@ html[data-section="temeller"] .tab.is-active { color: var(--terra); border-top-c
 html[data-theme="dark"][data-section="temeller"] .tab.is-active { color: var(--past); background: var(--past-bg); }
 html[data-section="temeller"] .card:not(.minitest-card),
 html[data-section="temeller"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--terra) 45%); }
+/* Temeller'deki "ipucu" kutularının çoğu (Altın kural, Kolay yol vb.)
+   .callout--tip sınıfını kullanıyor, ama o sınıf Alıştırma/Oyun Modu'nda
+   "doğru cevap" bildirimi olarak da kullanıldığı için (bkz. quiz__fb)
+   rengini oradan genel olarak değiştiremeyiz. Sadece Temeller'de, ve
+   sadece burada, yeşil yerine zaten "Altın kural" adıyla da örtüşen
+   hardal rengine çekiliyor - .callout'un zaten varsayılan (kindsiz)
+   rengiyle aynı, yani burada gerçekte "özel" bir renk değil, sadece
+   yeşil istisnası kaldırılıyor. */
+html[data-section="temeller"] .callout--tip {
+  border-left-color: var(--mustard);
+  background: color-mix(in srgb, var(--mustard) 14%, var(--surface));
+}
 
 html[data-section="harita"] .eyebrow { color: var(--green-700); }
 html[data-theme="dark"][data-section="harita"] .eyebrow { color: var(--green-300); }

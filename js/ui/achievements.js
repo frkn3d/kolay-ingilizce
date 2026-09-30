@@ -154,6 +154,13 @@
   ];
 
   var CATS = ['Zaman Haritası', 'Alıştırma', 'Kelime', 'Bağlılık', 'Oyun Modu'];
+  /* Her kategori açılan başarımlarda kendi rengini taşısın diye (bkz.
+     css/components.css, ".ach-cat--" ve ".ach-grid--" ile başlayan
+     kurallar) - hepsi aynı hardal tonuyla tek düze görünmesin. */
+  var CAT_SLUG = {
+    'Zaman Haritası': 'zaman', 'Alıştırma': 'alistirma', 'Kelime': 'kelime',
+    'Bağlılık': 'baglilik', 'Oyun Modu': 'oyun'
+  };
 
   function unlockedMap() { return KI.store.get('achievements') || {}; }
 
@@ -240,8 +247,9 @@
     CATS.forEach(function (cat) {
       var items = LIST.filter(function (a) { return a.cat === cat; });
       if (!items.length) return;
-      body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:14px', text: cat }));
-      var grid = U.el('div', { class: 'ach-grid' });
+      var slug = CAT_SLUG[cat] || '';
+      body.appendChild(U.el('p', { class: 'eyebrow ach-cat ach-cat--' + slug, style: 'margin-top:14px', text: cat }));
+      var grid = U.el('div', { class: 'ach-grid ach-grid--' + slug });
       items.forEach(function (a) {
         var un = unlocked[a.id];
         var item = U.el('div', { class: 'ach-item ' + (un ? 'is-unlocked' : 'is-locked') });
