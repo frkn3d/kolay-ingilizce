@@ -70,7 +70,8 @@
   --r-sm: 8px;
   --r:    14px;
   --r-lg: 22px;
-  --shadow-hard: 3px 3px 0 var(--line-2);
+  --shadow-color: var(--line-2);
+  --shadow-hard: 3px 3px 0 var(--shadow-color);
   --shadow-soft: 0 6px 18px rgba(23, 39, 29, .10);
   --ring: 0 0 0 3px rgba(54, 133, 90, .35);
 
@@ -119,7 +120,8 @@ html[data-theme="dark"] {
 
   --mustard:   #e0b25c;
   --mustard-bg:#3a2c10;
-  --shadow-hard: 3px 3px 0 #0a1410;
+  --shadow-color: #0a1410;
+  --shadow-hard: 3px 3px 0 var(--shadow-color);
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, .35);
 }
 
@@ -190,6 +192,25 @@ html[data-section="alistirma"] .tab.is-active { color: var(--mustard-d); border-
 html[data-theme="dark"][data-section="alistirma"] .tab.is-active { color: var(--mustard); background: var(--mustard-bg); }
 html[data-section="alistirma"] .card:not(.minitest-card),
 html[data-section="alistirma"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--mustard) 45%); }
+
+/* Temeller (kiremit/turuncu - zaten gövde tonunda --terra/--past kullanılıyordu,
+   burada aynı renk aktif sekmeye, etikete ve kart çerçevelerine de taşınıyor)
+   ve Harita (yeşil - uygulamanın zaten varsayılan/ana rengi, o yüzden aktif
+   sekme burada değişmiyor, sadece etiket ve kart çerçevesine hafif bir yeşil
+   ekleniyor ki o da diğer üçü gibi kendine ait bir iz taşısın). Harita'nın
+   kendi geçmiş/şimdi/gelecek renkli zaman kartları (.tcard) ayrı bir sınıf
+   kullandığı için burada .card kuralından etkilenmiyor. */
+html[data-section="temeller"] .eyebrow { color: var(--terra); }
+html[data-theme="dark"][data-section="temeller"] .eyebrow { color: var(--past); }
+html[data-section="temeller"] .tab.is-active { color: var(--terra); border-top-color: var(--terra); background: var(--past-bg); }
+html[data-theme="dark"][data-section="temeller"] .tab.is-active { color: var(--past); background: var(--past-bg); }
+html[data-section="temeller"] .card:not(.minitest-card),
+html[data-section="temeller"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--terra) 45%); }
+
+html[data-section="harita"] .eyebrow { color: var(--green-700); }
+html[data-theme="dark"][data-section="harita"] .eyebrow { color: var(--green-300); }
+html[data-section="harita"] .card:not(.minitest-card),
+html[data-section="harita"] .input { border-color: color-mix(in srgb, var(--line) 60%, var(--green-600) 40%); }
 
 /* Oyun Modu, Eğitim Modu'nun kağıt/defter kimliğinden tamamen ayrışan,
    açık/koyu tema tercihinden bağımsız (Giriş ekranı gibi) kendi koyu

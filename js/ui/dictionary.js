@@ -99,7 +99,7 @@
 
     var grid = U.el('div', { class: 'hub-grid' });
 
-    var wordsCard = U.el('a', { class: 'card modecard hub-card', href: '#/sozluk/kelimeler', 'data-sfx': 'nav' }, [
+    var wordsCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/kelimeler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('book') }),
       U.el('span', {}, [
         U.el('h3', { text: 'Sözlük' }),
@@ -108,7 +108,7 @@
     ]);
     grid.appendChild(wordsCard);
 
-    var storiesCard = U.el('a', { class: 'card modecard hub-card', href: '#/sozluk/hikayeler', 'data-sfx': 'nav' }, [
+    var storiesCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/hikayeler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('chat') }),
       U.el('span', {}, [
         U.el('h3', { text: 'Hikayeler' }),
@@ -117,7 +117,7 @@
     ]);
     grid.appendChild(storiesCard);
 
-    var journeyCard = U.el('a', { class: 'card modecard hub-card', href: '#/sozluk/zaman-yolculugu', 'data-sfx': 'nav' }, [
+    var journeyCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/zaman-yolculugu', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('compass') }),
       U.el('span', {}, [
         U.el('h3', { text: 'Zaman Yolculuğu' }),
@@ -127,6 +127,7 @@
     grid.appendChild(journeyCard);
 
     frag.appendChild(grid);
+    setTimeout(function () { KI.util.staggerReveal(grid, '.reveal', 60); }, 0);
     return frag;
   }
 

@@ -652,13 +652,14 @@
     ]));
     var grid = U.el('div', { class: 'stack' });
     (KI.minitest ? KI.minitest.levels : []).forEach(function (lv) {
-      var card = U.el('a', { class: 'card modecard minitest-card minitest-card--' + lv.id,
+      var card = U.el('a', { class: 'card modecard minitest-card minitest-card--' + lv.id + ' reveal',
         href: '#/alistirma/minitest/' + lv.id, 'data-sfx': 'nav' });
       card.appendChild(U.el('h3', { text: lv.tr, style: 'margin-bottom:.2em' }));
       card.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.84rem', text: lv.hint }));
       grid.appendChild(card);
     });
     frag.appendChild(grid);
+    setTimeout(function () { KI.util.staggerReveal(grid, '.reveal', 55); }, 0);
     return frag;
   }
 
@@ -743,7 +744,7 @@
 
       var grid = U.el('div', { class: 'stack' });
       MODES.forEach(function (m) {
-        var card = U.el('a', { class: 'card modecard', href: '#/alistirma/' + m.id, 'data-sfx': 'nav' });
+        var card = U.el('a', { class: 'card modecard reveal', href: '#/alistirma/' + m.id, 'data-sfx': 'nav' });
         var title = U.el('h3', { html: m.ico + '  ' + m.t, style: 'margin-bottom:.2em' });
         if (m.id === 'zorlandiklarim') {
           var n = KI.store.troubleCount();
@@ -758,6 +759,7 @@
         grid.appendChild(card);
       });
       frag.appendChild(grid);
+      setTimeout(function () { KI.util.staggerReveal(grid, '.reveal', 45); }, 0);
 
       var stats = U.el('section', { class: 'section' });
       stats.appendChild(U.el('h2', { class: 'section__title', text: 'Sonuçların' }));

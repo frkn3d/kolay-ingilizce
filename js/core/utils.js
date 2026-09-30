@@ -155,5 +155,35 @@ window.KI = window.KI || {};
     catch (e) { window.scrollTo(0, 0); }
   };
 
+  /* .reveal--in bitince sınıfları temizler. Bunu yapmazsak CSS animasyon
+     katmanının "both/forwards" ile sabitlediği bitiş değeri (transform: none)
+     normal :hover/:active kurallarından daha öncelikli kalmaya devam eder ve
+     ör. .tcard:hover / .modecard:hover kartları bir daha asla kalkamaz hâle
+     gelir - animasyon bittiğinde elemanı sıradan (animasyonsuz) stiline geri
+     bırakmak gerekiyor. Tek, genel bir dinleyici tüm .reveal--in kullanımlarını
+     (bkz. home.js, stats.js, staggerReveal) kapsar. */
+  if (typeof document !== 'undefined' && document.addEventListener) {
+    document.addEventListener('animationend', function (e) {
+      if (e.animationName === 'revealIn' && e.target.classList.contains('reveal--in')) {
+        e.target.classList.remove('reveal', 'reveal--in');
+      }
+    });
+  }
+
+  /* Bir liste/menü ekrana ilk geldiğinde kartlarını sırayla belirtir
+     (bkz. css/components.css .reveal/.reveal--in). root, o an henüz DOM'a
+     eklenmemiş bir fragment içindeki eleman referansı olabilir; çağıran
+     taraf bunu render fonksiyonunun sonunda setTimeout(fn, 0) içine alarak
+     çağırır ki eleman gerçekten belgeye eklendikten sonra çalışsın.
+     "Az hareket" tercihinde (data-motion="less") gecikme olmadan hepsi
+     birden görünür. */
+  U.staggerReveal = function (root, selector, step) {
+    var less = document.documentElement.getAttribute('data-motion') === 'less';
+    U.qsa(selector || '.reveal', root).forEach(function (el, i) {
+      if (less) { el.classList.add('reveal--in'); return; }
+      setTimeout(function () { el.classList.add('reveal--in'); }, (step || 40) * i);
+    });
+  };
+
   KI.util = U;
 })(window.KI);

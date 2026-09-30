@@ -118,11 +118,12 @@
     var row = U.el('div', { class: 'pill-row' });
     KI.basics.forEach(function (s) {
       row.appendChild(U.el('a', {
-        class: 'btn btn--sm' + (id === s.id ? ' btn--primary' : ''),
+        class: 'btn btn--sm reveal' + (id === s.id ? ' btn--primary' : ''),
         href: '#/temeller/' + s.id, 'data-sfx': 'nav', html: s.icon + ' ' + s.title
       }));
     });
     frag.appendChild(row);
+    setTimeout(function () { KI.util.staggerReveal(row, '.reveal', 30); }, 0);
 
     var shown = id ? KI.basics.filter(function (s) { return s.id === id; }) : KI.basics;
     if (!shown.length) shown = KI.basics;

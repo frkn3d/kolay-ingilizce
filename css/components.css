@@ -360,8 +360,21 @@ html[data-theme="dark"] .tcard__done .icon { color: var(--green-300); }
 }
 .input:focus { outline: none; box-shadow: var(--ring); border-color: var(--green-500); }
 
-.quiz__q { font-size: 1.05rem; font-family: var(--font-display); margin-bottom: .5em; line-height: 1.4; }
+.quiz__q { font-size: 1.05rem; font-family: var(--font-display); margin-bottom: .5em; line-height: 1.4; animation: fadeUp .3s ease; }
 .quiz__opts { display: grid; gap: 7px; }
+/* Yeni bir soruya her geçişte şıklar sırayla belirir ("testlere girişte
+   animasyon" isteği) - .opt her paint()'te sıfırdan oluşturulan bir eleman
+   olduğu için animasyon her seferinde baştan oynar, ekstra bir JS sınıfına
+   gerek yok. En çok 4 şık olduğundan (bkz. 'ABCD') dördüncüden sonrası için
+   ayrı bir kural gerekmiyor. */
+/* fill-mode "backwards" (both değil): gecikme sırasında görünmez kalması
+   yeterli, animasyon bitince "forwards" gibi sabitlenip .opt:hover/.opt:active
+   için gereken transform'u kalıcı olarak ezmesin. */
+.quiz__opts > .opt { animation: fadeUp .32s cubic-bezier(.2, .7, .3, 1) backwards; }
+.quiz__opts > .opt:nth-child(1) { animation-delay: 0s; }
+.quiz__opts > .opt:nth-child(2) { animation-delay: .07s; }
+.quiz__opts > .opt:nth-child(3) { animation-delay: .14s; }
+.quiz__opts > .opt:nth-child(4) { animation-delay: .21s; }
 .opt {
   text-align: left; width: 100%;
   border: 2px solid var(--line-2); border-radius: var(--r-sm);
@@ -651,7 +664,12 @@ html[data-theme="dark"] .wchip--placed { background: var(--present-bg); border-c
   border-radius: var(--r); padding: 10px 14px; margin-bottom: 14px;
 }
 .setrow__lbl { font-weight: 600; font-size: .9rem; color: var(--ink-soft); margin-right: auto; }
-.modecard { text-decoration: none; color: inherit; display: block; }
+.modecard { text-decoration: none; color: inherit; display: block; transition: transform .12s ease, box-shadow .12s ease; }
+/* Tıklanabilir kartlar da (Sözlük, Alıştırma, Temeller'deki "Karışan
+   zamanlar" vb.) tıpkı Kelime Eşleştir'deki kartlar gibi hafifçe kalkıp
+   basılınca içeri çöküyor - tüm menülerde aynı "canlı" his için. */
+.modecard:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--shadow-color); }
+.modecard:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--shadow-color); }
 
 /* Mini Test zorluk kartları: sol kenarlık, kolaydan zora doğru
    koyulaşan bir renk sırası (yeşil → hardal → kiremit → erik). */

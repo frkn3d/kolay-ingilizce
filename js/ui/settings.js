@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.20';
+  var APP_VERSION = '0.8.21';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.21', d: 'Temeller (kiremit) ve Harita (yeşil) sekmeleri de artık Sözlük/Alıştırma gibi kendi rengini taşıyor; dört sekme de birbirinden net ayrışıyor. Uygulamaya genel bir "canlılık" katıldı: Sözlük, Alıştırma ve Temeller\'deki kart listeleri açılışta sırayla beliriyor, alıştırmalarda yeni bir soruya geçince şıklar art arda süzülerek geliyor, tıklanabilir kartlar dokununca hafifçe kalkıp basılınca içeri çöküyor.' },
     { v: '0.8.20', d: 'Sözlük (mavi) ve Alıştırma (hardal) sekmeleri artık kendi rengini taşıyor: aktif sekme, üst başlık etiketi ve kart çerçeveleri hafifçe o rengi alıyor, böylece hangi sekmede olduğun daha net hissediliyor. Ayrıca alıştırmalarda doğru/yanlış cevap kutuları koyu temada artık çevresindeki yeşille karışmıyor: doğru cevap daha canlı bir yeşile çekildi ve her iki durum da belirgin bir gölgeyle öne çıkıyor.' },
     { v: '0.8.19', d: 'Günlük Hayat\'a yeni bir hikaye eklendi: "Bir Counter-Strike Gecesi". Emre ve arkadaşları akşam bir maça girerken headshot, reload, clutch, GG gibi oyun oynarken gerçekten kullanılan İngilizce kelime ve ifadeleri doğal bir anlatı içinde öğretiyor.' },
     { v: '0.8.18', d: 'Kelime Eşleştir daha eğlenceli göründüğü: yuvarlak, kalın bir yazı tipi ve İngilizce/Türkçe grupları için birbirinden farklı renkler (mor/altın), tam eşleşince küçük bir konfeti patlaması eklendi. Oyun Modu haritasında bir soruya girip geri dönünce ekran artık en üste atılmıyor, kaldığın durağa geri dönüyor; haritaya ilk girişte de doğrudan en son kaldığın durağa kayıyor.' },
