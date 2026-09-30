@@ -296,7 +296,7 @@
       }
 
       var watch = U.el('button', { class: 'btn btn--primary btn--block', type: 'button',
-        html: KI.icons.html('play') + ' Video izle · +3 can' });
+        html: KI.icons.html('play') + ' Video izle (deneme) · +3 can' });
       if (n >= max) watch.disabled = true;
       watch.addEventListener('click', function () {
         KI.audio.play('tap');
@@ -309,7 +309,7 @@
       container.appendChild(watch);
 
       var premBtn = U.el('button', { class: 'btn btn--block', type: 'button', style: 'margin-top:8px',
-        html: KI.icons.html('ach-crown') + ' Premium’a geç · sınırsız can' });
+        html: KI.icons.html('ach-crown') + ' Premium’a geç (deneme) · sınırsız can' });
       premBtn.addEventListener('click', function () {
         KI.audio.play('achievement');
         KI.store.setPremium(true);

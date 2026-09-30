@@ -24,12 +24,18 @@
     opts = opts || {};
     var acts = U.el('div', { class: 'wrow__acts' });
 
-    var say = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: KI.icons.html('speaker'), title: 'Dinle' });
+    var say = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button', html: KI.icons.html('speaker'), title: 'Dinle', 'aria-label': 'Dinle: ' + en });
     say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.word(en); });
     acts.appendChild(say);
 
     var star = U.el('button', { class: 'btn btn--sm btn--icon', type: 'button' });
-    function paint() { star.innerHTML = KI.icons.html(KI.store.hasWord(en) ? 'star' : 'star-outline'); }
+    function paint() {
+      var has = KI.store.hasWord(en);
+      star.innerHTML = KI.icons.html(has ? 'star' : 'star-outline');
+      var label = (has ? 'Kelime defterimden çıkar: ' : 'Kelime defterime ekle: ') + en;
+      star.title = label;
+      star.setAttribute('aria-label', label);
+    }
     paint();
     star.addEventListener('click', function () {
       if (KI.store.hasWord(en)) {

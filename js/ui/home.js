@@ -213,7 +213,7 @@
     var play = KI.icons.html('play');
     var primary = lastT
       ? U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/' + lastT.id, 'data-sfx': 'nav', html: play + ' Devam et: ' + U.esc(lastT.tr) })
-      : U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Baştan başla' });
+      : U.el('a', { class: 'btn btn--mustard btn--sm', href: '#/zaman/present-simple', 'data-sfx': 'nav', html: play + ' Öğrenmeye başla' });
     actions.appendChild(U.el('div', { class: 'row' }, [primary]));
     frag.appendChild(actions);
 

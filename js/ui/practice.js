@@ -607,14 +607,14 @@
     return box;
   }
 
-  /* --------- Mini Test: dış kaynaklı 500 soruluk sabit havuz ---------
+  /* --------- Mini Test: dış kaynaklı sabit soru havuzu ---------
      js/data/minitest.js -> KI.minitest.items, dört zorluk seviyesi
-     (kolay/orta/zor/cok-zor). Kaynak dosyada aynı sorular birkaç kez
-     tekrarlanıyor (150/150/150/50 satır ama çok daha az benzersiz
-     soru); bir tur içinde aynı sorunun iki kez çıkmaması için havuz
-     metne göre benzersizleştirilip öyle karıştırılıyor. Ayrıca A/B
-     şıkları birebir aynı olan birkaç bozuk satır (kaynak dosyanın
-     kendi hatası) oyuna hiç girmesin diye elenir. */
+     (kolay/orta/zor/cok-zor), 170 benzersiz satır (kaynaktaki tekrarlar
+     ve A/B şıkkı birebir aynı olan bozuk satırlar temizlendi). Yine de
+     bir turda aynı sorunun iki kez çıkmaması için havuz tam satıra göre
+     (soru + şıklar + cevap) benzersizleştirilip öyle karıştırılıyor -
+     yalnız soru metnine göre değil, çünkü bazı şablonlarda ("Hangi
+     cümle doğru?" gibi) aynı soru metni farklı şıklarla tekrar eder. */
   function tipTenseId(tip) {
     var t = KI.tenses.list.filter(function (x) { return tip.indexOf(x.en) >= 0; })[0];
     return t ? t.id : null;
@@ -625,8 +625,9 @@
     var pool = (KI.minitest ? KI.minitest.items : []).filter(function (it) {
       if (it.level !== level) return false;
       if (it.options[0] === it.options[1]) return false;
-      if (seen[it.en]) return false;
-      seen[it.en] = true;
+      var key = it.en + '|' + it.options.join('|') + '|' + it.answer;
+      if (seen[key]) return false;
+      seen[key] = true;
       return true;
     });
     return U.shuffle(pool).slice(0, count).map(function (it) {
@@ -647,7 +648,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
       U.el('h1', { text: 'Mini Test' }),
-      U.el('p', { style: 'font-size:.84rem', text: '500 soruluk mini test havuzu; zorluğunu seç, hemen başla.' })
+      U.el('p', { style: 'font-size:.84rem', text: '170 soruluk mini test havuzu; zorluğunu seç, hemen başla.' })
     ]));
     var grid = U.el('div', { class: 'stack' });
     (KI.minitest ? KI.minitest.levels : []).forEach(function (lv) {
@@ -669,7 +670,7 @@
 
   var MODES = [
     { id: 'minitest', ico: KI.icons.html('target'), t: 'Mini Test', minitest: true,
-      d: '500 soruluk kısa test havuzu; önce zorluğunu seç, hemen başla.' },
+      d: '170 soruluk kısa test havuzu; önce zorluğunu seç, hemen başla.' },
     { id: 'karisik', ico: KI.icons.html('dice'), t: 'Karışık', d: 'Her türden soru: cümle, çizgi, boşluk, kelime, fiil.',
       make: function () {
         var n = size();

@@ -99,13 +99,13 @@
     grid.appendChild(card({
       mod: 'study', href: '#/harita', img: 'assets/icon-mode-study.svg',
       title: 'Eğitim Modu',
-      desc: 'Zaman çizgisi, temeller, sözlük.',
+      desc: 'Yeni başlayanlar için önerilir.',
       cta: 'Başla'
     }));
     grid.appendChild(card({
       mod: 'game', href: '#/oyun', img: 'assets/icon-mode-game.svg',
       title: 'Oyun Modu',
-      desc: 'Harita, canlar, kısa sınavlar.',
+      desc: 'Pratik yaparak ilerle.',
       cta: 'Haritaya gir'
     }));
     wrap.appendChild(grid);
