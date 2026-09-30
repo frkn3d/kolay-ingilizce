@@ -145,6 +145,18 @@
     themeCursor++;
     return th;
   }
+  /* Haritanın kenarına ara sıra sağa-sola serpiştirilen, ana patikanın
+     PARÇASI OLMAYAN bağımsız dal düğmeleri (ör. Kelime Eşleştir). Bunlar
+     kilitli olmaz, sıra takip etmez, level.path'e hiç girmez - yalnızca
+     renderMap() her BRANCH_EVERY düz derste bir tanesini araya serpiştirir.
+     Girmek için ön koşul yok; her an, herhangi bir sırada oynanabilir. */
+  var BRANCH_EVERY = 7;
+  var BRANCH_OFFSET = 30;
+  var BRANCHES = [
+    { href: '#/oyun/kelime', ico: 'puzzle', label: 'Kelime Eşleştir' }
+  ];
+  var branchCursor = 0;
+
   var LESSON_SIZE = 10;       // her ders/sınav 10 soru
   var CHECKPOINT_EVERY = 8;   // her 8 dersten sonra bir İleri Sar sınavı
   var CHECKPOINT_PASS = 7;    // İleri Sar'ı geçmek için gereken en az doğru sayısı (10 üzerinden)
@@ -329,6 +341,7 @@
   /* ---------- harita ---------- */
   function renderMap() {
     KI.store.gameTouchDay();
+    branchCursor = 0;
     var frag = document.createDocumentFragment();
 
     /* İlerleme yalnızca bu cihazda saklanıyor; Oyun Modu'na ilk kez
@@ -431,6 +444,27 @@
         ]));
 
         track.appendChild(stop);
+
+        /* Ara sıra, ana patikanın dışına bağımsız bir dal düğmesi serpiştir
+           (kilitsiz, koşulsuz - bkz. BRANCHES). Yalnız düz derslerden sonra
+           eklenir, son düğümden sonra eklenmez (haritanın hemen bitişine
+           garip bir çıkıntı gelmesin diye). */
+        var isLastNode = (i === level.path.length - 1);
+        if (!isCp && !isLastNode && (i + 1) % BRANCH_EVERY === 0) {
+          var branchDef = BRANCHES[branchCursor % BRANCHES.length];
+          var branchSide = (branchCursor % 2 === 0) ? 1 : -1;
+          branchCursor++;
+          var branch = U.el('a', {
+            class: 'gmap__branch' + (branchSide < 0 ? ' gmap__branch--left' : ' gmap__branch--right'),
+            href: branchDef.href, 'data-sfx': 'nav',
+            style: 'transform:translateX(' + (branchSide * BRANCH_OFFSET) + 'px)',
+            title: branchDef.label + ' - bağımsız mod, her an oynanabilir'
+          }, [
+            U.el('span', { class: 'gmap__branch-ico', html: KI.icons.html(branchDef.ico) }),
+            U.el('span', { class: 'gmap__branch-label', text: branchDef.label })
+          ]);
+          track.appendChild(branch);
+        }
       });
       section.appendChild(track);
       wrap.appendChild(section);

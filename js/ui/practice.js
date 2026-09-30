@@ -648,7 +648,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Alıştırma' }),
       U.el('h1', { text: 'Mini Test' }),
-      U.el('p', { style: 'font-size:.84rem', text: '170 soruluk mini test havuzu; zorluğunu seç, hemen başla.' })
+      U.el('p', { style: 'font-size:.84rem', text: '200 soruluk mini test havuzu; zorluğunu seç, hemen başla.' })
     ]));
     var grid = U.el('div', { class: 'stack' });
     (KI.minitest ? KI.minitest.levels : []).forEach(function (lv) {
@@ -670,7 +670,7 @@
 
   var MODES = [
     { id: 'minitest', ico: KI.icons.html('target'), t: 'Mini Test', minitest: true,
-      d: '170 soruluk kısa test havuzu; önce zorluğunu seç, hemen başla.' },
+      d: '200 soruluk kısa test havuzu; önce zorluğunu seç, hemen başla.' },
     { id: 'karisik', ico: KI.icons.html('dice'), t: 'Karışık', d: 'Her türden soru: cümle, çizgi, boşluk, kelime, fiil.',
       make: function () {
         var n = size();

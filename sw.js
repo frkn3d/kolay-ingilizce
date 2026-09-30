@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v15';
+var CACHE_VERSION = 'ki-cache-v16';
 
 var CORE_ASSETS = [
   './',
@@ -66,6 +66,7 @@ var CORE_ASSETS = [
   './js/ui/settings.js',
   './js/ui/gate.js',
   './js/ui/game.js',
+  './js/ui/wordmatch.js',
   './js/app.js',
   './assets/favicon.svg',
   './assets/icon-512.svg',

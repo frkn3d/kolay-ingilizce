@@ -278,6 +278,51 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 
 .gmap__footnote { text-align: center; font-size: .74rem; margin: 26px 0 4px; opacity: .75; }
 
+/* Ana patikanın PARÇASI OLMAYAN, ara sıra sağa-sola serpiştirilen bağımsız
+   dal düğmeleri (ör. Kelime Eşleştir). Kesikli çerçeveyle ana düğümlerden
+   görsel olarak ayrılır: kilitli olmadıkları, sıra takip etmedikleri bir
+   bakışta anlaşılsın diye (bkz. js/ui/game.js BRANCHES). */
+.gmap__branch {
+  display: flex; align-items: center; gap: 8px;
+  margin: 10px 0; padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--surface); border: 2px dashed var(--line-2);
+  color: var(--ink); text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  font-size: .78rem; font-weight: 700; font-family: var(--font-display);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.gmap__branch:hover { transform: translateY(-2px); }
+.gmap__branch:active { transform: translateY(1px); }
+.gmap__branch-ico { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--present-bg); color: var(--present); flex: 0 0 auto; }
+.gmap__branch-ico .icon { width: 15px; height: 15px; }
+.gmap__branch-label { white-space: nowrap; }
+
+/* ---------- Kelime Eşleştir (bağımsız Oyun Modu dalı) ---------- */
+.wmatch { display: flex; gap: 10px; margin-top: 6px; }
+.wmatch__col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.wmatch__item {
+  display: block; width: 100%; text-align: center;
+  padding: .75em .5em;
+  border: 2px solid var(--line-2); border-radius: var(--r);
+  background: var(--surface); color: var(--ink);
+  font-weight: 600; font-size: .88rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-hard);
+  transition: transform .12s ease, box-shadow .12s ease, background .15s ease, opacity .25s ease;
+}
+.wmatch__item:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--line-2); }
+.wmatch__item:active:not(:disabled) { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--line-2); }
+.wmatch__item.is-selected { background: var(--mustard); border-color: var(--mustard-d); color: #3a2a06; }
+.wmatch__item.is-wrong { animation: wmatch-shake .32s ease; border-color: var(--terra); }
+.wmatch__item.is-solved { opacity: .32; pointer-events: none; box-shadow: none; transform: none; background: var(--green-100); border-color: var(--green-600); }
+.wmatch__done { margin-top: 18px; }
+@keyframes wmatch-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
 /* "Devam et": haritanın en üstünde, kaldığın durağa tek dokunuşla
    dönmeni sağlayan kart. İçindeki yüzde durağın değil TÜM haritanın
    ilerlemesi (bkz. renderMap, KI.store.gameNodesDoneCount). */

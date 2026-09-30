@@ -3,8 +3,9 @@
    Alıştırma sekmesindeki "Mini Test" modu için soru havuzu.
    Kaynak: proje kökündeki "mini test.md" (özgün olarak 500 satır,
    4 zorluk). Kaynakta aynı sorular birkaç kez tekrarlanıyordu ve 20
-   satırda A/B şıkkı birebir aynıydı; bunlar temizlendi - şimdi 170
-   satırın hepsi benzersiz ve geçerli (kolay 60, orta 30, zor 30,
+   satırda A/B şıkkı birebir aynıydı; bunlar temizlendi. Zor seviye
+   ayrıca 30'dan 60'a çıkarıldı (5 yeni konu × 6 şablon). Şimdi 200
+   satırın hepsi benzersiz ve geçerli (kolay 60, orta 30, zor 60,
    çok zor 50).
    ============================================================ */
 (function (KI) {
@@ -141,6 +142,36 @@
       { level: "zor", tip: "Boşluk doldurma · Future Perfect Continuous", en: "By 8 p.m., The scholarship committee will have been ____ the digital map for ten hours.", options: ["designed", "designing"], answer: 1 },
       { level: "zor", tip: "Zaman seçimi · Süre vurgusu", en: "Which option emphasizes duration up to now?", options: ["The neighborhood association has been evaluating the scholarship applications for months.", "The neighborhood association will have evaluated the scholarship applications by June."], answer: 0 },
       { level: "zor", tip: "Zaman seçimi · Future Perfect", en: "Which option shows completion before a future deadline?", options: ["The language club had been preparing the earthquake report when we arrived.", "The language club will have prepared the earthquake report by Friday."], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Present Perfect Continuous", en: "The ceramics workshop has been ____ the antique tiles for six months.", options: ["restoring", "restored"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Past Perfect Continuous", en: "The ceramics workshop had been ____ the antique tiles for two hours when the director arrived.", options: ["restore", "restoring"], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect", en: "The ceramics workshop will have ____ the antique tiles by next month.", options: ["restored", "restoring"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect Continuous", en: "By 8 p.m., the ceramics workshop will have been ____ the antique tiles for ten hours.", options: ["restored", "restoring"], answer: 1 },
+      { level: "zor", tip: "Zaman seçimi · Süre vurgusu", en: "Which option emphasizes duration up to now?", options: ["The ceramics workshop has been restoring the antique tiles for months.", "The ceramics workshop will have restored the antique tiles by June."], answer: 0 },
+      { level: "zor", tip: "Zaman seçimi · Future Perfect", en: "Which option shows completion before a future deadline?", options: ["The ceramics workshop had been restoring the antique tiles when we arrived.", "The ceramics workshop will have restored the antique tiles by Friday."], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Present Perfect Continuous", en: "The youth center has been ____ the reading marathon for six months.", options: ["organizing", "organized"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Past Perfect Continuous", en: "The youth center had been ____ the reading marathon for two hours when the director arrived.", options: ["organize", "organizing"], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect", en: "The youth center will have ____ the reading marathon by next month.", options: ["organized", "organizing"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect Continuous", en: "By 8 p.m., the youth center will have been ____ the reading marathon for ten hours.", options: ["organized", "organizing"], answer: 1 },
+      { level: "zor", tip: "Zaman seçimi · Süre vurgusu", en: "Which option emphasizes duration up to now?", options: ["The youth center has been organizing the reading marathon for months.", "The youth center will have organized the reading marathon by June."], answer: 0 },
+      { level: "zor", tip: "Zaman seçimi · Future Perfect", en: "Which option shows completion before a future deadline?", options: ["The youth center had been organizing the reading marathon when we arrived.", "The youth center will have organized the reading marathon by Friday."], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Present Perfect Continuous", en: "The fire department has been ____ the old apartment blocks for six months.", options: ["inspecting", "inspected"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Past Perfect Continuous", en: "The fire department had been ____ the old apartment blocks for two hours when the director arrived.", options: ["inspect", "inspecting"], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect", en: "The fire department will have ____ the old apartment blocks by next month.", options: ["inspected", "inspecting"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect Continuous", en: "By 8 p.m., the fire department will have been ____ the old apartment blocks for ten hours.", options: ["inspected", "inspecting"], answer: 1 },
+      { level: "zor", tip: "Zaman seçimi · Süre vurgusu", en: "Which option emphasizes duration up to now?", options: ["The fire department has been inspecting the old apartment blocks for months.", "The fire department will have inspected the old apartment blocks by June."], answer: 0 },
+      { level: "zor", tip: "Zaman seçimi · Future Perfect", en: "Which option shows completion before a future deadline?", options: ["The fire department had been inspecting the old apartment blocks when we arrived.", "The fire department will have inspected the old apartment blocks by Friday."], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Present Perfect Continuous", en: "The tourism office has been ____ the walking tour signs for six months.", options: ["translating", "translated"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Past Perfect Continuous", en: "The tourism office had been ____ the walking tour signs for two hours when the director arrived.", options: ["translate", "translating"], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect", en: "The tourism office will have ____ the walking tour signs by next month.", options: ["translated", "translating"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect Continuous", en: "By 8 p.m., the tourism office will have been ____ the walking tour signs for ten hours.", options: ["translated", "translating"], answer: 1 },
+      { level: "zor", tip: "Zaman seçimi · Süre vurgusu", en: "Which option emphasizes duration up to now?", options: ["The tourism office has been translating the walking tour signs for months.", "The tourism office will have translated the walking tour signs by June."], answer: 0 },
+      { level: "zor", tip: "Zaman seçimi · Future Perfect", en: "Which option shows completion before a future deadline?", options: ["The tourism office had been translating the walking tour signs when we arrived.", "The tourism office will have translated the walking tour signs by Friday."], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Present Perfect Continuous", en: "The research team has been ____ the well water samples for six months.", options: ["analyzing", "analyzed"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Past Perfect Continuous", en: "The research team had been ____ the well water samples for two hours when the director arrived.", options: ["analyze", "analyzing"], answer: 1 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect", en: "The research team will have ____ the well water samples by next month.", options: ["analyzed", "analyzing"], answer: 0 },
+      { level: "zor", tip: "Boşluk doldurma · Future Perfect Continuous", en: "By 8 p.m., the research team will have been ____ the well water samples for ten hours.", options: ["analyzed", "analyzing"], answer: 1 },
+      { level: "zor", tip: "Zaman seçimi · Süre vurgusu", en: "Which option emphasizes duration up to now?", options: ["The research team has been analyzing the well water samples for months.", "The research team will have analyzed the well water samples by June."], answer: 0 },
+      { level: "zor", tip: "Zaman seçimi · Future Perfect", en: "Which option shows completion before a future deadline?", options: ["The research team had been analyzing the well water samples when we arrived.", "The research team will have analyzed the well water samples by Friday."], answer: 1 },
       /* ---- cok-zor ---- */
       { level: "cok-zor", tip: "Kısa hikaye · Çıkarım", en: "At the village library, Derya found a notebook full of names. The librarian said those people had donated books before the new shelves arrived. Soru: What does the story imply?", options: ["The donations happened before the shelves arrived.", "The shelves arrived before anyone donated books."], answer: 0 },
       { level: "cok-zor", tip: "Kısa hikaye · Çıkarım", en: "Kemal had been waiting at the bus stop for forty minutes when the minibus finally appeared. He still reached the hospital before visiting hours ended. Soru: Which idea is correct?", options: ["Kemal missed the whole visiting period.", "Kemal waited for a long time but was not too late."], answer: 1 },
