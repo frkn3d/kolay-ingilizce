@@ -375,11 +375,11 @@ html[data-theme="dark"] .tcard__done .icon { color: var(--green-300); }
   display: grid; place-items: center; font-size: .72rem; font-weight: 700; }
 .opt.is-right {
   background: var(--ok-bg); border-color: var(--ok-edge);
-  box-shadow: 0 0 0 1px var(--ok-edge);
+  box-shadow: 3px 3px 0 var(--ok-edge);
 }
 .opt.is-wrong {
   background: var(--no-bg); border-color: var(--no-edge);
-  box-shadow: 0 0 0 1px var(--no-edge);
+  box-shadow: 3px 3px 0 var(--no-edge);
 }
 .opt.is-right .opt__key { background: var(--ok-edge); border-color: var(--ok-edge); color: var(--ok-key); font-size: .95rem; }
 .opt.is-wrong .opt__key { background: var(--no-edge); border-color: var(--no-edge); color: var(--no-key); font-size: .95rem; }

@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.19';
+  var APP_VERSION = '0.8.20';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.20', d: 'Sözlük (mavi) ve Alıştırma (hardal) sekmeleri artık kendi rengini taşıyor: aktif sekme, üst başlık etiketi ve kart çerçeveleri hafifçe o rengi alıyor, böylece hangi sekmede olduğun daha net hissediliyor. Ayrıca alıştırmalarda doğru/yanlış cevap kutuları koyu temada artık çevresindeki yeşille karışmıyor: doğru cevap daha canlı bir yeşile çekildi ve her iki durum da belirgin bir gölgeyle öne çıkıyor.' },
     { v: '0.8.19', d: 'Günlük Hayat\'a yeni bir hikaye eklendi: "Bir Counter-Strike Gecesi". Emre ve arkadaşları akşam bir maça girerken headshot, reload, clutch, GG gibi oyun oynarken gerçekten kullanılan İngilizce kelime ve ifadeleri doğal bir anlatı içinde öğretiyor.' },
     { v: '0.8.18', d: 'Kelime Eşleştir daha eğlenceli göründüğü: yuvarlak, kalın bir yazı tipi ve İngilizce/Türkçe grupları için birbirinden farklı renkler (mor/altın), tam eşleşince küçük bir konfeti patlaması eklendi. Oyun Modu haritasında bir soruya girip geri dönünce ekran artık en üste atılmıyor, kaldığın durağa geri dönüyor; haritaya ilk girişte de doğrudan en son kaldığın durağa kayıyor.' },
     { v: '0.8.17', d: 'Koyu temadaki "beyaz çakma" sorunu bir önceki sürümde tam çözülmemişti: asıl sebep, giriş ekranının arka planını çizen CSS kısayolunun body\'nin arka plan rengini görünmez (saydam) bir değere sıfırlaması, giriş ekranından çıkarken de body\'de zaten var olan 0.4 saniyelik geçiş efektinin bu saydamlık üzerinden altındaki beyaz tarayıcı zeminini kısa süreliğine göstermesiydi. Şimdi arka plan rengi açıkça belirtiliyor, geçiş hep koyu tondan koyu tona akıyor.' },

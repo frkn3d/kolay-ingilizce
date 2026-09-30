@@ -22,6 +22,7 @@
 
   --mustard:   #d9a03c;
   --mustard-d: #b8822a;
+  --mustard-bg:#f6ead0;
   --terra:     #b5542f;
   --terra-l:   #d8825c;
   --plum:      #6d4a7a;
@@ -95,9 +96,14 @@ html[data-theme="dark"] {
   --accent:    var(--green-400);
   --accent-ink:#0f2a1c;
   --link:      #9ccdae;
-  --ok-bg:     #26603f;
-  --ok-edge:   #6fbb8d;
-  --ok-key:    #0d1f14;
+  /* Koyu temada genel arayüz zaten baştan aşağı yeşil (bkz. --bg, --surface,
+     --accent) - eski --ok-bg (#26603f) bu yeşilin içinde neredeyse
+     kayboluyordu ("doğru cevap" hissi vermiyordu). Daha canlı/doygun bir
+     yeşile çekildi, ayrıca .opt.is-right'a eklenen sert (retro) gölge de
+     bu tonu çevresinden daha net ayırıyor. */
+  --ok-bg:     #1c8f57;
+  --ok-edge:   #85e6ad;
+  --ok-key:    #06170d;
   --no-bg:     #85462b;
   --no-edge:   #e5a284;
   --no-key:    #2b1408;
@@ -112,6 +118,7 @@ html[data-theme="dark"] {
   --tl-mini-future: #456e6f;
 
   --mustard:   #e0b25c;
+  --mustard-bg:#3a2c10;
   --shadow-hard: 3px 3px 0 #0a1410;
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, .35);
 }
@@ -155,6 +162,34 @@ html[data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg
 html[data-theme="dark"][data-section="temeller"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--past) 4%); }
 html[data-theme="dark"][data-section="alistirma"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--mustard) 4%); }
 html[data-theme="dark"][data-section="sozluk"] body { background-color: color-mix(in srgb, var(--bg) 96%, var(--future) 4%); }
+
+/* Yukarıdaki gövde tonu tek başına neredeyse fark edilmiyordu; Sözlük ve
+   Alıştırma'da aktif sekmeye, üstteki küçük başlık etiketine (eyebrow) ve
+   kart/satır çerçevelerine de aynı vurgu rengi hafifçe sızıyor ki kullanıcı
+   iki sekmenin de kendine özgü bir kimliği olduğunu net hissetsin - özellikle
+   koyu temada her yerin aynı yeşil olması karışıklık yaratıyordu. */
+html[data-section="sozluk"] .eyebrow { color: var(--future); }
+html[data-section="sozluk"] .tab.is-active { color: var(--future); border-top-color: var(--future); background: var(--future-bg); }
+/* layout.css'teki "html[data-theme=dark] .tab.is-active" kuralı bu
+   dosyadan sonra yüklenir ve özgüllüğü eşittir; koyu temada o kazanmasın
+   diye tema+bölüm birlikte hedeflenip özgüllük kasıtlı artırılıyor. */
+html[data-theme="dark"][data-section="sozluk"] .tab.is-active { color: var(--future); background: var(--future-bg); }
+html[data-section="sozluk"] .card:not(.minitest-card),
+html[data-section="sozluk"] .wrow,
+html[data-section="sozluk"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--future) 45%); }
+html[data-section="sozluk"] .hub-card__ico { background: var(--future-bg); color: var(--future); border-color: color-mix(in srgb, var(--line-2) 45%, var(--future) 35%); }
+/* components.css'teki genel "html[data-theme=dark] .hub-card__ico" kuralı
+   bu dosyadan sonra yüklendiği ve aynı özgüllükte olduğu için, koyu temada
+   kazanan o olurdu - burada tema+bölüm birlikte hedeflenerek özgüllük
+   kasıtlı olarak artırılıyor ki koyu temada da mavi ikon rengi kazansın. */
+html[data-theme="dark"][data-section="sozluk"] .hub-card__ico { background: var(--future-bg); color: var(--future); border-color: var(--line-2); }
+
+html[data-section="alistirma"] .eyebrow { color: var(--mustard-d); }
+html[data-theme="dark"][data-section="alistirma"] .eyebrow { color: var(--mustard); }
+html[data-section="alistirma"] .tab.is-active { color: var(--mustard-d); border-top-color: var(--mustard); background: var(--mustard-bg); }
+html[data-theme="dark"][data-section="alistirma"] .tab.is-active { color: var(--mustard); background: var(--mustard-bg); }
+html[data-section="alistirma"] .card:not(.minitest-card),
+html[data-section="alistirma"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--mustard) 45%); }
 
 /* Oyun Modu, Eğitim Modu'nun kağıt/defter kimliğinden tamamen ayrışan,
    açık/koyu tema tercihinden bağımsız (Giriş ekranı gibi) kendi koyu
