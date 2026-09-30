@@ -148,6 +148,91 @@
     'mince|kıymak (eti)|fiil', 'content|memnun, huzurlu|sıfat'
   ]);
 
+  /* ---- Günlük Hayat'ın üçüncü hikayesi: bir arkadaş grubunun akşam
+     Counter-Strike oynaması. Amaç, oyun oynarken gerçekten kullanılan
+     İngilizce oyun terimlerini (headshot, reload, clutch, GG vb.)
+     doğal bir günlük hayat anlatısı içinde öğretmek. ---- */
+  S.push({
+    id: 'oyun-gecesi',
+    cat: 'gunluk',
+    title: 'A Counter-Strike Night',
+    tr: 'Bir Counter-Strike Gecesi',
+    summary: 'Emre, ödevini bitirdikten sonra arkadaşları Ali ve Hasan ile Counter-Strike oynar; ekip çalışması, gerginlik dolu bir tur ve tek başına kazanılan inanılmaz bir "clutch" turu yaşarlar.',
+    sentences: [
+      { en: 'It was Friday evening, and Emre had just finished all of his homework.', tr: 'Cuma akşamıydı ve Emre bütün ödevlerini yeni bitirmişti.' },
+      { en: 'He closed his notebook, stretched his arms, and looked at the clock on the wall.', tr: 'Defterini kapattı, kollarını gerdi ve duvardaki saate baktı.' },
+      { en: '"Finally," he said to himself, "now I can play Counter-Strike with the boys."', tr: 'Kendi kendine, "Sonunda," dedi, "şimdi çocuklarla Counter-Strike oynayabilirim."' },
+      { en: 'He grabbed a small snack from the kitchen and went straight to his room.', tr: 'Mutfaktan küçük bir atıştırmalık kaptı ve doğruca odasına gitti.' },
+      { en: 'His computer was already on, and the screen was glowing brightly on the desk.', tr: 'Bilgisayarı zaten açıktı ve ekran masanın üstünde parlak bir şekilde parlıyordu.' },
+      { en: 'He sat down, put on his headset, and turned on the microphone.', tr: 'Oturdu, kulaklığını taktı ve mikrofonunu açtı.' },
+      { en: 'He opened the lobby and saw that his two teammates, Ali and Hasan, were already online.', tr: 'Lobiyi açtı ve iki takım arkadaşı Ali ile Hasan\'ın zaten çevrimiçi olduğunu gördü.', brk: true },
+      { en: '"Hey, are you guys ready for tonight?" Emre asked through the chat.', tr: 'Emre sohbet üzerinden, "Hey, bu geceye hazır mısınız?" diye sordu.' },
+      { en: '"Ready as always," Hasan answered with a laugh. "Let\'s find a match."', tr: 'Hasan gülerek, "Her zamanki gibi hazırız," diye cevap verdi. "Hadi bir maç bulalım."' },
+      { en: 'Ali joined the voice channel a moment later, sounding excited.', tr: 'Ali bir dakika sonra ses kanalına katıldı, heyecanlı duyuluyordu.' },
+      { en: '"My ping is a little high tonight," Ali said, "but I think it will be fine."', tr: 'Ali, "Bu gece pingim biraz yüksek," dedi, "ama sanırım sorun olmaz."' },
+      { en: 'Emre checked his own connection and clicked the button to search for an online match.', tr: 'Emre kendi bağlantısını kontrol etti ve çevrimiçi bir maç aramak için düğmeye tıkladı.' },
+      { en: 'After a short wait, the lobby found a server with ten players.', tr: 'Kısa bir bekleyişten sonra lobi, on oyunculu bir sunucu buldu.' },
+      { en: 'Emre\'s team became the defenders, and the other five players became the attackers.', tr: 'Emre\'nin takımı savunmacı oldu, diğer beş oyuncu da saldırgan oldu.', brk: true },
+      { en: 'At the start of the round, everyone bought their weapons from the shop.', tr: 'Turun başında herkes silahlarını dükkândan satın aldı.' },
+      { en: 'Emre chose a rifle and a kevlar vest, while Hasan bought a pistol and two grenades.', tr: 'Emre bir tüfek ve bir kevlar yelek seçti, Hasan ise bir tabanca ve iki el bombası aldı.' },
+      { en: '"Do not spend all your money," Ali warned, "we might need to save it for the next round."', tr: 'Ali, "Bütün paranı harcama," diye uyardı, "bir sonraki tur için biriktirmemiz gerekebilir."' },
+      { en: '"This is only an economy round for the other team," Emre said. "They will not have strong weapons yet."', tr: 'Emre, "Bu diğer takım için sadece bir ekonomi turu," dedi. "Henüz güçlü silahları olmayacak."' },
+      { en: 'The round began, and the three friends spread out to watch different parts of the map.', tr: 'Tur başladı ve üç arkadaş haritanın farklı bölümlerini izlemek için ayrıldı.' },
+      { en: '"I can hear footsteps near the bomb site," Hasan whispered into the microphone.', tr: 'Hasan mikrofona fısıldayarak, "Bomba bölgesinin yakınında ayak sesleri duyuyorum," dedi.', brk: true },
+      { en: '"Hold your position," Emre said quietly, "do not move from that angle."', tr: 'Emre sessizce, "Yerinde kal," dedi, "o açıdan ayrılma."' },
+      { en: 'Suddenly, an enemy player ran around the corner, and Emre fired quickly.', tr: 'Aniden bir düşman oyuncu köşeden koştu ve Emre hızlıca ateş etti.' },
+      { en: '"Headshot!" Ali shouted happily. "Nice shot, Emre!"', tr: 'Ali mutlulukla, "Kafadan vuruş!" diye bağırdı. "Güzel atış, Emre!"' },
+      { en: 'One of their teammates was killed a moment later, and a new enemy tried to plant the bomb.', tr: 'Bir dakika sonra takım arkadaşlarından biri öldürüldü ve yeni bir düşman bombayı kurmaya çalıştı.' },
+      { en: 'Hasan threw a smoke grenade to block the enemy\'s view of the site.', tr: 'Hasan, düşmanın bölgeyi görmesini engellemek için bir duman bombası attı.' },
+      { en: '"Reload now, while it is quiet," Emre reminded his friends.', tr: 'Emre arkadaşlarına, "Sessizken şimdi doldur," diye hatırlattı.' },
+      { en: 'They defused the bomb just in time, and the round ended in victory.', tr: 'Bombayı tam zamanında etkisiz hale getirdiler ve tur zaferle sona erdi.' },
+      { en: '"My game is lagging again," Ali complained. "The screen froze for two seconds."', tr: 'Ali şikayet ederek, "Oyunum yine donuyor," dedi. "Ekran iki saniye kilitlendi."', brk: true },
+      { en: '"Maybe you should close some other programs," Emre suggested.', tr: 'Emre, "Belki diğer programları kapatmalısın," diye önerdi.' },
+      { en: 'Between rounds, the three friends talked and laughed about their day at school.', tr: 'Turlar arasında üç arkadaş okuldaki günleri hakkında konuşup güldüler.' },
+      { en: '"I have an exam tomorrow morning," Hasan said, "but I promised myself just one hour of gaming."', tr: 'Hasan, "Yarın sabah sınavım var," dedi, "ama kendime sadece bir saat oyun sözü verdim."' },
+      { en: '"One hour always becomes three hours," Ali joked, and they all laughed loudly.', tr: 'Ali şakayla, "Bir saat hep üç saate dönüşür," dedi ve hepsi yüksek sesle güldü.' },
+      { en: 'In the final round, something went wrong, and both of Emre\'s teammates were killed quickly.', tr: 'Son turda bir şeyler ters gitti ve Emre\'nin iki takım arkadaşı da hızlıca öldürüldü.', brk: true },
+      { en: '"It\'s just you now, Emre," Hasan said. "Three against one, but we believe in you."', tr: 'Hasan, "Artık sadece sen varsın Emre," dedi. "Üçe bir ama sana inanıyoruz."' },
+      { en: 'Emre took a deep breath and moved carefully from corner to corner.', tr: 'Emre derin bir nefes aldı ve köşeden köşeye dikkatlice hareket etti.' },
+      { en: 'He listened closely for footsteps and kept his aim ready on every angle.', tr: 'Ayak seslerini dikkatle dinledi ve her açıda nişanını hazır tuttu.' },
+      { en: 'One opponent stepped into view, and Emre hit him with a clean headshot.', tr: 'Bir rakip görüş alanına girdi ve Emre onu temiz bir kafa vuruşuyla vurdu.' },
+      { en: 'Two enemies remained, and Emre felt nervous, but he stayed calm and quiet.', tr: 'İki düşman kalmıştı ve Emre gergin hissetti, ama sakin ve sessiz kaldı.' },
+      { en: 'The last two enemies came together through the hallway.', tr: 'Son iki düşman koridordan birlikte geldi.' },
+      { en: 'Emre aimed carefully and fired twice, and both enemies fell to the ground.', tr: 'Emre dikkatlice nişan aldı ve iki kez ateş etti, iki düşman da yere düştü.' },
+      { en: '"Clutch! Unbelievable!" Ali screamed with joy. "You are the best player tonight!"', tr: 'Ali sevinçle haykırdı, "Tek başına kurtardın! İnanılmaz!" "Bu gece en iyi oyuncu sensin!"' },
+      { en: 'The word "Victory" appeared on the screen, and the three friends cheered together.', tr: 'Ekranda "Zafer" yazısı belirdi ve üç arkadaş birlikte tezahürat yaptı.' },
+      { en: 'After a few more matches, Emre\'s mother knocked on his door.', tr: 'Birkaç maç daha sonra Emre\'nin annesi kapısını çaldı.', brk: true },
+      { en: '"It\'s getting late, and you have school tomorrow," she said gently.', tr: 'Nazikçe, "Vakit geç oluyor ve yarın okulun var," dedi.' },
+      { en: '"Okay, Mom, just one more round," Emre replied, and his friends laughed at the familiar joke.', tr: 'Emre, "Tamam anne, sadece bir tur daha," diye cevap verdi ve arkadaşları tanıdık şakaya güldü.' },
+      { en: 'They said "GG" to each other, which means "good game," and left the voice channel.', tr: 'Birbirlerine "GG" dediler, bu "iyi oyundu" anlamına geliyor, ve ses kanalından ayrıldılar.' },
+      { en: 'Emre turned off his computer, feeling happy and a little tired.', tr: 'Emre bilgisayarını kapattı, mutlu ve biraz yorgun hissediyordu.' },
+      { en: 'He turned off the light and got into bed, already thinking about tomorrow\'s match.', tr: 'Işığı kapattı ve yatağa girdi, şimdiden yarınki maçı düşünüyordu.' },
+      { en: 'In the end, homework, a well-earned snack, and one incredible clutch round had made it a perfect Friday night.', tr: 'Sonunda, ödev, hak edilmiş bir atıştırmalık ve inanılmaz bir kurtarış turu, mükemmel bir Cuma gecesi yaratmıştı.' }
+    ]
+  });
+
+  /* ---- yukarıdaki hikayede geçen, sözlükte eksik kelimeler; ayrıca
+     "clutch", "plant" ve "fire" gibi zaten var olan kelimelere bu
+     hikayede geçen oyun anlamlarını da ekliyoruz (mevcut anlamı silmeden). ---- */
+  KI.glossary.addWords([
+    'headset|kulaklık (mikrofonlu)|isim', 'microphone|mikrofon|isim', 'lobby|bekleme odası, lobi|isim',
+    'teammate|takım arkadaşı|isim', 'online|çevrimiçi|sıfat', 'chat|sohbet|isim',
+    'ping|gecikme süresi (oyunda)|isim', 'rifle|tüfek|isim', 'kevlar|kurşun geçirmez yelek malzemesi|isim',
+    'vest|yelek|isim', 'grenade|el bombası|isim', 'headshot|kafadan vuruş|isim',
+    'angle|açı|isim', 'smoke|duman; (oyunda) duman bombası|isim', 'reload|yeniden doldurmak, yeniden yüklemek|fiil',
+    'defuse|(bombayı) etkisiz hale getirmek|fiil', 'lag|donmak, gecikmek|fiil', 'froze|dondu, kilitlendi|fiil',
+    'opponent|rakip|isim', 'site|alan, bölge; (oyunda) bomba bölgesi|isim', 'unbelievable|inanılmaz|sıfat',
+    'clutch|debriyaj; (oyunda) az kişiyle tek başına turu kurtarmak|isim',
+    'plant|dikmek; (oyunda) bombayı kurmak|fiil',
+    'fire|ateşlemek, ateş etmek; işten çıkarmak|fiil',
+    'snack|atıştırmalık|isim', 'glow|parlamak, ışıldamak|fiil', 'hey|hey (selam, dikkat çekme ünlemi)|ünlem',
+    'guy|adam, tip (arkadaşça hitap)|isim', 'defender|savunmacı|isim', 'attacker|saldırgan|isim',
+    'pistol|tabanca|isim', 'footstep|ayak sesi|isim', 'position|pozisyon, konum|isim',
+    'view|görüş, manzara|isim', 'against|karşı|edat', 'aim|nişan almak, hedeflemek|fiil',
+    'scream|çığlık atmak|fiil', 'cheer|tezahürat yapmak|fiil', 'okay|tamam|ünlem',
+    'mom|anne (samimi hitap)|isim', 'well-earned|hak edilmiş|sıfat'
+  ]);
+
   S.push({
     id: 'ay-mi-gunes-mi',
     cat: 'nasreddin',

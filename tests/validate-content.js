@@ -64,7 +64,11 @@ var UNTRANSLATED_PROPER_NOUNS = {
   ayşe: 1, yusuf: 1,
   /* "dolmuş": sondaki Türkçe ş harfi temizleme regex'i tarafından atılıyor,
      geriye "dolmu" kalıyor. */
-  dolmu: 1
+  dolmu: 1,
+  /* "Counter-Strike": gerçek, bilinen bir oyun adı - şehir/kişi adı gibi
+     çevrilmeye ihtiyacı yok. "GG" ise "good game" için evrensel bir oyun
+     kısaltması, hikayede zaten açıklamasıyla birlikte geçiyor. */
+  'counter-strike': 1, gg: 1
 };
 function isExemptWord(clean) {
   var w = clean.toLowerCase().replace(/['’]s$/, '');
