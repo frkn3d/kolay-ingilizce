@@ -98,7 +98,12 @@
 
     if (KI.viewGame) KI.viewGame.syncChrome(hit ? hit.tab : null);
 
-    if (lastPath !== null && lastPath !== path) U.scrollTop();
+    /* Oyun Modu haritası kendi kaydırma konumunu kendi yönetir (bkz.
+       game.js renderMap: kaldığın durağa otomatik kayar) - buradaki genel
+       "her rotada en üste dön" davranışı yalnız bu rota için atlanır,
+       yoksa haritanın kendi kaydırması bununla yarışıp üstte kalırdı. */
+    var isGameMap = !!(hit && hit.tab === 'oyun' && /^\/oyun\/?$/.test(path));
+    if (lastPath !== null && lastPath !== path && !isGameMap) U.scrollTop();
     lastPath = path;
     view.focus({ preventScroll: true });
   }

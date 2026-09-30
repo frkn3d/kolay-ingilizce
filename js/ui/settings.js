@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.17';
+  var APP_VERSION = '0.8.18';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.18', d: 'Kelime Eşleştir daha eğlenceli göründüğü: yuvarlak, kalın bir yazı tipi ve İngilizce/Türkçe grupları için birbirinden farklı renkler (mor/altın), tam eşleşince küçük bir konfeti patlaması eklendi. Oyun Modu haritasında bir soruya girip geri dönünce ekran artık en üste atılmıyor, kaldığın durağa geri dönüyor; haritaya ilk girişte de doğrudan en son kaldığın durağa kayıyor.' },
     { v: '0.8.17', d: 'Koyu temadaki "beyaz çakma" sorunu bir önceki sürümde tam çözülmemişti: asıl sebep, giriş ekranının arka planını çizen CSS kısayolunun body\'nin arka plan rengini görünmez (saydam) bir değere sıfırlaması, giriş ekranından çıkarken de body\'de zaten var olan 0.4 saniyelik geçiş efektinin bu saydamlık üzerinden altındaki beyaz tarayıcı zeminini kısa süreliğine göstermesiydi. Şimdi arka plan rengi açıkça belirtiliyor, geçiş hep koyu tondan koyu tona akıyor.' },
     { v: '0.8.16', d: 'Mini Test\'te Zor seviye 30\'dan 60 benzersiz soruya çıkarıldı (toplam havuz artık 200 soru). README güncellendi: eski "günlük 5 can" ve "720 soru" gibi ifadeler gerçek sayılarla değiştirildi, Hikayeler/Zaman Yolculuğu/Mini Test/Başarımlar gibi sonradan eklenen bölümler artık dokümante ediliyor. Oyun Modu haritasına yeni, koşulsuz bir bağımsız mod eklendi: "Kelime Eşleştir" - haritanın kenarına ara sıra serpiştirilen dallardan girilir, 5 İngilizce kelimeyi 5 Türkçe karşılığıyla eşleştirmeye çalışırsın, doğru eşleşenler silikleşir. Bu moda girmenin hiçbir ön koşulu yok, can harcamaz, istediğin an oynanabilir.' },
     { v: '0.8.14', d: 'Koyu tema açıkken bazı sayfalara girince görülen kısa "beyaz çakma" (flash) sorunu giderildi - tema artık sayfa boyanmadan önce uygulanıyor. "Bugünün Çalışması"na 3 yeni başarım eklendi: bir kez tamamlama, üst üste 3 gün tamamlama ve toplamda 7 kez tamamlama.' },

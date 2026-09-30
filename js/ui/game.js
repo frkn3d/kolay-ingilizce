@@ -358,6 +358,7 @@
     /* "Devam et": haritada kaldığın yere tek dokunuşla dön. İçindeki
        yüzde, o durağın değil, HARİTANIN TAMAMININ ilerlemesidir. */
     var current = findCurrentNode();
+    var currentStopEl = null;
     var pct = Math.round(KI.store.gameNodesDoneCount() / totalNodesCount() * 100);
     if (current) {
       var isCp = current.node.kind === 'checkpoint';
@@ -411,6 +412,7 @@
 
         var isCurrent = !!(current && current.level.id === level.id && current.node.id === node.id);
         var stop = U.el('div', { class: 'gmap__stop' + (isCp ? ' gmap__stop--cp' : ''), style: 'transform:translateX(' + offset + 'px)', 'data-node': node.id });
+        if (isCurrent) currentStopEl = stop;
 
         var nodeCls = 'gmap__node' + (isCp ? ' gmap__node--checkpoint' : '') +
           (done ? ' gmap__node--done' : (tUnlocked ? ' gmap__node--next' : ' gmap__node--locked')) +
@@ -473,6 +475,21 @@
     frag.appendChild(wrap);
     frag.appendChild(U.el('p', { class: 'gmap__footnote soft',
       text: 'İlerlemen yalnızca bu cihazda saklanıyor · Ayarlar\'dan yedekleyebilirsin' }));
+
+    /* Haritaya her girişte (ilk kez ya da bir sorudan geri dönünce) sayfa
+       en üste atılmasın, kaldığın durağa (current) otomatik kaysın - bkz.
+       app.js paint()'teki genel scrollTop() çağrısının harita rotası için
+       bilerek atlanması. Bu fonksiyon senkron bittiğinde döndürdüğü
+       fragment henüz #view'a eklenmemiş olduğu için, düğüm gerçekten
+       belgeye girdikten sonra (bir sonraki animasyon karesinde) kaydırma
+       yapılır. */
+    requestAnimationFrame(function () {
+      if (currentStopEl && document.body.contains(currentStopEl)) {
+        currentStopEl.scrollIntoView({ block: 'center' });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    });
     return frag;
   }
 

@@ -305,29 +305,57 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__branch-ico .icon { width: 15px; height: 15px; }
 .gmap__branch-label { white-space: nowrap; }
 
-/* ---------- Kelime Eşleştir (bağımsız Oyun Modu dalı) ---------- */
-.wmatch { display: flex; gap: 10px; margin-top: 6px; }
-.wmatch__col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+/* ---------- Kelime Eşleştir (bağımsız Oyun Modu dalı) ----------
+   Eğlenceli hissettirsin diye Oyun Modu'nun yuvarlak, kalın başlık
+   yazı tipini (Quicksand, bkz. yukarıdaki --font-display geçersiz
+   kılma) ve iki grubu (İngilizce/Türkçe) birbirinden görünür şekilde
+   ayıran, Oyun Modu'nun kendi vurgu renklerinden (mor/altın) gelen
+   iki ayrı renk kimliği kullanır. */
+.wmatch { display: flex; gap: 12px; margin-top: 10px; }
+.wmatch__side { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.wmatch__heading {
+  align-self: center;
+  font-family: var(--font-display); font-weight: 700; font-size: .78rem;
+  letter-spacing: .04em; text-transform: uppercase;
+  padding: .3em .9em; border-radius: 999px;
+}
+.wmatch__heading--en { background: color-mix(in srgb, var(--accent) 24%, transparent); color: var(--accent); }
+.wmatch__heading--tr { background: color-mix(in srgb, var(--mustard) 26%, transparent); color: var(--mustard); }
+.wmatch__col { display: flex; flex-direction: column; gap: 10px; }
 .wmatch__item {
   display: block; width: 100%; text-align: center;
-  padding: .75em .5em;
-  border: 2px solid var(--line-2); border-radius: var(--r);
+  padding: .8em .5em;
+  border: 3px solid var(--line-2); border-radius: var(--r-lg);
   background: var(--surface); color: var(--ink);
-  font-weight: 600; font-size: .88rem;
+  font-family: var(--font-display); font-weight: 700; font-size: .92rem;
   cursor: pointer;
   box-shadow: var(--shadow-hard);
   transition: transform .12s ease, box-shadow .12s ease, background .15s ease, opacity .25s ease;
 }
-.wmatch__item:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--line-2); }
+.wmatch__item:hover:not(:disabled) { transform: translate(-1px, -1px) scale(1.02); box-shadow: 4px 4px 0 var(--line-2); }
 .wmatch__item:active:not(:disabled) { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--line-2); }
-.wmatch__item.is-selected { background: var(--mustard); border-color: var(--mustard-d); color: #3a2a06; }
+/* İki grup, seçilmemiş hâlde bile birbirinden ayırt edilsin diye hafif
+   renkli bir zemin ve çerçeveyle başlar. */
+.wmatch__item--en { border-color: color-mix(in srgb, var(--accent) 55%, var(--line-2)); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.wmatch__item--tr { border-color: color-mix(in srgb, var(--mustard) 60%, var(--line-2)); background: color-mix(in srgb, var(--mustard) 12%, var(--surface)); }
+.wmatch__item--en.is-selected { background: var(--accent); border-color: #4c40a3; color: var(--accent-ink); }
+.wmatch__item--tr.is-selected { background: var(--mustard); border-color: var(--mustard-d); color: #3a2a06; }
 .wmatch__item.is-wrong { animation: wmatch-shake .32s ease; border-color: var(--terra); }
-.wmatch__item.is-solved { opacity: .32; pointer-events: none; box-shadow: none; transform: none; background: var(--green-100); border-color: var(--green-600); }
+.wmatch__item.is-solved {
+  animation: wmatch-pop .32s ease;
+  opacity: .35; pointer-events: none; box-shadow: none;
+  background: var(--green-100); border-color: var(--green-600); color: var(--green-700);
+}
 .wmatch__done { margin-top: 18px; }
 @keyframes wmatch-shake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+  25% { transform: translateX(-5px) rotate(-2deg); }
+  75% { transform: translateX(5px) rotate(2deg); }
+}
+@keyframes wmatch-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }
 
 /* "Devam et": haritanın en üstünde, kaldığın durağa tek dokunuşla

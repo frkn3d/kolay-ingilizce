@@ -42,8 +42,14 @@
     var board = U.el('div', { class: 'wmatch' });
     var leftCol = U.el('div', { class: 'wmatch__col' });
     var rightCol = U.el('div', { class: 'wmatch__col' });
-    board.appendChild(leftCol);
-    board.appendChild(rightCol);
+    board.appendChild(U.el('div', { class: 'wmatch__side wmatch__side--en' }, [
+      U.el('span', { class: 'wmatch__heading wmatch__heading--en', text: 'İngilizce' }),
+      leftCol
+    ]));
+    board.appendChild(U.el('div', { class: 'wmatch__side wmatch__side--tr' }, [
+      U.el('span', { class: 'wmatch__heading wmatch__heading--tr', text: 'Türkçe' }),
+      rightCol
+    ]));
     frag.appendChild(board);
 
     var doneBox = U.el('div', { class: 'wmatch__done', hidden: true });
@@ -70,6 +76,7 @@
         solvedCount++;
         if (solvedCount === words.length) {
           KI.audio.play('finish');
+          if (KI.confetti) KI.confetti.burst();
           setTimeout(showDone, 500);
         }
       } else {
@@ -83,8 +90,9 @@
     }
 
     function makeCol(order, col, labelKey) {
+      var groupCls = labelKey === 'en' ? 'wmatch__item--en' : 'wmatch__item--tr';
       order.forEach(function (idx) {
-        var btn = U.el('button', { class: 'wmatch__item', type: 'button', text: words[idx][labelKey] });
+        var btn = U.el('button', { class: 'wmatch__item ' + groupCls, type: 'button', text: words[idx][labelKey] });
         btn.addEventListener('click', function () {
           if (btn.disabled) return;
           KI.audio.play('tap');
