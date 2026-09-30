@@ -88,9 +88,16 @@ body.is-gate .view { padding: 0; max-width: none; }
 /* Giriş ekranının arka planı, uygulamanın açık/koyu tema tercihinden
    bağımsız olarak her zaman koyudur (defter dokusu yok): logonun
    arkasında hafif sıcak bir parıltı veren, yeşil tonlarına doğru
-   koyulaşan bir radyal gradyan - markanın kendi renkleriyle uyumlu. */
+   koyulaşan bir radyal gradyan - markanın kendi renkleriyle uyumlu.
+   background-color AYRICA ve AÇIKÇA belirtiliyor (background kısayolu
+   kullanılmıyor): body'nin transition: background-color .4s'i olduğu
+   için (bkz. base.css), kısayol background-color'ı "transparent"a
+   sıfırlıyordu - girişten çıkarken bu 0.4 saniyelik geçiş sırasında
+   body şeffaflaşıp altındaki beyaz tarayıcı zeminini gösteriyordu; bu
+   da koyu temada kısa bir "beyaz çakma" gibi görünüyordu. */
 body.is-gate {
-  background:
+  background-color: var(--green-800);
+  background-image:
     radial-gradient(60% 46% at 50% 20%, color-mix(in srgb, var(--mustard) 38%, transparent) 0%, transparent 72%),
     radial-gradient(120% 95% at 50% 0%, var(--green-600) 0%, var(--green-800) 48%, #081209 100%);
   background-attachment: fixed;
