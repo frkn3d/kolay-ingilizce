@@ -142,8 +142,14 @@
        olarak sayılır. */
     var bottom = U.el('div', { class: 'gate__bottom' });
     bottom.appendChild(dailyButton());
-    bottom.appendChild(U.el('p', { class: 'gate__footnote',
-      text: 'Logspace' + (KI.appVersion ? ' · v' + KI.appVersion : '') }));
+    var footnote = U.el('button', { class: 'gate__footnote', type: 'button',
+      text: 'Logspace' + (KI.appVersion ? ' · v' + KI.appVersion : '') });
+    footnote.addEventListener('click', function () {
+      KI.settings.openAbout();
+      KI.util.openModal(document.getElementById('settings-modal'), footnote);
+      KI.audio.play('open');
+    });
+    bottom.appendChild(footnote);
     wrap.appendChild(bottom);
 
     frag.appendChild(wrap);

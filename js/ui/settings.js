@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.26';
+  var APP_VERSION = '0.8.27';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.27', d: 'Giriş ekranı, büyük yazı boyutuyla en küçük telefonlarda kayma oluşturabiliyordu; logo, kartlar ve Nasıl Kullanılır/İstatistikler düğmeleri biraz daraltıldı, bu kayma tamamen gitti. Alttaki "Logspace · sürüm" yazısı artık tıklanabilir: Ayarlar\'ı doğrudan Hakkında sekmesinde açıyor.' },
     { v: '0.8.26', d: 'Küçük pencerelerden biri açıkken arkadaki sayfa artık kaymıyor (kapanınca kaldığın yere geri dönüyorsun). Harita sekmesinde üstteki sarı NOW noktasına dokununca da, çizgiye dokunmuş gibi aşağıdaki kartların kuralı değişiyor; bu yeni davranışı fark ettirmek için Harita\'ya her girişte noktanın üstünde kısa bir dokunma ipucu beliriyor.' },
     { v: '0.8.25', d: 'Bir önceki sürümdeki arka plan bulanıklığı yalnızca Ayarlar\'daydı; artık Bugünün Çalışması, Başarımlar, Canlar ve sıfırlama onayı gibi küçük pencere şeklinde açılan her şeyde aynı hafif bulanıklık var.' },
     { v: '0.8.24', d: 'Ayarlar penceresi açıkken arkadaki sayfa artık hafifçe bulanıklaşıyor (cam buzlu etkisi). Telefonu yormasın diye bulanıklık düşük tutuldu ve "Animasyonları azalt" açıkken ya da sistemin azaltılmış hareket tercihinde tamamen kapanıyor.' },
@@ -363,5 +364,12 @@
     build();
   }
 
-  KI.settings = { build: build, open: open };
+  /* Giriş ekranındaki "Logspace · vX.X" yazısına dokununca Ayarlar
+     doğrudan Hakkında sekmesinde açılsın diye (bkz. gate.js). */
+  function openAbout() {
+    activeTab = 'hakkinda';
+    build();
+  }
+
+  KI.settings = { build: build, open: open, openAbout: openAbout };
 })(window.KI);
