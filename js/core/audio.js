@@ -111,6 +111,12 @@
     },
     star: function () { tone(1318.5, 0.08, 'sine', 0, 0.25); tone(1760, 0.14, 'sine', 0.07, 0.22); },
     toggle: function () { click(0.25, 1100); },
+    /* Harita: kural kartlarının dönmesi - yumuşak, kısa bir "kart çevirme" */
+    swap: function () { click(0.16, 1800); tone(740, 0.06, 'sine', 0, 0.16, 990); tone(990, 0.08, 'sine', 0.05, 0.12); },
+    /* alt menü sekmeleri: nav'dan daha hafif tek bir tık */
+    tab: function () { click(0.20, 1300); tone(587.33, 0.06, 'sine', 0, 0.14); },
+    /* yakınlaştırma, kaydırıcı gibi küçük ayarlar: neredeyse duyulmayan tık */
+    tick: function () { click(0.14, 2600); },
 
     /* Oyun Modu: üst üste 3/5/7 doğru - kısa, parlak bir "ding" */
     combo: function () {

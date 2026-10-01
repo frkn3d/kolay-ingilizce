@@ -205,6 +205,13 @@
       if (el) KI.audio.play(el.getAttribute('data-sfx') || 'tap');
     }, true);
 
+    /* açılır kutular (<details>): "Haritayı nasıl okumalı?", sürüm notları...
+       toggle olayı kabarmaz, o yüzden yakalama aşamasında dinlenir. */
+    document.addEventListener('toggle', function (e) {
+      var d = e.target;
+      if (d && d.tagName === 'DETAILS') KI.audio.play(d.open ? 'reveal' : 'close');
+    }, true);
+
     /* ilk dokunuşta ses motorunu uyandır (iOS Safari'de touchend en güvenilir olan) */
     ['pointerdown', 'touchend', 'keydown'].forEach(function (evt) {
       window.addEventListener(evt, function once() {

@@ -56,6 +56,7 @@
         if (sheet.node.hidden) return;
         if (sheet.node.contains(e.target)) return;
         if (e.target.closest && e.target.closest('.w')) return;
+        KI.audio.play('close');
         sheet.hide();
       });
     },

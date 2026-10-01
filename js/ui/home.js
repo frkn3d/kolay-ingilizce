@@ -143,7 +143,7 @@
         item.trEl.classList.add('tcard__tr--swap');
         item.trEl.innerHTML = key ? item.tense.formula[key] : U.esc(item.tense.tr);
       });
-      KI.audio.play('tap');
+      KI.audio.play('swap');
     }
     trackwrap.addEventListener('click', cycleRules);
     if (nowBtn) nowBtn.addEventListener('click', cycleRules);

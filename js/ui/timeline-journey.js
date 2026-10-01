@@ -234,10 +234,12 @@
     frag.appendChild(zoombar);
     frag.appendChild(detail);
 
-    zoomOut.addEventListener('click', function () { if (pz) pz.setScale(pz.getScale() - 0.2); });
-    zoomIn.addEventListener('click', function () { if (pz) pz.setScale(pz.getScale() + 0.2); });
+    zoomOut.addEventListener('click', function () { KI.audio.play('tick'); if (pz) pz.setScale(pz.getScale() - 0.2); });
+    zoomIn.addEventListener('click', function () { KI.audio.play('tick'); if (pz) pz.setScale(pz.getScale() + 0.2); });
     range.addEventListener('input', function () { if (pz) pz.setScale(Number(range.value) / 100); });
+    range.addEventListener('change', function () { KI.audio.play('tick'); });
     fitBtn.addEventListener('click', function () {
+      KI.audio.play('tap');
       if (!pz) return;
       pz.setScale(OVERVIEW_SCALE);
       pz.centerOn(CENTER_X, AXIS_Y);
