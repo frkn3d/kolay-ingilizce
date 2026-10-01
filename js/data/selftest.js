@@ -302,13 +302,21 @@
   KI.selftest = {
     tf: function (id) { return TF[id] || []; },
     stories: function (id) { return STORY[id] || []; },
-    /* Cümle kurma havuzu: o zamanın örneklerinden 4-12 kelimelik ilk 12'si.
-       Sabit seçim, havuzun her girişte aynı 50 sorudan oluşmasını sağlar. */
+    /* Cümle kurma havuzu: o zamanın 4-12 kelimelik bütün örnek cümleleri
+       (zaman başına 50-100); her turda bunlardan 10'u rastgele seçilir.
+       Uzun cümleli zamanlarda (Future Perfect Continuous gibi) 12 kelimelik
+       cümle az olduğu için havuz, en kısalarından başlayarak 16 kelimeye
+       kadarki cümlelerle en az 30'a tamamlanır. */
     build: function (t) {
-      return (t && t.examples ? t.examples : []).filter(function (ex) {
-        var n = ex.en.split(/\s+/).length;
-        return n >= 4 && n <= 12;
-      }).slice(0, 12);
+      var ex = (t && t.examples ? t.examples : []);
+      function len(e) { return e.en.split(/\s+/).length; }
+      var out = ex.filter(function (e) { var n = len(e); return n >= 4 && n <= 12; });
+      if (out.length < 30) {
+        out = out.concat(ex.filter(function (e) { var n = len(e); return n > 12 && n <= 16; })
+          .sort(function (x, y) { return len(x) - len(y); })
+          .slice(0, 30 - out.length));
+      }
+      return out;
     },
     _tf: TF,
     _story: STORY

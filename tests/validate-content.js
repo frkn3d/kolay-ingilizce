@@ -37,7 +37,8 @@ global.window = { KI: {} };
   'js/data/compare.js',
   'js/data/exercises-2.js',
   'js/data/minitest.js',
-  'js/data/selftest.js'
+  'js/data/selftest.js',
+  'js/data/selftest-2.js'
 ].forEach(function (rel) { require(path.join(root, rel)); });
 
 var KI = window.KI;
@@ -163,6 +164,11 @@ KI.tenses.list.forEach(function (t) {
   var size = (t.quiz || []).length + tf.length + bd.length + st.length;
   selftestTotal += size;
   if (size < 50) fail('selftest/' + t.id + ': havuz ' + size + ' soru (en az 50 olmalı)');
+  /* her türden 10 soru sorulduğu için her türün havuzu 10'dan belirgin şekilde büyük olmalı */
+  if ((t.quiz || []).length < 20) fail('selftest/' + t.id + ': boşluk doldurma havuzu 20 sorudan az');
+  if (tf.length < 20) fail('selftest/' + t.id + ': doğru/yanlış havuzu 20 sorudan az');
+  if (bd.length < 20) fail('selftest/' + t.id + ': cümle kurma havuzu 20 sorudan az');
+  if (st.length < 5) fail('selftest/' + t.id + ': hikâye görevi 5 taneden az');
   if (!st.length) fail('selftest/' + t.id + ': hikâye görevi yok');
   tf.forEach(function (q, i) {
     if (typeof q.ok !== 'boolean') fail('selftest/' + t.id + ' tf#' + i + ': ok true/false olmalı');
