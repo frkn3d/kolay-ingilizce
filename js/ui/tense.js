@@ -157,6 +157,34 @@
     return row;
   }
 
+  /* "Kendini dene" karma testi: 10 soru = 4 boşluk doldurma + 3 doğru/yanlış
+     + 2 cümle kurma + 1 hikâye (her zaman sonda). Havuz: zamanın tüm quiz
+     soruları + selftest.js'teki doğru/yanlış ve hikâye görevleri + örnek
+     cümlelerden 12 cümle kurma (toplam en az 50). */
+  var SELFTEST_N = 10;
+  function selfTestPool(t) {
+    var ST = KI.selftest;
+    var tf = ST ? ST.tf(t.id) : [], builds = ST ? ST.build(t) : [], stories = ST ? ST.stories(t.id) : [];
+    function draw() {
+      var hasStory = stories.length && KI.storyCheck;
+      var nB = Math.min(2, builds.length), nT = Math.min(3, tf.length);
+      var nQ = Math.min(t.quiz.length, SELFTEST_N - nB - nT - (hasStory ? 1 : 0));
+      var mixed = U.shuffle(t.quiz).slice(0, nQ).map(function (q) {
+        return { q: q.q, options: q.options, answer: q.answer, why: q.why, tenseId: t.id };
+      }).concat(U.shuffle(tf).slice(0, nT).map(function (q) {
+        return { kind: 'tf', s: q.s, ok: q.ok, fix: q.fix, why: q.why, tenseId: t.id };
+      })).concat(U.shuffle(builds).slice(0, nB).map(function (ex) {
+        return { kind: 'build', head: 'Kelimelere dokunup cümleyi kur', en: ex.en, tr: ex.tr, tense: t, tenseId: t.id };
+      }));
+      mixed = U.shuffle(mixed);
+      if (hasStory) {
+        mixed.push({ kind: 'story', head: 'Kendi hikâyeni yaz', task: U.shuffle(stories)[0], tense: t, tenseId: t.id });
+      }
+      return mixed;
+    }
+    return { draw: draw, size: t.quiz.length + tf.length + builds.length + stories.length };
+  }
+
   function view(id) {
     var t = KI.tenses.get(id);
     var frag = document.createDocumentFragment();
@@ -186,10 +214,10 @@
       sec.appendChild(U.el('h2', { class: 'section__title' }, [
         U.el('span', { class: 'num', text: '?' }), document.createTextNode('Kendini dene')
       ]));
-      /* Havuzda çok daha fazla soru var; her girişte rastgele bir alt küme
-         gösterilir ki hep aynı soru turu tekrarlanmasın. */
-      var QUIZ_N = Math.min(6, t.quiz.length);
-      sec.appendChild(KI.quiz.widget(U.shuffle(t.quiz).slice(0, QUIZ_N), { tenseId: t.id }));
+      var pool = selfTestPool(t);
+      sec.appendChild(U.el('p', { class: 'soft selftest__sub',
+        text: SELFTEST_N + ' soru · ' + pool.size + ' soruluk havuzdan her girişte yeni bir set: boşluk doldurma, doğru / yanlış, cümle kurma ve sonda kendi hikâyen.' }));
+      sec.appendChild(KI.quiz.widget(pool.draw(), { tenseId: t.id, regen: pool.draw }));
       frag.appendChild(sec);
     }
 

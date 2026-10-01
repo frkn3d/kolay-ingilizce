@@ -47,6 +47,7 @@
     speechVoice: '',
     autoTranslate: false,
     autoSpeakWord: false,
+    onlineCheck: true,    // "Kendi hikâyeni yaz" metnini LanguageTool'a gönderip dilbilgisi denetimi yap
     learned: {},     // { tenseId: true }
     scores: {},      // { tenseId: {best: 0, total: 0} }
     words: [],       // [{en, tr, at}]

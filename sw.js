@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v16';
+var CACHE_VERSION = 'ki-cache-v17';
 
 var CORE_ASSETS = [
   './',
@@ -50,6 +50,7 @@ var CORE_ASSETS = [
   './js/data/game-questions.js',
   './js/data/game-questions-2.js',
   './js/data/minitest.js',
+  './js/data/selftest.js',
   './js/ui/timeline.js',
   './js/ui/sentence.js',
   './js/ui/home.js',
@@ -60,6 +61,7 @@ var CORE_ASSETS = [
   './js/ui/dictionary.js',
   './js/ui/stories.js',
   './js/ui/timeline-journey.js',
+  './js/ui/storycheck.js',
   './js/ui/achievements.js',
   './js/ui/stats.js',
   './js/ui/help.js',

@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.29';
+  var APP_VERSION = '0.8.30';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.30', d: 'Zaman sayfalarındaki "Kendini dene" büyüdü: artık 10 soru, her konuda en az 50 soruluk bir havuzdan her girişte yeni bir set çekiliyor. Dört tür soru var: boşluk doldurma, doğru / yanlış, cümle kurma ve sonda kendi hikâyeni yazma. Hikâyen; uzunluk, hedef zamanı en az 2 cümlede kullanma ve hatasız kelime oranı (%80) üzerinden puanlanıyor. Çevrimiçiyken dilbilgisi denetimi LanguageTool ile yapılıyor (Ayarlar\'dan kapatılabilir), çevrimdışıyken cihazdaki kurallar ve sözlük kullanılıyor.' },
     { v: '0.8.29', d: 'Harita\'daki NOW noktası ipucu yeniden yapıldı: imleç artık sağ alt çaprazdan gelip ucunu tam sarı noktaya değdiriyor, bir kez tıklayıp kayboluyor - hepsi tam 2 saniye. Eski sürümde animasyon tekrarları bitince imleç aniden sağa kayıyordu, bu da giderildi.' },
     { v: '0.8.28', d: 'Harita\'daki NOW noktası ipucu düzeltildi: parmak yerine bir fare imleci ikonu geldi, rengi sarıdan (nokta zaten sarı) nötr bir tona çevrildi ve üstteki "Devam et" düğmesiyle çakışmaması için noktaya biraz daha yakın duruyor.' },
     { v: '0.8.27', d: 'Giriş ekranı, büyük yazı boyutuyla en küçük telefonlarda kayma oluşturabiliyordu; logo, kartlar ve Nasıl Kullanılır/İstatistikler düğmeleri biraz daraltıldı, bu kayma tamamen gitti. Alttaki "Logspace · sürüm" yazısı artık tıklanabilir: Ayarlar\'ı doğrudan Hakkında sekmesinde açıyor.' },
@@ -165,6 +166,7 @@
     body.appendChild(U.el('p', { class: 'eyebrow', text: 'Okuma ve Alıştırma' }));
     body.appendChild(switchRow('Çeviriler açık gelsin', 'Örnek cümlelerin Türkçesi baştan görünür.', 'autoTranslate'));
     body.appendChild(switchRow('Sadece öğrendiğim zamanlardan sor', 'Yalnız "Öğrendim" işaretlediğin zamanlardan soru gelir.', 'onlyLearned'));
+    body.appendChild(switchRow('Hikâyemi çevrimiçi denetle', '"Kendi hikâyeni yaz" metni dilbilgisi denetimi için LanguageTool’a gönderilir. Kapalıyken yalnız yazım ve zaman kullanımı cihazda kontrol edilir.', 'onlineCheck'));
 
     /* --- görünüm --- */
     body.appendChild(U.el('p', { class: 'eyebrow', text: 'Görünüm' }));

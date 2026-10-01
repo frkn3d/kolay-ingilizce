@@ -151,11 +151,19 @@
   /* --------- çoktan seçmeli bileşen --------- */
   function widget(rawQs, opts) {
     opts = opts || {};
-    var qs = (rawQs || []).map(function (q) {
+    function normalizeAll(list) { return (list || []).map(normalizeQ); }
+    var qs = (rawQs || []).map(normalizeQ);
+    function normalizeQ(q) {
+      if (q.kind === 'tf') {
+        /* Doğru/yanlış: iki şıklı çoktan seçmeli soruya çevrilir */
+        return { kind: 'tf', head: 'Bu cümle doğru mu?', sentence: q.s, speak: q.ok ? q.s : null,
+          options: ['Doğru', 'Yanlış'], answer: q.ok ? 0 : 1, tenseId: q.tenseId,
+          why: (q.ok ? '' : 'Düzeltilmiş hâli: ' + q.fix + '  ') + (q.why || '') };
+      }
       if (q.kind) return q;
       /* zaman sayfasındaki basit sorular */
-      return { kind: 'blank', head: 'Doğru seçeneği bul', sentence: q.q, options: q.options.slice(), answer: q.answer, why: q.why };
-    });
+      return { kind: 'blank', head: 'Doğru seçeneği bul', sentence: q.q, options: q.options.slice(), answer: q.answer, why: q.why, tenseId: q.tenseId };
+    }
 
     var box = U.el('div', { class: 'card' });
     var i = 0, correct = 0, answered = false;
@@ -201,8 +209,9 @@
 
       var again = U.el('button', { class: 'btn btn--primary', type: 'button', html: '↻ Tekrar dene' });
       again.addEventListener('click', function () {
-        i = 0; correct = 0; KI.audio.play('tap');
-        qs = U.shuffle(qs); paint();
+        i = 0; correct = 0; missed = {}; KI.audio.play('tap');
+        /* Karma testte (Kendini dene) her turda havuzdan yeni bir set çekilir */
+        qs = opts.regen ? normalizeAll(opts.regen()) : U.shuffle(qs); paint();
       });
       var row = U.el('div', { class: 'row', style: 'margin-top:10px' }, [again]);
       if (opts.onFinish) row.appendChild(opts.onFinish());
@@ -217,6 +226,29 @@
       U.clear(box);
 
       box.appendChild(U.el('p', { class: 'eyebrow', text: (i + 1) + ' / ' + qs.length + ' · ' + q.head }));
+
+      /* Cümle kurma ve hikâye yazma: kendi arayüzleri var. report(ok) birden
+         çok kez çağrılabilir (hikâyeyi düzeltip yeniden denetlemek); "Sonraki"
+         düğmesine basıldığı andaki son sonuç sayılır. */
+      if (q.kind === 'build' || q.kind === 'story') {
+        var last = false, nextShown = false;
+        var report = function (ok) {
+          last = ok;
+          if (nextShown) return;
+          nextShown = true;
+          var nb = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', style: 'margin-top:12px',
+            html: (i + 1 >= qs.length ? 'Sonucu gör' : 'Sonraki soru →') });
+          nb.addEventListener('click', function () {
+            if (last) correct++;
+            KI.store.recordAnswer({ tenseId: q.tenseId }, last);
+            if (!last && q.tenseId) missed[q.tenseId] = (missed[q.tenseId] || 0) + 1;
+            i++; KI.audio.play('nav'); paint();
+          });
+          box.appendChild(nb);
+        };
+        box.appendChild(q.kind === 'build' ? buildTask(q, report) : KI.storyCheck.render(q, report));
+        return;
+      }
 
       if (q.kind === 'timeline') {
         var tl = U.el('div', { class: 'tl-wrap', style: 'margin-bottom:12px' });
@@ -386,6 +418,92 @@
     return U.shuffle(pool).slice(0, count);
   }
 
+  /* Tek bir cümle kurma görevi (Türkçe ipucu + kelime çipleri + kontrol).
+     Hem cümle kurma modunda hem "Kendini dene" karma testinde kullanılır.
+     done(ok) kontrol edilince bir kez çağrılır. */
+  function buildTask(it, done) {
+    var wrap = U.el('div', { class: 'build-task' });
+    var target = it.en.replace(/\s+/g, ' ').trim();
+    var words = target.split(' ');
+    wrap.appendChild(U.el('p', { class: 'quiz__q', html: KI.icons.html('flag') + ' ' + U.esc(it.tr) }));
+
+    var line = U.el('div', { class: 'builder__line' });
+    var pool = U.el('div', { class: 'builder__pool' });
+    var placed = [];
+    var check = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', style: 'margin-top:12px', html: '✓ Kontrol et' });
+
+    function refresh() {
+      U.clear(line);
+      if (!placed.length) line.appendChild(U.el('span', { class: 'builder__hint', text: 'Cümlen burada oluşacak' }));
+      placed.forEach(function (p, idx) {
+        var chip = U.el('button', { class: 'wchip wchip--placed', type: 'button', text: p.w });
+        chip.addEventListener('click', function () {
+          placed.splice(idx, 1);
+          p.node.classList.remove('wchip--used'); p.node.disabled = false;
+          KI.audio.play('tap');
+          refresh();
+        });
+        line.appendChild(chip);
+      });
+      check.disabled = placed.length !== words.length;
+    }
+
+    /* "hidden" ile DOM akışından tamamen çıkarmak yerine (kalan kelimelerin
+       flex-wrap içinde kaymasına ve yanlış kelimeye dokunulmasına yol
+       açıyordu) yerini koruyan bir "kullanıldı" durumuna geçiriyoruz. */
+    U.shuffle(words.map(function (w, k) { return { w: w, k: k }; })).forEach(function (item) {
+      var chip = U.el('button', { class: 'wchip', type: 'button', text: item.w });
+      item.node = chip;
+      chip.addEventListener('click', function () {
+        chip.classList.add('wchip--used'); chip.disabled = true;
+        placed.push(item);
+        KI.audio.play('word');
+        refresh();
+      });
+      pool.appendChild(chip);
+    });
+
+    wrap.appendChild(line);
+    wrap.appendChild(pool);
+    wrap.appendChild(check);
+    refresh();
+
+    check.addEventListener('click', function () {
+      var answer = placed.map(function (p) { return p.w; }).join(' ');
+      var ok = answer.toLowerCase() === target.toLowerCase();
+      KI.audio.play(ok ? 'correct' : 'wrong');
+      check.disabled = true;
+      U.qsa('.wchip', wrap).forEach(function (c) { c.disabled = true; });
+      line.classList.add(ok ? 'is-right' : 'is-wrong');
+
+      var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
+      fb.appendChild(U.el('b', { class: 'callout__t', text: ok ? '✓ Doğru kurdun' : '✕ Doğrusu şöyle:' }));
+      fb.appendChild(U.el('div', { style: 'font-family:var(--font-display);font-size:1.05rem', text: target }));
+
+      /* Yanlışsa kendi cümleni kelime kelime karşılaştır */
+      if (!ok) {
+        var mine = U.el('div', { class: 'diffline' });
+        mine.appendChild(U.el('span', { class: 'diffline__lbl', text: 'senin kurduğun' }));
+        placed.forEach(function (p, idx) {
+          var good = words[idx] && words[idx].toLowerCase() === p.w.toLowerCase();
+          mine.appendChild(U.el('span', { class: 'diffw' + (good ? ' diffw--ok' : ' diffw--bad'), text: p.w }));
+        });
+        fb.appendChild(mine);
+      }
+      var actions = U.el('div', { class: 'row', style: 'margin-top:8px' });
+      var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Dinle' });
+      say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target); });
+      actions.appendChild(say);
+      if (it.tense) {
+        actions.appendChild(U.el('a', { class: 'btn btn--sm', href: '#/zaman/' + it.tense.id, 'data-sfx': 'nav', text: it.tense.en + ' →' }));
+      }
+      fb.appendChild(actions);
+      wrap.appendChild(fb);
+      done(ok);
+    });
+    return wrap;
+  }
+
   /* --------- cümle kurma bileşeni --------- */
   function builder(items, opts) {
     opts = opts || {};
@@ -409,92 +527,15 @@
     function paint() {
       if (i >= items.length) return finish();
       var it = items[i];
-      var target = it.en.replace(/\s+/g, ' ').trim();
-      var words = target.split(' ');
       U.clear(box);
-
       box.appendChild(U.el('p', { class: 'eyebrow', text: (i + 1) + ' / ' + items.length + ' · Kelimelere dokunup cümleyi kur' }));
-      box.appendChild(U.el('p', { class: 'quiz__q', html: KI.icons.html('flag') + ' ' + U.esc(it.tr) }));
-
-      var line = U.el('div', { class: 'builder__line' });
-      var pool = U.el('div', { class: 'builder__pool' });
-      var placed = [];
-      var check = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', style: 'margin-top:12px', html: '✓ Kontrol et' });
-
-      function refresh() {
-        U.clear(line);
-        if (!placed.length) line.appendChild(U.el('span', { class: 'builder__hint', text: 'Cümlen burada oluşacak' }));
-        placed.forEach(function (p, idx) {
-          var chip = U.el('button', { class: 'wchip wchip--placed', type: 'button', text: p.w });
-          chip.addEventListener('click', function () {
-            placed.splice(idx, 1);
-            p.node.classList.remove('wchip--used'); p.node.disabled = false;
-            KI.audio.play('tap');
-            refresh();
-          });
-          line.appendChild(chip);
-        });
-        check.disabled = placed.length !== words.length;
-      }
-
-      /* "hidden" ile DOM akışından tamamen çıkarmak yerine (kalan kelimelerin
-         flex-wrap içinde kaymasına ve yanlış kelimeye dokunulmasına yol
-         açıyordu) yerini koruyan bir "kullanıldı" durumuna geçiriyoruz. */
-      U.shuffle(words.map(function (w, k) { return { w: w, k: k }; })).forEach(function (item) {
-        var chip = U.el('button', { class: 'wchip', type: 'button', text: item.w });
-        item.node = chip;
-        chip.addEventListener('click', function () {
-          chip.classList.add('wchip--used'); chip.disabled = true;
-          placed.push(item);
-          KI.audio.play('word');
-          refresh();
-        });
-        pool.appendChild(chip);
-      });
-
-      box.appendChild(line);
-      box.appendChild(pool);
-      box.appendChild(check);
-      refresh();
-
-      check.addEventListener('click', function () {
-        var answer = placed.map(function (p) { return p.w; }).join(' ');
-        var ok = answer.toLowerCase() === target.toLowerCase();
+      box.appendChild(buildTask(it, function (ok) {
         if (ok) correct++;
-        KI.audio.play(ok ? 'correct' : 'wrong');
-        check.disabled = true;
-        U.qsa('.wchip', box).forEach(function (c) { c.disabled = true; });
-        line.classList.add(ok ? 'is-right' : 'is-wrong');
-
-        var fb = U.el('div', { class: 'quiz__fb callout ' + (ok ? 'callout--tip' : 'callout--warn') });
-        fb.appendChild(U.el('b', { class: 'callout__t', text: ok ? '✓ Doğru kurdun' : '✕ Doğrusu şöyle:' }));
-        fb.appendChild(U.el('div', { style: 'font-family:var(--font-display);font-size:1.05rem', text: target }));
-
-        /* Yanlışsa kendi cümleni kelime kelime karşılaştır */
-        if (!ok) {
-          var mine = U.el('div', { class: 'diffline' });
-          mine.appendChild(U.el('span', { class: 'diffline__lbl', text: 'senin kurduğun' }));
-          placed.forEach(function (p, idx) {
-            var good = words[idx] && words[idx].toLowerCase() === p.w.toLowerCase();
-            mine.appendChild(U.el('span', { class: 'diffw' + (good ? ' diffw--ok' : ' diffw--bad'), text: p.w }));
-          });
-          fb.appendChild(mine);
-        }
-        var actions = U.el('div', { class: 'row', style: 'margin-top:8px' });
-        var say = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('speaker') + ' Dinle' });
-        say.addEventListener('click', function () { KI.audio.play('tap'); KI.speech.speak(target); });
-        actions.appendChild(say);
-        if (it.tense) {
-          actions.appendChild(U.el('a', { class: 'btn btn--sm', href: '#/zaman/' + it.tense.id, 'data-sfx': 'nav', text: it.tense.en + ' →' }));
-        }
-        fb.appendChild(actions);
-        box.appendChild(fb);
-
         var next = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', style: 'margin-top:12px',
           html: (i + 1 >= items.length ? 'Sonucu gör' : 'Sonraki cümle →') });
         next.addEventListener('click', function () { i++; KI.audio.play('nav'); paint(); });
         box.appendChild(next);
-      });
+      }));
     }
 
     paint();
@@ -828,6 +869,6 @@
     return frag;
   }
 
-  KI.quiz = { widget: widget, builder: builder, dictation: dictation, modes: MODES };
+  KI.quiz = { widget: widget, builder: builder, buildTask: buildTask, dictation: dictation, modes: MODES };
   KI.viewPractice = { render: view };
 })(window.KI);

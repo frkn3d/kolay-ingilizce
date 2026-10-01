@@ -36,7 +36,8 @@ global.window = { KI: {} };
   'js/data/exercises.js',
   'js/data/compare.js',
   'js/data/exercises-2.js',
-  'js/data/minitest.js'
+  'js/data/minitest.js',
+  'js/data/selftest.js'
 ].forEach(function (rel) { require(path.join(root, rel)); });
 
 var KI = window.KI;
@@ -152,6 +153,33 @@ if ((KI.timelineJourney || []).length !== KI.tenses.list.length) {
   fail('timeline-journey: kayıt sayısı (' + (KI.timelineJourney || []).length + ') zaman sayısıyla (' + KI.tenses.list.length + ') eşleşmiyor');
 }
 
+/* ---- Kendini dene havuzu: her zamanda en az 50 soru, doğru/yanlış
+   cümleleri (ve düzeltilmiş hâlleri) sözlükte, yanlışların düzeltmesi var,
+   her doğru cümlede hedef zaman tespit ediliyor ---- */
+require(path.join(root, 'js/ui/storycheck.js'));
+var selftestTotal = 0;
+KI.tenses.list.forEach(function (t) {
+  var tf = KI.selftest.tf(t.id), st = KI.selftest.stories(t.id), bd = KI.selftest.build(t);
+  var size = (t.quiz || []).length + tf.length + bd.length + st.length;
+  selftestTotal += size;
+  if (size < 50) fail('selftest/' + t.id + ': havuz ' + size + ' soru (en az 50 olmalı)');
+  if (!st.length) fail('selftest/' + t.id + ': hikâye görevi yok');
+  tf.forEach(function (q, i) {
+    if (typeof q.ok !== 'boolean') fail('selftest/' + t.id + ' tf#' + i + ': ok true/false olmalı');
+    if (!q.ok && !q.fix) fail('selftest/' + t.id + ' tf#' + i + ': yanlış cümlenin düzeltmesi (fix) yok');
+    [q.s, q.fix].filter(Boolean).forEach(function (en) {
+      en.replace(/[‘’]/g, "'").split(/\s+/).forEach(function (tok) {
+        var clean = tok.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
+        if (!clean) return;
+        if (!KI.glossary.lookup(clean) && !isExemptWord(clean)) fail('selftest/' + t.id + ' tf#' + i + ': sözlükte yok "' + clean + '"');
+      });
+    });
+    /* düzeltme bazen bilerek başka zamandadır (I am knowing → I know) */
+    var good = q.ok ? q.s : null;
+    if (good && !KI.storyCheck.detectTenses(good)[t.id]) fail('selftest/' + t.id + ' tf#' + i + ': hikâye denetleyicisi doğru cümlede zamanı tanımadı ("' + good + '")');
+  });
+});
+
 /* ---- Mini Test: yalnız yapısal denetim (mini test.md dış kaynaklı bir
    metin dosyası; sözlük kapsamı denetimi burada uygulanmaz çünkü içinde
    özel isimler ve sözlükte olmayan meslek/konu kelimeleri var). Yalnız
@@ -180,6 +208,7 @@ console.log('Karşılaştırma sayfaları:', KI.compare.list.length);
 console.log('Örnek cümleler:', exampleCount);
 console.log('Sorular (zaman + karşılaştırma):', tenseQuiz + compareQuiz);
 console.log('Hikayeler:', (KI.stories || []).length, '(' + storySentences + ' cümle)');
+console.log('Kendini dene havuzu:', selftestTotal, '(zaman başına en az 50)');
 console.log('Zaman Yolculuğu kaydı:', (KI.timelineJourney || []).length);
 console.log('Sözlük kelime sayısı:', KI.glossary.size());
 console.log('Düzensiz fiil sayısı:', KI.glossary.irregularVerbs.length);
