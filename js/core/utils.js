@@ -118,8 +118,36 @@ window.KI = window.KI || {};
       return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
     });
   }
+  /* Sayıcı kullanılıyor çünkü reset-confirm-modal, Ayarlar'ın üstünde
+     açılabiliyor - iç modal kapanınca kilidi hemen kaldırırsak dıştaki
+     Ayarlar hâlâ açıkken arka plan kayar hâle gelirdi. */
+  var scrollLockCount = 0;
+  var savedScrollY = 0;
+  function lockScroll() {
+    if (scrollLockCount === 0) {
+      savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      document.body.style.top = '-' + savedScrollY + 'px';
+      document.documentElement.classList.add('modal-open');
+    }
+    scrollLockCount++;
+  }
+  function unlockScroll() {
+    scrollLockCount = Math.max(0, scrollLockCount - 1);
+    if (scrollLockCount === 0) {
+      document.documentElement.classList.remove('modal-open');
+      document.body.style.top = '';
+      window.scrollTo(0, savedScrollY);
+    }
+  }
+  /* Başarım kutlama kutusu (ach-earned-modal) openModal/closeModal'ı
+     kullanmıyor (kendi sırayla gösterme kuyruğu var, odak tuzağına ihtiyacı
+     yok); yine de arka planı kilitlemesi için bu ikisi dışarı açılıyor. */
+  U.lockScroll = lockScroll;
+  U.unlockScroll = unlockScroll;
+
   var activeTrap = null;
   U.openModal = function (modal, triggerEl) {
+    if (modal.hidden) lockScroll();
     modal.hidden = false;
     var focusables = focusablesIn(modal);
     var first = focusables[0];
@@ -137,6 +165,7 @@ window.KI = window.KI || {};
     activeTrap = { modal: modal, onKeydown: onKeydown, trigger: triggerEl || null };
   };
   U.closeModal = function (modal) {
+    if (!modal.hidden) unlockScroll();
     modal.hidden = true;
     if (activeTrap && activeTrap.modal === modal) {
       modal.removeEventListener('keydown', activeTrap.onKeydown);

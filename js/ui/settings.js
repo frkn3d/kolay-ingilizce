@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.25';
+  var APP_VERSION = '0.8.26';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.26', d: 'Küçük pencerelerden biri açıkken arkadaki sayfa artık kaymıyor (kapanınca kaldığın yere geri dönüyorsun). Harita sekmesinde üstteki sarı NOW noktasına dokununca da, çizgiye dokunmuş gibi aşağıdaki kartların kuralı değişiyor; bu yeni davranışı fark ettirmek için Harita\'ya her girişte noktanın üstünde kısa bir dokunma ipucu beliriyor.' },
     { v: '0.8.25', d: 'Bir önceki sürümdeki arka plan bulanıklığı yalnızca Ayarlar\'daydı; artık Bugünün Çalışması, Başarımlar, Canlar ve sıfırlama onayı gibi küçük pencere şeklinde açılan her şeyde aynı hafif bulanıklık var.' },
     { v: '0.8.24', d: 'Ayarlar penceresi açıkken arkadaki sayfa artık hafifçe bulanıklaşıyor (cam buzlu etkisi). Telefonu yormasın diye bulanıklık düşük tutuldu ve "Animasyonları azalt" açıkken ya da sistemin azaltılmış hareket tercihinde tamamen kapanıyor.' },
     { v: '0.8.23', d: 'Ayarlar penceresi sadeleştirildi: üstte Ayarlar ve Hakkında olmak üzere iki sekme geldi, hakkında yazısı ve sürüm notları artık kendi sekmesinde. Ayarlar sekmesindeki benzer bölümler (Okuma+Alıştırma, Görünüm+Okunaklılık, İlerleme+Veri) tek başlık altında birleştirildi ve genel boşluklar sıkılaştırıldı - pencere artık çok daha az yer kaplıyor.' },

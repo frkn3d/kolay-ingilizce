@@ -220,11 +220,13 @@
     var ok = U.el('button', { class: 'btn btn--primary btn--block', type: 'button', text: 'Harika!' });
     ok.addEventListener('click', function () {
       modal.hidden = true;
+      U.unlockScroll();
       KI.audio.play('close');
       setTimeout(dequeue, 350);
     });
     card.appendChild(ok);
     modal.hidden = false;
+    U.lockScroll();
     KI.audio.play('achievement');
   }
 

@@ -130,6 +130,12 @@ html[data-theme="dark"] {
 html { -webkit-text-size-adjust: 100%; font-size: 16px; }
 html[data-font="small"] { font-size: 14.5px; }
 html[data-font="large"] { font-size: 18.5px; }
+/* Küçük pencerelerden biri (.modal) açıkken arkadaki sayfa kaymasın diye
+   (bkz. js/core/utils.js openModal/closeModal). body'yi position:fixed
+   yapmak, iOS Safari'de salt overflow:hidden'ın engelleyemediği arka plan
+   kaydırma/zıplama sorununu da önler; kapanınca kaldığı yere geri dönülür. */
+html.modal-open { overflow: hidden; }
+html.modal-open body { position: fixed; left: 0; right: 0; overflow: hidden; }
 html[data-motion="less"] *,
 html[data-motion="less"] *::before,
 html[data-motion="less"] *::after {

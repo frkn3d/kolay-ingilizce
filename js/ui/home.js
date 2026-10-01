@@ -79,13 +79,21 @@
     var timebar = U.el('div', { class: 'timebar' + (introPlayed ? '' : ' timebar--intro') });
     introPlayed = true;
     var labels = U.el('div', { class: 'timebar__labels' });
+    var nowBtn = null;
     KI.tenses.groups.forEach(function (g) {
       if (g.id === 'present') {
         /* "NOW" yazısı yerine sürekli kısa dalgalar yayan kalın bir nokta;
-           yazı ekran okuyucular için aria-label olarak korunuyor. */
-        labels.appendChild(U.el('span', { class: 'timebar__label timebar__label--now', 'aria-label': 'NOW' }, [
-          U.el('span', { class: 'timebar__now-dot', 'aria-hidden': 'true' })
-        ]));
+           yazı ekran okuyucular için aria-label olarak korunuyor. Noktaya
+           dokunmak da tıpkı aşağıdaki çizgiye dokunmak gibi kuralları
+           döndürür (bkz. cycleRules()). */
+        nowBtn = U.el('button', {
+          class: 'timebar__label timebar__label--now', type: 'button',
+          'aria-label': 'Zamanların olumlu, olumsuz ve soru kurallarını sırayla göster'
+        }, [
+          U.el('span', { class: 'timebar__now-dot', 'aria-hidden': 'true' }),
+          U.el('span', { class: 'timebar__now-hint', 'aria-hidden': 'true', html: KI.icons.html('point-down') })
+        ]);
+        labels.appendChild(nowBtn);
         return;
       }
       labels.appendChild(U.el('span', {
@@ -121,12 +129,12 @@
       wrap.appendChild(band);
     });
 
-    /* Ana zaman çizgisine dokununca bütün kartların Türkçe adı, o zamanın
-       kuralına (olumlu → olumsuz → soru → ada geri) birlikte, kısaca yer
-       değiştirerek geçer. */
+    /* Ana zaman çizgisine (ya da üstündeki sarı NOW noktasına) dokununca
+       bütün kartların Türkçe adı, o zamanın kuralına (olumlu → olumsuz →
+       soru → ada geri) birlikte, kısaca yer değiştirerek geçer. */
     var RULE_KEYS = [null, 'pos', 'neg', 'que'];
     var ruleStep = 0;
-    trackwrap.addEventListener('click', function () {
+    function cycleRules() {
       ruleStep = (ruleStep + 1) % RULE_KEYS.length;
       var key = RULE_KEYS[ruleStep];
       registry.forEach(function (item) {
@@ -136,7 +144,9 @@
         item.trEl.innerHTML = key ? item.tense.formula[key] : U.esc(item.tense.tr);
       });
       KI.audio.play('tap');
-    });
+    }
+    trackwrap.addEventListener('click', cycleRules);
+    if (nowBtn) nowBtn.addEventListener('click', cycleRules);
 
     return wrap;
   }
