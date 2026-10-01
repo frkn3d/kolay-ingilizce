@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.22';
+  var APP_VERSION = '0.8.23';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.23', d: 'Ayarlar penceresi sadeleştirildi: üstte Ayarlar ve Hakkında olmak üzere iki sekme geldi, hakkında yazısı ve sürüm notları artık kendi sekmesinde. Ayarlar sekmesindeki benzer bölümler (Okuma+Alıştırma, Görünüm+Okunaklılık, İlerleme+Veri) tek başlık altında birleştirildi ve genel boşluklar sıkılaştırıldı - pencere artık çok daha az yer kaplıyor.' },
     { v: '0.8.22', d: 'Temeller\'deki "ipucu" kutuları (Altın kural, Kolay yol vb.) artık yeşil değil hardal renginde - koyu temada her yerin yeşil olması karışıklık yaratıyordu. Başarımlar da tek düze hardal+gri olmaktan çıktı: Zaman Haritası, Alıştırma, Kelime, Bağlılık ve Oyun Modu kategorilerinin her biri kazanılınca kendi rengini taşıyor.' },
     { v: '0.8.21', d: 'Temeller (kiremit) ve Harita (yeşil) sekmeleri de artık Sözlük/Alıştırma gibi kendi rengini taşıyor; dört sekme de birbirinden net ayrışıyor. Uygulamaya genel bir "canlılık" katıldı: Sözlük, Alıştırma ve Temeller\'deki kart listeleri açılışta sırayla beliriyor, alıştırmalarda yeni bir soruya geçince şıklar art arda süzülerek geliyor, tıklanabilir kartlar dokununca hafifçe kalkıp basılınca içeri çöküyor.' },
     { v: '0.8.20', d: 'Sözlük (mavi) ve Alıştırma (hardal) sekmeleri artık kendi rengini taşıyor: aktif sekme, üst başlık etiketi ve kart çerçeveleri hafifçe o rengi alıyor, böylece hangi sekmede olduğun daha net hissediliyor. Ayrıca alıştırmalarda doğru/yanlış cevap kutuları koyu temada artık çevresindeki yeşille karışmıyor: doğru cevap daha canlı bir yeşile çekildi ve her iki durum da belirgin bir gölgeyle öne çıkıyor.' },
@@ -80,17 +81,43 @@
     return U.el('div', { class: 'switchrow' }, [lbl]);
   }
 
+  /* Üstteki iki sekme (Ayarlar/Hakkında) - tercih kalıcı değil, modal her
+     açıldığında Ayarlar'dan başlar; tek oturum içinde (ör. tema değiştirip
+     build() yeniden çağrıldığında) hangi sekmede olunduğu korunur. */
+  var activeTab = 'ayarlar';
+
+  function tabBtn(id, label) {
+    var b = U.el('button', {
+      class: 'settings-tab' + (activeTab === id ? ' is-active' : ''),
+      type: 'button', text: label
+    });
+    b.addEventListener('click', function () {
+      if (activeTab === id) return;
+      activeTab = id;
+      KI.audio.play('tap');
+      build();
+    });
+    return b;
+  }
+
   function build() {
     var body = document.getElementById('settings-body');
     if (!body) return;
     U.clear(body);
+    body.appendChild(U.el('div', { class: 'settings-tabs' }, [
+      tabBtn('ayarlar', 'Ayarlar'), tabBtn('hakkinda', 'Hakkında')
+    ]));
+    if (activeTab === 'hakkinda') { buildAbout(body); return; }
+    buildSettings(body);
+  }
 
+  function buildSettings(body) {
     /* --- ses --- */
     body.appendChild(U.el('p', { class: 'eyebrow', text: 'Ses' }));
     body.appendChild(switchRow('Buton ses efektleri', 'Kısık, kısa tıklama sesleri.', 'sound'));
     body.appendChild(switchRow('Kelimeye dokununca oku', 'Kelime kartı açılınca telaffuzu otomatik duyulur.', 'autoSpeakWord'));
     if (KI.haptics && KI.haptics.available()) {
-      body.appendChild(switchRow('Titreşim', 'Tıklamalarda minik, yanlış cevapta biraz daha uzun titreşim (yalnızca destekleyen cihazlarda).', 'haptics'));
+      body.appendChild(switchRow('Titreşim', 'Tıklamalarda minik, yanlış cevapta biraz daha uzun titreşim.', 'haptics'));
     }
 
     /* --- okuma hızı --- */
@@ -103,10 +130,9 @@
     rate.addEventListener('change', function () {
       KI.speech.speak('My grandfather drinks tea after the morning prayer.');
     });
-    body.appendChild(U.el('div', { class: 'field', style: 'margin-top:14px' }, [
+    body.appendChild(U.el('div', { class: 'field' }, [
       U.el('div', { class: 'field__lbl' }, [U.el('span', { text: 'Okuma hızı' }), rateVal]),
-      rate,
-      U.el('div', { class: 'soft', style: 'font-size:.82rem', text: 'Kolu bırakınca örnek cümle okunur.' })
+      rate
     ]));
 
     /* --- ses seçimi --- */
@@ -124,21 +150,18 @@
     body.appendChild(U.el('div', { class: 'field' }, [
       U.el('div', { class: 'field__lbl' }, [U.el('span', { text: 'Telaffuz sesi' })]),
       sel,
-      U.el('div', { class: 'soft', style: 'font-size:.82rem', html: voices.length
-        ? 'Cihazında ' + voices.length + ' İngilizce ses bulundu. Hiçbir internet servisi kullanılmaz.'
-        : 'Cihazında İngilizce ses bulunamadı. Windows’ta Ayarlar → Saat ve Dil → Konuşma bölümünden, Android’de Ayarlar → Erişilebilirlik → Metin okuma bölümünden İngilizce ses eklenebilir.' })
+      U.el('div', { class: 'soft', style: 'font-size:.78rem', html: voices.length
+        ? voices.length + ' İngilizce ses bulundu. Hiçbir internet servisi kullanılmaz.'
+        : 'İngilizce ses bulunamadı. Windows: Ayarlar → Saat ve Dil → Konuşma · Android: Ayarlar → Erişilebilirlik → Metin okuma.' })
     ]));
 
-    /* --- okuma --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', text: 'Okuma' }));
+    /* --- okuma ve alıştırma --- */
+    body.appendChild(U.el('p', { class: 'eyebrow', text: 'Okuma ve Alıştırma' }));
     body.appendChild(switchRow('Çeviriler açık gelsin', 'Örnek cümlelerin Türkçesi baştan görünür.', 'autoTranslate'));
-
-    /* --- alıştırma --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Alıştırma' }));
-    body.appendChild(switchRow('Sadece öğrendiğim zamanlardan sor', 'Açıkken sorular yalnız "Öğrendim" işaretlediğin zamanlardan gelir. Hiçbir zaman işaretli değilse hepsinden sorulur.', 'onlyLearned'));
+    body.appendChild(switchRow('Sadece öğrendiğim zamanlardan sor', 'Yalnız "Öğrendim" işaretlediğin zamanlardan soru gelir.', 'onlyLearned'));
 
     /* --- görünüm --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Görünüm' }));
+    body.appendChild(U.el('p', { class: 'eyebrow', text: 'Görünüm' }));
     var themeRow = U.el('div', { class: 'row' });
     [['light', 'sun', 'Açık'], ['dark', 'moon', 'Koyu']].forEach(function (th) {
       var b = U.el('button', {
@@ -154,8 +177,6 @@
     });
     body.appendChild(themeRow);
 
-    /* --- okunaklılık --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: 'Okunaklılık' }));
     var fontRow = U.el('div', { class: 'row' });
     [['small', 'Küçük'], ['normal', 'Normal'], ['large', 'Büyük']].forEach(function (o) {
       var b = U.el('button', {
@@ -170,7 +191,7 @@
       });
       fontRow.appendChild(b);
     });
-    body.appendChild(U.el('div', { class: 'field' }, [
+    body.appendChild(U.el('div', { class: 'field', style: 'margin-top:10px' }, [
       U.el('div', { class: 'field__lbl' }, [U.el('span', { text: 'Yazı boyutu' })]),
       fontRow
     ]));
@@ -178,12 +199,12 @@
       KI.applyPrefs();
     }));
 
-    /* --- ilerleme --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px', text: 'İlerleme' }));
-    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
-      text: KI.store.learnedCount() + ' zaman öğrenildi olarak işaretli, defterinde ' + KI.store.words().length +
-            ' kelime var (' + KI.store.dueWordCount() + ' tanesinin bugün tekrar zamanı geldi). Zorlandıklarım listesinde ' +
-            KI.store.troubleCount() + ' kayıt bulunuyor.' }));
+    /* --- ilerleme ve veri --- */
+    body.appendChild(U.el('p', { class: 'eyebrow', text: 'İlerleme ve Veri' }));
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.84rem',
+      text: KI.store.learnedCount() + ' zaman öğrenildi, defterinde ' + KI.store.words().length +
+            ' kelime var (' + KI.store.dueWordCount() + ' tanesi bugün tekrara hazır), Zorlandıklarım\'da ' +
+            KI.store.troubleCount() + ' kayıt var.' }));
     var reset = U.el('button', { class: 'btn btn--sm holdbtn', type: 'button', title: '3 saniye basılı tut' }, [
       U.el('span', { class: 'holdbtn__fill', 'aria-hidden': 'true' }),
       U.el('span', { class: 'holdbtn__label', html: KI.icons.html('trash') + ' Tüm ilerlemeyi sıfırla' })
@@ -212,14 +233,10 @@
     reset.addEventListener('keyup', holdCancel);
     reset.addEventListener('contextmenu', function (e) { e.preventDefault(); });
     body.appendChild(reset);
-    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.78rem;margin-top:6px',
-      text: 'Yanlışlıkla silinmesin diye: düğmeyi 3 saniye basılı tutman, sonra da açılan onay penceresinde 3 saniye daha beklemen gerekiyor.' }));
+    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.76rem;margin-top:4px',
+      text: 'Yanlışlıkla silinmesin diye 3 saniye basılı tutman, sonra da onay penceresinde 3 saniye daha beklemen gerekiyor.' }));
 
-    /* --- veri: cihaz değişince ilerlemeyi taşımak için --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px', text: 'Veri' }));
-    body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
-      text: 'İlerlemeni bir dosyaya kaydedip başka bir cihazda geri yükleyebilirsin. Hiçbir veri dışarıya gönderilmez.' }));
-    var dataRow = U.el('div', { class: 'row' });
+    var dataRow = U.el('div', { class: 'row', style: 'margin-top:10px' });
     var exportBtn = U.el('button', { class: 'btn btn--sm', type: 'button', html: KI.icons.html('download') + ' Dışa aktar' });
     exportBtn.addEventListener('click', function () {
       KI.audio.play('tap');
@@ -259,9 +276,9 @@
     dataRow.appendChild(importBtn);
     dataRow.appendChild(importInput);
     body.appendChild(dataRow);
+  }
 
-    /* --- hakkında --- */
-    body.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:18px;border-top:1px dashed var(--line);padding-top:14px', text: 'Hakkında' }));
+  function buildAbout(body) {
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.88rem',
       text: 'Gramer Atlası · Zaman çizgisiyle gramer · ' + KI.tenses.list.length + ' zaman · ' + KI.glossary.size() + ' kelime.' }));
     body.appendChild(U.el('p', { class: 'soft', style: 'font-size:.82rem',
@@ -338,5 +355,10 @@
     KI.audio.play('open');
   }
 
-  KI.settings = { build: build };
+  function open() {
+    activeTab = 'ayarlar';
+    build();
+  }
+
+  KI.settings = { build: build, open: open };
 })(window.KI);

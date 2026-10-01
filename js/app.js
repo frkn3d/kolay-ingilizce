@@ -134,7 +134,7 @@
     var modal = document.getElementById('settings-modal');
     var btnSettings = document.getElementById('btn-settings');
     btnSettings.addEventListener('click', function () {
-      KI.settings.build();
+      KI.settings.open();
       KI.util.openModal(modal, btnSettings);
       KI.audio.play('open');
     });
