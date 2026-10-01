@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.31';
+  var APP_VERSION = '0.8.32';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.32', d: 'Titreşimler biraz güçlendirildi: dokunma 12 ms’den 20 ms’ye, Harita kural dönüşündeki çift vuruş ve kaydırıcı tıkları da aynı oranda uzatıldı.' },
     { v: '0.8.31', d: 'Sesler ve titreşimler elden geçirildi. Harita\'da üstteki zaman çizgisine ya da sarı noktaya dokununca kurallar dönerken artık kısa bir "kart çevirme" sesi ve hissedilir çift titreşim var. Alt menü sekmeleri, açılır kutular (Haritayı nasıl okumalı?, sürüm notları), Zaman Yolculuğu yakınlaştırma düğmeleri, okuma hızı ve ses seçimi de minik, kısık efektler kazandı. Çok kısa olduğu için birçok telefonda hissedilmeyen dokunma titreşimi biraz uzatıldı. iPhone\'da (iOS 17.4+) da titreşim artık çalışıyor.' },
     { v: '0.8.30', d: 'Zaman sayfalarındaki "Kendini dene" büyüdü: artık 10 soru, her konuda en az 50 soruluk bir havuzdan her girişte yeni bir set çekiliyor. Dört tür soru var: boşluk doldurma, doğru / yanlış, cümle kurma ve sonda kendi hikâyeni yazma. Hikâyen; uzunluk, hedef zamanı en az 2 cümlede kullanma ve hatasız kelime oranı (%80) üzerinden puanlanıyor. Çevrimiçiyken dilbilgisi denetimi LanguageTool ile yapılıyor (Ayarlar\'dan kapatılabilir), çevrimdışıyken cihazdaki kurallar ve sözlük kullanılıyor.' },
     { v: '0.8.29', d: 'Harita\'daki NOW noktası ipucu yeniden yapıldı: imleç artık sağ alt çaprazdan gelip ucunu tam sarı noktaya değdiriyor, bir kez tıklayıp kayboluyor - hepsi tam 2 saniye. Eski sürümde animasyon tekrarları bitince imleç aniden sağa kayıyordu, bu da giderildi.' },

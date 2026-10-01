@@ -7,11 +7,11 @@
 (function (KI) {
   'use strict';
 
-  /* 8 ms gibi çok kısa vuruşlar birçok Android telefonda hiç hissedilmiyor;
-     12 ms hâlâ minik ama fark ediliyor. */
-  var TAP_MS = 12;
-  var TICK_MS = 8;                                  // kaydırıcı/zoom: en hafif
-  var SWAP_PATTERN = [16, 45, 10];                  // Harita kural döngüsü: çift tık hissi
+  /* 8-12 ms gibi çok kısa vuruşlar birçok Android telefonda zayıf kalıyor
+     ya da hiç hissedilmiyor; 20 ms belirgin ama hâlâ kısa bir "tık". */
+  var TAP_MS = 20;
+  var TICK_MS = 12;                                 // kaydırıcı/zoom: en hafif
+  var SWAP_PATTERN = [26, 50, 18];                  // Harita kural döngüsü: çift tık hissi
   var WRONG_MS = 200;
   var ACHIEVEMENT_PATTERN = [70, 90, 70, 90, 70];   // art arda üç vuruş
   var COMBO_PATTERN = [30, 40, 30];                 // 3/5/7 kombo: iki kısa vuruş
