@@ -102,6 +102,7 @@ window.KI = window.KI || {};
 
     /* Dokunma ipucu: parmağı uzatılmış, aşağıyı gösteren bir el. */
     'point-down': '<rect x="9.4" y="2" width="5.2" height="11" rx="2.6"/><rect x="5.5" y="11" width="13" height="9.5" rx="4.2"/><path d="M5.5 14.6c-1.7.25-2.9 1.5-2.9 3.1 0 1.85 1.55 3.3 3.5 3.3h1.1"/>',
+    cursor: '<path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3Z" fill="currentColor" stroke="none"/><line x1="13" y1="13" x2="19" y2="19"/>',
 
     /* --- Oyun Modu haritası: kilit ve zaman türü (aspect) simgeleri --- */
     lock: '<rect x="5" y="10.6" width="14" height="10" rx="1.8"/><path d="M8 10.6V7.6a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.1" r="1.3" fill="currentColor" stroke="none"/>',

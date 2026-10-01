@@ -91,7 +91,7 @@
           'aria-label': 'Zamanların olumlu, olumsuz ve soru kurallarını sırayla göster'
         }, [
           U.el('span', { class: 'timebar__now-dot', 'aria-hidden': 'true' }),
-          U.el('span', { class: 'timebar__now-hint', 'aria-hidden': 'true', html: KI.icons.html('point-down') })
+          U.el('span', { class: 'timebar__now-hint', 'aria-hidden': 'true', html: KI.icons.html('cursor') })
         ]);
         labels.appendChild(nowBtn);
         return;

@@ -251,15 +251,18 @@ html[data-theme="dark"] .grid-map__tier-name--ileri { color: var(--past); }
   cursor: pointer;
 }
 /* Noktanın yeni "dokununca kuralları döndürür" davranışını fark ettirmek
-   için Harita'ya her girişte üstünde birkaç kez dokunup kaybolan bir el
-   ikonu (bkz. home.js). Giriş ekranındaki yardım ipucuyla aynı dokunma/
-   kaybolma animasyonunu (gateHandTap/gateHandFade, game.css) kullanır. */
+   için Harita'ya her girişte üstünde birkaç kez dokunup kaybolan bir fare
+   imleci (bkz. home.js). Nokta zaten sarı olduğu için imleç nötr bırakıldı
+   (açık temada koyu, koyu temada krem - bkz. --ink); yukarıdaki "Devam et"
+   düğmesiyle çakışmaması için de noktaya eskisinden daha yakın duruyor.
+   Giriş ekranındaki yardım ipucuyla aynı dokunma/kaybolma animasyonunu
+   (gateHandTap/gateHandFade, game.css) kullanır. */
 .timebar__now-hint {
-  position: absolute; bottom: calc(100% + 3px); left: 50%;
-  display: inline-flex; color: var(--mustard); pointer-events: none;
+  position: absolute; top: -6px; left: 50%;
+  display: inline-flex; color: var(--ink); pointer-events: none;
   animation: gateHandTap 1.1s ease-in-out 3, gateHandFade .5s ease 4.6s forwards;
 }
-.timebar__now-hint .icon { width: 20px; height: 20px; }
+.timebar__now-hint .icon { width: 17px; height: 17px; }
 /* "NOW" yazısı yerine kalın, sürekli kısa dalgalar yayan bir nokta -
    iki iç içe halka, aralarında gecikmeyle sürekliymiş hissi verir. */
 .timebar__now-dot {
