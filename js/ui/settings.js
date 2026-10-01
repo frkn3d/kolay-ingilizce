@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.24';
+  var APP_VERSION = '0.8.25';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.25', d: 'Bir önceki sürümdeki arka plan bulanıklığı yalnızca Ayarlar\'daydı; artık Bugünün Çalışması, Başarımlar, Canlar ve sıfırlama onayı gibi küçük pencere şeklinde açılan her şeyde aynı hafif bulanıklık var.' },
     { v: '0.8.24', d: 'Ayarlar penceresi açıkken arkadaki sayfa artık hafifçe bulanıklaşıyor (cam buzlu etkisi). Telefonu yormasın diye bulanıklık düşük tutuldu ve "Animasyonları azalt" açıkken ya da sistemin azaltılmış hareket tercihinde tamamen kapanıyor.' },
     { v: '0.8.23', d: 'Ayarlar penceresi sadeleştirildi: üstte Ayarlar ve Hakkında olmak üzere iki sekme geldi, hakkında yazısı ve sürüm notları artık kendi sekmesinde. Ayarlar sekmesindeki benzer bölümler (Okuma+Alıştırma, Görünüm+Okunaklılık, İlerleme+Veri) tek başlık altında birleştirildi ve genel boşluklar sıkılaştırıldı - pencere artık çok daha az yer kaplıyor.' },
     { v: '0.8.22', d: 'Temeller\'deki "ipucu" kutuları (Altın kural, Kolay yol vb.) artık yeşil değil hardal renginde - koyu temada her yerin yeşil olması karışıklık yaratıyordu. Başarımlar da tek düze hardal+gri olmaktan çıktı: Zaman Haritası, Alıştırma, Kelime, Bağlılık ve Oyun Modu kategorilerinin her biri kazanılınca kendi rengini taşıyor.' },
