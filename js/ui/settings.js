@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.23';
+  var APP_VERSION = '0.8.24';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.24', d: 'Ayarlar penceresi açıkken arkadaki sayfa artık hafifçe bulanıklaşıyor (cam buzlu etkisi). Telefonu yormasın diye bulanıklık düşük tutuldu ve "Animasyonları azalt" açıkken ya da sistemin azaltılmış hareket tercihinde tamamen kapanıyor.' },
     { v: '0.8.23', d: 'Ayarlar penceresi sadeleştirildi: üstte Ayarlar ve Hakkında olmak üzere iki sekme geldi, hakkında yazısı ve sürüm notları artık kendi sekmesinde. Ayarlar sekmesindeki benzer bölümler (Okuma+Alıştırma, Görünüm+Okunaklılık, İlerleme+Veri) tek başlık altında birleştirildi ve genel boşluklar sıkılaştırıldı - pencere artık çok daha az yer kaplıyor.' },
     { v: '0.8.22', d: 'Temeller\'deki "ipucu" kutuları (Altın kural, Kolay yol vb.) artık yeşil değil hardal renginde - koyu temada her yerin yeşil olması karışıklık yaratıyordu. Başarımlar da tek düze hardal+gri olmaktan çıktı: Zaman Haritası, Alıştırma, Kelime, Bağlılık ve Oyun Modu kategorilerinin her biri kazanılınca kendi rengini taşıyor.' },
     { v: '0.8.21', d: 'Temeller (kiremit) ve Harita (yeşil) sekmeleri de artık Sözlük/Alıştırma gibi kendi rengini taşıyor; dört sekme de birbirinden net ayrışıyor. Uygulamaya genel bir "canlılık" katıldı: Sözlük, Alıştırma ve Temeller\'deki kart listeleri açılışta sırayla beliriyor, alıştırmalarda yeni bir soruya geçince şıklar art arda süzülerek geliyor, tıklanabilir kartlar dokununca hafifçe kalkıp basılınca içeri çöküyor.' },
