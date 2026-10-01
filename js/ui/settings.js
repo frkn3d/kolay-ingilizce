@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.28';
+  var APP_VERSION = '0.8.29';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.29', d: 'Harita\'daki NOW noktası ipucu yeniden yapıldı: imleç artık sağ alt çaprazdan gelip ucunu tam sarı noktaya değdiriyor, bir kez tıklayıp kayboluyor - hepsi tam 2 saniye. Eski sürümde animasyon tekrarları bitince imleç aniden sağa kayıyordu, bu da giderildi.' },
     { v: '0.8.28', d: 'Harita\'daki NOW noktası ipucu düzeltildi: parmak yerine bir fare imleci ikonu geldi, rengi sarıdan (nokta zaten sarı) nötr bir tona çevrildi ve üstteki "Devam et" düğmesiyle çakışmaması için noktaya biraz daha yakın duruyor.' },
     { v: '0.8.27', d: 'Giriş ekranı, büyük yazı boyutuyla en küçük telefonlarda kayma oluşturabiliyordu; logo, kartlar ve Nasıl Kullanılır/İstatistikler düğmeleri biraz daraltıldı, bu kayma tamamen gitti. Alttaki "Logspace · sürüm" yazısı artık tıklanabilir: Ayarlar\'ı doğrudan Hakkında sekmesinde açıyor.' },
     { v: '0.8.26', d: 'Küçük pencerelerden biri açıkken arkadaki sayfa artık kaymıyor (kapanınca kaldığın yere geri dönüyorsun). Harita sekmesinde üstteki sarı NOW noktasına dokununca da, çizgiye dokunmuş gibi aşağıdaki kartların kuralı değişiyor; bu yeni davranışı fark ettirmek için Harita\'ya her girişte noktanın üstünde kısa bir dokunma ipucu beliriyor.' },

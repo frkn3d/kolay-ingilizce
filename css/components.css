@@ -250,19 +250,30 @@ html[data-theme="dark"] .grid-map__tier-name--ileri { color: var(--past); }
   padding: 0; border: 0; background: none; font: inherit; letter-spacing: inherit;
   cursor: pointer;
 }
-/* Noktanın yeni "dokununca kuralları döndürür" davranışını fark ettirmek
-   için Harita'ya her girişte üstünde birkaç kez dokunup kaybolan bir fare
-   imleci (bkz. home.js). Nokta zaten sarı olduğu için imleç nötr bırakıldı
-   (açık temada koyu, koyu temada krem - bkz. --ink); yukarıdaki "Devam et"
-   düğmesiyle çakışmaması için de noktaya eskisinden daha yakın duruyor.
-   Giriş ekranındaki yardım ipucuyla aynı dokunma/kaybolma animasyonunu
-   (gateHandTap/gateHandFade, game.css) kullanır. */
+/* Noktanın "dokununca kuralları döndürür" davranışını fark ettirmek için
+   Harita'ya her girişte sağ alt çaprazdan gelen, ucu tam sarı noktaya
+   değince bir kez tıklayıp kaybolan bir fare imleci (bkz. home.js).
+   Toplam süre tam 2 saniye, tek parça bir animasyon - eski çok tekrarlı
+   sürümde tekrarlar bitince ortalama dönüşümü düşüp imleç sağa kayıyordu.
+   İmleç ikonu 16px: SVG'deki uç (3,3)/24 birimde, yani 2px; o yüzden öğe
+   noktanın merkezinden 2px sola/yukarı konuyor ki uç tam merkeze değsin.
+   Renk nötr (--ink), nokta sarı kalıyor. */
 .timebar__now-hint {
-  position: absolute; top: -6px; left: 50%;
+  position: absolute; top: calc(50% - 2px); left: calc(50% - 2px);
   display: inline-flex; color: var(--ink); pointer-events: none;
-  animation: gateHandTap 1.1s ease-in-out 3, gateHandFade .5s ease 4.6s forwards;
+  transform-origin: 2px 2px;
+  animation: nowCursorTap 2s ease-out both;
 }
-.timebar__now-hint .icon { width: 17px; height: 17px; }
+.timebar__now-hint .icon { width: 16px; height: 16px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
+@keyframes nowCursorTap {
+  0%   { opacity: 0; transform: translate(26px, 26px); }
+  12%  { opacity: 1; }
+  45%  { opacity: 1; transform: translate(0, 0) scale(1); }
+  53%  { transform: translate(0, 0) scale(.78); }
+  62%  { transform: translate(0, 0) scale(1); }
+  80%  { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(0, 0) scale(1); }
+}
 /* "NOW" yazısı yerine kalın, sürekli kısa dalgalar yayan bir nokta -
    iki iç içe halka, aralarında gecikmeyle sürekliymiş hissi verir. */
 .timebar__now-dot {
