@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v20';
+var CACHE_VERSION = 'ki-cache-v21';
 
 var CORE_ASSETS = [
   './',
@@ -22,6 +22,11 @@ var CORE_ASSETS = [
   './css/game.css',
   './css/stats.css',
   './css/ux.css',
+  './css/skin-clay.css',
+  './assets/fonts/nunito-latin.woff2',
+  './assets/fonts/nunito-latin-ext.woff2',
+  './assets/fonts/dmsans-latin.woff2',
+  './assets/fonts/dmsans-latin-ext.woff2',
   './js/core/utils.js',
   './js/core/icons.js',
   './js/core/store.js',

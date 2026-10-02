@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.9.0';
+  var APP_VERSION = '0.9.1';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.9.1', d: 'Deneysel Clay tasarımı eklendi (Ayarlar > Görünüm > Tasarım). UI/UX Pro Max skill’inin bu uygulama için önerdiği tasarım sisteminin tamamı: Claymorphism stili (yuvarlak köşeler, kalın çerçeveler, içten ve dıştan yumuşak gölgeler, yaylanarak basılan düğmeler), indigo renk paleti, pastel zaman renkleri (geçmiş şeftali, şimdiki nane, gelecek bebek mavisi), alttan ayrık yüzen sekme çubuğu ve Nunito + DM Sans yazı tipleri. Skill’in ilk önerdiği Comic Neue yazı tipinde Türkçe ğ ve İ harfleri olmadığı için skill’in Claymorphism’e özel önerdiği çift kullanıldı. Açık ve koyu temada çalışır, Oyun Modu kendi gece paletini korur. Klasik tasarım varsayılan olarak kalır.' },
     { v: '0.9.0', d: 'Büyük arayüz ve kullanılabilirlik güncellemesi (UI/UX Pro Max kural seti). Görünüm ve çalışma biçimi korunarak uygulamanın tamamı erişilebilirlik, dokunma, tipografi ve hareket kurallarına göre tarandı ve düzeltildi. Okunurluk: açık ve koyu temada yazı kontrastı yetersiz kalan 20 yer düzeltildi (Oyun Modu seviye başlıkları, sekme ve üst başlık renkleri, kilitli başarımlar, koyu temada ana düğmeler); 12 pikselden küçük yazı kalmadı. Dokunma: küçük düğme, bağlantı ve noktaların dokunma alanı görünümleri değişmeden en az 44 piksele genişletildi, ayar kutuları büyüdü, çift dokunma gecikmesi kaldırıldı. Harita kartlarında kırpılan zaman adları ve kurallar artık tam görünüyor. Klavyeyle gezinmede odak halkası belirginleşti, başlık sırası düzeltildi, her ekran tarayıcı sekmesinde kendi adını taşıyor. Küçük pencereler hafif bir açılma hareketiyle geliyor; animasyonları azalt tercihine uyuluyor.' },
     { v: '0.8.34', d: 'Sözlüğe Deyimler bölümü eklendi: 157 Türkçe atasözü, deyim ve kalıp sözün İngilizcede gerçekten kullanılan, kalıplaşmış karşılığı. Her birinde anlamı, gerekiyorsa açıklaması, sesli okuma ve çoğunda örnek cümle var. Türkçe ya da İngilizce aranabiliyor; atasözü, deyim, kalıp söz ve iki dilde aynı imgeyi kullananlar diye süzülebiliyor. Karşılığı olmayan sözler (aç ayı oynamaz gibi) bilerek eklenmedi.' },
     { v: '0.8.33', d: 'Kendini dene uzadı: artık her türden 10 soru var (10 boşluk doldurma, 10 doğru / yanlış, 10 cümle kurma) ve sonda bir hikâye görevi, toplam 31 soru. Havuz büyütüldü: her zamana 16 yeni doğru / yanlış, 10 yeni boşluk doldurma ve 7 yeni hikâye görevi eklendi; cümle kurma artık o zamanın bütün örnek cümlelerinden seçiliyor. Zaman başına havuz 100 ile 175 soru arasında, toplamda 1700ün üzerinde; her girişte ve her Tekrar dene ile yeni bir set geliyor.' },
@@ -191,6 +192,27 @@
       themeRow.appendChild(b);
     });
     body.appendChild(themeRow);
+
+    /* Tasarım kaplaması: Klasik (retro yeşil) ya da Clay (UI/UX Pro Max
+       skill'inin önerdiği tasarım sistemi, deneysel) */
+    var skinRow = U.el('div', { class: 'row' });
+    [['classic', 'Klasik'], ['clay', 'Clay (deneysel)']].forEach(function (o) {
+      var b = U.el('button', {
+        class: 'btn btn--sm' + ((KI.store.get('skin') || 'classic') === o[0] ? ' btn--primary' : ''),
+        type: 'button', text: o[1], 'aria-pressed': String((KI.store.get('skin') || 'classic') === o[0])
+      });
+      b.addEventListener('click', function () {
+        KI.setSkin(o[0]);
+        KI.audio.play('toggle');
+        build();
+      });
+      skinRow.appendChild(b);
+    });
+    body.appendChild(U.el('div', { class: 'field', style: 'margin-top:10px' }, [
+      U.el('div', { class: 'field__lbl' }, [U.el('span', { text: 'Tasarım' })]),
+      skinRow,
+      U.el('div', { class: 'soft', style: 'font-size:.78rem;margin-top:4px', text: 'Clay: yuvarlak, yumuşak gölgeli, indigo renkli deneysel tasarım. Uygulamanın çalışması değişmez.' })
+    ]));
 
     var fontRow = U.el('div', { class: 'row' });
     [['small', 'Küçük'], ['normal', 'Normal'], ['large', 'Büyük']].forEach(function (o) {

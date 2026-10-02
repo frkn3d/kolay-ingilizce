@@ -1,0 +1,359 @@
+/* ============================================================
+   Gramer Atlası - skin-clay.css  (DENEYSEL "Clay" tasarımı)
+   UI/UX Pro Max skill'inin bu uygulama için önerdiği tasarım sistemi
+   tümüyle uygulanmış hâli. Yalnız html[data-skin="clay"] iken etkin;
+   Ayarlar > Görünüm > Tasarım'dan Klasik'e tek dokunuşla dönülür.
+
+   Skill çıktısı (--design-system "education language learning app"):
+     Stil     : Claymorphism - yumuşak 3B, tombul, oyuncak gibi; 3-4px
+                kalın çerçeve, 16-24px köşe, içten + dıştan çift gölge,
+                pastel renkler, yaylanan 200ms basma
+     Renk     : primary #4F46E5, secondary #818CF8, accent #16A34A,
+                background #EEF2FF, foreground #312E81, card #FFFFFF,
+                muted-fg #475569, border #C7D2FE, destructive #DC2626
+     Pasteller: şeftali #FDBCB4, bebek mavisi #ADD8E6, nane #98FF98,
+                lila #E6E6FA (zaman gruplarının zeminleri)
+     Yazı     : skill'in ilk önerisi Baloo 2 + Comic Neue idi; Comic Neue'de
+                Türkçe ğ / İ harfleri olmadığı için skill'in Claymorphism'e
+                özel çifti kullanıldı: Nunito (başlık, 800) + DM Sans (gövde).
+   Koyu tema: skill'e göre Claymorphism'de koyu mod "koşullu" -
+   aynı paletin gece indigosu tonlarıyla, kontrastı ayrıca ölçülerek yapıldı.
+   ============================================================ */
+
+/* ---------- yazı tipleri (uygulamayla birlikte gelir, çevrimdışı çalışır) ---------- */
+@font-face {
+  font-family: 'Nunito'; font-style: normal; font-weight: 600 900; font-display: swap;
+  src: url('../assets/fonts/nunito-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito'; font-style: normal; font-weight: 600 900; font-display: swap;
+  src: url('../assets/fonts/nunito-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../assets/fonts/dmsans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../assets/fonts/dmsans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- belirteçler: açık ---------- */
+html[data-skin="clay"] {
+  /* Uygulamanın "marka yeşili" skalası indigo skalasına eşlenir; böylece
+     yeşil kullanan her bileşen (üst çubuk, ana düğme, sekme...) kendiliğinden
+     skill'in primary rengine geçer. */
+  --green-900: #1e1b4b;
+  --green-800: #312e81;
+  --green-700: #4338ca;
+  --green-600: #4f46e5;
+  --green-500: #6366f1;
+  --green-400: #818cf8;
+  --green-300: #a5b4fc;
+  --green-200: #c7d2fe;
+  --green-100: #e0e7ff;
+
+  --cream:     #ffffff;
+  --paper:     #eef2ff;
+  --paper-2:   #e0e7ff;
+  --sand:      #c7d2fe;
+
+  --mustard:     #f59e0b;
+  --mustard-d:   #d97706;
+  --mustard-ink: #92400e;
+  --mustard-bg:  #fef3c7;
+  --terra:       #ea580c;
+  --terra-d:     #9a3412;   /* şeftali zeminde de 4.5:1 */
+  --terra-l:     #fdba8c;
+  --plum:        #7c3aed;
+  --sky:         #0284c7;
+
+  --bg:        #eef2ff;
+  --bg-grain:  transparent;
+  --surface:   #ffffff;
+  --surface-2: #f5f7ff;
+  --ink:       #312e81;
+  --ink-soft:  #475569;
+  --ink-mute:  #545e72;
+  --line:      #c7d2fe;
+  --line-2:    #a5b4fc;
+  --accent:    #4f46e5;
+  --accent-ink:#ffffff;
+  --link:      #4338ca;
+
+  --ok-bg:   #dcfce7;
+  --ok-edge: #16a34a;
+  --ok-key:  #ffffff;
+  --no-bg:   #fee2e2;
+  --no-edge: #dc2626;
+  --no-key:  #ffffff;
+
+  /* zaman grupları: koyu ton yazı/çizgi için, pastel ton zemin için */
+  --past:       #c2410c;
+  --past-bg:    #ffe4dc;   /* şeftali */
+  --present:    #15803d;
+  --present-bg: #dcfce7;   /* nane */
+  --future:     #0369a1;
+  --future-bg:  #e0f2fe;   /* bebek mavisi */
+  --tl-mini-past:   #fdba8c;
+  --tl-mini-future: #7dd3fc;
+
+  /* claymorphism ölçüleri */
+  --r-sm: 14px;
+  --r:    20px;
+  --r-lg: 26px;
+  --clay-out: 6px 8px 18px rgba(49, 46, 129, .13);
+  --clay-in:  inset -3px -3px 7px rgba(49, 46, 129, .07), inset 3px 3px 7px rgba(255, 255, 255, .95);
+  --shadow-color: rgba(79, 70, 229, .22);
+  --shadow-hard: var(--clay-out), var(--clay-in);
+  --shadow-soft: 0 10px 30px rgba(49, 46, 129, .16);
+  --ring: 0 0 0 4px rgba(79, 70, 229, .28);
+
+  --font-display: 'Nunito', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  /* eski "daktilo" etiketleri yerine yuvarlak, kalın küçük etiketler */
+  --font-mono: 'Nunito', system-ui, sans-serif;
+
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* ---------- belirteçler: koyu ("koşullu" - gece indigosu) ---------- */
+html[data-skin="clay"][data-theme="dark"] {
+  --green-100: #2a2660;
+  --green-200: #3b3780;
+  --cream:     #eef2ff;
+
+  --bg:        #13112e;
+  --surface:   #221f4d;
+  --surface-2: #2a2660;
+  --ink:       #eef2ff;
+  --ink-soft:  #c7d2fe;
+  --ink-mute:  #aab4f0;
+  --line:      #3b3780;
+  --line-2:    #514caa;
+  --accent:    #a5b4fc;
+  --accent-ink:#1e1b4b;
+  --link:      #a5b4fc;
+
+  --mustard:     #fbbf24;
+  --mustard-ink: #fcd34d;
+  --mustard-bg:  #3a2a0a;
+
+  --ok-bg:   #166534;
+  --ok-edge: #86efac;
+  --ok-key:  #052e16;
+  --no-bg:   #7f1d1d;
+  --no-edge: #fca5a5;
+  --no-key:  #450a0a;
+
+  --past:       #fdba74;
+  --past-bg:    #3b1d12;
+  --present:    #86efac;
+  --present-bg: #0f2e1d;
+  --future:     #7dd3fc;
+  --future-bg:  #0c2a3d;
+  --tl-mini-past:   #9a5b3c;
+  --tl-mini-future: #2f6f8f;
+
+  --clay-out: 6px 8px 18px rgba(0, 0, 0, .45);
+  --clay-in:  inset -3px -3px 7px rgba(0, 0, 0, .28), inset 3px 3px 7px rgba(255, 255, 255, .07);
+  --shadow-color: rgba(0, 0, 0, .5);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, .5);
+  --ring: 0 0 0 4px rgba(165, 180, 252, .35);
+}
+
+/* ---------- zemin ---------- */
+/* Oyun Modu ve İstatistikler kendi koyu "sahne" zeminini korur (base.css) */
+html[data-skin="clay"]:not([data-section="oyun"]):not([data-section="istatistikler"]) body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(60% 40% at 0% 0%, rgba(253, 188, 180, .35), transparent 70%),
+    radial-gradient(50% 40% at 100% 10%, rgba(173, 216, 230, .35), transparent 70%),
+    radial-gradient(60% 50% at 50% 100%, rgba(230, 230, 250, .7), transparent 70%);
+  background-attachment: fixed;
+}
+html[data-skin="clay"][data-theme="dark"]:not([data-section="oyun"]):not([data-section="istatistikler"]) body {
+  background-image:
+    radial-gradient(60% 40% at 0% 0%, rgba(124, 58, 237, .18), transparent 70%),
+    radial-gradient(50% 40% at 100% 10%, rgba(3, 105, 161, .16), transparent 70%);
+}
+html[data-skin="clay"] h1, html[data-skin="clay"] h2, html[data-skin="clay"] h3, html[data-skin="clay"] h4 {
+  font-weight: 800; letter-spacing: -.015em;
+}
+html[data-skin="clay"] .eyebrow { font-weight: 800; letter-spacing: .12em; }
+
+/* ---------- üst çubuk ve alt sekmeler ---------- */
+html[data-skin="clay"] .appbar {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border-bottom: 0;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, .3);
+}
+html[data-skin="clay"][data-theme="dark"] .appbar {
+  background: linear-gradient(135deg, #2a2670, #3730a3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+}
+/* üst çubuktaki yuvarlak düğmeler indigo zeminde camsı; pencerelerdeki
+   kapat düğmeleri beyaz kart üstünde olduğu için ayrı (aşağıda) */
+html[data-skin="clay"] .appbar .iconbtn {
+  border: 3px solid rgba(255, 255, 255, .55);
+  background: rgba(255, 255, 255, .16);
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, .25), inset -2px -2px 5px rgba(0, 0, 0, .12);
+  color: #fff;
+}
+/* mobilde alt sekme çubuğu ekrandan ayrık, yüzen bir kil şerit olur
+   (masaüstünde sekmeler üst çubuğa taşındığı için yalnız 860px altı) */
+@media (max-width: 859px) {
+  html[data-skin="clay"] .tabbar {
+    left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    padding: 0; border-radius: 24px; border: 3px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--clay-out), var(--clay-in);
+    overflow: hidden;
+  }
+  html[data-skin="clay"] body:not(.no-tabbar) { padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 28px); }
+  html[data-skin="clay"] .tab { border-top: 0; border-radius: 18px; margin: 5px 3px; height: calc(var(--tabbar-h) - 10px); }
+  html[data-skin="clay"] .tab.is-active { box-shadow: inset 2px 2px 5px rgba(255, 255, 255, .7), inset -2px -2px 6px rgba(49, 46, 129, .12); }
+  html[data-skin="clay"][data-theme="dark"] .tab.is-active { box-shadow: inset 2px 2px 5px rgba(255, 255, 255, .06), inset -2px -2px 6px rgba(0, 0, 0, .3); }
+  html[data-skin="clay"] .toast { bottom: calc(var(--tabbar-h) + 30px + env(safe-area-inset-bottom, 0px)); }
+}
+
+html[data-skin="clay"] .modal .iconbtn {
+  border: 3px solid var(--line); background: var(--surface-2); color: var(--ink);
+  box-shadow: 3px 4px 10px rgba(49, 46, 129, .12), inset 2px 2px 5px rgba(255, 255, 255, .9);
+}
+html[data-skin="clay"][data-theme="dark"] .modal .iconbtn { box-shadow: 3px 4px 10px rgba(0, 0, 0, .35); }
+
+/* ---------- kartlar ---------- */
+html[data-skin="clay"] .card,
+html[data-skin="clay"] .tcard,
+html[data-skin="clay"] .example,
+html[data-skin="clay"] .wrow,
+html[data-skin="clay"] .modal__card,
+html[data-skin="clay"] .grid-map__tier,
+html[data-skin="clay"] .cmp__side,
+html[data-skin="clay"] .timebar,
+html[data-skin="clay"] .tj {
+  border-width: 3px;
+  border-radius: var(--r);
+  box-shadow: var(--clay-out), var(--clay-in);
+}
+html[data-skin="clay"] .modal__card { border-radius: var(--r-lg); border-color: var(--line); }
+html[data-skin="clay"] .modecard:hover,
+html[data-skin="clay"] .tcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 8px 12px 24px rgba(49, 46, 129, .18), var(--clay-in);
+}
+html[data-skin="clay"][data-theme="dark"] .modecard:hover,
+html[data-skin="clay"][data-theme="dark"] .tcard:hover { box-shadow: 8px 12px 24px rgba(0, 0, 0, .55), var(--clay-in); }
+html[data-skin="clay"] .modecard:active,
+html[data-skin="clay"] .tcard:active { transform: scale(.97); box-shadow: var(--clay-in); }
+
+/* ---------- düğmeler: tombul, yaylanarak basılan ---------- */
+html[data-skin="clay"] .btn {
+  border-width: 3px;
+  box-shadow: 4px 5px 12px rgba(49, 46, 129, .14), inset -2px -3px 6px rgba(49, 46, 129, .10), inset 2px 3px 6px rgba(255, 255, 255, .9);
+  transition: transform 200ms var(--ease-spring), box-shadow 200ms ease-out, background .15s ease;
+  font-weight: 700;
+}
+html[data-skin="clay"] .btn--sm { border-width: 2px; box-shadow: 2px 3px 8px rgba(49, 46, 129, .12), inset -2px -2px 4px rgba(49, 46, 129, .08), inset 2px 2px 4px rgba(255, 255, 255, .9); }
+html[data-skin="clay"] .btn:hover { transform: translateY(-2px); }
+html[data-skin="clay"] .btn:active { transform: scale(.95); box-shadow: inset 2px 3px 7px rgba(49, 46, 129, .2); }
+html[data-skin="clay"] .btn--ghost { box-shadow: none; }
+html[data-skin="clay"] .btn--primary {
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
+  color: #fff; border-color: #4338ca;
+  box-shadow: 4px 6px 14px rgba(79, 70, 229, .35), inset -2px -3px 6px rgba(30, 27, 75, .3), inset 2px 3px 6px rgba(255, 255, 255, .35);
+}
+html[data-skin="clay"][data-theme="dark"] .btn {
+  box-shadow: 4px 5px 12px rgba(0, 0, 0, .4), inset -2px -3px 6px rgba(0, 0, 0, .25), inset 2px 3px 6px rgba(255, 255, 255, .06);
+}
+html[data-skin="clay"][data-theme="dark"] .btn--primary {
+  background: linear-gradient(180deg, #a5b4fc, #818cf8);
+  color: #1e1b4b; border-color: #6366f1;
+}
+html[data-skin="clay"] .btn--mustard,
+html[data-skin="clay"] .btn--defter.btn--primary {
+  background: linear-gradient(180deg, #fcd34d, #f59e0b); color: #451a03; border-color: #d97706;
+}
+
+/* ---------- şıklar, çipler, giriş alanları ---------- */
+html[data-skin="clay"] .opt,
+html[data-skin="clay"] .wchip,
+html[data-skin="clay"] .input,
+html[data-skin="clay"] .field select {
+  border-width: 3px;
+  box-shadow: 3px 4px 10px rgba(49, 46, 129, .10), inset 2px 2px 5px rgba(255, 255, 255, .9);
+}
+html[data-skin="clay"] .opt { border-radius: var(--r-sm); }
+html[data-skin="clay"] .wchip { border-radius: 14px; }
+html[data-skin="clay"] .wchip:active { transform: scale(.94); }
+html[data-skin="clay"] .input { border-radius: 18px; }
+html[data-skin="clay"] .story-task__field { border-radius: 18px; }
+html[data-skin="clay"][data-theme="dark"] .opt,
+html[data-skin="clay"][data-theme="dark"] .wchip,
+html[data-skin="clay"][data-theme="dark"] .input,
+html[data-skin="clay"][data-theme="dark"] .field select {
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, .35), inset 2px 2px 5px rgba(255, 255, 255, .05);
+}
+html[data-skin="clay"] .opt.is-right { box-shadow: 0 0 0 3px var(--ok-edge), 4px 6px 14px rgba(22, 163, 74, .25); }
+html[data-skin="clay"] .opt.is-wrong { box-shadow: 0 0 0 3px var(--no-edge), 4px 6px 14px rgba(220, 38, 38, .2); }
+html[data-skin="clay"] .wchip--placed { background: var(--green-100); border-color: var(--green-400); }
+
+/* ---------- giriş ekranı ---------- */
+html[data-skin="clay"]:not([data-section="oyun"]):not([data-section="istatistikler"]) body.is-gate {
+  background-color: #4f46e5;
+  background-image:
+    radial-gradient(60% 46% at 50% 18%, rgba(253, 188, 180, .45), transparent 72%),
+    radial-gradient(50% 40% at 100% 100%, rgba(173, 216, 230, .35), transparent 70%),
+    linear-gradient(180deg, #4f46e5, #3730a3);
+}
+html[data-skin="clay"][data-theme="dark"]:not([data-section="oyun"]):not([data-section="istatistikler"]) body.is-gate {
+  background-color: #1e1b4b;
+  background-image:
+    radial-gradient(60% 46% at 50% 18%, rgba(124, 58, 237, .35), transparent 72%),
+    linear-gradient(180deg, #1e1b4b, #13112e);
+}
+html[data-skin="clay"] .gate__card,
+html[data-skin="clay"] .gate__stats {
+  border-radius: var(--r-lg);
+  box-shadow: 0 12px 28px rgba(30, 27, 75, .35), inset -3px -4px 8px rgba(49, 46, 129, .12), inset 3px 4px 8px rgba(255, 255, 255, .95);
+}
+html[data-skin="clay"] .gate__card { color: #1e1b4b; }
+/* indigo zemindeki açık yazılar: krem karışımları beyazda 4.5:1'in altında kalıyordu */
+html[data-skin="clay"] .gate__head p { color: rgba(255, 255, 255, .92); }
+html[data-skin="clay"] .gate__footnote { color: rgba(255, 255, 255, .86); }
+html[data-skin="clay"] .gate__daily-btn-count { color: rgba(255, 255, 255, .92); }
+html[data-skin="clay"] .gate__daily-btn.is-all-done .gate__daily-btn-count { color: #86efac; }
+html[data-skin="clay"] .gate__daily-btn { box-shadow: 0 10px 24px rgba(30, 27, 75, .3), inset 2px 3px 6px rgba(255, 255, 255, .25); }
+html[data-skin="clay"] .gate__card h2 { color: #1e1b4b; }
+html[data-skin="clay"] .gate__card p { color: #475569; }
+html[data-skin="clay"] .gate__card:hover { transform: translateY(-3px); }
+
+/* ---------- küçük ayrıntılar ---------- */
+html[data-skin="clay"] .badge, html[data-skin="clay"] .countpill, html[data-skin="clay"] .idiom__match { border-radius: 999px; }
+html[data-skin="clay"] .toast {
+  background: #312e81; color: #fff; border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(30, 27, 75, .35);
+}
+html[data-skin="clay"] .callout { border-radius: var(--r-sm); }
+html[data-skin="clay"] .sheet { border-radius: 26px 26px 0 0; box-shadow: 0 -10px 30px rgba(49, 46, 129, .18); }
+html[data-skin="clay"] .tcard__done { color: var(--ok-edge); }
+
+/* Oyun Modu'nun kendi "gece haritası" paleti korunur (ayrı bir mod
+   kimliği); yalnız kartlar ve düğmeler de kil biçimini alır. */
+html[data-skin="clay"][data-section="oyun"] #view {
+  --clay-out: 6px 8px 18px rgba(0, 0, 0, .45);
+  --clay-in:  inset -3px -3px 7px rgba(0, 0, 0, .28), inset 3px 3px 7px rgba(255, 255, 255, .07);
+}
+
+/* azaltılmış hareket: yaylanma ve kalkma yok */
+html[data-skin="clay"][data-motion="less"] .btn,
+html[data-skin="clay"][data-motion="less"] .modecard,
+html[data-skin="clay"][data-motion="less"] .tcard { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin="clay"] .btn:hover, html[data-skin="clay"] .modecard:hover, html[data-skin="clay"] .tcard:hover { transform: none; }
+}

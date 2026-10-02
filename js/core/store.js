@@ -43,6 +43,7 @@
     sound: true,
     haptics: true,
     theme: 'light',
+    skin: 'classic',      // tasarım kaplaması: classic | clay (deneysel, bkz. css/skin-clay.css)
     speechRate: 0.85,
     speechVoice: '',
     autoTranslate: false,

@@ -15,8 +15,14 @@
 (function () {
   try {
     var raw = localStorage.getItem('kolay-ingilizce/v1');
-    var theme = raw && JSON.parse(raw).theme === 'dark' ? 'dark' : 'light';
+    var st = raw ? JSON.parse(raw) : {};
+    var theme = st.theme === 'dark' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', theme);
+    /* Tasarım kaplaması (Klasik / Clay). ?skin=clay|classic bağlantısı
+       tercihi geçersiz kılar; app.js bunu kalıcı olarak kaydeder. */
+    var qs = /[?&]skin=(clay|classic)(?![a-z])/.exec(location.search);
+    var skin = qs ? qs[1] : (st.skin === 'clay' ? 'clay' : 'classic');
+    if (skin === 'clay') document.documentElement.setAttribute('data-skin', 'clay');
     if (theme === 'dark') {
       var m = document.querySelector('meta[name="theme-color"]');
       if (m) m.setAttribute('content', '#0d1711');
@@ -32,6 +38,7 @@
 <link rel="stylesheet" href="css/game.css" />
 <link rel="stylesheet" href="css/stats.css" />
 <link rel="stylesheet" href="css/ux.css" />
+<link rel="stylesheet" href="css/skin-clay.css" />
 </head>
 <body>
 

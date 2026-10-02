@@ -12,7 +12,24 @@
     document.documentElement.setAttribute('data-theme', t);
     KI.store.set('theme', t);
     var meta = U.qs('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#0d1711' : '#14361f');
+    if (meta) meta.setAttribute('content', themeColor());
+  };
+
+  /* Durum çubuğu rengi hem temaya hem tasarım kaplamasına göre */
+  function themeColor() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (document.documentElement.getAttribute('data-skin') === 'clay') return dark ? '#2a2670' : '#4f46e5';
+    return dark ? '#0d1711' : '#14361f';
+  }
+
+  /* ---------------- tasarım kaplaması ---------------- */
+  KI.setSkin = function (name) {
+    var s = (name === 'clay') ? 'clay' : 'classic';
+    if (s === 'clay') document.documentElement.setAttribute('data-skin', 'clay');
+    else document.documentElement.removeAttribute('data-skin');
+    KI.store.set('skin', s);
+    var meta = U.qs('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', themeColor());
   };
 
   /* Yazı boyutu ve hareket tercihlerini belgeye uygula */
@@ -130,6 +147,8 @@
     U.qsa('[data-icon]').forEach(function (el) { el.innerHTML = KI.icons.html(el.getAttribute('data-icon')); });
 
     KI.setTheme(KI.store.get('theme'));
+    var skinParam = /[?&]skin=(clay|classic)(?![a-z])/.exec(location.search);
+    KI.setSkin(skinParam ? skinParam[1] : KI.store.get('skin'));
     KI.applyPrefs();
     KI.sentence.sheet.init();
 
