@@ -43,7 +43,7 @@
 }
 .stats-eyebrow {
   margin: 0 0 .3em;
-  font-family: var(--font-mono); font-size: .72rem; font-weight: 700;
+  font-family: var(--font-mono); font-size: .75rem; font-weight: 700;
   letter-spacing: .16em; text-transform: uppercase; color: var(--sp-gold);
 }
 .stats-hero h1 { color: var(--sp-ink); margin-bottom: .2em; }
@@ -99,7 +99,7 @@
   font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; line-height: 1.1;
   color: var(--sp-ink);
 }
-.stat-tile__lbl { font-size: .74rem; color: var(--sp-ink-mute); line-height: 1.25; }
+.stat-tile__lbl { font-size: .75rem; color: var(--sp-ink-mute); line-height: 1.25; }
 
 /* ---------- en iyi / en zayıf zaman kartları ---------- */
 .stats-highlight-row { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -113,7 +113,7 @@
 .stats-highlight--past { border-left-color: var(--sp-past); }
 .stats-highlight--present { border-left-color: var(--sp-present); }
 .stats-highlight--future { border-left-color: var(--sp-future); }
-.stats-highlight__eyebrow { font-size: .7rem; letter-spacing: .04em; color: var(--sp-ink-mute); }
+.stats-highlight__eyebrow { font-size: .75rem; letter-spacing: .04em; color: var(--sp-ink-mute); }
 .stats-highlight__name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--sp-ink); }
 .stats-highlight__meta { font-size: .8rem; color: var(--sp-ink-soft); }
 .stats-highlight--empty {
@@ -172,7 +172,7 @@
 .stats-dot--future { border-color: var(--sp-future); }
 .stats-dot--future.is-done { background: var(--sp-future); }
 .stats-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-.stats-legend__item { display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; color: var(--sp-ink-mute); }
+.stats-legend__item { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--sp-ink-mute); }
 
 /* ---------- kapanış cümlesi ---------- */
 .stats-footnote { margin: 4px 0 0; text-align: center; font-size: .86rem; color: var(--sp-ink-soft); }

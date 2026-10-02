@@ -102,7 +102,7 @@
     var wordsCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/kelimeler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('book') }),
       U.el('span', {}, [
-        U.el('h3', { text: 'Sözlük' }),
+        U.el('h2', { class: 'card-title', text: 'Sözlük' }),
         U.el('p', { class: 'soft', text: KI.glossary.size() + ' kelime · türüne göre süz, dinle, defterine ekle.' })
       ])
     ]);
@@ -111,7 +111,7 @@
     var storiesCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/hikayeler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('chat') }),
       U.el('span', {}, [
-        U.el('h3', { text: 'Hikayeler' }),
+        U.el('h2', { class: 'card-title', text: 'Hikayeler' }),
         U.el('p', { class: 'soft', text: (KI.stories ? KI.stories.length : 0) + ' anonim ve yerelleşmiş hikaye; oku, dinle, kelimelere dokun.' })
       ])
     ]);
@@ -120,7 +120,7 @@
     var journeyCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/zaman-yolculugu', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('compass') }),
       U.el('span', {}, [
-        U.el('h3', { text: 'Zaman Yolculuğu' }),
+        U.el('h2', { class: 'card-title', text: 'Zaman Yolculuğu' }),
         U.el('p', { class: 'soft', text: 'Tek cümle, 12 zaman. Yakınlaş, gez, karşılaştır.' })
       ])
     ]);
@@ -129,7 +129,7 @@
     var idiomsCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/deyimler', 'data-sfx': 'nav' }, [
       U.el('span', { class: 'hub-card__ico', html: KI.icons.html('lantern') }),
       U.el('span', {}, [
-        U.el('h3', { text: 'Deyimler' }),
+        U.el('h2', { class: 'card-title', text: 'Deyimler' }),
         U.el('p', { class: 'soft', text: (KI.idioms ? KI.idioms.list.length : 0) + ' atasözü, deyim ve kalıp söz: İngilizcede gerçekten kullanılan karşılıklarıyla.' })
       ])
     ]);

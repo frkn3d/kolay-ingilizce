@@ -695,7 +695,7 @@
     (KI.minitest ? KI.minitest.levels : []).forEach(function (lv) {
       var card = U.el('a', { class: 'card modecard minitest-card minitest-card--' + lv.id + ' reveal',
         href: '#/alistirma/minitest/' + lv.id, 'data-sfx': 'nav' });
-      card.appendChild(U.el('h3', { text: lv.tr, style: 'margin-bottom:.2em' }));
+      card.appendChild(U.el('h2', { class: 'card-title', text: lv.tr, style: 'margin-bottom:.2em' }));
       card.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.84rem', text: lv.hint }));
       grid.appendChild(card);
     });
@@ -786,7 +786,8 @@
       var grid = U.el('div', { class: 'stack' });
       MODES.forEach(function (m) {
         var card = U.el('a', { class: 'card modecard reveal', href: '#/alistirma/' + m.id, 'data-sfx': 'nav' });
-        var title = U.el('h3', { html: m.ico + '  ' + m.t, style: 'margin-bottom:.2em' });
+        /* h1'den sonra h3'e atlamamak için h2; görünüşü h3 ile aynı (.card-title) */
+        var title = U.el('h2', { class: 'card-title', html: m.ico + '  ' + m.t, style: 'margin-bottom:.2em' });
         if (m.id === 'zorlandiklarim') {
           var n = KI.store.troubleCount();
           title.appendChild(U.el('span', { class: 'countpill' + (n ? '' : ' countpill--zero'), text: String(n) }));

@@ -10,7 +10,7 @@
    ============================================================ */
 'use strict';
 
-var CACHE_VERSION = 'ki-cache-v19';
+var CACHE_VERSION = 'ki-cache-v20';
 
 var CORE_ASSETS = [
   './',
@@ -21,6 +21,7 @@ var CORE_ASSETS = [
   './css/layout.css',
   './css/game.css',
   './css/stats.css',
+  './css/ux.css',
   './js/core/utils.js',
   './js/core/icons.js',
   './js/core/store.js',

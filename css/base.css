@@ -23,6 +23,11 @@
   --mustard:   #d9a03c;
   --mustard-d: #b8822a;
   --mustard-bg:#f6ead0;
+  /* Vurgu renkleri yazı olarak kullanıldığında (sekme, üst başlık, rozet
+     yazısı) açık zeminde 4.5:1 kontrastı geçen koyu eşleri. 0.9 UI/UX
+     denetimi: --mustard-d (3.1:1) ve --terra (3.8:1) yazı için yetersizdi. */
+  --mustard-ink:#835911;
+  --terra-d:   #9d4525;
   --terra:     #b5542f;
   --terra-l:   #d8825c;
   --plum:      #6d4a7a;
@@ -35,7 +40,7 @@
   --surface-2: #f7f0de;
   --ink:       #17271d;
   --ink-soft:  #47584c;
-  --ink-mute:  #5c6c60;
+  --ink-mute:  #4f5f53;   /* 0.9: #5c6c60 kâğıt-2 zeminde 4.5:1'in altına düşüyordu */
   --line:      #cbbb9c;
   --line-2:    #bfae86;
   --accent:    var(--green-700);
@@ -90,7 +95,7 @@ html[data-theme="dark"] {
   --surface-2: #223626;
   --ink:       #ece4cf;
   --ink-soft:  #bdc9bd;
-  --ink-mute:  #92a495;
+  --ink-mute:  #a0b1a3;   /* 0.9: koyu yüzey-2 üstünde 4.5:1 için açıldı */
   --line:      #334a3a;
   --line-2:    #46654f;
   --cream:     #ece4cf;
@@ -119,6 +124,7 @@ html[data-theme="dark"] {
   --tl-mini-future: #456e6f;
 
   --mustard:   #e0b25c;
+  --mustard-ink:#e0b25c;
   --mustard-bg:#3a2c10;
   --shadow-color: #0a1410;
   --shadow-hard: 3px 3px 0 var(--shadow-color);
@@ -192,9 +198,9 @@ html[data-section="sozluk"] .hub-card__ico { background: var(--future-bg); color
    kasıtlı olarak artırılıyor ki koyu temada da mavi ikon rengi kazansın. */
 html[data-theme="dark"][data-section="sozluk"] .hub-card__ico { background: var(--future-bg); color: var(--future); border-color: var(--line-2); }
 
-html[data-section="alistirma"] .eyebrow { color: var(--mustard-d); }
+html[data-section="alistirma"] .eyebrow { color: var(--mustard-ink); }
 html[data-theme="dark"][data-section="alistirma"] .eyebrow { color: var(--mustard); }
-html[data-section="alistirma"] .tab.is-active { color: var(--mustard-d); border-top-color: var(--mustard); background: var(--mustard-bg); }
+html[data-section="alistirma"] .tab.is-active { color: var(--mustard-ink); border-top-color: var(--mustard); background: var(--mustard-bg); }
 html[data-theme="dark"][data-section="alistirma"] .tab.is-active { color: var(--mustard); background: var(--mustard-bg); }
 html[data-section="alistirma"] .card:not(.minitest-card),
 html[data-section="alistirma"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--mustard) 45%); }
@@ -206,9 +212,9 @@ html[data-section="alistirma"] .input { border-color: color-mix(in srgb, var(--l
    ekleniyor ki o da diğer üçü gibi kendine ait bir iz taşısın). Harita'nın
    kendi geçmiş/şimdi/gelecek renkli zaman kartları (.tcard) ayrı bir sınıf
    kullandığı için burada .card kuralından etkilenmiyor. */
-html[data-section="temeller"] .eyebrow { color: var(--terra); }
+html[data-section="temeller"] .eyebrow { color: var(--terra-d); }
 html[data-theme="dark"][data-section="temeller"] .eyebrow { color: var(--past); }
-html[data-section="temeller"] .tab.is-active { color: var(--terra); border-top-color: var(--terra); background: var(--past-bg); }
+html[data-section="temeller"] .tab.is-active { color: var(--terra-d); border-top-color: var(--terra); background: var(--past-bg); }
 html[data-theme="dark"][data-section="temeller"] .tab.is-active { color: var(--past); background: var(--past-bg); }
 html[data-section="temeller"] .card:not(.minitest-card),
 html[data-section="temeller"] .input { border-color: color-mix(in srgb, var(--line) 55%, var(--terra) 45%); }
@@ -306,7 +312,7 @@ button { font: inherit; color: inherit; }
 
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: .72rem;
+  font-size: .75rem;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--ink-mute);

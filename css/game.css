@@ -72,6 +72,11 @@ html[data-section="oyun"] #view .wchip--placed {
 html[data-section="oyun"] #view .gmap__level             { --lvl-soft: #17301f; }
 html[data-section="oyun"] #view .gmap__level[data-level="orta"]  { --lvl-soft: #3a2c10; }
 html[data-section="oyun"] #view .gmap__level[data-level="ileri"] { --lvl-soft: #33231c; }
+/* 0.9: başlık rengi (--lvl-d) koyu afiş zemininde 1.5:1 kalıyordu; Oyun
+   Modu hep koyu olduğu için seviyenin açık tonu yazı rengi olur. */
+html[data-section="oyun"] #view .gmap__level                     { --lvl-ink: var(--green-300); }
+html[data-section="oyun"] #view .gmap__level[data-level="orta"]  { --lvl-ink: #e0b25c; }
+html[data-section="oyun"] #view .gmap__level[data-level="ileri"] { --lvl-ink: #e08a63; }
 
 .brand__logo { width: 34px; height: 34px; display: block; }
 
@@ -144,7 +149,7 @@ body.is-gate {
 .gate__ico img { width: 100%; height: 100%; }
 .gate__card h2 { margin: 0 0 .1em; font-size: 1rem; color: #17271d; }
 .gate__card p { color: #47584c; margin: 0 0 .25em; font-size: .76rem; line-height: 1.25; }
-.gate__cta { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .03em; color: var(--green-700); font-weight: 700; }
+.gate__cta { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .03em; color: var(--green-700); font-weight: 700; }
 
 /* İki büyük mod kartından sonra, "Logspace" notundan önce: ufak
    ama aynı kart ailesinden iki seçenek yan yana (Nasıl Kullanılır /
@@ -164,7 +169,7 @@ body.is-gate {
   background: var(--cream);
   color: #17271d;
   text-decoration: none;
-  font-family: var(--font-mono); font-size: .74rem; letter-spacing: .01em; font-weight: 700;
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .01em; font-weight: 700;
   text-align: center; line-height: 1.25;
   box-shadow: 0 6px 16px rgba(0, 0, 0, .22);
   transition: background .15s ease, transform .15s ease, border-color .15s ease, box-shadow .15s ease;
@@ -201,8 +206,8 @@ body.is-gate {
 .gate__footnote {
   display: block; width: 100%; text-align: center; margin: 6px 0 0;
   padding: 2px 0; border: 0; background: none; cursor: pointer;
-  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .03em;
-  color: color-mix(in srgb, var(--cream) 55%, transparent);
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .03em;
+  color: color-mix(in srgb, var(--cream) 72%, transparent);
 }
 .gate__footnote:hover { color: color-mix(in srgb, var(--cream) 80%, transparent); }
 
@@ -271,7 +276,7 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
   border-radius: 50%; background: var(--lvl); color: var(--cream); flex: 0 0 auto;
 }
 .gmap__banner-ico .icon { width: 20px; height: 20px; }
-.gmap__banner h2 { margin: 0; font-size: 1.1rem; color: var(--lvl-d); }
+.gmap__banner h2 { margin: 0; font-size: 1.1rem; color: var(--lvl-ink, var(--lvl-d)); }
 .gmap__banner p { margin: 0; font-size: .82rem; color: var(--ink-soft); }
 .gmap__banner--locked { opacity: .72; }
 .gmap__banner--locked .gmap__banner-ico { background: var(--ink-mute); }
@@ -289,7 +294,7 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__connector svg { display: block; overflow: visible; }
 .gmap__connector-line { stroke: var(--line-2); stroke-width: 5; stroke-dasharray: 8 9; }
 
-.gmap__footnote { text-align: center; font-size: .74rem; margin: 26px 0 4px; opacity: .75; }
+.gmap__footnote { text-align: center; font-size: .75rem; margin: 26px 0 4px; opacity: .75; }
 
 /* Ana patikanın PARÇASI OLMAYAN, ara sıra sağa-sola serpiştirilen bağımsız
    dal düğmeleri (ör. Kelime Eşleştir). Kesikli çerçeveyle ana düğümlerden
@@ -325,7 +330,7 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
   letter-spacing: .04em; text-transform: uppercase;
   padding: .3em .9em; border-radius: 999px;
 }
-.wmatch__heading--en { background: color-mix(in srgb, var(--accent) 24%, transparent); color: var(--accent); }
+.wmatch__heading--en { background: color-mix(in srgb, var(--accent) 24%, transparent); color: #c9c1ff; }
 .wmatch__heading--tr { background: color-mix(in srgb, var(--mustard) 26%, transparent); color: var(--mustard); }
 .wmatch__col { display: flex; flex-direction: column; gap: 10px; }
 .wmatch__item {
@@ -388,14 +393,14 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 .gmap__continue-text span { font-size: .78rem; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .gmap__continue-pct {
   flex: 0 0 auto; font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem;
-  color: var(--mustard-d);
+  color: var(--mustard);
   background: color-mix(in srgb, var(--mustard) 20%, var(--surface));
   border-radius: 999px; padding: 5px 11px;
 }
 .gmap__continue--done { border-color: var(--green-600); cursor: default; }
 .gmap__continue--done:hover { transform: none; }
 .gmap__continue--done .gmap__continue-ico { background: var(--green-600); color: var(--cream); }
-.gmap__continue--done .gmap__continue-pct { color: var(--green-700); background: color-mix(in srgb, var(--green-600) 20%, var(--surface)); }
+.gmap__continue--done .gmap__continue-pct { color: var(--green-300); background: color-mix(in srgb, var(--green-600) 20%, var(--surface)); }
 
 .gmap__node {
   position: relative;
@@ -471,7 +476,7 @@ html[data-theme="dark"] .gmap__level[data-level="ileri"] { --lvl-soft: var(--pas
 
 .gmap__label { text-align: center; margin-top: 8px; max-width: 122px; }
 .gmap__label b { display: block; font-size: .8rem; line-height: 1.22; font-family: var(--font-display); }
-.gmap__label-score { display: inline-block; margin-top: 2px; font-family: var(--font-mono); font-size: .7rem; color: var(--ink-mute); }
+.gmap__label-score { display: inline-block; margin-top: 2px; font-family: var(--font-mono); font-size: .75rem; color: var(--ink-mute); }
 
 /* ---------- Oyun Modu: sınav ekranı ---------- */
 .gquiz__back { margin-bottom: 12px; font-weight: 700; }

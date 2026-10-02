@@ -9,7 +9,7 @@
   function side(s, which) {
     var box = U.el('div', { class: 'cmp__side cmp__side--' + which });
     box.appendChild(U.el('span', { class: 'cmp__tag', text: which === 'a' ? 'A' : 'B' }));
-    box.appendChild(U.el('h3', { text: s.label, style: 'margin:0' }));
+    box.appendChild(U.el('h2', { class: 'card-title', text: s.label, style: 'margin:0' }));
     box.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.85rem', text: s.tr }));
     if (s.tenseId) {
       var t = KI.tenses.get(s.tenseId);
@@ -85,7 +85,7 @@
       var stack = U.el('div', { class: 'stack' });
       KI.compare.list.forEach(function (c) {
         var card = U.el('a', { class: 'card modecard', href: '#/karsilastir/' + c.id, 'data-sfx': 'nav' });
-        card.appendChild(U.el('h3', { text: c.title, style: 'margin-bottom:.2em' }));
+        card.appendChild(U.el('h2', { class: 'card-title', text: c.title, style: 'margin-bottom:.2em' }));
         card.appendChild(U.el('p', { class: 'soft', style: 'margin:0;font-size:.84rem', text: c.short }));
         stack.appendChild(card);
       });

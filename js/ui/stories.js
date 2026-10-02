@@ -28,7 +28,8 @@
     CATS.forEach(function (cat) {
       var items = (KI.stories || []).filter(function (s) { return s.cat === cat.id; });
       if (!items.length) return;
-      frag.appendChild(U.el('p', { class: 'eyebrow', style: 'margin-top:16px', text: cat.title }));
+      /* kategori adı, altındaki hikaye başlıklarının (h3) bölüm başlığıdır */
+      frag.appendChild(U.el('h2', { class: 'eyebrow', style: 'margin-top:16px', text: cat.title }));
       var stack = U.el('div', { class: 'stack' });
       items.forEach(function (s) {
         var card = U.el('a', { class: 'card modecard', href: '#/sozluk/hikayeler/' + s.id, 'data-sfx': 'nav' });

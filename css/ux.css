@@ -1,0 +1,184 @@
+/* ============================================================
+   Gramer Atlası - ux.css  (0.9 UI/UX katmanı)
+   "UI/UX Pro Max" kural setinin (ui-ux-pro-max-skill) uygulamaya
+   uyarlanmış hâli. Görsel kimliği (retro yeşil palet, sert gölgeler,
+   yazı tipleri) DEĞİŞTİRMEZ; yalnız erişilebilirlik, dokunma, tipografi
+   ve hareket kurallarını tamamlar. En son yüklenir.
+   Öncelik sırası (skill): 1 Erişilebilirlik, 2 Dokunma, 5 Düzen,
+   6 Tipografi/Renk, 7 Animasyon.
+   ============================================================ */
+
+/* ---------- Hareket belirteçleri (motion-consistency) ----------
+   Tüm geçişler aynı ritmi paylaşsın: kısa geri bildirim, standart geçiş,
+   giriş. Çıkışlar girişin ~%65'i (exit-faster-than-enter). */
+:root {
+  --dur-press: 90ms;
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-enter: 320ms;
+  --dur-exit: 200ms;
+  --ease-out: cubic-bezier(.2, .7, .3, 1);      /* varışta yavaşlar */
+  --ease-in: cubic-bezier(.5, 0, .75, .2);      /* ayrılırken hızlanır */
+  --ease-spring: cubic-bezier(.34, 1.4, .64, 1); /* hafif yaylanma */
+}
+
+/* ---------- 2. Dokunma ---------- */
+
+/* tap-delay: çift dokunma yakınlaştırması beklenmesin, dokunuş anında
+   tepki versin. (.holdbtn ve Zaman Yolculuğu'nun pan/zoom alanı kendi
+   touch-action:none değerlerini korur - sınıf seçicileri daha özgül.) */
+a, button, input, select, textarea, summary, label, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* touch-target-size: en az 44x44. Görünümü değiştirmeden, görünmez bir
+   ::after katmanıyla dokunma alanı genişletilir ("extend hit area beyond
+   visual bounds"). Değerler her öğenin gerçek yüksekliğine göre. */
+.btn, .crumb, .brand, .stats-back, .wchip,
+.gate__stats, .gate__daily-btn, .gate__footnote, .timebar__trackwrap {
+  position: relative;
+}
+.btn::after, .crumb::after, .brand::after, .stats-back::after, .wchip::after,
+.gate__stats::after, .gate__daily-btn::after, .gate__footnote::after,
+.timebar__trackwrap::after, .timebar__label--now::before {
+  content: "";
+  position: absolute;
+  inset: var(--hit-y, -6px) var(--hit-x, 0px);
+}
+.btn          { --hit-y: -6px; }
+.btn--icon    { --hit-y: -6px; --hit-x: -4px; }
+.crumb        { --hit-y: -12px; --hit-x: -6px; }
+.stats-back   { --hit-y: -12px; --hit-x: -6px; }
+.brand        { --hit-y: -5px; }
+.wchip        { --hit-y: -5px; --hit-x: -2px; }
+.gate__stats, .gate__daily-btn { --hit-y: -4px; }
+.gate__footnote { --hit-y: -12px; --hit-x: 22%; }
+.timebar__trackwrap { --hit-y: -11px; }
+/* NOW noktası 8x8 görünür; parmakla rahat basılsın diye 44x44 alan */
+.timebar__label--now::before { inset: -18px; }
+
+/* Boyutu doğrudan büyütmek görünümü bozmayan kontroller */
+.btn--icon { min-width: 36px; min-height: 36px; }
+/* tek karakterlik küçük düğmeler (?, −, sayı) parmak genişliğinden dar kalmasın */
+.btn--sm { min-width: 44px; --hit-y: -8px; }
+.wchip { min-width: 44px; }
+/* Ayar satırlarında etiketin tamamı tıklanır; kutunun kendisi de rahat görünsün */
+.switchrow input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex: none; }
+.settings-tab { min-height: 44px; }
+select, .field select { min-height: 44px; }
+input[type="range"] { min-height: 44px; }
+.input { min-height: 44px; }
+
+/* press-feedback / scale-feedback: dokununca hemen (<100 ms) görsel tepki.
+   Hover dönüşümü olan sert gölgeli düğmeler zaten "basılma" hissi veriyor;
+   kartlar ve çipler için hafif ölçek eklenir. */
+.modecard:active, .hub-card:active, .tcard:active, .idiom:active {
+  transform: scale(.985);
+  transition-duration: var(--dur-press);
+}
+
+/* disabled-states: devre dışı denetim hem görünür hem semantik olarak ayrışsın */
+button:disabled, .btn[disabled], input:disabled, select:disabled { cursor: not-allowed; }
+
+/* ---------- 1. Erişilebilirlik ---------- */
+
+/* focus-states / focus-appearance: odak halkası her iki temada da 3:1'i
+   geçsin; koyu temada açık yeşil, açık temada koyu yeşil. Ayrıca odak
+   halkası sert gölgeli düğmelerin gölgesiyle karışmasın diye ofsetli. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.input:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+/* focus-not-obscured: sabit üst çubuk ve alt sekme çubuğu, klavyeyle
+   odaklanan öğeyi örtmesin. */
+html { scroll-padding-top: 76px; scroll-padding-bottom: calc(var(--tabbar-h) + 16px); }
+
+/* ---------- 6. Tipografi ---------- */
+
+/* heading-line-balance: kısa başlıklar dengeli bölünsün (desteklemeyen
+   tarayıcıda normal davranır). Paragraflarda tek kelimelik son satırlar
+   ("yetim") azaltılır. */
+h1, h2, h3, .card-title { text-wrap: balance; }
+.hub-card h2.card-title { margin: 0 0 .2em; font-size: 1.2rem; }
+p, li, .example__tr, .idiom__mean { text-wrap: pretty; }
+
+/* h1'den sonra h3'e atlamamak için h2'ye çevrilen kart başlıkları
+   (heading-hierarchy): görünüşleri h3 ile aynı kalır. */
+h2.card-title { font-size: 1.1rem; }
+/* bölüm başlığı olarak h2'ye çevrilen "eyebrow" etiketleri p ile aynı görünsün */
+h2.eyebrow { font-weight: 400; line-height: 1.6; font-size: .75rem; letter-spacing: .16em; }
+
+/* number-tabular: değişen sayılar (skor, sayaç, yüzde, süre) genişlik
+   değiştirip yanındakileri oynatmasın. */
+.quiz__score, .countpill, .stat-tile__val, .gmap__continue-pct, .gmap__label-score,
+.grid-map__tier-count, .iconbtn__badge, .maphead__num, .story-task__count, .ach-progress {
+  font-variant-numeric: tabular-nums;
+}
+
+/* long-token-wrapping: kullanıcının yazdığı uzun kelime/URL taşma yapmasın */
+.story-check__text, .story-task__field, .quiz__q, .example__tr { overflow-wrap: anywhere; }
+
+/* Oyun haritasında kilitli seviye afişi: soldurmak başlığı okunmaz
+   yapıyordu (3.1:1). Kilit artık kesikli çerçeve ve gri ikonla anlatılır,
+   yazı tam okunur kalır (color-not-only + contrast). */
+.gmap__banner--locked { opacity: 1; border-style: dashed; }
+.gmap__banner--locked h2 { color: var(--ink-soft); }
+.gmap__continue-pct { color: #f0c87a; }
+
+/* ---------- 8. Geri bildirim ---------- */
+
+/* Çok satıra bölünen bildirim balonu oval bir lekeye dönüşmesin */
+.toast { border-radius: 16px; line-height: 1.4; }
+
+/* ---------- 7. Animasyon ---------- */
+
+/* modal-motion: küçük pencereler bulunduğu yerden hafif ölçek + solma ile
+   girer (spatial continuity); içerik anında etkileşime açıktır. */
+.modal:not([hidden]) .modal__card { animation: uxModalIn var(--dur-enter) var(--ease-spring) both; }
+@keyframes uxModalIn {
+  from { opacity: 0; transform: translateY(10px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* reduced-motion: hem sistem tercihi hem uygulama içi "Animasyonları azalt" */
+html[data-motion="less"] .modal__card,
+html[data-motion="less"] .modecard:active, html[data-motion="less"] .hub-card:active,
+html[data-motion="less"] .tcard:active, html[data-motion="less"] .idiom:active {
+  animation: none !important; transform: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal:not([hidden]) .modal__card { animation: none; }
+  .modecard:active, .hub-card:active, .tcard:active, .idiom:active { transform: none; }
+}
+
+/* ---------- 5. Düzen ---------- */
+
+/* viewport-units: mobil tarayıcı çubukları açılıp kapanırken pencere
+   yüksekliği zıplamasın (vh yerine dvh; desteklemeyen eski hâli korur). */
+.modal__card { max-height: 86dvh; }
+
+/* orientation-support: telefon yatay tutulduğunda üst ve alt çubuklar
+   ekranın yarısını yemesin; içerik okunur kalsın. */
+@media (orientation: landscape) and (max-height: 480px) {
+  :root { --tabbar-h: 52px; }
+  .tab__ico .icon { width: 20px; height: 20px; }
+}
+
+/* Giriş ekranı kaydırmasız kalmalı (bkz. game.css .gate). 12 px yazı
+   tabanı en küçük telefonda (320x568) büyük yazı tercihiyle 15 px
+   taşmaya yol açıyordu; yalnız bu durumda bloklar arası boşluk daraltılır. */
+@media (max-height: 600px) {
+  html[data-font="large"] .gate { gap: 6px; }
+}
+
+/* Harita kartlarındaki Türkçe ad / kural metni: 12 px tabanında iki
+   satıra sığmayan adlar ("Şimdiki Zamanın Hikâyesi (-yordu)") kırpılıyordu
+   (truncation-strategy: kesmek yerine sar). Artık metnin tamamı görünür;
+   en az üç satırlık yer ayrılır ki kural döngüsünde kartların çoğu
+   zıplamasın. Aynı satırdaki kartlar ızgarada eşit yükseklikte kalır. */
+.tcard__tr { height: auto; min-height: 3.6em; overflow: visible; }
+
+/* Sözlük satırlarındaki yuvarlak ikon düğmeleri oval olmasın; dokunma
+   alanı ::after ile zaten 44 px'e tamamlanıyor. */
+.btn--sm.btn--icon { min-width: 36px; }

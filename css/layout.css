@@ -47,7 +47,7 @@ html[data-theme="dark"] .appbar { background: #13231a; border-bottom-color: #081
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   height: var(--tabbar-h);
   text-decoration: none; color: var(--ink-mute);
-  font-size: .72rem; font-weight: 600;
+  font-size: .75rem; font-weight: 600;
   border-top: 3px solid transparent;
   transition: color .15s ease, background .15s ease;
 }
@@ -171,5 +171,5 @@ html[data-theme="dark"] .tab.is-active { color: var(--green-300); background: va
   .grid-map { gap: 9px; }
   .tcard { padding: 8px 8px 7px; min-height: 84px; }
   .tcard__en { font-size: .82rem; }
-  .tcard__tr { font-size: .68rem; }
+  .tcard__tr { font-size: .75rem; }
 }

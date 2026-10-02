@@ -106,6 +106,12 @@
     var isGameMap = !!(hit && hit.tab === 'oyun' && /^\/oyun\/?$/.test(path));
     if (lastPath !== null && lastPath !== path && !isGameMap) U.scrollTop();
     lastPath = path;
+    /* Sayfa başlığı her ekranın kendi adını taşısın (ekran okuyucular,
+       sekme listesi ve geçmiş için; WCAG 2.4.2). Ekranın h1'i kullanılır. */
+    var h1 = view.querySelector('h1');
+    var activeTab = document.querySelector('.tab.is-active .tab__txt');
+    var name = h1 ? h1.textContent.replace(/\s+/g, ' ').trim() : (activeTab && showTabbar ? activeTab.textContent : '');
+    document.title = name ? name + ' · Gramer Atlası' : 'Gramer Atlası - Zamanlarla Öğren';
     view.focus({ preventScroll: true });
   }
 
