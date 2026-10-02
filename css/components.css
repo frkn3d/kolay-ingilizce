@@ -846,6 +846,36 @@ html[data-theme="dark"] .hub-card__ico { background: var(--present-bg); color: v
 .story-check__issues { margin: 8px 0 0; padding-left: 1.1em; font-size: .84rem; }
 .story-check__issues li { margin: 3px 0; }
 
+/* ---------- Sözlük > Deyimler ---------- */
+.idiom-list { display: grid; gap: 10px; }
+/* sol şerit türü gösterir; sözlük bölümünün kart çerçeve rengini (base.css,
+   html[data-section] ... .card) ezebilmek için aynı özgüllükte yazıldı */
+.idiom { padding: 12px 14px 12px; }
+html[data-section] .card.idiom { border-left: 5px solid var(--future); }
+html[data-section] .card.idiom--atasozu { border-left-color: var(--past); }
+html[data-section] .card.idiom--kalip { border-left-color: var(--mustard); }
+.idiom__top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
+.idiom__cat {
+  font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute);
+}
+.idiom__match {
+  font-size: .7rem; padding: .12em .55em; border-radius: 999px;
+  border: 1px solid var(--line-2); color: var(--ink-soft); background: var(--surface-2); white-space: nowrap;
+}
+.idiom__match--birebir { border-color: var(--ok-edge); background: var(--ok-bg); color: var(--ink); }
+.idiom__tr { font-weight: 700; margin: 0 0 4px; font-size: .95rem; }
+.idiom__en-row, .idiom__ex-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.idiom__en { font-family: var(--font-display); font-size: 1.12rem; line-height: 1.3; margin: 0; color: var(--ink); }
+.idiom__mean { font-size: .86rem; margin: 6px 0 0; }
+.idiom__note {
+  display: flex; gap: 6px; align-items: flex-start; font-size: .8rem; color: var(--ink-soft); margin: 6px 0 0;
+}
+.idiom__note .icon { width: 14px; height: 14px; flex: none; margin-top: 2px; }
+.idiom__toggle { margin-top: 8px; }
+.idiom__ex { margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: var(--surface-2); }
+.idiom__ex-en { font-family: var(--font-display); margin: 0; font-size: .95rem; }
+.idiom__ex-tr { margin: 4px 0 0; font-size: .84rem; color: var(--ink-soft); }
+
 /* ---------- Zaman karşılaştırma ---------- */
 .cmp__heads { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
 .cmp__side {

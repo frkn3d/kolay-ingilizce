@@ -6,9 +6,10 @@
   'use strict';
   var U = KI.util;
 
-  var APP_VERSION = '0.8.33';
+  var APP_VERSION = '0.8.34';
   KI.appVersion = APP_VERSION;  // gate.js gibi başka modüller de okuyabilsin diye
   var CHANGELOG = [
+    { v: '0.8.34', d: 'Sözlüğe Deyimler bölümü eklendi: 157 Türkçe atasözü, deyim ve kalıp sözün İngilizcede gerçekten kullanılan, kalıplaşmış karşılığı. Her birinde anlamı, gerekiyorsa açıklaması, sesli okuma ve çoğunda örnek cümle var. Türkçe ya da İngilizce aranabiliyor; atasözü, deyim, kalıp söz ve iki dilde aynı imgeyi kullananlar diye süzülebiliyor. Karşılığı olmayan sözler (aç ayı oynamaz gibi) bilerek eklenmedi.' },
     { v: '0.8.33', d: 'Kendini dene uzadı: artık her türden 10 soru var (10 boşluk doldurma, 10 doğru / yanlış, 10 cümle kurma) ve sonda bir hikâye görevi, toplam 31 soru. Havuz büyütüldü: her zamana 16 yeni doğru / yanlış, 10 yeni boşluk doldurma ve 7 yeni hikâye görevi eklendi; cümle kurma artık o zamanın bütün örnek cümlelerinden seçiliyor. Zaman başına havuz 100 ile 175 soru arasında, toplamda 1700ün üzerinde; her girişte ve her Tekrar dene ile yeni bir set geliyor.' },
     { v: '0.8.32', d: 'Titreşimler biraz güçlendirildi: dokunma 12 ms’den 20 ms’ye, Harita kural dönüşündeki çift vuruş ve kaydırıcı tıkları da aynı oranda uzatıldı.' },
     { v: '0.8.31', d: 'Sesler ve titreşimler elden geçirildi. Harita\'da üstteki zaman çizgisine ya da sarı noktaya dokununca kurallar dönerken artık kısa bir "kart çevirme" sesi ve hissedilir çift titreşim var. Alt menü sekmeleri, açılır kutular (Haritayı nasıl okumalı?, sürüm notları), Zaman Yolculuğu yakınlaştırma düğmeleri, okuma hızı ve ses seçimi de minik, kısık efektler kazandı. Çok kısa olduğu için birçok telefonda hissedilmeyen dokunma titreşimi biraz uzatıldı. iPhone\'da (iOS 17.4+) da titreşim artık çalışıyor.' },

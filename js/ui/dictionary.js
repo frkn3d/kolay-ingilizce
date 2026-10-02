@@ -94,7 +94,7 @@
     frag.appendChild(U.el('div', { class: 'page-head' }, [
       U.el('p', { class: 'eyebrow', text: 'Sözlük' }),
       U.el('h1', { text: 'Sözlük ve Hikayeler' }),
-      U.el('p', { style: 'font-size:.84rem', text: 'Kelime dağarcığını çalış ya da bir hikaye okuyarak kelimelere doğal bağlamda rastla.' })
+      U.el('p', { style: 'font-size:.84rem', text: 'Kelime dağarcığını çalış, bir hikaye oku ya da Türkçe deyimlerin İngilizcedeki karşılıklarını keşfet.' })
     ]));
 
     var grid = U.el('div', { class: 'hub-grid' });
@@ -125,6 +125,15 @@
       ])
     ]);
     grid.appendChild(journeyCard);
+
+    var idiomsCard = U.el('a', { class: 'card modecard hub-card reveal', href: '#/sozluk/deyimler', 'data-sfx': 'nav' }, [
+      U.el('span', { class: 'hub-card__ico', html: KI.icons.html('lantern') }),
+      U.el('span', {}, [
+        U.el('h3', { text: 'Deyimler' }),
+        U.el('p', { class: 'soft', text: (KI.idioms ? KI.idioms.list.length : 0) + ' atasözü, deyim ve kalıp söz: İngilizcede gerçekten kullanılan karşılıklarıyla.' })
+      ])
+    ]);
+    grid.appendChild(idiomsCard);
 
     frag.appendChild(grid);
     setTimeout(function () { KI.util.staggerReveal(grid, '.reveal', 60); }, 0);

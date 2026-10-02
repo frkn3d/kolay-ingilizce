@@ -38,7 +38,8 @@ global.window = { KI: {} };
   'js/data/exercises-2.js',
   'js/data/minitest.js',
   'js/data/selftest.js',
-  'js/data/selftest-2.js'
+  'js/data/selftest-2.js',
+  'js/data/idioms.js'
 ].forEach(function (rel) { require(path.join(root, rel)); });
 
 var KI = window.KI;
@@ -186,6 +187,22 @@ KI.tenses.list.forEach(function (t) {
   });
 });
 
+/* ---- Deyimler: yapısal denetim (İngilizce karşılıklar kalıplaşmış
+   ifadeler olduğu için sözlük kapsamı denetimi uygulanmaz) ---- */
+var IDIOM_CATS = { atasozu: 1, deyim: 1, kalip: 1 };
+var idiomSeen = {};
+(KI.idioms ? KI.idioms.list : []).forEach(function (it, i) {
+  var lbl = 'idioms#' + i + ' (' + it.tr + ')';
+  if (!IDIOM_CATS[it.cat]) fail(lbl + ': geçersiz tür "' + it.cat + '"');
+  if (it.match !== 'birebir' && it.match !== 'anlam') fail(lbl + ': benzerlik birebir ya da anlam olmalı');
+  if (!it.tr || !it.en || !it.mean) fail(lbl + ': tr, en ve anlam zorunlu');
+  if (!!it.ex !== !!it.exTr) fail(lbl + ': örnek cümlenin İngilizcesi ve Türkçesi birlikte olmalı');
+  var key = it.tr.toLocaleLowerCase('tr');
+  if (idiomSeen[key]) fail(lbl + ': aynı deyim iki kez var');
+  idiomSeen[key] = 1;
+});
+if ((KI.idioms ? KI.idioms.list.length : 0) < 100) fail('idioms: en az 100 deyim olmalı');
+
 /* ---- Mini Test: yalnız yapısal denetim (mini test.md dış kaynaklı bir
    metin dosyası; sözlük kapsamı denetimi burada uygulanmaz çünkü içinde
    özel isimler ve sözlükte olmayan meslek/konu kelimeleri var). Yalnız
@@ -215,6 +232,7 @@ console.log('Örnek cümleler:', exampleCount);
 console.log('Sorular (zaman + karşılaştırma):', tenseQuiz + compareQuiz);
 console.log('Hikayeler:', (KI.stories || []).length, '(' + storySentences + ' cümle)');
 console.log('Kendini dene havuzu:', selftestTotal, '(zaman başına en az 50)');
+console.log('Deyimler:', KI.idioms ? KI.idioms.list.length : 0);
 console.log('Zaman Yolculuğu kaydı:', (KI.timelineJourney || []).length);
 console.log('Sözlük kelime sayısı:', KI.glossary.size());
 console.log('Düzensiz fiil sayısı:', KI.glossary.irregularVerbs.length);
